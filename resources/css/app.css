@@ -1,0 +1,11 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.bg-default {
+    background-color: #EDE9E0;
+}
+
+.bg-light {
+    background-color: #FDFCF8;
+}
