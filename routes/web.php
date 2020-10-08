@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('dashboard');
 });
+
+Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->name('social_login');
+Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');

@@ -1,0 +1,73 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import "input";
+
+@font-face {
+    font-family: MinionPro;
+    src: url("../fonts/minionpro/MinionPro-Regular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: MinionPro;
+    font-weight: 600;
+    src: url("../fonts/minionpro/MinionPro-Semibold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: GillSans;
+    src: url('../fonts/gillsans/gil-regular.ttf') format('truetype');
+}
+
+body {
+    font-family: GillSans;
+    font-size: 16px;
+    color: #4e4d4b !important;
+}
+
+.ff-minion {
+    font-family: MinionPro;
+}
+
+.bg-default {
+    background-color: #EDE9E0;
+}
+
+.bg-light {
+    background-color: #FDFCF8;
+}
+
+.bg-dark {
+    background-color: #4e4d4b;
+}
+
+.fs-70 {
+    font-size: 70px;
+}
+
+.fs-default {
+    font-size: 16px;
+}
+
+.text-color-light {
+    color: #adaaa5;
+}
+
+.text-color-dark {
+    color: #4e4d4b;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.login-logo {
+    position: absolute;
+    top: 36px;
+}
+
+.form-label {
+    font-size: 12px;
+    letter-spacing: 2.18px;
+}

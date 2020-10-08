@@ -1,0 +1,56 @@
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #FDFCF8 inset;
+}
+
+input:-webkit-autofill:focus {
+    /*-webkit-box-shadow: !*your box-shadow*!,0 0 0 50px white inset;*/
+    /*-webkit-text-fill-color: #333;*/
+}
+
+.input-default {
+    /*-webkit-text-fill-color: transparent !important;*/
+
+    border: none;
+    background-color: transparent !important;
+    border-bottom: 1px solid #cdcfc4;
+    padding: 10px;
+    outline: none;
+    box-shadow: none;
+}
+
+.input-default:focus {
+    outline: none;
+}
+
+.input-icon-wrapper {
+    position: relative;
+
+    svg {
+        position: absolute;
+    }
+
+    &.email {
+        svg {
+            top: 15px;
+        }
+    }
+
+    &.password {
+        svg {
+            top: 13px;
+        }
+    }
+
+    .show-password {
+        cursor: pointer;
+
+        svg {
+            right: 0;
+            top: 15px;
+        }
+    }
+
+    input {
+        padding-left: 30px;
+    }
+}

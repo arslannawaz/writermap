@@ -22,11 +22,12 @@ class CreateTeam implements CreatesTeams
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'personal_team' => ['required', 'boolean'],
         ])->validateWithBag('createTeam');
 
         return $user->ownedTeams()->create([
             'name' => $input['name'],
-            'personal_team' => false,
+            'personal_team' => $input['personal_team'],
         ]);
     }
 }
