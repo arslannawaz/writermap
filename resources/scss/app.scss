@@ -3,6 +3,7 @@
 @import 'tailwindcss/utilities';
 
 @import "input";
+@import "login";
 
 @font-face {
     font-family: MinionPro;
@@ -42,6 +43,14 @@ body {
     background-color: #4e4d4b;
 }
 
+.fs-22 {
+    font-size: 22px;
+}
+
+.fs-50 {
+    font-size: 50px;
+}
+
 .fs-70 {
     font-size: 70px;
 }
@@ -60,11 +69,6 @@ body {
 
 .h-full {
     height: 100%;
-}
-
-.login-logo {
-    position: absolute;
-    top: 36px;
 }
 
 .form-label {

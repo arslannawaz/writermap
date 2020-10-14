@@ -1,0 +1,24 @@
+.login-logo {
+    position: absolute;
+    left: 50%;
+    top: 36px;
+
+    &__link {
+        position: relative;
+        left: -50%;
+    }
+}
+
+.login-background {
+    &.absolute {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .col-span-1, .register {
+        background-color: #f7f4ed;
+    }
+}
