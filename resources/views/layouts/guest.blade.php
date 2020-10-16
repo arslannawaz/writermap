@@ -14,12 +14,7 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
     </head>
     <body class="bg-default h-screen">
-        <div class="grid grid-cols-3 login-background absolute z-0 invisible lg:visible">
-            <div class="col-span-2"></div>
-            <div class="col-span-1"></div>
-        </div>
-
-        <div class="container relative z-10 h-full mx-auto">
+        <div class="container h-full mx-auto">
 
             <div class="antialiased h-full">
                 {{ $slot }}

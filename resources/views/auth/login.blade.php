@@ -1,5 +1,10 @@
 <x-guest-layout>
-    <div class="grid grid-cols-3 gap-4 h-full login-background">
+    <div class="grid grid-cols-3 login-background absolute z-0 invisible lg:visible">
+        <div class="col-span-2"></div>
+        <div class="col-span-1"></div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 h-full login-background relative z-10">
         <div class="col-span-3 lg:col-span-2 flex flex-col justify-center relative">
             <div class="login-logo">
                 <a href="{{ route('dashboard') }}" class="login-logo__link invisible sm:visible">
