@@ -9,7 +9,9 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <update-profile-information-form
-                            :name="$page.user.name"
+                            :pen_name="$page.user.pen_name"
+                            :first_name="$page.user.first_name"
+                            :last_name="$page.user.last_name"
                             :email="$page.user.email" />
 
                 <jet-section-border />

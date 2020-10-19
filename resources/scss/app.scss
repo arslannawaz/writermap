@@ -43,8 +43,16 @@ body {
     background-color: #4e4d4b;
 }
 
+.bg-semilight {
+    background-color: #F7F4ED;
+}
+
 .fs-22 {
     font-size: 22px;
+}
+
+.fs-34 {
+    font-size: 34px;
 }
 
 .fs-50 {
@@ -59,11 +67,17 @@ body {
     font-size: 16px;
 }
 
-.text-color-light {
+.text-color-light, .text-color-inactive {
     color: #adaaa5;
 }
 
-.text-color-dark {
+.text-color-inactive {
+    &:hover {
+        color: #4e4d4b;
+    }
+}
+
+.text-color-dark, .text-color-active {
     color: #4e4d4b;
 }
 
@@ -74,4 +88,21 @@ body {
 .form-label {
     font-size: 12px;
     letter-spacing: 2.18px;
+}
+
+.gap-15p {
+    gap: 15%;
+}
+
+label {
+    position: relative;
+
+    &.required {
+        &::after {
+            position: absolute;
+            content: '*';
+            color: red;
+            right: 0;
+        }
+    }
 }

@@ -22,14 +22,24 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+//            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return DB::transaction(function () use ($input) {
+        $userName = null;
+        if (array_key_exists('first_name', $input) && array_key_exists('first_name', $input) === false) {
+            $userName = $input['first_name'];
+        } elseif (array_key_exists('first_name', $input) && array_key_exists('last_name', $input)) {
+            $userName = $input['first_name'] . ' ' . $input['last_name'];
+        }
+
+        return DB::transaction(function () use ($input, $userName) {
             return tap(User::create([
-                'name' => $input['name'],
+                'pen_name' => $input['pen_name'],
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
+                'name' => $userName,
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
