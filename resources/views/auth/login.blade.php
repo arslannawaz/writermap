@@ -7,7 +7,7 @@
     <div class="grid grid-cols-3 gap-4 h-full login-background relative z-10">
         <div class="col-span-3 lg:col-span-2 flex flex-col justify-center relative">
             <div class="login-logo">
-                <a href="{{ route('dashboard') }}" class="login-logo__link invisible sm:visible">
+                <a href="{{ route('dashboard') }}" class="login-logo__link">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140"
                          height="61" viewBox="0 0 140 61">
                         <defs>
