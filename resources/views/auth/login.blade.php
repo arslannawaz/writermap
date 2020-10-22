@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="grid grid-cols-3 login-background absolute z-0 invisible lg:visible">
+    <div class="grid grid-cols-3 gap-4 login-background absolute z-0 invisible lg:visible">
         <div class="col-span-2"></div>
         <div class="col-span-1"></div>
     </div>
