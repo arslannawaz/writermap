@@ -13,9 +13,14 @@ input:-webkit-autofill:focus {
     border: none;
     background-color: transparent !important;
     border-bottom: 1px solid #cdcfc4;
-    padding: 10px;
+    padding: 10px 0;
     outline: none;
     box-shadow: none;
+    transition: all $defaultDurationTIme linear;
+
+    &:focus {
+        border-bottom: 1px solid #4e4d4b;
+    }
 }
 
 .input-default:focus {
@@ -53,4 +58,9 @@ input:-webkit-autofill:focus {
     input {
         padding-left: 30px;
     }
+}
+
+button {
+    outline: none !important;
+    border: none;
 }

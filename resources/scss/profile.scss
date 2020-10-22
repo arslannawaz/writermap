@@ -1,0 +1,33 @@
+.profile-photo {
+    position: relative;
+
+    &:hover {
+        svg {
+            g {
+                fill: #1a202c;
+            }
+        }
+    }
+
+    svg {
+        g {
+            transition: fill $defaultDurationTIme linear;
+        }
+    }
+
+    &__image {
+        position: relative;
+        z-index: 1;
+    }
+
+    &__icon-change {
+        position: absolute;
+        z-index: 2;
+        bottom: -5px;
+        right: -5px;
+        background-color: #fefcf8;
+        padding: 7px;
+        border-radius: 50%;
+        border: 2px solid #EDE9E0;
+    }
+}

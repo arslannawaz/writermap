@@ -196,7 +196,7 @@
                                          required autocomplete="current-password"/>
 
                             <div id="show-password" class="show-password" onclick="clickShowPassword()">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14">
+                                <svg id="show-password-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#ADAAA5" fill-rule="nonzero">
                                             <g>
@@ -244,8 +244,11 @@
 
                     if (showPassword !== null) {
                         function clickShowPassword() {
+                            const showPasswordSvg = document.getElementById('show-password-svg');
                             const passwordInput = document.getElementById('password-input');
                             const type = passwordInput.getAttribute('type');
+
+                            showPasswordSvg.classList.toggle('active');
 
                             if (type === 'password') {
                                 passwordInput.setAttribute('type', 'text');

@@ -2,8 +2,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import "variables";
 @import "input";
 @import "login";
+@import "profile";
+@import "sidebar";
 
 @font-face {
     font-family: MinionPro;
@@ -19,6 +22,12 @@
 @font-face {
     font-family: GillSans;
     src: url('../fonts/gillsans/gil-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: GillSans;
+    font-weight: 600;
+    src: url('../fonts/gillsans/gil-bold.ttf') format('truetype');
 }
 
 body {
@@ -91,7 +100,7 @@ body {
 }
 
 .gap-15p {
-    gap: 15%;
+    gap: 20px 15%;
 }
 
 label {

@@ -11,16 +11,39 @@
                                @change="updatePhotoPreview">
 
                         <!-- Current Profile Photo -->
-                        <div class="mt-2" v-show="! photoPreview">
+                        <div class="mt-2 profile-photo" v-show="! photoPreview" @click="selectNewPhoto">
                             <img :src="$page.user.profile_photo_url" alt="Current Profile Photo"
-                                 class="rounded-full h-24 w-24 object-cover cursor-pointer" @click="selectNewPhoto">
+                                 class="rounded-full h-24 w-24 object-cover cursor-pointer profile-photo__image">
+
+                                 <div class="profile-photo__icon-change cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#ADAAA5" fill-rule="nonzero">
+                                                <g>
+                                                    <path d="M13.6 2.8h-1.024L12.32 2c-.34-.962-1.252-1.604-2.272-1.6H5.952c-1.031.002-1.946.662-2.272 1.64l-.256.8H2.4C1.075 2.84 0 3.915 0 5.24v6.4c0 1.325 1.075 2.4 2.4 2.4h11.2c1.325 0 2.4-1.075 2.4-2.4v-6.4c.01-.643-.237-1.264-.689-1.723-.45-.459-1.067-.717-1.711-.717zm.8 8.8c0 .442-.358.8-.8.8H2.4c-.442 0-.8-.358-.8-.8V5.2c0-.442.358-.8.8-.8H4c.359.019.686-.204.8-.544l.432-1.312c.11-.326.416-.545.76-.544h4.096c.344 0 .65.218.76.544l.432 1.312c.105.312.39.528.72.544h1.6c.442 0 .8.358.8.8v6.4zM8 4.4c-1.767 0-3.2 1.433-3.2 3.2 0 1.767 1.433 3.2 3.2 3.2 1.767 0 3.2-1.433 3.2-3.2 0-.849-.337-1.663-.937-2.263-.6-.6-1.414-.937-2.263-.937zm0 4.8c-.884 0-1.6-.716-1.6-1.6C6.4 6.716 7.116 6 8 6c.884 0 1.6.716 1.6 1.6 0 .884-.716 1.6-1.6 1.6z" transform="translate(-433 -112) translate(433 112)"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
                         </div>
 
                         <!-- New Profile Photo Preview -->
-                        <div class="mt-2" v-show="photoPreview">
-                        <span class="block rounded-full w-20 h-20"
-                              :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
-                        </span>
+                        <div class="mt-2" v-show="photoPreview" @click="selectNewPhoto">
+                            <div class="rounded-full h-24 w-24 object-cover cursor-pointer profile-photo__image"
+                                :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'">
+                                <div class="profile-photo__icon-change cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#ADAAA5" fill-rule="nonzero">
+                                                <g>
+                                                    <path d="M13.6 2.8h-1.024L12.32 2c-.34-.962-1.252-1.604-2.272-1.6H5.952c-1.031.002-1.946.662-2.272 1.64l-.256.8H2.4C1.075 2.84 0 3.915 0 5.24v6.4c0 1.325 1.075 2.4 2.4 2.4h11.2c1.325 0 2.4-1.075 2.4-2.4v-6.4c.01-.643-.237-1.264-.689-1.723-.45-.459-1.067-.717-1.711-.717zm.8 8.8c0 .442-.358.8-.8.8H2.4c-.442 0-.8-.358-.8-.8V5.2c0-.442.358-.8.8-.8H4c.359.019.686-.204.8-.544l.432-1.312c.11-.326.416-.545.76-.544h4.096c.344 0 .65.218.76.544l.432 1.312c.105.312.39.528.72.544h1.6c.442 0 .8.358.8.8v6.4zM8 4.4c-1.767 0-3.2 1.433-3.2 3.2 0 1.767 1.433 3.2 3.2 3.2 1.767 0 3.2-1.433 3.2-3.2 0-.849-.337-1.663-.937-2.263-.6-.6-1.414-.937-2.263-.937zm0 4.8c-.884 0-1.6-.716-1.6-1.6C6.4 6.716 7.116 6 8 6c.884 0 1.6.716 1.6 1.6 0 .884-.716 1.6-1.6 1.6z" transform="translate(-433 -112) translate(433 112)"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
 
                         <!--                        <jet-secondary-button class="mt-2 mr-2" type="button" @click.native.prevent="selectNewPhoto">-->
@@ -34,9 +57,9 @@
 
                         <jet-input-error :message="form.error('photo')" class="mt-2"/>
                     </div>
-                    <div class="col-span-1 ml-10">
+                    <div class="col-span-1 ml-6">
                         <h1 class="fs-34 ff-minion">{{ $page.user.name }}</h1>
-                        <span class="text-color-light">{{ $page.user.email }}</span>
+                        <div class="text-color-light -mt-2">{{ $page.user.email }}</div>
                     </div>
                 </div>
             </div>
@@ -60,7 +83,7 @@
                 <!-- Email -->
                 <div class="col-end-7 col-span-3">
                     <jet-label for="email" value="Last Name"/>
-                    <jet-input id="email" type="email" class="mt-1 block w-full input-default" v-model="form.last_name"
+                    <jet-input id="email" type="text" class="mt-1 block w-full input-default" v-model="form.last_name"
                                autocomplete="last_name"/>
                     <jet-input-error :message="form.error('last_name')" class="mt-2"/>
                 </div>
@@ -83,13 +106,15 @@
         </template>
 
         <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
+            <div class="flex items-center justify-center">
+                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Update
+                </jet-button>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Update
-            </jet-button>
+                <jet-action-message :on="form.recentlySuccessful" class="ml-4 uppercase">
+                    Saved
+                </jet-action-message>
+            </div>
         </template>
     </jet-form-section>
 </template>
@@ -120,6 +145,9 @@ export default {
         return {
             form: this.$inertia.form({
                 '_method': 'PUT',
+                pen_name: this.pen_name,
+                first_name: this.first_name,
+                last_name: this.last_name,
                 name: this.name,
                 email: this.email,
                 photo: null,

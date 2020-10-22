@@ -1,0 +1,31 @@
+.nav-sidebar {
+    a {
+        color: #adaaa5;
+
+        &:focus, &:hover {
+            color: #4e4d4b;
+
+            svg.nav-sidebar__icon_fill {
+                g {
+                    fill: #1a202c;
+                }
+            }
+
+            svg.nav-sidebar__icon_stroke {
+                stroke: #1a202c;
+            }
+        }
+
+        svg.nav-sidebar__icon_fill {
+            g {
+                fill: #BEBDB8;
+                transition: fill 150ms linear;
+            }
+        }
+
+        svg.nav-sidebar__icon_stroke {
+            stroke: #BEBDB8;
+            transition: stroke 150ms linear;
+        }
+    }
+}

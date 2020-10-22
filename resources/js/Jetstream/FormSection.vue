@@ -14,7 +14,7 @@
                         <slot name="form"></slot>
                     </div>
 
-                    <div class="flex items-start justify-start bg-light text-right px-12 pb-12" v-if="hasActions">
+                    <div class="flex items-start justify-start bg-light text-right px-1 pb-6 sm:px-12 sm:pb-12 sm:-mt-4" v-if="hasActions">
                         <slot name="actions"></slot>
                     </div>
                 </div>

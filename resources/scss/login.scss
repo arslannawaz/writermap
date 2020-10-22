@@ -22,3 +22,17 @@
         background-color: #f7f4ed;
     }
 }
+
+#show-password {
+    svg {
+        &.active {
+            g {
+                fill: #1a202c;
+            }
+        }
+
+        g {
+            transition: fill $defaultDurationTIme linear;
+        }
+    }
+}

@@ -29,13 +29,15 @@
         </template>
 
         <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
+            <div class="flex items-center justify-center">
+                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Update
+                </jet-button>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
-            </jet-button>
+                <jet-action-message :on="form.recentlySuccessful" class="ml-4 uppercase">
+                    Saved
+                </jet-action-message>
+            </div>
         </template>
     </jet-form-section>
 </template>
