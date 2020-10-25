@@ -1,10 +1,10 @@
 <x-guest-layout>
-    <div class="grid grid-cols-3 gap-4 login-background absolute z-0 invisible lg:visible">
+    <div class="grid grid-cols-3 login-background absolute z-0 invisible lg:visible">
         <div class="col-span-2"></div>
         <div class="col-span-1"></div>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 h-full login-background relative z-10 login-section">
+    <div class="grid grid-cols-3 h-full login-background relative z-10 login-section">
         <div class="col-span-3 lg:col-span-2 flex flex-col justify-center relative">
             <div class="login-logo">
                 <a href="{{ route('dashboard') }}" class="login-logo__link">
@@ -261,7 +261,7 @@
             </x-jet-authentication-card>
         </div>
         <div class="col-span-3 lg:col-span-1 flex flex-col justify-center items-center text-center register">
-            <div class="">
+            <div class="mt-60px">
                 <svg xmlns="http://ww.w3.org/2000/svg" width="230" height="225" viewBox="0 0 230 225">
                     <g fill="none" fill-rule="evenodd">
                         <g>
@@ -630,15 +630,15 @@
                 </svg>
             </div>
 
-            <h2 class="mt-14 fs-70 ff-minion font-semibold">Hello!</h2>
+            <h2 class="mt-40px fs-70 ff-minion font-semibold">Hello!</h2>
 
-            <p class="mt-14 ff-minion fs-22">
+            <p class="mt-40px ff-minion fs-22">
                 Enter your personal details and start<br>
                 to create your story
             </p>
 
             <a href="{{ route('register') }}"
-               class="mt-14 mb-12 button rounded-lg bg-dark px-16 py-3 font-semibold text-white">Sign Up</a>
+               class="login-register-button button rounded-lg bg-dark px-16 py-3 font-semibold text-white">Sign Up</a>
         </div>
     </div>
 </x-guest-layout>
