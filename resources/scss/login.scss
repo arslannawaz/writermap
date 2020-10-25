@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
 
     @media (min-width: $lg) and (min-height: 880px) {
         position: absolute;
@@ -37,9 +37,9 @@
             display: none;
         }
 
-        @media (min-height: 800px) {
+        @media (min-height: 880px) {
             display: block;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
     }
 }
@@ -59,6 +59,17 @@
 }
 
 .login-register-button {
-    margin-top: 70px;
-    margin-bottom: 100px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+
+    @media (min-height: 880px) {
+        margin-top: 70px;
+        margin-bottom: 100px;
+    }
+}
+
+.login-right-block {
+    @media (min-height: 880px) {
+        padding-top: 60px;
+    }
 }

@@ -260,8 +260,8 @@
                 </script>
             </x-jet-authentication-card>
         </div>
-        <div class="col-span-3 lg:col-span-1 flex flex-col justify-center items-center text-center register">
-            <div class="mt-60px">
+        <div class="col-span-3 lg:col-span-1 flex flex-col justify-center items-center text-center register login-right-block">
+            <div>
                 <svg xmlns="http://ww.w3.org/2000/svg" width="230" height="225" viewBox="0 0 230 225">
                     <g fill="none" fill-rule="evenodd">
                         <g>
