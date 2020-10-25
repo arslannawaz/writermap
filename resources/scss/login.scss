@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    margin: 36px 0;
+    margin: 20px 0;
 
     @media (min-width: $lg) and (min-height: 880px) {
         position: absolute;
@@ -28,6 +28,19 @@
 
     .col-span-1, .register {
         background-color: #f7f4ed;
+    }
+}
+
+.login-section {
+    .login-logo {
+        @media (min-height: 630px) {
+            display: none;
+        }
+
+        @media (min-height: 800px) {
+            display: block;
+            margin: 20px 0;
+        }
     }
 }
 

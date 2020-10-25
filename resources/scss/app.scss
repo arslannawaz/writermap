@@ -5,6 +5,7 @@
 @import "variables";
 @import "input";
 @import "login";
+@import "auth";
 @import "profile";
 @import "sidebar";
 
@@ -72,6 +73,14 @@ body {
 
 .fs-70 {
     font-size: 70px;
+
+    @media (min-height: 630px) {
+        font-size: 40px;
+    }
+
+    @media (min-height: 800px) {
+        font-size: 70px;
+    }
 }
 
 .fs-default {

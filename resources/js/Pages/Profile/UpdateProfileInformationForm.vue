@@ -102,11 +102,42 @@
                     <jet-input id="email" type="email" class="mt-1 block w-full input-default" v-model="form.email"/>
                     <jet-input-error :message="form.error('email')" class="mt-2"/>
                 </div>
+
+                <div class="mt-4 col-start-1 col-end-4">
+                    <jet-label for="password" value="New Password" />
+                    <div class="show-password">
+                        <jet-input id="password" type="password" class="show-password__input mt-1 block w-full" v-model="form.password" autocomplete="new-password" />
+                        <div class="show-password__icon-wrapper" @click="showPassword()">
+                            <svg id="show-password-svg" class="show-password__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#ADAAA5" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <g>
+                                                    <path
+                                                        d="M17.074 6.514C15.343 2.494 12.086 0 8.571 0 5.057 0 1.8 2.494.07 6.514c-.096.219-.096.467 0 .686 1.731 4.02 4.988 6.514 8.502 6.514 3.515 0 6.772-2.494 8.503-6.514.096-.219.096-.467 0-.686zM8.571 12C5.854 12 3.283 10.037 1.8 6.857c1.483-3.18 4.054-5.143 6.771-5.143 2.718 0 5.289 1.963 6.772 5.143C13.86 10.037 11.289 12 8.57 12zm0-8.571c-1.893 0-3.428 1.535-3.428 3.428 0 1.894 1.535 3.429 3.428 3.429C10.465 10.286 12 8.75 12 6.857c0-.91-.361-1.781-1.004-2.424S9.48 3.429 8.57 3.429zm0 5.142c-.946 0-1.714-.767-1.714-1.714s.768-1.714 1.714-1.714c.947 0 1.715.767 1.715 1.714S9.518 8.571 8.57 8.571z"
+                                                        transform="translate(-825 -630) translate(403 445) translate(60 154) translate(362 31)"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <jet-input-error :message="form.error('password')" class="mt-2" />
+                </div>
+
+                <div class="mt-4 col-end-7 col-span-3">
+                    <jet-label for="password_confirmation" value="Confirm Password" />
+                    <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" autocomplete="new-password" />
+                    <jet-input-error :message="form.error('password_confirmation')" class="mt-2" />
+                </div>
             </div>
         </template>
 
         <template #actions>
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center ml-2">
                 <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Update
                 </jet-button>
@@ -139,7 +170,7 @@ export default {
         JetSecondaryButton,
     },
 
-    props: ['first_name', 'last_name', 'pen_name', 'email'],
+    props: ['first_name', 'last_name', 'pen_name', 'email', 'password', 'password_confirmation'],
 
     data() {
         return {
@@ -151,6 +182,8 @@ export default {
                 name: this.name,
                 email: this.email,
                 photo: null,
+                password: '',
+                password_confirmation: '',
             }, {
                 bag: 'updateProfileInformation',
                 resetOnSuccess: false,
@@ -161,6 +194,20 @@ export default {
     },
 
     methods: {
+        showPassword() {
+            const showPasswordSvg = document.getElementById('show-password-svg');
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type');
+
+            showPasswordSvg.classList.toggle('active');
+
+            if (type === 'password') {
+                passwordInput.setAttribute('type', 'text');
+            } else {
+                passwordInput.setAttribute('type', 'password');
+            }
+        },
+
         updateProfileInformation() {
             if (this.$refs.photo) {
                 this.form.photo = this.$refs.photo.files[0]

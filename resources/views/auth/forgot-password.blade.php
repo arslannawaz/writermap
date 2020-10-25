@@ -87,7 +87,7 @@
             </div>
             <x-jet-authentication-card>
                 <x-slot name="logo">
-                    <h1 class="fs-70 mt-0 lg:mt-16 mb-4 ff-minion font-semibold text-center">Forgot Password</h1>
+                    <h1 class="fs-70 mt-0 lg:mt-8 mb-4 ff-minion font-semibold text-center">Forgot Password</h1>
                 </x-slot>
 
                 <div class="mb-8 text-sm text-gray-600">

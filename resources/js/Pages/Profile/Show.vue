@@ -16,7 +16,7 @@
 
                 <jet-section-border />
 
-                <update-password-form class="mt-10 sm:mt-0" />
+<!--                <update-password-form class="mt-10 sm:mt-0" />-->
 
 <!--                <div v-if="$page.jetstream.canManageTwoFactorAuthentication">-->
 <!--                    <jet-section-border />-->

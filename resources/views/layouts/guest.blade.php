@@ -13,7 +13,7 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
     </head>
-    <body class="bg-default h-screen">
+    <body class="bg-default h-screen auth-page">
         <div class="container h-full mx-auto">
 
             <div class="antialiased h-full">

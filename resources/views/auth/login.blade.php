@@ -4,7 +4,7 @@
         <div class="col-span-1"></div>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 h-full login-background relative z-10">
+    <div class="grid grid-cols-3 gap-4 h-full login-background relative z-10 login-section">
         <div class="col-span-3 lg:col-span-2 flex flex-col justify-center relative">
             <div class="login-logo">
                 <a href="{{ route('dashboard') }}" class="login-logo__link">
@@ -195,7 +195,7 @@
                             <x-jet-input id="password-input" class="block mt-1 w-full" type="password" name="password"
                                          required autocomplete="current-password"/>
 
-                            <div id="show-password" class="show-password" onclick="clickShowPassword()">
+                            <div id="show-password" class="show-password-icon" onclick="clickShowPassword()">
                                 <svg id="show-password-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#ADAAA5" fill-rule="nonzero">
@@ -261,9 +261,7 @@
             </x-jet-authentication-card>
         </div>
         <div class="col-span-3 lg:col-span-1 flex flex-col justify-center items-center text-center register">
-            <h1 class="mt-4 fs-50 ff-minion font-semibold">Hello!</h1>
-
-            <div class="mt-14">
+            <div class="">
                 <svg xmlns="http://ww.w3.org/2000/svg" width="230" height="225" viewBox="0 0 230 225">
                     <g fill="none" fill-rule="evenodd">
                         <g>
@@ -631,6 +629,8 @@
                     </g>
                 </svg>
             </div>
+
+            <h2 class="mt-14 fs-70 ff-minion font-semibold">Hello!</h2>
 
             <p class="mt-14 ff-minion fs-22">
                 Enter your personal details and start<br>
