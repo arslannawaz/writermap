@@ -36,13 +36,30 @@ input:-webkit-autofill:focus {
 
     &.email {
         svg {
-            top: 15px;
+            width: 16px;
+            height: 14px;
+            top: 14px;
+
+            @media (min-height: 880px) {
+                width: 18px;
+                height: 15px;
+                top: 15px;
+            }
         }
     }
 
     &.password {
-        svg {
-            top: 13px;
+        svg.password-icon {
+            width: 16px;
+            height: 16px;
+            top: 11px;
+            left: 2px;
+
+            @media (min-height: 880px) {
+                width: 18px;
+                height: 18px;
+                top: 13px;
+            }
         }
     }
 

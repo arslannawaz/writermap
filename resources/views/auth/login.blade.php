@@ -95,7 +95,7 @@
                     {{--            <x-jet-authentication-card-logo />--}}
                     <div class="flex justify-center login-socials">
                         <a href="{{ route('social_login', 'facebook') }}" class="mx-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+                            <svg class="svg-42" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
                                 <g fill="none" fill-rule="evenodd">
                                     <g>
                                         <g>
@@ -115,7 +115,7 @@
                         </a>
 
                         <a href="{{ route('social_login', 'google') }}" class="mx-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+                            <svg class="svg-42" xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
                                 <g fill="none" fill-rule="evenodd">
                                     <g>
                                         <g>
@@ -176,7 +176,7 @@
                         <x-jet-label value="{{ __('Password') }}"/>
 
                         <div class="input-icon-wrapper password">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <svg class="password-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#ADAAA5" fill-rule="nonzero">
                                         <g>
