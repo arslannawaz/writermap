@@ -91,9 +91,9 @@
 
             <x-jet-authentication-card>
                 <x-slot name="logo">
-                    <h1 class="fs-70 mb-4 ff-minion font-semibold text-center">Log in to Writers Map</h1>
+                    <h1 class="fs-70 login-h1 ff-minion font-semibold text-center">Log in to Writers Map</h1>
                     {{--            <x-jet-authentication-card-logo />--}}
-                    <div class="flex justify-center mb-8">
+                    <div class="flex justify-center login-socials">
                         <a href="{{ route('social_login', 'facebook') }}" class="mx-5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
                                 <g fill="none" fill-rule="evenodd">
