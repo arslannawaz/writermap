@@ -66,8 +66,29 @@
                     </a>
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
                     <nav class="mt-16 flex-1 px-2 bg-semilight flex flex-col items-center nav-sidebar">
+                        <a href="/dashboard"
+                           class="w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+<!--                            <svg-->
+<!--                                -->
+<!--                                stroke="currentColor" fill="none" viewBox="0 0 24 24">-->
+<!--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+<!--                                      d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"/>-->
+<!--                            </svg>-->
+                            <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#BEBDB8" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M12.25 0H3.5C1.567 0 0 1.612 0 3.6v10.8C0 16.388 1.567 18 3.5 18h8.75c.966 0 1.75-.806 1.75-1.8V1.8c0-.994-.784-1.8-1.75-1.8zM1.75 3.6c0-.994.784-1.8 1.75-1.8h8.75v9H3.5c-.617.003-1.222.177-1.75.504V3.6zM3.5 16.2c-.966 0-1.75-.806-1.75-1.8s.784-1.8 1.75-1.8h8.75v3.6H3.5zM5.25 5.4h3.5c.483 0 .875-.403.875-.9s-.392-.9-.875-.9h-3.5c-.483 0-.875.403-.875.9s.392.9.875.9z" transform="translate(-48 -201) translate(0 1) translate(48 200)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            Writers Room
+                        </a>
                         <a href="/user/profile"
-                           class="w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out">
+                           class="mt-10 w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out">
                             <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#4E4D4B" fill-rule="nonzero">
@@ -80,16 +101,6 @@
                                 </g>
                             </svg>
                             Account
-                        </a>
-                        <a href="/dashboard"
-                           class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
-                            <svg
-                                class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_stroke"
-                                stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"/>
-                            </svg>
-                            Dashboard
                         </a>
                     </nav>
                 </div>

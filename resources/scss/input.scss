@@ -40,11 +40,11 @@ input:-webkit-autofill:focus {
             height: 14px;
             top: 14px;
 
-            @media (min-height: 880px) {
-                width: 18px;
-                height: 15px;
-                top: 15px;
-            }
+            //@media (min-height: 880px) {
+            //    width: 18px;
+            //    height: 15px;
+            //    top: 15px;
+            //}
         }
     }
 
@@ -53,13 +53,13 @@ input:-webkit-autofill:focus {
             width: 16px;
             height: 16px;
             top: 11px;
-            left: 2px;
+            left: 1px;
 
-            @media (min-height: 880px) {
-                width: 18px;
-                height: 18px;
-                top: 13px;
-            }
+            //@media (min-height: 880px) {
+            //    width: 18px;
+            //    height: 18px;
+            //    top: 13px;
+            //}
         }
     }
 

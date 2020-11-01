@@ -34,18 +34,26 @@
 
 body {
     font-family: GillSans;
-    font-size: 13px;
+    font-size: 15px !important;
     color: #4e4d4b !important;
     overflow-y: auto;
     overflow-x: hidden;
 
-    @media (min-height: 630px) {
-        font-size: 13px;
-    }
+    //@media (min-height: 630px) {
+    //    font-size: 13px;
+    //}
+    //
+    //@media (min-height: 880px) {
+    //    font-size: 16px;
+    //}
+}
 
-    @media (min-height: 880px) {
-        font-size: 16px;
-    }
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-size: 15px;
 }
 
 .ff-minion {
@@ -69,11 +77,11 @@ body {
 }
 
 .fs-22 {
-    font-size: 16px;
+    font-size: 18px;
 
-    @media (min-height: 880px) {
-        font-size: 22px;
-    }
+    //@media (min-height: 880px) {
+    //    font-size: 22px;
+    //}
 }
 
 .fs-34 {
@@ -85,19 +93,19 @@ body {
 }
 
 .fs-70 {
-    font-size: 70px;
+    font-size: 46px;
 
-    @media (min-height: 630px) {
-        font-size: 30px;
-    }
-
-    @media (min-height: 880px) {
-        font-size: 70px;
-    }
+    //@media (min-height: 630px) {
+    //    font-size: 30px;
+    //}
+    //
+    //@media (min-height: 880px) {
+    //    font-size: 70px;
+    //}
 }
 
 .fs-default {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .text-color-light, .text-color-inactive {
@@ -141,11 +149,11 @@ label {
 }
 
 .svg-42 {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 
-    @media (min-height: 880px) {
-        width: 42px;
-        height: 42px;
-    }
+    //@media (min-height: 880px) {
+    //    width: 42px;
+    //    height: 42px;
+    //}
 }

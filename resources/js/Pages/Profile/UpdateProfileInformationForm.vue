@@ -54,14 +54,13 @@
                         <!--                                              v-if="$page.user.profile_photo_path">-->
                         <!--                            Remove Photo-->
                         <!--                        </jet-secondary-button>-->
-
-                        <jet-input-error :message="form.error('photo')" class="mt-2"/>
                     </div>
                     <div class="col-span-1 ml-6">
                         <h1 class="fs-34 ff-minion">{{ $page.user.name }}</h1>
                         <div class="text-color-light -mt-2">{{ $page.user.email }}</div>
                     </div>
                 </div>
+                <jet-input-error :message="form.error('photo')" class="mt-6"/>
             </div>
         </template>
 
@@ -230,6 +229,8 @@ export default {
             };
 
             reader.readAsDataURL(this.$refs.photo.files[0]);
+
+            this.updateProfileInformation();
         },
 
         deletePhoto() {

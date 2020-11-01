@@ -47,8 +47,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             ])->save();
         }
 
-        $passwordUpdate = new UpdateUserPassword();
-        $passwordUpdate->update($user, $input);
+        if ($input['password'] !== null) {
+            $passwordUpdate = new UpdateUserPassword();
+            $passwordUpdate->update($user, $input);
+        }
     }
 
     /**
