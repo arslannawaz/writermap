@@ -9,6 +9,10 @@
 @import "auth";
 @import "profile";
 @import "sidebar";
+@import "dashboard";
+@import "modal";
+@import "books";
+@import "breakdown";
 
 @font-face {
     font-family: MinionPro;
@@ -76,12 +80,25 @@ textarea {
     background-color: #F7F4ED;
 }
 
+.copyright {
+    font-size: 10px;
+    color: rgba(3, 3, 3, 0.5);
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
 .fs-22 {
     font-size: 18px;
 
     //@media (min-height: 880px) {
     //    font-size: 22px;
     //}
+}
+
+.fs-24 {
+    font-size: 24px;
 }
 
 .fs-34 {
@@ -156,4 +173,18 @@ label {
     //    width: 42px;
     //    height: 42px;
     //}
+}
+
+.h2 {
+    font-family: MinionPro;
+    font-weight: 600;
+    font-size: 34px;
+    color: #4e4d4b;
+}
+
+.h3 {
+    font-family: MinionPro;
+    font-size: 20px;
+    font-weight: 600;
+    color: #4e4d4b;
 }

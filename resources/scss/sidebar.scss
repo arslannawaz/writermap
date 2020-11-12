@@ -16,6 +16,20 @@
             }
         }
 
+        &.active {
+            color: #4e4d4b;
+
+            svg.nav-sidebar__icon_fill {
+                g {
+                    fill: #1a202c;
+                }
+            }
+
+            svg.nav-sidebar__icon_stroke {
+                stroke: #1a202c;
+            }
+        }
+
         svg.nav-sidebar__icon_fill {
             g {
                 fill: #BEBDB8;

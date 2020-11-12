@@ -1,0 +1,19 @@
+.breakdown-header-links {
+    a {
+        padding: 10px 0;
+        font-size: 15px;
+        font-weight: 600;
+        color: #adaaa5;
+        border-bottom: 1px solid transparent;
+        transition: color $defaultDurationTIme linear;
+
+        &:hover {
+            color: #4e4d4b;
+        }
+
+        &.active {
+            color: #4e4d4b;
+            border-bottom-color: #4e4d4b;
+        }
+    }
+}

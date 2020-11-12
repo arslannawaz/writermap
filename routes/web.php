@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,14 @@ Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->na
 Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
+    return Inertia\Inertia::render('Dashboard', [
+        'books' => Auth::user()->books()->orderBy('created_at', 'desc')->paginate(4),
+    ]);
 })->name('dashboard');
+
+
+Route::post('books', [BookController::class, 'index'])->name('books.index');
+Route::get('books/{id}/pages', [BookController::class, 'pages'])->name('books.pages');
+Route::get('books/{id}/breakdown', [BookController::class, 'breakdown'])->name('books.breakdown');
+Route::get('books/{id}/breakdown/{type}', [BookController::class, 'breakdown'])->name('books.breakdown');
+Route::post('books/create', [BookController::class, 'create'])->name('books.create');

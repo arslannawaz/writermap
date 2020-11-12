@@ -66,44 +66,188 @@
                     </a>
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
                     <nav class="mt-16 flex-1 px-2 bg-semilight flex flex-col items-center nav-sidebar">
-                        <a href="/dashboard"
-                           class="w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
-<!--                            <svg-->
-<!--                                -->
-<!--                                stroke="currentColor" fill="none" viewBox="0 0 24 24">-->
-<!--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-<!--                                      d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"/>-->
-<!--                            </svg>-->
-                            <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
-                                <g fill="none" fill-rule="evenodd">
-                                    <g fill="#BEBDB8" fill-rule="nonzero">
-                                        <g>
+                        <div v-if="isBookMenu">
+                            <a :href="'/books/' + bookId + '/pages'"
+                               class="w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('pages') }">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
                                             <g>
-                                                <path d="M12.25 0H3.5C1.567 0 0 1.612 0 3.6v10.8C0 16.388 1.567 18 3.5 18h8.75c.966 0 1.75-.806 1.75-1.8V1.8c0-.994-.784-1.8-1.75-1.8zM1.75 3.6c0-.994.784-1.8 1.75-1.8h8.75v9H3.5c-.617.003-1.222.177-1.75.504V3.6zM3.5 16.2c-.966 0-1.75-.806-1.75-1.8s.784-1.8 1.75-1.8h8.75v3.6H3.5zM5.25 5.4h3.5c.483 0 .875-.403.875-.9s-.392-.9-.875-.9h-3.5c-.483 0-.875.403-.875.9s.392.9.875.9z" transform="translate(-48 -201) translate(0 1) translate(48 200)"/>
+                                                <g>
+                                                    <g>
+                                                        <path d="M16.2 6.246c-.01-.083-.027-.164-.054-.243v-.081c-.043-.093-.101-.178-.171-.252l-5.4-5.4c-.074-.07-.16-.128-.252-.171-.027-.004-.054-.004-.081 0C10.151.047 10.05.013 9.945 0H6.3C4.809 0 3.6 1.209 3.6 2.7v.9h-.9C1.209 3.6 0 4.809 0 6.3v9C0 16.791 1.209 18 2.7 18h7.2c1.491 0 2.7-1.209 2.7-2.7v-.9h.9c1.491 0 2.7-1.209 2.7-2.7V6.3v-.054zm-5.4-3.177L13.131 5.4H11.7c-.497 0-.9-.403-.9-.9V3.069zm0 12.231c0 .497-.403.9-.9.9H2.7c-.497 0-.9-.403-.9-.9v-9c0-.497.403-.9.9-.9h.9v6.3c0 1.491 1.209 2.7 2.7 2.7h4.5v.9zm3.6-3.6c0 .497-.403.9-.9.9H6.3c-.497 0-.9-.403-.9-.9v-9c0-.497.403-.9.9-.9H9v2.7c0 1.491 1.209 2.7 2.7 2.7h2.7v4.5z" transform="translate(-48 -143) translate(0 1) translate(46 141) translate(2 1)"/>
+                                                    </g>
+                                                </g>
                                             </g>
                                         </g>
                                     </g>
-                                </g>
-                            </svg>
-                            Writers Room
-                        </a>
-                        <a href="/user/profile"
-                           class="mt-10 w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out">
-                            <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                                <g fill="none" fill-rule="evenodd">
-                                    <g fill="#4E4D4B" fill-rule="nonzero">
-                                        <g>
+                                </svg>
+                                Pages
+                            </a>
+
+                            <a href="#"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="11" viewBox="0 0 18 11">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
                                             <g>
-                                                <path d="M6.75 7.65H9c.497 0 .9-.403.9-.9s-.403-.9-.9-.9h-.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.495c-1.133.23-1.907 1.281-1.79 2.431.115 1.15 1.084 2.025 2.24 2.024h.9c.249 0 .45.201.45.45s-.201.45-.45.45H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h.9v.45c0 .497.403.9.9.9s.9-.403.9-.9v-.495c1.133-.23 1.907-1.281 1.79-2.431-.115-1.15-1.084-2.025-2.24-2.024h-.9c-.249 0-.45-.201-.45-.45s.201-.45.45-.45zM17.1 9h-2.7V.9c.001-.323-.17-.622-.45-.783-.278-.16-.622-.16-.9 0l-2.7 1.548L7.65.117c-.278-.16-.622-.16-.9 0l-2.7 1.548L1.35.117c-.278-.16-.622-.16-.9 0C.17.278-.001.577 0 .9v14.4C0 16.791 1.209 18 2.7 18h12.6c1.491 0 2.7-1.209 2.7-2.7V9.9c0-.497-.403-.9-.9-.9zM2.7 16.2c-.497 0-.9-.403-.9-.9V2.457l1.8 1.026c.282.147.618.147.9 0l2.7-1.548 2.7 1.548c.282.147.618.147.9 0l1.8-1.026V15.3c.002.307.057.611.162.9H2.7zm13.5-.9c0 .497-.403.9-.9.9s-.9-.403-.9-.9v-4.5h1.8v4.5z" transform="translate(-48 -277) translate(0 1) translate(48 276)"/>
+                                                <g>
+                                                    <g>
+                                                        <path d="M1.539 9.261c-.086-.082-.187-.146-.297-.189-.22-.09-.465-.09-.684 0-.11.043-.211.107-.297.189-.082.086-.146.187-.189.297-.14.335-.066.722.189.981.087.08.188.143.297.189.218.096.466.096.684 0 .11-.046.21-.11.297-.189.255-.259.33-.646.189-.981-.043-.11-.107-.211-.189-.297zM4.5 1.8h12.6c.497 0 .9-.403.9-.9s-.403-.9-.9-.9H4.5c-.497 0-.9.403-.9.9s.403.9.9.9zM1.539 4.761c-.259-.255-.646-.33-.981-.189-.11.046-.21.11-.297.189-.082.086-.146.187-.189.297-.096.218-.096.466 0 .684.046.11.11.21.189.297.087.08.188.143.297.189.218.096.466.096.684 0 .11-.046.21-.11.297-.189.08-.087.143-.188.189-.297.096-.218.096-.466 0-.684-.043-.11-.107-.211-.189-.297zM17.1 4.5H4.5c-.497 0-.9.403-.9.9s.403.9.9.9h12.6c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zM1.539.261C1.453.179 1.352.115 1.242.072.907-.068.52.006.261.261.181.348.118.449.072.558c-.096.218-.096.466 0 .684.046.11.11.21.189.297.087.08.188.143.297.189.335.14.722.066.981-.189.08-.087.143-.188.189-.297.096-.218.096-.466 0-.684-.046-.11-.11-.21-.189-.297zM17.1 9H4.5c-.497 0-.9.403-.9.9s.403.9.9.9h12.6c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-47 -225) translate(0 1) translate(46 141) translate(1 83)"/>
+                                                    </g>
+                                                </g>
                                             </g>
                                         </g>
                                     </g>
-                                </g>
-                            </svg>
-                            Account
-                        </a>
+                                </svg>
+                                Story Plan
+                            </a>
+
+                            <a :href="'/books/' + bookId + '/breakdown/characters'"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('breakdown') }">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#8D8C89" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <path d="M7.2 7.2H.9c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm0 7.2H.9c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm3.6-12.6h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9h-6.3c-.497 0-.9.403-.9.9s.403.9.9.9zM7.2 3.6H.9c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm0 7.2H.9c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zM7.2 0H4.5c-.497 0-.9.403-.9.9s.403.9.9.9h2.7c.497 0 .9-.403.9-.9S7.697 0 7.2 0zm9.9 3.6h-6.3c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm0 3.6h-6.3c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm-3.6 7.2h-2.7c-.497 0-.9.403-.9.9s.403.9.9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm3.6-3.6h-6.3c-.497 0-.9.403-.9.9s.403.9.9.9h6.3c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-47 -298) translate(0 1) translate(46 141) translate(1 156)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Breakdown
+                            </a>
+
+                            <a href="#"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <path d="M10.273 8.382c.981-.85 1.545-2.084 1.545-3.382 0-2.51-2.035-4.545-4.545-4.545S2.727 2.49 2.727 5c0 1.298.564 2.532 1.546 3.382C1.673 9.559.003 12.147 0 15c0 .502.407.91.91.91.501 0 .908-.408.908-.91 0-3.012 2.442-5.455 5.455-5.455 3.012 0 5.454 2.443 5.454 5.455 0 .502.407.91.91.91.501 0 .908-.408.908-.91-.002-2.853-1.673-5.441-4.272-6.618zm-3-.655c-1.507 0-2.728-1.22-2.728-2.727 0-1.506 1.221-2.727 2.728-2.727C8.779 2.273 10 3.493 10 5c0 .723-.287 1.417-.799 1.928-.511.512-1.205.8-1.928.8zm8.854.291c1.189-1.338 1.481-3.25.747-4.882-.733-1.632-2.357-2.682-4.147-2.681-.502 0-.909.407-.909.909s.407.909.91.909c1.506 0 2.727 1.22 2.727 2.727-.003.972-.523 1.869-1.364 2.355-.274.158-.446.447-.455.763-.007.314.147.61.41.782l.354.236.118.064c2.238 1.061 3.656 3.324 3.637 5.8 0 .502.407.91.909.91s.909-.408.909-.91c.015-2.837-1.44-5.478-3.846-6.982z" transform="translate(-46 -377) translate(0 1) translate(46 141) translate(0 235)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Characters
+                            </a>
+
+                            <a href="#"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <path d="M11.788 9.57L9.9 8.48V4.5c0-.497-.403-.9-.9-.9s-.9.403-.9.9V9c0 .322.171.619.45.78l2.338 1.35c.279.16.622.16.9 0 .28-.161.451-.458.45-.78 0-.322-.171-.619-.45-.78zM9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c-.006-4.968-4.032-8.994-9-9zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c-.005 3.975-3.225 7.195-7.2 7.2z" transform="translate(-47 -455) translate(0 1) translate(46 141) translate(1 313)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Timeline
+                            </a>
+
+                            <a href="#"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <path d="M1.8 11.214c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.9c0 .497.403.9.9.9h.9c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zM5.562 1.8h1.89c.497 0 .9-.403.9-.9s-.403-.9-.9-.9h-1.89c-.497 0-.9.403-.9.9s.403.9.9.9zm5.652 0c0 .497.403.9.9.9s.9-.403.9-.9V.9c0-.497-.403-.9-.9-.9h-.9c-.497 0-.9.403-.9.9s.403.9.9.9zM1.8 0H.9C.403 0 0 .403 0 .9v.9c0 .497.403.9.9.9s.9-.403.9-.9c.497 0 .9-.403.9-.9S2.297 0 1.8 0zM.9 8.352c.497 0 .9-.403.9-.9v-1.89c0-.497-.403-.9-.9-.9s-.9.403-.9.9v1.89c0 .497.403.9.9.9zM12.438 16.2h-1.89c-.497 0-.9.403-.9.9s.403.9.9.9h1.89c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zM17.1 4.986h-.9c-.497 0-.9.403-.9.9s.403.9.9.9c0 .497.403.9.9.9s.9-.403.9-.9v-.9c0-.497-.403-.9-.9-.9zm0 4.662c-.497 0-.9.403-.9.9v1.89c0 .497.403.9.9.9s.9-.403.9-.9v-1.89c0-.497-.403-.9-.9-.9zm-4.086-4.662c0-.497-.403-.9-.9-.9s-.9.403-.9.9H5.886c-.497 0-.9.403-.9.9v5.328c-.497 0-.9.403-.9.9s.403.9.9.9c0 .497.403.9.9.9s.9-.403.9-.9h5.328c.239 0 .468-.095.636-.264.17-.168.264-.397.264-.636V6.786c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm-1.8 6.228H6.786V6.786h4.428v4.428zM17.1 15.3c-.497 0-.9.403-.9.9-.497 0-.9.403-.9.9s.403.9.9.9h.9c.497 0 .9-.403.9-.9v-.9c0-.497-.403-.9-.9-.9zm-10.314.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.9c0 .497.403.9.9.9h.9c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-47 -532) translate(0 1) translate(46 141) translate(1 390)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Visual
+                            </a>
+
+                            <a href="#"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <path d="M11.7 10.8H4.5c-.497 0-.9.403-.9.9s.403.9.9.9h7.2c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm0-3.6H6.3c-.497 0-.9.403-.9.9s.403.9.9.9h5.4c.497 0 .9-.403.9-.9s-.403-.9-.9-.9zm3.6-5.4h-2.7V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.9H9V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.9H5.4V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.9H.9c-.497 0-.9.403-.9.9v12.6C0 16.791 1.209 18 2.7 18h10.8c1.491 0 2.7-1.209 2.7-2.7V2.7c0-.497-.403-.9-.9-.9zm-.9 13.5c0 .497-.403.9-.9.9H2.7c-.497 0-.9-.403-.9-.9V3.6h1.8v.9c0 .497.403.9.9.9s.9-.403.9-.9v-.9h1.8v.9c0 .497.403.9.9.9s.9-.403.9-.9v-.9h1.8v.9c0 .497.403.9.9.9s.9-.403.9-.9v-.9h1.8v11.7z" transform="translate(-48 -611) translate(0 1) translate(46 141) translate(2 469)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Notes
+                            </a>
+
+                            <a href="#"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <g>
+                                                        <path d="M18.336.964C17.685.85 17.025.794 16.364.79 14.108.789 11.899 1.436 10 2.655 8.096 1.452 5.888.82 3.636.836c-.66.003-1.32.06-1.972.173-.441.076-.761.462-.755.91v10.908c-.004.27.113.529.318.705.206.175.48.25.746.204 2.632-.455 5.336.17 7.5 1.737l.109.063h.1c.203.085.433.085.636 0h.1l.11-.063c2.148-1.601 4.854-2.264 7.5-1.837.266.046.539-.029.745-.204.205-.176.322-.434.318-.705V1.818c-.02-.427-.334-.782-.755-.854zM9.091 13.045C7.409 12.161 5.537 11.7 3.636 11.7h-.909V2.61c.303-.018.607-.018.91 0 1.939-.003 3.836.566 5.454 1.635v8.8zm8.182-1.309h-.91c-1.9 0-3.772.461-5.454 1.346V4.245c1.618-1.069 3.515-1.638 5.455-1.636.302-.017.606-.017.909 0v9.127zm1.063 3.773c-.651-.112-1.311-.17-1.972-.173-2.256-.001-4.465.645-6.364 1.864-1.899-1.219-4.108-1.865-6.364-1.864-.66.003-1.32.06-1.972.173-.24.038-.453.17-.595.366-.142.196-.2.44-.16.68.096.491.572.812 1.064.718 2.632-.456 5.336.17 7.5 1.736.315.225.739.225 1.054 0 2.164-1.566 4.868-2.192 7.5-1.736.492.094.968-.227 1.064-.718.04-.24-.018-.484-.16-.68-.142-.196-.356-.328-.595-.366z" transform="translate(-46 -689) translate(0 1) translate(46 141) translate(0 547)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Pitching
+                            </a>
+                        </div>
+                        <div v-else>
+                            <a href="/dashboard"
+                               class="w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('dashboard') }">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <path d="M12.25 0H3.5C1.567 0 0 1.612 0 3.6v10.8C0 16.388 1.567 18 3.5 18h8.75c.966 0 1.75-.806 1.75-1.8V1.8c0-.994-.784-1.8-1.75-1.8zM1.75 3.6c0-.994.784-1.8 1.75-1.8h8.75v9H3.5c-.617.003-1.222.177-1.75.504V3.6zM3.5 16.2c-.966 0-1.75-.806-1.75-1.8s.784-1.8 1.75-1.8h8.75v3.6H3.5zM5.25 5.4h3.5c.483 0 .875-.403.875-.9s-.392-.9-.875-.9h-3.5c-.483 0-.875.403-.875.9s.392.9.875.9z" transform="translate(-48 -201) translate(0 1) translate(48 200)"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Writers Room
+                            </a>
+                            <a href="/user/profile"
+                               class="mt-10 w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('user/profile') }">
+                                <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g fill="#4E4D4B" fill-rule="nonzero">
+                                            <g>
+                                                <g>
+                                                    <path d="M6.75 7.65H9c.497 0 .9-.403.9-.9s-.403-.9-.9-.9h-.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v.495c-1.133.23-1.907 1.281-1.79 2.431.115 1.15 1.084 2.025 2.24 2.024h.9c.249 0 .45.201.45.45s-.201.45-.45.45H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h.9v.45c0 .497.403.9.9.9s.9-.403.9-.9v-.495c1.133-.23 1.907-1.281 1.79-2.431-.115-1.15-1.084-2.025-2.24-2.024h-.9c-.249 0-.45-.201-.45-.45s.201-.45.45-.45zM17.1 9h-2.7V.9c.001-.323-.17-.622-.45-.783-.278-.16-.622-.16-.9 0l-2.7 1.548L7.65.117c-.278-.16-.622-.16-.9 0l-2.7 1.548L1.35.117c-.278-.16-.622-.16-.9 0C.17.278-.001.577 0 .9v14.4C0 16.791 1.209 18 2.7 18h12.6c1.491 0 2.7-1.209 2.7-2.7V9.9c0-.497-.403-.9-.9-.9zM2.7 16.2c-.497 0-.9-.403-.9-.9V2.457l1.8 1.026c.282.147.618.147.9 0l2.7-1.548 2.7 1.548c.282.147.618.147.9 0l1.8-1.026V15.3c.002.307.057.611.162.9H2.7zm13.5-.9c0 .497-.403.9-.9.9s-.9-.403-.9-.9v-4.5h1.8v4.5z" transform="translate(-48 -277) translate(0 1) translate(48 276)"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Account
+                            </a>
+                        </div>
                     </nav>
                 </div>
+<!--                <div v-if="isBookMenu" class="text-center mb-16">-->
+<!--                    <a href="#" class="button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>-->
+<!--                </div>-->
                 <div class="flex-shrink-0 flex pt-4 pb-8 px-10">
                     <a href="/user/profile" class="flex-shrink-0 group block focus:outline-none">
                         <div class="flex items-center">
@@ -173,10 +317,23 @@ export default {
     data() {
         return {
             showingNavigationDropdown: false,
+            isBookMenu: false,
+            bookId: null,
+        }
+    },
+
+    mounted() {
+        if (window.location.href.indexOf("books") > -1) {
+            this.isBookMenu = true;
+            this.bookId = window.location.pathname.split('/')[2];
         }
     },
 
     methods: {
+        isUrlContain(value) {
+            return window.location.pathname.indexOf(value) > -1;
+        },
+
         switchToTeam(team) {
             this.$inertia.put('/current-team', {
                 'team_id': team.id

@@ -1,0 +1,45 @@
+.header-user {
+    position: relative;
+
+    &__image {
+        position: absolute;
+        right: 0;
+    }
+}
+
+.scriptorium-wrapper {
+    position: relative;
+
+    &__add-icon {
+        position: absolute;
+        cursor: pointer;
+        right: -25px;
+        top: 50px;
+        width: 50px;
+        height: 50px;
+        padding: 18px;
+        border-radius: 50%;
+        background-color: #4e4d4b;
+    }
+}
+
+.scriptorium-book {
+    &:hover {
+        .scriptorium-book {
+            &__title {
+                color: #000;
+            }
+        }
+    }
+
+    &__image {
+        min-height: 230px;
+        height: 280px;
+        width: 100%;
+        background-size: cover;
+    }
+
+    &__title {
+        transition: color $defaultDurationTIme linear;
+    }
+}
