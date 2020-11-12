@@ -21,15 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="129c5017-af8c-4604-a9b4-b8519ed14f8a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Book/Breakdown.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Book/Breakdown.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Book/Pages.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Book/Pages.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/scss/books.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/books.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/scss/input.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/input.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/scss/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/login.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
     </list>
@@ -210,7 +204,7 @@
       <updated>1605064860713</updated>
       <workItem from="1605064863261" duration="3405000" />
       <workItem from="1605127099016" duration="3338000" />
-      <workItem from="1605133301466" duration="13844000" />
+      <workItem from="1605133301466" duration="14498000" />
     </task>
     <servers />
   </component>
@@ -234,13 +228,13 @@
       <screen x="0" y="23" width="2560" height="1338" />
     </state>
     <state x="0" y="23" width="2560" height="1338" key="SettingsEditor/0.23.2560.1338@0.23.2560.1338" timestamp="1605133211115" />
-    <state x="900" y="381" width="759" height="622" key="find.popup" timestamp="1605145889866">
+    <state x="900" y="381" width="759" height="658" key="find.popup" timestamp="1605150390771">
       <screen x="0" y="23" width="2560" height="1338" />
     </state>
-    <state x="900" y="381" width="759" height="622" key="find.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605145889866" />
-    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup" timestamp="1605149807565">
+    <state x="900" y="381" width="759" height="658" key="find.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605150390771" />
+    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup" timestamp="1605150098935">
       <screen x="0" y="23" width="2560" height="1338" />
     </state>
-    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605149807565" />
+    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605150098935" />
   </component>
 </project>

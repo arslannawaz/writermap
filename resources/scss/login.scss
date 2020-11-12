@@ -9,6 +9,7 @@
     }
 
     @media (min-width: 960px) and (min-height: 1024px) {
+
         position: absolute;
         left: 50%;
         top: 36px;
@@ -17,6 +18,15 @@
         &__link {
             position: relative;
             left: -50%;
+        }
+
+        &_left {
+            left: 40px;
+
+            .login-logo__link {
+                position: relative;
+                left: 0;
+            }
         }
     }
 }
@@ -79,7 +89,7 @@
 
 .login-register-button {
     margin-top: 60px;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
 
     //@media (min-height: 880px) {
     //    margin-top: 70px;
@@ -102,7 +112,7 @@
 }
 
 .auth-card {
-    padding: 40px;
+    padding: 30px;
     margin-top: 30px;
 
     //@media (min-height: 880px) {

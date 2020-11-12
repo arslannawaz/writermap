@@ -3,7 +3,7 @@
         {{ $logo }}
     </div>
 
-    <div class="auth-card w-full sm:max-w-lg bg-light shadow-md overflow-hidden">
+    <div class="auth-card w-full sm:max-w-md bg-light shadow-md overflow-hidden">
         {{ $slot }}
     </div>
 </div>
