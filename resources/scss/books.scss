@@ -39,13 +39,15 @@
             margin: 20px 0;
         }
 
-        p:first-child {
-            &::first-letter {
-                font-size: 28px;
-                float: left;
-                padding-right: 10px;
-                color: #4e4d4b;
-                font-weight: 600;
+        &_first-letter {
+            p:first-child {
+                &::first-letter {
+                    font-size: 28px;
+                    float: left;
+                    padding-right: 10px;
+                    color: #4e4d4b;
+                    font-weight: 600;
+                }
             }
         }
     }

@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="grid grid-cols-3 login-background absolute z-0 invisible lg:visible">
         <div class="col-span-2"></div>
-        <div class="col-span-1"></div>
+        <div class="col-span-1 bg-col"></div>
     </div>
 
     <div class="grid grid-cols-3 h-full login-background relative z-10 login-section">

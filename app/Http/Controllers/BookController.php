@@ -33,6 +33,7 @@ class BookController extends Controller
     {
         return inertia('Book/Breakdown', [
             'book' => Book::find($id),
+            'type' => $type,
         ]);
     }
 }

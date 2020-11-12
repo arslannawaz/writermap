@@ -1,12 +1,18 @@
 <template>
     <app-layout>
         <app-container>
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-2 grid-background absolute z-0 invisible lg:visible">
+                <div class="col-span-1"></div>
+                <div class="col-span-1 col-bg"></div>
+            </div>
+            <div class="grid grid-cols-2 relative z-10 h-full">
                 <!-- BEGIN Left block -->
                 <div class="px-12">
-                    <div class="flex justify-between px-6">
-                        <h1 class="h2">{{ book.name }}</h1>
-                        <svg class="mt-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                    <div class="flex justify-between pl-6">
+                        <h1 class="h2">
+                            <input ref="book_name" type="text" class="input-default input-default_p-zero input-default_border-transparent h2" v-model="book.name">
+                        </h1>
+                        <svg class="mt-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" @click="$refs.book_name.focus()">
                             <g fill="none" fill-rule="evenodd">
                                 <g fill="#BEBDB8" fill-rule="nonzero">
                                     <g>
@@ -65,17 +71,20 @@
                 <!-- BEGIN Right block -->
                 <div class="px-12">
                     <div class="flex justify-between mt-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                            <g fill="none" fill-rule="evenodd">
-                                <g fill="#BEBDB8" fill-rule="nonzero">
-                                    <g>
+                        <div class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#BEBDB8" fill-rule="nonzero">
                                         <g>
-                                            <path d="M18.738 17.453l-3.357-3.33c2.705-3.373 2.302-8.273-.918-11.158C11.243.079 6.328.213 3.271 3.27.213 6.328.079 11.243 2.965 14.463c2.885 3.22 7.785 3.623 11.158.918l3.33 3.33c.17.17.401.267.642.267s.473-.096.643-.268c.339-.35.339-.906 0-1.257zm-9.69-2.072c-3.498 0-6.334-2.836-6.334-6.333 0-3.498 2.836-6.334 6.334-6.334 3.497 0 6.333 2.836 6.333 6.334 0 1.68-.667 3.29-1.855 4.478-1.188 1.188-2.799 1.855-4.478 1.855z" transform="translate(-740 -40) translate(740 40)"/>
+                                            <g>
+                                                <path d="M18.738 17.453l-3.357-3.33c2.705-3.373 2.302-8.273-.918-11.158C11.243.079 6.328.213 3.271 3.27.213 6.328.079 11.243 2.965 14.463c2.885 3.22 7.785 3.623 11.158.918l3.33 3.33c.17.17.401.267.642.267s.473-.096.643-.268c.339-.35.339-.906 0-1.257zm-9.69-2.072c-3.498 0-6.334-2.836-6.334-6.333 0-3.498 2.836-6.334 6.334-6.334 3.497 0 6.333 2.836 6.333 6.334 0 1.68-.667 3.29-1.855 4.478-1.188 1.188-2.799 1.855-4.478 1.855z" transform="translate(-740 -40) translate(740 40)"/>
+                                            </g>
                                         </g>
                                     </g>
                                 </g>
-                            </g>
-                        </svg>
+                            </svg>
+                            <input type="text" class="input-default input-default_p-zero ml-4">
+                        </div>
 
                         <div class="flex justify-end">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -113,7 +122,7 @@
                             <div class="book-page__paper flex flex-col justify-end">
                                 <span class="book-page__chapter">Chapter One</span>
 
-                                <div class="book-page__content">
+                                <div class="book-page__content book-page__content_first-letter">
                                     <p>Don’t know about you, but I’m getting a lot of reading done these days. I just finished To Kill a Mockingbird, which I still can’t believe  school without reading. On my nightstand are The Overstory by Richard Powers and Edge of the Map by Johanna Garton. Coventry by Rachel Cusk calls to me to finish it with a reminder of how lucid close observation can be. There’s a Stephen King open on my Kindle app…which one? Ah, yes, The Institute. Oh, and Joni just finished a loaner copy of Michelle Obama’s Becoming and I get it next.</p>
                                     <p>Sometimes, though, you want to lose yourself in a classic adventure tale, where a human sets a goal and then launches on a quest to accomplish that goal. Can they climb this? Can they paddle this faster than anyone? Can they survive a plane crash in the Sahara? These five are some of my faves (four in photo because Emerald Mile is out on loan). I’ve read them all more than once, and each time I discover new delights within.</p>
                                 </div>

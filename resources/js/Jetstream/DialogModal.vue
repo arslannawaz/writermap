@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="px-8 py-8 bg-light">
+        <div class="px-8 pb-8 bg-light">
             <slot name="footer">
             </slot>
         </div>

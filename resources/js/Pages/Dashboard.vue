@@ -4389,13 +4389,13 @@
         </template>
 
         <template #content>
-            <input type="text" class="input-default" v-model="form.name">
+            <input type="text" class="input-default w-full" v-model="form.name">
 
             <jet-input-error :message="form.error" class="mt-2" />
         </template>
 
         <template #footer>
-            <button @click="createBook()">Test</button>
+            <button @click="createBook()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
         </template>
     </jet-dialog-modal>
     <portal-target name="modal"></portal-target>
