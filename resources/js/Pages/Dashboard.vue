@@ -4388,7 +4388,7 @@
                       :class="{ 'pagination__page_active': page.active }"
                       @click="setPage(page)"
                     >
-                    <span v-if="page.label === 'Previous'">
+                    <span v-if="page.label === 'Previous' || page.label === '&laquo; Previous'">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
                             <defs>
                                 <path id="sluil6fsia" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
@@ -4405,7 +4405,7 @@
                         </svg>
                     </span>
 
-                    <span v-else-if="page.label === 'Next'">
+                    <span v-else-if="page.label === 'Next' || page.label === 'Next &raquo;'">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
                             <defs>
                                 <path id="swxada9rxa" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
