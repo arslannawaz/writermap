@@ -2,8 +2,8 @@
     <div class="h-screen flex overflow-hidden bg-default">
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:flex-shrink-0">
-            <div class="flex flex-col w-64 bg-semilight">
-                <div class="h-0 flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+            <div class="flex flex-col w-76 bg-semilight">
+                <div class="flex-1 flex flex-col pt-5 pb-4">
                     <a href="/dashboard" class="mt-2 flex items-center justify-center flex-shrink-0 px-4">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140" height="61" viewBox="0 0 140 61">
                             <defs>
@@ -245,9 +245,19 @@
                         </div>
                     </nav>
                 </div>
-<!--                <div v-if="isBookMenu" class="text-center mb-16">-->
-<!--                    <a href="#" class="button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>-->
-<!--                </div>-->
+
+                <div class="flex flex-col justify-center items-center mb-12" v-if="!isBookMenu">
+                    <div class="leave-feedback">
+                        <div class="leave-feedback__label">Write your feeback</div>
+                        <textarea class="leave-feedback__field input-default w-full mb-8" rows="3" placeholder="Enter Message"></textarea>
+                    </div>
+                    <button class="-mt-4 button rounded-lg bg-dark px-10 py-3 font-semibold text-white cursor-pointer">Send Feedback</button>
+                </div>
+
+                <div v-if="isBookMenu" class="text-center mb-16">
+                    <a href="#" class="button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>
+                </div>
+
                 <div class="flex-shrink-0 flex pt-4 pb-8 px-10">
                     <a href="/user/profile" class="flex-shrink-0 group block focus:outline-none">
                         <div class="flex items-center">

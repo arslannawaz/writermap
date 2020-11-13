@@ -24,8 +24,12 @@
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Layouts/AppLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Layouts/AppLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/scss/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/scss/dashboard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/dashboard.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/scss/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/login.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +189,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -204,7 +209,8 @@
       <updated>1605064860713</updated>
       <workItem from="1605064863261" duration="3405000" />
       <workItem from="1605127099016" duration="3338000" />
-      <workItem from="1605133301466" duration="14498000" />
+      <workItem from="1605133235284" duration="585000" />
+      <workItem from="1605213229830" duration="11611000" />
     </task>
     <servers />
   </component>
@@ -224,17 +230,17 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="23" width="2560" height="1338" key="SettingsEditor" timestamp="1605133211115">
+    <state x="0" y="23" width="2560" height="1338" key="SettingsEditor" timestamp="1605235467308">
       <screen x="0" y="23" width="2560" height="1338" />
     </state>
-    <state x="0" y="23" width="2560" height="1338" key="SettingsEditor/0.23.2560.1338@0.23.2560.1338" timestamp="1605133211115" />
-    <state x="900" y="381" width="759" height="658" key="find.popup" timestamp="1605150390771">
+    <state x="0" y="23" width="2560" height="1338" key="SettingsEditor/0.23.2560.1338@0.23.2560.1338" timestamp="1605235467308" />
+    <state x="900" y="381" width="759" height="658" key="find.popup" timestamp="1605239432220">
       <screen x="0" y="23" width="2560" height="1338" />
     </state>
-    <state x="900" y="381" width="759" height="658" key="find.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605150390771" />
-    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup" timestamp="1605150098935">
+    <state x="900" y="381" width="759" height="658" key="find.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605239432220" />
+    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup" timestamp="1605229933867">
       <screen x="0" y="23" width="2560" height="1338" />
     </state>
-    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605150098935" />
+    <state x="861" y="321" width="838" height="1032" key="search.everywhere.popup/0.23.2560.1338@0.23.2560.1338" timestamp="1605229933867" />
   </component>
 </project>

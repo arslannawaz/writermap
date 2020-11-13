@@ -13,6 +13,8 @@
 @import "modal";
 @import "books";
 @import "breakdown";
+@import "feedback";
+@import "pagination";
 
 @font-face {
     font-family: MinionPro;
@@ -36,8 +38,10 @@
     src: url('../fonts/gillsans/gil-bold.ttf') format('truetype');
 }
 
-body {
-    font-family: GillSans;
+
+
+html, body {
+    font-family: GillSans, sans-serif !important;
     font-size: 15px !important;
     color: #4e4d4b !important;
     overflow-y: auto;
@@ -52,16 +56,18 @@ body {
     //}
 }
 
+body, input, button {font-family: GillSans, sans-serif;}
+
 button,
 input,
 optgroup,
 select,
 textarea {
-    font-size: 15px;
+    font-size: 15px !important;
 }
 
 .ff-minion {
-    font-family: MinionPro;
+    font-family: MinionPro, sans-serif;
 }
 
 .bg-default {
@@ -143,6 +149,10 @@ textarea {
     height: 100%;
 }
 
+.w-76 {
+    width: 18rem;
+}
+
 .form-label {
     font-size: 12px;
     letter-spacing: 2.18px;
@@ -187,4 +197,14 @@ label {
     font-size: 20px;
     font-weight: 600;
     color: #4e4d4b;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }

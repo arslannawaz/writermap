@@ -8,6 +8,25 @@
         margin-top: 20px;
     }
 
+    @media (min-width: 960px) and (min-height: 620px) {
+        position: absolute;
+        margin: 0;
+
+        &_left {
+            left: 20px;
+            top: 20px;
+
+            .login-logo__link {
+                position: relative;
+                left: 0;
+            }
+        }
+
+        svg {
+            height: 40px;
+        }
+    }
+
     @media (min-width: 960px) and (min-height: 1024px) {
 
         position: absolute;
@@ -27,6 +46,10 @@
                 position: relative;
                 left: 0;
             }
+        }
+
+        svg {
+            height: 60px;
         }
     }
 }

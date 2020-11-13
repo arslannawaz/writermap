@@ -1,6 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+    corePlugins: {
+        fontFamily: false,
+    },
     purge: [
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -11,7 +14,7 @@ module.exports = {
     theme: {
         color: {
             black: '#4e4d4b',
-        },
+        }
     },
 
     variants: {

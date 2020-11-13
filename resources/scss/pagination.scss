@@ -1,0 +1,37 @@
+.pagination {
+    color: #adaaa5;
+    font-size: 12px;
+
+    &__page {
+        cursor: pointer;
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid transparent;
+
+        &:hover {
+            color: #4e4d4b;
+
+            svg {
+                g, use {
+                    fill: #4e4d4b;
+                }
+            }
+        }
+
+        &_active {
+            color: #4e4d4b;
+            border-color: #ccc;
+        }
+
+        svg {
+            g, use {
+                transition: fill $defaultDurationTIme linear;
+            }
+        }
+    }
+
+    &__arrow {
+        cursor: pointer;
+        margin: 0 5px;
+    }
+}

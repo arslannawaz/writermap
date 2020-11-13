@@ -4356,7 +4356,7 @@
             <h2 class="h2">Scriptorium</h2>
 
             <div class="mt-6 bg-light p-14 scriptorium-wrapper">
-                <div class="grid grid-cols-4 gap-16">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4" v-if="books">
                     <div class="scriptorium-wrapper__add-icon" @click="showModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
                             <g fill="none" fill-rule="evenodd">
@@ -4373,13 +4373,59 @@
                         </svg>
                     </div>
 
-                    <a :href="'/books/' + book.id + '/pages'" class="scriptorium-book" v-for="book in booksList.data" :key="book.id">
-                        <div class="scriptorium-book__image" style="background-image: url('/images/x1d-ii-xcd45p-02.jpg');"></div>
-                        <h3 class="h3 mt-6 scriptorium-book__title">{{ book.name }}</h3>
-                        <span class="scriptorium-book__author">{{ $page.user.pen_name }}</span>
+                    <a :href="'/books/' + book.id + '/pages'" class="scriptorium-book col-span-1" v-for="book in books.data" :key="book.id">
+                        <div class="flex flex-col justify-center items-center">
+                            <div class="scriptorium-book__image" style="background-image: url('/images/x1d-ii-xcd45p-02.jpg');"></div>
+                            <h3 class="h3 mt-6 scriptorium-book__title">{{ book.name }}</h3>
+                            <span class="scriptorium-book__author">{{ $page.user.pen_name }}</span>
+                        </div>
                     </a>
                 </div>
             </div>
+
+            <div class="pagination mt-12 flex justify-center items-center noselect" v-if="books">
+                <div class="pagination__page" v-for="(page, index) in books.links" :key="index"
+                      :class="{ 'pagination__page_active': page.active }"
+                      @click="setPage(page)"
+                    >
+                    <span v-if="page.label === 'Previous'">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                            <defs>
+                                <path id="sluil6fsia" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                            </defs>
+                            <g fill="none" fill-rule="evenodd">
+                                <g>
+                                    <g>
+                                        <g transform="translate(-776 -885) translate(776 873) matrix(0 -1 -1 0 5 21)">
+                                            <use fill="#BEBDB8" xlink:href="#sluil6fsia"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+
+                    <span v-else-if="page.label === 'Next'">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                            <defs>
+                                <path id="swxada9rxa" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                            </defs>
+                            <g fill="none" fill-rule="evenodd">
+                                <g>
+                                    <g>
+                                        <g transform="translate(-920 -885) translate(776 873) rotate(-90 82.5 -61.5)">
+                                            <use fill="#BEBDB8" xlink:href="#swxada9rxa"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </span>
+
+                    <span v-else>{{ page.label }}</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -4416,11 +4462,11 @@ export default {
         Welcome,
     },
 
-    props: ['books'],
+    props: [],
 
     data() {
         return {
-            booksList: this.books,
+            books: null,
             isModalShow: false,
             form: this.$inertia.form({
                 name: '',
@@ -4431,8 +4477,9 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
         console.log('created event, books list', this.books);
+        this.updateBooks();
     },
 
     methods: {
@@ -4453,17 +4500,25 @@ export default {
 
                 // this.$nextTick(() => this.$emit('confirmed'));
 
-                this.updateBookList();
+                this.updateBooks();
             }).catch(error => {
                 this.form.processing = false;
                 this.form.error = error.response.data.errors.password[0];
             });
         },
 
-        updateBookList() {
-            axios.post('/books').then(response => {
+        setPage(page) {
+            this.updateBooks(page.url);
+        },
+
+        updateBooks(url = null) {
+            if (url === null) {
+                url = '/books';
+            }
+
+            axios.post(url).then(response => {
                 console.log('books list', response);
-                this.booksList = response.data;
+                this.books = response.data;
             }).catch(error => {
                 console.log('error', error);
             });
