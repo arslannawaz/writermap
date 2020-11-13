@@ -4375,7 +4375,7 @@
 
                     <a :href="'/books/' + book.id + '/pages'" class="scriptorium-book col-span-1" v-for="book in books.data" :key="book.id">
                         <div class="flex flex-col justify-center items-center">
-                            <div class="scriptorium-book__image" style="background-image: url('/images/x1d-ii-xcd45p-02.jpg');"></div>
+                            <div class="scriptorium-book__image" :style="{ backgroundImage: 'url(' + book.cover_image_url + ')' }"></div>
                             <h3 class="h3 mt-6 scriptorium-book__title">{{ book.name }}</h3>
                             <span class="scriptorium-book__author">{{ $page.user.pen_name }}</span>
                         </div>

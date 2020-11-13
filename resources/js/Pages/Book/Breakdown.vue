@@ -22,7 +22,7 @@
                                 <span class="book-page__chapter mt-4">Paragraph</span>
 
                                 <div class="book-page__content -mt-4">
-                                    <p>
+                                    <p contenteditable="true">
                                         I made it through school without reading. On my nightstand are The Overstory by Richard Powers and Edge of the Map by Johanna Garton. Coventry by Rachel Cusk calls to me to finish it with a reminder of how lucid close observation can be. There’s a Stephen King open on my Kindle app…which one? Ah, yes, The Institute. Oh, and Joni just finished a loaner copy of Michelle Obama’s Becoming and I get it next.
                                     </p>
                                 </div>

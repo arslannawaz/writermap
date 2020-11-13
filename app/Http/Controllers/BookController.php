@@ -36,4 +36,17 @@ class BookController extends Controller
             'type' => $type,
         ]);
     }
+
+    public function update($id)
+    {
+        $field = request('field');
+
+        /** @var Book $book */
+        $book = Book::find($id);
+
+        $book->$field = request('value');
+        $book->save();
+
+        return $book;
+    }
 }

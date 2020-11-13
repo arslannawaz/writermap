@@ -15,11 +15,19 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->timestamps();
 
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->text('cover_image_path')->nullable();
+
+            $table->string('name');
+            $table->string('additional_name')->nullable();
+
+            $table->text('contacts')->nullable();
+            $table->string('copyright')->nullable();
+
+            $table->timestamps();
         });
     }
 

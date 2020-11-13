@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::post('books', [BookController::class, 'index'])->name('books.index');
 Route::get('books/{id}/pages', [BookController::class, 'pages'])->name('books.pages');
+Route::put('books/{id}/update', [BookController::class, 'update'])->name('books.update');
 Route::get('books/{id}/breakdown', [BookController::class, 'breakdown'])->name('books.breakdown');
 Route::get('books/{id}/breakdown/{type}', [BookController::class, 'breakdown'])->name('books.breakdown');
 Route::post('books/create', [BookController::class, 'create'])->name('books.create');
