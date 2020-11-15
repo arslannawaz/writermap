@@ -49,8 +49,8 @@
                         </div>
 
                         <div class="book-page flex justify-center mt-2">
-                            <div v-if="book.cover_image_url && isShowCover" class="book-page__paper book-page__paper_cover flex flex-col justify-start ff-minion">
-                                <div :style="{ backgroundImage: 'url(' + book.cover_image_url + ')', height: '520px', backgroundSize: 'cover' }"></div>
+                            <div v-if="coverImageUrl && isShowCover" class="book-page__paper book-page__paper_cover flex flex-col justify-start ff-minion">
+                                <div :style="{ backgroundImage: 'url(' + coverImageUrl + ')', height: '520px', backgroundSize: 'cover' }"></div>
                                 <div class="text-center mt-2">
                                     <p class="font-semibold fs-34">”{{ book.title }}”</p>
                                     <p>By {{ $page.user.pen_name }}</p>
@@ -184,6 +184,7 @@ export default {
             previewCover: null,
             coverImage: null,
             isShowCover: false,
+            coverImageUrl: this.book_data.cover_image_url,
         };
     },
 
@@ -232,8 +233,11 @@ export default {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
-                }, function (data) {
-                    this.book = data;
+                }, (data) => {
+                    this.coverImageUrl = data.cover_image_url;
+                    if (this.coverImageUrl !== this.book.cover_image_url) {
+                        this.isShowCover = true;
+                    }
                 });
             }
         },

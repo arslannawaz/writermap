@@ -40,6 +40,9 @@
         max-width: 210px;
         background-size: cover;
         background-position: center;
+        -moz-transition: background-image $defaultDurationTIme ease-in-out;
+        -webkit-transition: background-image $defaultDurationTIme ease-in-out;
+        -o-transition: background-image $defaultDurationTIme ease-in-out;
     }
 
     &__title {
