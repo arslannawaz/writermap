@@ -16,14 +16,18 @@
                 <div>
                     <div class="mt-85px">
                         <div class="book-page flex justify-center">
-                            <div class="book-page__paper flex flex-col justify-center ff-minion">
-                                <span class="book-page__chapter fs-24 capitalize">{{ type }}</span>
+                            <div class="book-page__paper flex flex-col ff-minion">
+                                <span class="book-page__chapter fs-24 capitalize mt-16">{{ type }}</span>
 
                                 <span class="book-page__chapter mt-4">Paragraph</span>
 
                                 <div class="book-page__content -mt-4">
-                                    <p contenteditable="true">
-                                        I made it through school without reading. On my nightstand are The Overstory by Richard Powers and Edge of the Map by Johanna Garton. Coventry by Rachel Cusk calls to me to finish it with a reminder of how lucid close observation can be. There’s a Stephen King open on my Kindle app…which one? Ah, yes, The Institute. Oh, and Joni just finished a loaner copy of Michelle Obama’s Becoming and I get it next.
+                                    <p :ref="'content_' + index" contenteditable="true" v-for="(item, index) in decodeContent" :key="index"
+                                       @input="updateContentEditableField('content', $event, index)"
+                                       v-on:keypress="checkContentKey"
+                                       class="outline-none"
+                                    >
+                                        {{ item }}
                                     </p>
                                 </div>
                             </div>
@@ -36,17 +40,19 @@
                 <div>
                     <div class="mt-85px">
                         <div class="book-page flex justify-center">
-                            <div class="book-page__paper flex flex-col justify-center ff-minion">
-                                <span class="book-page__chapter">Key Points</span>
+                            <div class="book-page__paper flex flex-col ff-minion">
+                                <div class="mb-2"></div>
+                                <span class="book-page__chapter mt-32">Key Points</span>
 
                                 <div class="book-page__content">
                                     <ul class="list-disc ml-4">
-                                        <li>Can they paddle this faster than anyone?</li>
-                                        <li>These five are some of my faves.</li>
-                                        <li>I’ve read them all more than once, and each time I discover new delights within.</li>
-                                        <li>In 1983, the Colorado River was in flood.</li>
-                                        <li>The winter had seen the biggest El Niño on record, and the mountains of the Southwest were fat with snow.</li>
-                                        <li>Late May, the temperature shot into the 80s and the snowpack melted almost all at once.</li>
+                                        <li :ref="'point_' + index" contenteditable="true" v-for="(item, index) in decodeKeyPoints" :key="index"
+                                           @input="updatePointEditableField('key_points', $event, index)"
+                                           v-on:keypress="checkPointsKey"
+                                           class="outline-none"
+                                        >
+                                            {{ item }}
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -64,7 +70,7 @@ import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 
 export default {
-    props: ['book', 'type'],
+    props: ['book', 'type', 'breakdown'],
 
     components: {
         AppLayout,
@@ -72,16 +78,158 @@ export default {
     },
 
     data() {
-        return {};
+        return {
+            decodeContent: {},
+            decodeKeyPoints: {},
+        };
     },
 
     mounted() {
-        console.log('mounted')
+        console.log('mounted');
+        console.log('book', this.book);
+        console.log('breakdown', this.breakdown);
+
+        if (this.breakdown.content != null && this.breakdown.content.length > 4) {
+            console.log('1 err');
+            this.decodeContent = JSON.parse(this.breakdown.content)
+        } else {
+            console.log('2 err');
+            this.$set(this.decodeContent, 0, '');
+        }
+
+        if (this.breakdown.key_points != null && this.breakdown.key_points.length > 4) {
+            console.log('11 err');
+            this.decodeKeyPoints = JSON.parse(this.breakdown.key_points)
+        } else {
+            console.log('22 err');
+            this.$set(this.decodeKeyPoints, 0, '');
+        }
     },
 
     methods: {
         isUrlContain(value) {
             return window.location.pathname.indexOf(value) > -1;
+        },
+
+        checkContentKey(event) {
+            console.log(event.key);
+            if (event.key === 'Enter') {
+                event.preventDefault();
+
+                let lastKey = Object.keys(this.decodeContent)[Object.keys(this.decodeContent).length-1];
+                lastKey = parseInt(lastKey) + 1;
+
+                this.$set(this.decodeContent, lastKey, '');
+                // this.decodeContent[lastKey] = 'New line';
+
+                console.log('refs list', this.$refs);
+                console.log('decodeContent', this.decodeContent);
+
+                this.$nextTick(() => {
+                    // const focusToRef = parseInt(Object.keys(this.decodeContent).length) - 1;
+                    this.$refs['content_' + lastKey][0].focus();
+                });
+            }
+        },
+
+        checkPointsKey(event) {
+            console.log(event.key);
+            if (event.key === 'Enter') {
+                event.preventDefault();
+
+                let lastKey = Object.keys(this.decodeKeyPoints)[Object.keys(this.decodeKeyPoints).length-1];
+                lastKey = parseInt(lastKey) + 1;
+
+                this.$set(this.decodeKeyPoints, lastKey, '');
+                // this.decodeContent[lastKey] = 'New line';
+
+                console.log('refs list', this.$refs);
+                console.log('decodePoint', this.decodeKeyPoints);
+
+                this.$nextTick(() => {
+                    // const focusToRef = parseInt(Object.keys(this.decodeContent).length) - 1;
+                    this.$refs['point_' + lastKey][0].focus();
+                });
+            }
+        },
+
+        postUpdate(data, config = {}, callback=()=>{}) {
+            axios.post('/books/' + this.book.id + '/breakdowns/' + this.breakdown.id + '/update', data, config).then(response => {
+                console.log('response', response);
+                if (typeof callback === 'function') {
+                    callback(response.data);
+                }
+            }).catch(error => {
+                // this.form.processing = false;
+                // this.form.error = error.response.data.errors.password[0];
+                console.log('update error', error);
+            });
+        },
+
+        updateContentEditableField(field, event, index = null) {
+            console.log('input to index element', index);
+            if (event.target.innerText == "" || event.target.innerText == null) {
+                console.log('EMpty text', this.decodeContent);
+
+                this.$delete(this.decodeContent, index);
+
+                console.log('delete decode content', this.decodeContent);
+
+                this.$nextTick(() => {
+                    if (Object.keys(this.decodeContent).length > 0) {
+                        const lastKey = Object.keys(this.decodeContent)[Object.keys(this.decodeContent).length-1];
+                        const keyToFocus = 'content_' + lastKey;
+                        console.log('last key after delete', lastKey, keyToFocus);
+                        console.log('refs', this.$refs);
+                        this.$refs[keyToFocus][0].focus();
+                    } else {
+                        this.$set(this.decodeContent, 0, '');
+                        this.$nextTick(() => {
+                            this.$refs['content_0'][0].focus();
+                        });
+                    }
+                });
+            }
+
+            // console.log(field, this.bookItem, this.bookItem[field]);
+            this.postUpdate({
+                field: field,
+                value: event.target.innerText,
+                index: index,
+            });
+        },
+
+        updatePointEditableField(field, event, index = null) {
+            console.log('input to index element', index);
+            if (event.target.innerText == "" || event.target.innerText == null) {
+                console.log('EMpty text', this.decodeKeyPoints);
+
+                this.$delete(this.decodeKeyPoints, index);
+
+                console.log('delete decode points', this.decodeKeyPoints);
+
+                this.$nextTick(() => {
+                    if (Object.keys(this.decodeKeyPoints).length > 0) {
+                        const lastKey = Object.keys(this.decodeKeyPoints)[Object.keys(this.decodeKeyPoints).length-1];
+                        const keyToFocus = 'point_' + lastKey;
+                        console.log('last key after delete', lastKey, keyToFocus);
+                        console.log('refs', this.$refs);
+                        this.$refs[keyToFocus][0].focus();
+                    } else {
+                        this.$set(this.decodeKeyPoints, 0, '');
+                        this.$nextTick(() => {
+                            this.$refs['point_0'][0].focus();
+                        });
+                    }
+                });
+            }
+
+            // console.log(field, this.bookItem, this.bookItem[field]);
+            this.postUpdate({
+                field: field,
+                value: event.target.innerText,
+                index: index,
+            });
         },
     },
 }

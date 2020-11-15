@@ -21,10 +21,14 @@ class CreateBooksTable extends Migration
 
             $table->text('cover_image_path')->nullable();
 
-            $table->string('name');
-            $table->string('additional_name')->nullable();
+            $table->string('title');
+            $table->string('additional_title')->nullable();
 
-            $table->text('contacts')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('site')->nullable();
+
             $table->string('copyright')->nullable();
 
             $table->timestamps();

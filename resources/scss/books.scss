@@ -20,15 +20,27 @@
 
     &__paper {
         width: 100%;
-        padding: 30px;
+        padding: 30px 0;
+        //padding: 30px;
         background-color: #fefcf8;
-        min-height: 600px;
-        height: 600px;
+        min-height: 640px;
+        height: 640px;
         max-width: 470px;
-        max-height: 600px;
+        max-height: 640px;
+
+        &_cover {
+            padding: 0;
+        }
+    }
+
+    &__contacts {
+        padding: 30px;
+        font-size: 12px;
+        color: #4e4d4b;
     }
 
     &__chapter {
+        padding: 0 30px;
         font-family: MinionPro;
         font-size: 16px;
         font-weight: 600;
@@ -38,8 +50,30 @@
 
     &__content {
         font-family: MinionPro;
+        padding: 0 30px;
         line-height: 1.43;
         font-size: 14px;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 2px;
+            //border-radius: 2px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
 
         p {
             margin: 20px 0;

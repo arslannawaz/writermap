@@ -4376,7 +4376,7 @@
                     <a :href="'/books/' + book.id + '/pages'" class="scriptorium-book col-span-1" v-for="book in books.data" :key="book.id">
                         <div class="flex flex-col justify-center items-center">
                             <div class="scriptorium-book__image" :style="{ backgroundImage: 'url(' + book.cover_image_url + ')' }"></div>
-                            <h3 class="h3 mt-6 scriptorium-book__title">{{ book.name }}</h3>
+                            <h3 class="h3 mt-6 scriptorium-book__title">{{ book.title }}</h3>
                             <span class="scriptorium-book__author">{{ $page.user.pen_name }}</span>
                         </div>
                     </a>
@@ -4435,7 +4435,7 @@
         </template>
 
         <template #content>
-            <input type="text" class="input-default w-full" v-model="form.name">
+            <input type="text" class="input-default w-full" v-model="form.title">
 
             <jet-input-error :message="form.error" class="mt-2" />
         </template>
@@ -4469,7 +4469,7 @@ export default {
             books: null,
             isModalShow: false,
             form: this.$inertia.form({
-                name: '',
+                title: '',
                 error: '',
             }, {
                 bag: 'createBook',
@@ -4491,7 +4491,7 @@ export default {
             this.form.processing = true;
 
             axios.post('/books/create', {
-                name: this.form.name,
+                title: this.form.title,
             }).then(response => {
                 this.isModalShow = false;
 

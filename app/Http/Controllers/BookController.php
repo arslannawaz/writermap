@@ -16,7 +16,7 @@ class BookController extends Controller
     {
         $book = new Book;
         $book->user_id = \Auth::id();
-        $book->name = $request->name;
+        $book->title = $request->title;
         $book->save();
 
         return $book;
@@ -25,27 +25,32 @@ class BookController extends Controller
     public function pages($id)
     {
         return inertia('Book/Pages', [
-            'book' => Book::find($id),
+            'book_data' => Book::find($id),
         ]);
     }
 
     public function breakdown($id, $type = null)
     {
+        $book = Book::find($id);
         return inertia('Book/Breakdown', [
-            'book' => Book::find($id),
+            'book' => $book,
+            'breakdown' => $book->breakdowns()->where(['type' => $type])->first(),
             'type' => $type,
         ]);
     }
 
     public function update($id)
     {
-        $field = request('field');
-
         /** @var Book $book */
         $book = Book::find($id);
 
-        $book->$field = request('value');
-        $book->save();
+        if (request('image')) {
+            $book->updateCoverImage(request('image'));
+        } else {
+            $field = request('field');
+            $book->$field = request('value');
+            $book->save();
+        }
 
         return $book;
     }

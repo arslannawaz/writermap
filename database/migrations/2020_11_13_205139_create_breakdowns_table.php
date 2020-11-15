@@ -21,7 +21,8 @@ class CreateBreakdownsTable extends Migration
 
             $table->string('type');
 
-            $table->text('content')->nullable();
+            $table->json('content')->nullable();
+            $table->json('key_points')->nullable();
 
             $table->timestamps();
         });

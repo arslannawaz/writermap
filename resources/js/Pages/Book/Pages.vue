@@ -10,7 +10,7 @@
                 <div class="px-12">
                     <div class="flex justify-between pl-6">
                         <h1 class="h2">
-                            <input ref="book_name" type="text" class="input-default input-default_p-zero input-default_border-transparent h2" v-model="book.name" @input="updateField('name')">
+                            <input ref="book_name" type="text" class="input-default input-default_p-zero input-default_border-transparent h2" v-model="book.title" @input="updateField('title')">
                         </h1>
                         <svg class="mt-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" @click="$refs.book_name.focus()">
                             <g fill="none" fill-rule="evenodd">
@@ -25,7 +25,10 @@
 
                     <div class="mt-85px">
                         <div class="flex justify-between px-6">
-                            <span class="book-label">Cover Page</span>
+                            <div class="book-label outline-none select-none" @click="isShowCover = !isShowCover">
+                                <span v-if="isShowCover">Title Page</span>
+                                <span v-else>Cover Page</span>
+                            </div>
                             <div class="flex flex-end items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <g fill="none" fill-rule="evenodd">
@@ -41,33 +44,47 @@
                                        ref="cover"
                                        @change="updateCoverImagePreview()">
 
-                                <span class="ml-2 font-semibold fs-12" @click="selectNewCoverImage()">Manuscript Title Page</span>
+                                <span class="ml-2 font-semibold fs-12 cursor-pointer select-none" @click="selectNewCoverImage()">Update cover image</span>
                             </div>
                         </div>
 
                         <div class="book-page flex justify-center mt-2">
-                            <div class="book-page__paper flex flex-col justify-between ff-minion">
-                                <span class="text-center outline-none" v-model="book.additional_name" contenteditable="true" @input="updateContentEditableField('additional_name', $event)">
-                                    <span v-if="book.additional_name === null">Additional title</span>
-                                    <span v-else>{{ book.additional_name }}</span>
+                            <div v-if="book.cover_image_url && isShowCover" class="book-page__paper book-page__paper_cover flex flex-col justify-start ff-minion">
+                                <div :style="{ backgroundImage: 'url(' + book.cover_image_url + ')', height: '520px', backgroundSize: 'cover' }"></div>
+                                <div class="text-center mt-2">
+                                    <p class="font-semibold fs-34">”{{ book.title }}”</p>
+                                    <p>By {{ $page.user.pen_name }}</p>
+                                </div>
+                            </div>
+                            <div v-else class="book-page__paper flex flex-col justify-between ff-minion">
+                                <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
+                                    <span v-if="book.additional_title === null">Additional title</span>
+                                    <span v-else>{{ book.additional_title }}</span>
                                 </span>
 
                                 <div class="text-center">
-                                    <p class="font-semibold fs-24">”{{ book.name }}”</p>
+                                    <p class="font-semibold fs-24">”{{ book.title }}”</p>
                                     <p>By {{ $page.user.pen_name }}</p>
                                 </div>
 
                                 <div>
-                                    <div class="text-right outline-none" v-model="book.contacts" contenteditable="true" @input="updateContentEditableField('contacts', $event)">
-                                        <div v-if="book.contacts === null">
-                                            First Stree 12,  BC 6769<br>
-                                            +1 6768 797<br>
-                                            {{ $page.user.email }}<br>
-                                            amb-gord_stories.com<br>
-                                        </div>
-                                        <div v-else>
-                                            {{ book.contacts }}
-                                        </div>
+                                    <div class="text-right outline-none book-page__contacts">
+                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('address', $event)">
+                                            <span v-if="book.address">{{ book.address }}</span>
+                                            <span v-else>First Stree 12,  BC 6769</span>
+                                        </p>
+                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('phone', $event)">
+                                            <span v-if="book.phone">{{ book.phone }}</span>
+                                            <span v-else>+1 6768 797</span>
+                                        </p>
+                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('email', $event)">
+                                            <span v-if="book.email">{{ book.email }}</span>
+                                            <span v-else>{{ $page.user.email }}</span>
+                                        </p>
+                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('site', $event)">
+                                            <span v-if="book.site">{{ book.site }}</span>
+                                            <span v-else>amb-gord_stories.com</span>
+                                        </p>
                                     </div>
 
                                     <p class="text-center mt-16 copyright outline-none" v-model="book.copyright" contenteditable="true" @input="updateContentEditableField('copyright', $event)">
@@ -154,7 +171,7 @@ import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 
 export default {
-    props: ['book'],
+    props: ['book_data'],
 
     components: {
         AppLayout,
@@ -163,9 +180,10 @@ export default {
 
     data() {
         return {
-            bookItem: this.book,
+            book: this.book_data,
             previewCover: null,
             coverImage: null,
+            isShowCover: false,
         };
     },
 
@@ -174,13 +192,12 @@ export default {
     },
 
     methods: {
-        updateContentEditableField(field, event) {
-            // console.log(field, this.bookItem, this.bookItem[field]);
-            axios.put('/books/' + this.book.id + '/update', {
-                field: field,
-                value: event.target.innerText,
-            }).then(response => {
+        postUpdate(data, config = {}, callback=()=>{}) {
+            axios.post('/books/' + this.book.id + '/update', data, config).then(response => {
                 console.log('response', response);
+                if (typeof callback === 'function') {
+                    callback(response.data);
+                }
             }).catch(error => {
                 // this.form.processing = false;
                 // this.form.error = error.response.data.errors.password[0];
@@ -188,17 +205,19 @@ export default {
             });
         },
 
+        updateContentEditableField(field, event) {
+            // console.log(field, this.bookItem, this.bookItem[field]);
+            this.postUpdate({
+                field: field,
+                value: event.target.innerText,
+            });
+        },
+
         updateField(field) {
             // console.log(field, this.bookItem, this.bookItem[field]);
-            axios.put('/books/' + this.book.id + '/update', {
+            this.postUpdate({
                 field: field,
                 value: this.book[field],
-            }).then(response => {
-                console.log('response', response);
-            }).catch(error => {
-                // this.form.processing = false;
-                // this.form.error = error.response.data.errors.password[0];
-                console.log('update error', error);
             });
         },
 
@@ -209,18 +228,12 @@ export default {
                 const formData = new FormData();
                 formData.append('image', this.coverImage);
 
-
-                axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-                axios.put('/books/' + this.book.id + '/update', formData, {
+                this.postUpdate(formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
-                }).then(response => {
-                    console.log('response', response);
-                }).catch(error => {
-                    // this.form.processing = false;
-                    // this.form.error = error.response.data.errors.password[0];
-                    console.log('update error', error);
+                }, function (data) {
+                    this.book = data;
                 });
             }
         },
@@ -230,6 +243,7 @@ export default {
 
             reader.onload = (e) => {
                 this.previewCover = e.target.result;
+                console.log('preview cover', this.previewCover);
             };
 
             reader.readAsDataURL(this.$refs.cover.files[0]);
