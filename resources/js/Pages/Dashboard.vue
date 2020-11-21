@@ -4356,7 +4356,7 @@
             <h2 class="h2">Scriptorium</h2>
 
             <div class="mt-6 bg-light p-14 scriptorium-wrapper">
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4" v-if="books">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8" v-if="books">
                     <div class="scriptorium-wrapper__add-icon" @click="showModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
                             <g fill="none" fill-rule="evenodd">
