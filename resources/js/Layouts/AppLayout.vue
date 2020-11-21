@@ -1,11 +1,101 @@
 <template>
-    <div class="h-screen flex overflow-hidden bg-default">
+    <div class="flex bg-default">
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:flex-shrink-0">
-            <div class="flex flex-col w-76 bg-semilight">
-                <div class="flex-1 flex flex-col pt-5 pb-4">
-                    <a href="/dashboard" class="mt-2 flex items-center justify-center flex-shrink-0 px-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140" height="61" viewBox="0 0 140 61">
+            <div class="flex flex-col w-76 bg-semilight" :class="{ 'small-menu': isMenuHide == true }">
+                <div class="flex flex-col relative">
+                    <div class="small-menu-button" @click="hideMenu(!isMenuHide)">
+                        <svg v-if="isMenuHide == true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6" height="9" viewBox="0 0 6 9">
+                            <defs>
+                                <path id="9mp5pnrhca" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                            </defs>
+                            <g fill="none" fill-rule="evenodd">
+                                <g>
+                                    <g>
+                                        <g>
+                                            <g transform="translate(-287 -108) translate(252 84) rotate(-90 34 -1.5)">
+                                                <use fill="#4E4D4B" xlink:href="#9mp5pnrhca"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <svg v-else xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6" height="9" viewBox="0 0 6 9">
+                            <defs>
+                                <path id="qbz8nczqla" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                            </defs>
+                            <g fill="none" fill-rule="evenodd">
+                                <g>
+                                    <g>
+                                        <g transform="translate(-110 -108) translate(75 84) matrix(0 -1 -1 0 40.5 32.5)">
+                                            <use fill="#4E4D4B" xlink:href="#qbz8nczqla"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <a href="/dashboard" class="mt-4 mb-6 flex items-center justify-center flex-shrink-0 px-4">
+                    <svg v-if="isMenuHide == true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37" height="48" viewBox="0 0 37 48">
+    <defs>
+        <linearGradient id="nwn8g9eh4b" x1="100%" x2="100%" y1="2.765%" y2="135.902%">
+            <stop offset="0%" stop-color="#7D7E79"/>
+            <stop offset="100%" stop-color="#FFFCF8"/>
+        </linearGradient>
+        <linearGradient id="1cspe46fcd" x1="28.935%" x2="80.111%" y1="37.783%" y2="81.956%">
+            <stop offset="0%" stop-color="#6B6B6A"/>
+            <stop offset="100%" stop-color="#92928E"/>
+        </linearGradient>
+        <linearGradient id="dgpdfohd2e" x1="51.722%" x2="45.505%" y1="11.457%" y2="94.07%">
+            <stop offset="0%" stop-color="#B5B5B1"/>
+            <stop offset="100%" stop-color="#E4E3DF"/>
+        </linearGradient>
+        <linearGradient id="wx7wdhenbg" x1="27.031%" x2="90.987%" y1="60.894%" y2="-41.779%">
+            <stop offset="0%" stop-color="#BCB6AA"/>
+            <stop offset="100%" stop-color="#F6F5EF"/>
+        </linearGradient>
+        <linearGradient id="cfpzxptpxj" x1="99.982%" x2="99.982%" y1="5.809%" y2="104.162%">
+            <stop offset="0%" stop-color="#EAE6DF"/>
+            <stop offset="100%" stop-color="#BCB6AA"/>
+        </linearGradient>
+        <path id="dim2clzgra" d="M5.613 23.386c.04-2.204.635-2.685 1.524-3.438.662-.562 1.11-1 1.149-2.828.055-2.581-2.416-4.285-4.335-4.334-2.146-.055-3.53 1.546-3.94 2.527C2.85 8.051 11.62.375 11.945.018c1.754 7.614 7.903 14.313 10.029 15.594-7.712 9.482-14.03 24.648-16.68 31.557h-.187V23.892c.323 0 .5-.182.506-.506"/>
+        <path id="747rlgut9f" d="M26.063.56c.168.347-7.459 5.649-11.993 15.454-2.295 4.963-3.695 10.924-3.102 18.296l-.613-1.262C7.468 27.168 3.937 20.947.051 16.17 2.178 14.888 8.333 8.181 10.084.56 12.747.25 15.41.07 18.073.056c2.663.012 5.326.192 7.99.503"/>
+        <path id="c4ybnr59pi" d="M2.964 2.075c.01 3.639 2.706 1.835 2.67 6.075-.002.323.183.505.506.505v23.277h-.187C4.64 28.504 3.034 24.307.191 18.517-.313 13.044.53 5.107 3.356.077c-.307.65-.394 1.23-.392 1.998"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <path fill="#FFF" d="M19.416 47.726c2.65-6.909 8.967-22.075 16.68-31.557-2.128-1.281-8.283-7.988-10.033-15.61-2.664-.31-5.327-.49-7.99-.503-2.663.012-5.326.192-7.99.503C8.334 8.181 2.179 14.888.052 16.17c7.712 9.482 14.03 24.648 16.68 31.557h.186V24.45c-.278 0-.505-.227-.505-.505 0-4.329-2.673-2.351-2.673-6.266 0-2.394 1.94-4.335 4.334-4.335 2.394 0 4.334 1.94 4.334 4.335 0 3.915-2.672 1.937-2.672 6.266 0 .278-.228.505-.506.505v23.277h.187z" transform="translate(-35 -20) translate(35 20)"/>
+                    <g transform="translate(-35 -20) translate(35 20) translate(14.122 .557)">
+                        <mask id="y57lm7vqcc" fill="#fff">
+                            <use xlink:href="#dim2clzgra"/>
+                        </mask>
+                        <path fill="url(#nwn8g9eh4b)" d="M5.613 23.386c.04-2.204.635-2.685 1.524-3.438.662-.562 1.11-1 1.149-2.828.055-2.581-2.416-4.285-4.335-4.334-2.146-.055-3.53 1.546-3.94 2.527C2.85 8.051 11.62.375 11.945.018c1.754 7.614 7.903 14.313 10.029 15.594-7.712 9.482-14.03 24.648-16.68 31.557h-.187V23.892c.323 0 .5-.182.506-.506" mask="url(#y57lm7vqcc)"/>
+                    </g>
+                    <path fill="url(#1cspe46fcd)" d="M22.154 16.219c6.672 4.336 13.942-.05 13.942-.05-2.127-1.28-8.275-7.98-10.03-15.594-.214.306-8.76 7.521-11.933 15.295.892-1.778 2.444-2.576 4.192-2.52 1.623.053 3.435 1.647 3.829 2.869" transform="translate(-35 -20) translate(35 20)"/>
+                    <path fill="url(#dgpdfohd2e)" d="M27.46 29.758c-1.288-3.192-3.104-6.46-5.94-9.483-1.271 1.072-1.756 1.41-1.787 3.712-.005.323-.181.462-.504.462v23.277h.187c1.561-4.072 4.398-11.013 8.043-17.968" transform="translate(-35 -20) translate(35 20)"/>
+                    <g transform="translate(-35 -20) translate(35 20)">
+                        <mask id="hvkcuk4ywh" fill="#fff">
+                            <use xlink:href="#747rlgut9f"/>
+                        </mask>
+                        <path fill="url(#wx7wdhenbg)" d="M26.063.56c.168.347-7.459 5.649-11.993 15.454-2.295 4.963-3.695 10.924-3.102 18.296l-.613-1.262C7.468 27.168 3.937 20.947.051 16.17 2.178 14.888 8.333 8.181 10.084.56 12.747.25 15.41.07 18.073.056c2.663.012 5.326.192 7.99.503" mask="url(#hvkcuk4ywh)"/>
+                    </g>
+                    <path fill="#EAE6DF" d="M26.066.575C14.848 4.024 14.646 14.202.054 16.185 3.94 20.962 7.472 27.183 10.36 33.064l.61 1.246c-.666-10.45 2.173-17.592 5.6-22.859 3.443-5.293 7.48-8.69 9.497-10.876" transform="translate(-35 -20) translate(35 20)"/>
+                    <g transform="translate(-35 -20) translate(35 20) translate(10.777 15.794)">
+                        <mask id="kfi3tvuwak" fill="#fff">
+                            <use xlink:href="#c4ybnr59pi"/>
+                        </mask>
+                        <path fill="url(#cfpzxptpxj)" d="M2.964 2.075c.01 3.639 2.706 1.835 2.67 6.075-.002.323.183.505.506.505v23.277h-.187C4.64 28.504 3.034 24.307.191 18.517-.313 13.044.53 5.107 3.356.077c-.307.65-.394 1.23-.392 1.998" mask="url(#kfi3tvuwak)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+
+                        <svg v-else style="height: 52px;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140" height="61" viewBox="0 0 140 61">
                             <defs>
                                 <linearGradient id="3tqz95lgkb" x1="100%" x2="100%" y1="2.765%" y2="135.902%">
                                     <stop offset="0%" stop-color="#7D7E79"></stop>
@@ -65,10 +155,10 @@
                         </svg>
                     </a>
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
-                    <nav class="mt-16 flex-1 px-2 bg-semilight flex flex-col items-center nav-sidebar">
-                        <div v-if="isBookMenu">
+                    <nav class="">
+                        <div class="flex-1 px-2 bg-semilight flex flex-col items-center nav-sidebar" v-if="isBookMenu">
                             <a :href="'/books/' + bookId + '/pages'"
-                               class="w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('pages') }">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('pages') }">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -82,11 +172,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Pages
+                                <span class="menu-link-title">Pages</span>
                             </a>
 
                             <a href="#"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="11" viewBox="0 0 18 11">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -100,11 +190,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Story Plan
+                                <span class="menu-link-title">Story Plan</span>
                             </a>
 
                             <a :href="'/books/' + bookId + '/breakdown/characters'"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('breakdown') }">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('breakdown') }">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#8D8C89" fill-rule="nonzero">
@@ -118,11 +208,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Breakdown
+                                <span class="menu-link-title">Breakdown</span>
                             </a>
 
                             <a href="#"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -136,11 +226,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Characters
+                                <span class="menu-link-title">Characters</span>
                             </a>
 
                             <a href="#"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -154,11 +244,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Timeline
+                                <span class="menu-link-title">Timeline</span>
                             </a>
 
                             <a href="#"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -172,11 +262,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Visual
+                                <span class="menu-link-title">Visual</span>
                             </a>
 
                             <a href="#"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -190,11 +280,11 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Notes
+                                <span class="menu-link-title">Notes</span>
                             </a>
 
                             <a href="#"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -208,12 +298,12 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Pitching
+                                <span class="menu-link-title">Pitching</span>
                             </a>
                         </div>
-                        <div v-else>
+                        <div class="flex-1 px-2 bg-semilight flex flex-col items-center nav-sidebar" v-else>
                             <a href="/dashboard"
-                               class="w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('dashboard') }">
+                               class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('dashboard') }">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#BEBDB8" fill-rule="nonzero">
@@ -225,10 +315,10 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Writers Room
+                                <span class="menu-link-title">Writers Room</span>
                             </a>
                             <a href="/user/profile"
-                               class="mt-10 w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('user/profile') }">
+                               class="menu-link mt-10 w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('user/profile') }">
                                 <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#4E4D4B" fill-rule="nonzero">
@@ -240,13 +330,13 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Account
+                                <span class="menu-link-title">Account</span>
                             </a>
                         </div>
                     </nav>
                 </div>
 
-                <div class="flex flex-col justify-center items-center mb-12" v-if="!isBookMenu">
+                <div class="flex flex-col justify-center items-center mt-16 my-8" v-if="!isBookMenu && !isMenuHide">
                     <div class="leave-feedback">
                         <div class="leave-feedback__label">Write your feeback</div>
                         <textarea class="leave-feedback__field input-default w-full mb-8" rows="3" placeholder="Enter Message"></textarea>
@@ -254,11 +344,26 @@
                     <button class="-mt-4 button rounded-lg bg-dark px-10 py-3 font-semibold text-white cursor-pointer">Send Feedback</button>
                 </div>
 
-                <div v-if="isBookMenu" class="text-center mb-16">
-                    <a href="#" class="button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>
+                <div v-if="isBookMenu" class="text-center flex-shrink-0 flex justify-center">
+                    <a v-if="isMenuHide == true" href="#" class="button rounded-full bg-dark px-4 py-4 font-semibold text-white" :class="{'mt-6': isMenuHide == true}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+                            <g fill="none" fill-rule="evenodd">
+                                <g fill="#FFF">
+                                    <g>
+                                        <g>
+                                            <g>
+                                                <path d="M12.44 6.14h-4.2v-4.2c0-.579-.47-1.05-1.05-1.05-.579 0-1.05.471-1.05 1.05v4.2h-4.2c-.579 0-1.05.471-1.05 1.05 0 .58.471 1.05 1.05 1.05h4.2v4.2c0 .58.471 1.05 1.05 1.05.58 0 1.05-.47 1.05-1.05v-4.2h4.2c.58 0 1.05-.47 1.05-1.05 0-.579-.47-1.05-1.05-1.05z" transform="translate(-47 -827) translate(29 809) translate(18 18)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                    <a v-else href="#" class="mt-6 button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>
                 </div>
 
-                <div class="flex-shrink-0 flex pt-4 pb-8 px-10">
+                <div class="flex-shrink-0 flex mt-4 pt-4 pb-8" :class="{'px-13': isMenuHide == false, 'px-9': isMenuHide == true}">
                     <a href="/user/profile" class="flex-shrink-0 group block focus:outline-none">
                         <div class="flex items-center">
                             <div>
@@ -266,7 +371,7 @@
                                      :src="$page.user.profile_photo_url"
                                      alt=""/>
                             </div>
-                            <div class="ml-8 flex flex-col justify-center">
+                            <div class="ml-8 flex flex-col justify-center" v-if="isMenuHide == false">
                                 <p v-if="$page.user.pen_name" class="text-md leading-5 font-semibold text-color-dark">
                                     {{ $page.user.pen_name }}
                                 </p>
@@ -329,10 +434,12 @@ export default {
             showingNavigationDropdown: false,
             isBookMenu: false,
             bookId: null,
+            isMenuHide: (localStorage.getItem('isMenuHide') == "true"),
         }
     },
 
     mounted() {
+        console.log('mounted data isMenuHide', this.isMenuHide);
         if (window.location.href.indexOf("books") > -1) {
             this.isBookMenu = true;
             this.bookId = window.location.pathname.split('/')[2];
@@ -340,6 +447,15 @@ export default {
     },
 
     methods: {
+        hideMenu(value) {
+            this.isMenuHide = value;
+
+            // localStorage.removeItem('isMenuHide');
+            localStorage.setItem('isMenuHide', value);
+
+            console.log('local hide menu change', localStorage.isMenuHide);
+        },
+
         isUrlContain(value) {
             return window.location.pathname.indexOf(value) > -1;
         },

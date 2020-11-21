@@ -2,8 +2,34 @@
     position: relative;
 
     &__image {
+        display: none;
         position: absolute;
         right: 0;
+
+        @media (min-width: 960px) {
+            display: block;
+            width: 320px;
+        }
+
+        @media (min-width: 960px) {
+            width: 320px;
+        }
+
+        @media (min-width: 1000px) {
+            width: 400px;
+        }
+
+        @media (min-width: 1200px) {
+            width: 520px;
+        }
+
+        @media (min-width: 1250px) {
+            width: 520px;
+        }
+
+        @media (min-width: 1280px) {
+            width: 620px;
+        }
     }
 }
 

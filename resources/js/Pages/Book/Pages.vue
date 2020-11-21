@@ -5,7 +5,7 @@
                 <div class="col-span-1"></div>
                 <div class="col-span-1 col-bg"></div>
             </div>
-            <div class="grid grid-cols-2 relative z-10 h-full">
+            <div class="grid grid-cols-1 xl:grid-cols-2 relative z-10 h-full">
                 <!-- BEGIN Left block -->
                 <div class="px-12">
                     <div class="flex justify-between pl-6">
@@ -50,11 +50,7 @@
 
                         <div class="book-page flex justify-center mt-2">
                             <div v-if="coverImageUrl && isShowCover" class="book-page__paper book-page__paper_cover flex flex-col justify-start ff-minion">
-                                <div :style="{ backgroundImage: 'url(' + coverImageUrl + ')', height: '520px', backgroundSize: 'cover' }"></div>
-                                <div class="text-center mt-2">
-                                    <p class="font-semibold fs-34">”{{ book.title }}”</p>
-                                    <p>By {{ $page.user.pen_name }}</p>
-                                </div>
+                                <div :style="{ backgroundImage: 'url(' + coverImageUrl + ')', height: '100%', backgroundSize: 'cover' }"></div>
                             </div>
                             <div v-else class="book-page__paper flex flex-col justify-between ff-minion">
                                 <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
@@ -99,7 +95,7 @@
                 <!-- END Left block -->
 
                 <!-- BEGIN Right block -->
-                <div class="px-12">
+                <div class="px-12 mt-16 lg:mt-0">
                     <div class="flex justify-between mt-2">
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">

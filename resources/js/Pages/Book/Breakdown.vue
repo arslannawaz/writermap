@@ -3,7 +3,7 @@
         <app-container>
             <div class="flex px-16">
                 <h1 class="h2">Breakdown</h1>
-                <div class="ml-16 breakdown-header-links mt-1">
+                <div class="flex-wrap ml-16 breakdown-header-links mt-1 hidden xl:flex">
                     <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
                     <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
                     <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
@@ -11,7 +11,15 @@
                     <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
                 </div>
             </div>
-            <div class="grid grid-cols-2 px-16">
+
+            <div class="px-10 flex-wrap breakdown-header-links mt-1 flex xl:hidden">
+                    <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
+                    <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
+                    <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
+                    <a :href="'/books/' + book.id + '/breakdown/solution'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/solution') }">Solution</a>
+                    <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
+            </div>
+            <div class="grid grid-cols-1 xl:grid-cols-2 px-16">
                 <!-- BEGIN Left block -->
                 <div>
                     <div class="mt-85px">
