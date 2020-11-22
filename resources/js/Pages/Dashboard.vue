@@ -4444,7 +4444,6 @@
             <button @click="createBook()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
         </template>
     </jet-dialog-modal>
-    <portal-target name="modal"></portal-target>
 </app-layout>
 </template>
 

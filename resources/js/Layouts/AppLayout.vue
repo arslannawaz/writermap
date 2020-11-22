@@ -1,5 +1,5 @@
 <template>
-    <div class="flex bg-default">
+    <div class="h-screen flex bg-default">
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:flex-shrink-0">
             <div class="flex flex-col w-76 bg-semilight" :class="{ 'small-menu': isMenuHide == true }">
@@ -406,6 +406,8 @@
                 <slot></slot>
             </main>
         </div>
+
+        <portal-target name="modal"></portal-target>
     </div>
 </template>
 
