@@ -24,7 +24,7 @@
                 <!-- BEGIN Left block -->
                 <div>
                     <div class="mt-85px">
-                        <a :href="'/books/' + book.id + '/breakdown/' + prev_type" class="cursor-pointer icon-hoverable">
+                        <a :href="'/books/' + book.id + '/breakdown/' + prev_type" class="flex justify-start cursor-pointer icon-hoverable pb-5">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
                                 <defs>
                                     <path id="mn9mdf2o2a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
@@ -38,7 +38,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <div class="mt-5 book-page flex justify-center">
+                        <div class="book-page flex justify-center">
                             <div class="book-page__paper flex flex-col ff-minion">
                                 <span class="book-page__chapter fs-24 capitalize mt-16">{{ type }}</span>
 
@@ -62,23 +62,21 @@
                 <!-- BEGIN Right block -->
                 <div>
                     <div class="mt-85px">
-                        <div class="flex justify-end">
-                            <a :href="'/books/' + book.id + '/breakdown/' + next_type" class="icon-hoverable cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
-                                    <defs>
-                                        <path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
-                                    </defs>
-                                    <g fill="none" fill-rule="evenodd">
-                                        <g>
-                                            <g transform="translate(-1365 -154) rotate(-90 764 -601)">
-                                                <use fill="#BEBDB8" xlink:href="#b7e3ue085a"/>
-                                            </g>
+                        <a :href="'/books/' + book.id + '/breakdown/' + next_type" class="icon-hoverable cursor-pointer flex justify-end pb-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                                <defs>
+                                    <path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                                </defs>
+                                <g fill="none" fill-rule="evenodd">
+                                    <g>
+                                        <g transform="translate(-1365 -154) rotate(-90 764 -601)">
+                                            <use fill="#BEBDB8" xlink:href="#b7e3ue085a"/>
                                         </g>
                                     </g>
-                                </svg>
-                            </a>
-                        </div>
-                        <div class="mt-5 book-page flex justify-center">
+                                </g>
+                            </svg>
+                        </a>
+                        <div class="book-page flex justify-center">
                             <div class="book-page__paper flex flex-col ff-minion">
                                 <div class="mb-2"></div>
                                 <span class="book-page__chapter mt-32">Key Points</span>
