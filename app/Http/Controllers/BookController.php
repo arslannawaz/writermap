@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Breakdown;
 use Illuminate\Http\Request;
 use App\Models\Book;
 
@@ -32,10 +33,40 @@ class BookController extends Controller
     public function breakdown($id, $type = null)
     {
         $book = Book::find($id);
+
+        $prevType = null;
+        $nextType = null;
+        if ($type !== null) {
+            switch ($type) {
+                case Breakdown::TYPE_CHARACTERS:
+                    $prevType = Breakdown::TYPE_KEY_EVENTS;
+                    $nextType = Breakdown::TYPE_SETTINGS;
+                    break;
+                case Breakdown::TYPE_SETTINGS:
+                    $prevType = Breakdown::TYPE_CHARACTERS;
+                    $nextType = Breakdown::TYPE_PROBLEM;
+                    break;
+                case Breakdown::TYPE_PROBLEM:
+                    $prevType = Breakdown::TYPE_SETTINGS;
+                    $nextType = Breakdown::TYPE_SOLUTION;
+                    break;
+                case Breakdown::TYPE_SOLUTION:
+                    $prevType = Breakdown::TYPE_PROBLEM;
+                    $nextType = Breakdown::TYPE_KEY_EVENTS;
+                    break;
+                case Breakdown::TYPE_KEY_EVENTS:
+                    $prevType = Breakdown::TYPE_SOLUTION;
+                    $nextType = Breakdown::TYPE_CHARACTERS;
+                    break;
+            }
+        }
+
         return inertia('Book/Breakdown', [
             'book' => $book,
             'breakdown' => $book->breakdowns()->where(['type' => $type])->first(),
             'type' => $type,
+            'prev_type' => $prevType,
+            'next_type' => $nextType,
         ]);
     }
 
@@ -53,5 +84,10 @@ class BookController extends Controller
         }
 
         return $book;
+    }
+
+    public function storyPlan()
+    {
+        return inertia('Book/StoryPlan', []);
     }
 }

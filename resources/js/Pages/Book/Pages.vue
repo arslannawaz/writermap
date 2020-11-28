@@ -29,8 +29,8 @@
                                 <span v-if="isShowCover">Title Page</span>
                                 <span v-else>Cover Page</span>
                             </div>
-                            <div class="flex flex-end items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                            <div class="flex flex-end items-center" v-if="isShowCover">
+                                <svg @click="selectNewCoverImage()" class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <g fill="none" fill-rule="evenodd">
                                         <g fill="#4E4D4B" fill-rule="nonzero">
                                             <g>
@@ -44,7 +44,7 @@
                                        ref="cover"
                                        @change="updateCoverImagePreview()">
 
-                                <span class="ml-2 font-semibold fs-12 cursor-pointer select-none" @click="selectNewCoverImage()">Update cover image</span>
+<!--                                <span class="ml-2 font-semibold fs-12 cursor-pointer select-none" @click="selectNewCoverImage()">Update cover image</span>-->
                             </div>
                         </div>
 

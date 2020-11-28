@@ -1,7 +1,7 @@
 <template>
-    <portal to="modal">
+    <portal :to="portal">
         <transition leave-active-class="duration-200">
-            <div v-show="show" class="fixed z-10 top-0 inset-x-0 px-4 pt-6 sm:px-0 sm:flex sm:items-top sm:justify-center">
+            <div v-show="show" class="modal-dialog fixed z-10 inset-x-0 px-4 pt-6 sm:px-0 sm:flex sm:items-top sm:justify-center">
                 <transition enter-active-class="ease-out duration-300"
                         enter-class="opacity-0"
                         enter-to-class="opacity-100"
@@ -33,6 +33,7 @@
 <script>
     export default {
         props: {
+            portal: { default: 'modal' },
             show: {
                 default: false
             },

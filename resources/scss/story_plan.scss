@@ -1,0 +1,12 @@
+.milestone-item {
+    &__date {
+        position: absolute;
+        top: -45px;
+    }
+
+    &__dots {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}

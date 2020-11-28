@@ -15,6 +15,7 @@
 @import "breakdown";
 @import "feedback";
 @import "pagination";
+@import "story_plan";
 
 @font-face {
     font-family: MinionPro;
@@ -95,6 +96,14 @@ textarea {
     font-size: 12px;
 }
 
+.fs-13 {
+    font-size: 13px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
 .fs-22 {
     font-size: 18px;
 
@@ -113,6 +122,11 @@ textarea {
 
 .fs-50 {
     font-size: 50px;
+}
+
+.fs-60 {
+    font-size: 60px;
+    line-height: 60px;
 }
 
 .fs-70 {
@@ -189,6 +203,7 @@ label {
     font-family: MinionPro;
     font-weight: 600;
     font-size: 34px;
+    line-height: 34px;
     color: #4e4d4b;
 }
 
@@ -207,4 +222,58 @@ label {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+.custom-scroll {
+    &::-webkit-scrollbar {
+        width: 2px;
+        //border-radius: 2px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+.modal-dialog {
+    top: 25%;
+}
+
+.border-default {
+    border: 1px solid #d0d0d0;
+}
+
+.icon-hoverable {
+    &:hover {
+        g, use {
+            fill: #4e4d4b;
+        }
+
+        svg {
+            g, use {
+                fill: #4e4d4b;
+            }
+        }
+    }
+
+    g, use {
+        transition: fill $defaultDurationTIme linear;
+    }
+
+    svg {
+        g, use {
+            transition: fill $defaultDurationTIme linear;
+        }
+    }
 }

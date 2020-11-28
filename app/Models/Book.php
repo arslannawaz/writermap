@@ -42,6 +42,10 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Eloquent\Builder|Book whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Book whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Book whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CharacterGroup[] $characterGroups
+ * @property-read int|null $character_groups_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Character[] $characters
+ * @property-read int|null $characters_count
  */
 class Book extends Model
 {
@@ -66,6 +70,16 @@ class Book extends Model
     public function breakdowns()
     {
         return $this->hasMany(Breakdown::class);
+    }
+
+    public function characterGroups()
+    {
+        return $this->hasMany(CharacterGroup::class);
+    }
+
+    public function characters()
+    {
+        return $this->hasMany(Character::class);
     }
 
     /**

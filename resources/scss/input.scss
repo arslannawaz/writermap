@@ -23,7 +23,13 @@ input:-webkit-autofill:focus {
     }
 
     &_border-none {
-        border: none;
+        border-bottom: none !important;
+    }
+
+    &_border-hover-none {
+        &:hover {
+            border-bottom: none !important;
+        }
     }
 
     &_border-transparent {

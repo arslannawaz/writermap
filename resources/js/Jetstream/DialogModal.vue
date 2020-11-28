@@ -1,5 +1,5 @@
 <template>
-    <modal :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
+    <modal :portal="portal" :show="show" :max-width="maxWidth" :closeable="closeable" @close="close">
         <div class="px-8 py-8">
             <div class="text-center">
                 <slot name="title">
@@ -28,6 +28,9 @@
         },
 
         props: {
+            portal: {
+                default: 'modal',
+            },
             show: {
                 default: false
             },
