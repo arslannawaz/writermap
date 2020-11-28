@@ -139,7 +139,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-85px pt-6">
+                    <div class="mt-85px pt-4">
                         <div class="flex justify-between px-6">
                             <span class="book-label">Page Preview</span>
                         </div>
