@@ -20,13 +20,18 @@ class CharacterController extends Controller
 
     public function list()
     {
+        $characters = Book::find(request('book_id'))->characters();
+
         if (request()->has('group_id') && request('group_id') !== 'all') {
-            return Book::find(request('book_id'))->characters()->where('group_id', request('group_id'))
-                ->orderBy('created_at', 'desc')
-                ->paginate(8);
+            $characters->where('group_id', request('group_id'));
         }
 
-        return Book::find(request('book_id'))->characters()->orderBy('created_at', 'desc')->paginate(8);
+        if (request()->has('query') && empty(request('query')) === false) {
+            $characters->where('name', 'like', '%'. request('query') . '%');
+        }
+
+        $characters->orderBy('created_at', 'desc');
+        return $characters->paginate(8);
     }
 
     public function groupList()

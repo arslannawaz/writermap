@@ -16,7 +16,8 @@
                 </div>
 
                 <div class="flex items-center">
-                    <svg class="mr-10 icon-hoverable cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
+                    <svg @click="toggleSearch()"
+                        class="mr-10 icon-hoverable cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
                         <g fill="none" fill-rule="evenodd">
                             <g fill="#BEBDB8" fill-rule="nonzero">
                                 <g>
@@ -27,6 +28,8 @@
                             </g>
                         </g>
                     </svg>
+
+                    <input @input="search($event)" ref="search_input" type="text" class="input-default mr-10 w-48" :class="{'hidden': !isSearchVisible}">
 
                     <select class="input-default mr-10 w-48" @change="changeGroup($event.target.value)">
                         <option value="all" @click="selectedGroup = 'all'" :selected="selectedGroup === 'all'">All groups</option>
@@ -180,6 +183,7 @@ export default {
     data() {
         return {
             selectedGroup: 'all',
+            isSearchVisible: false,
             isGroupModalShow: false,
             isCharacterModalShow: false,
             characters: [],
@@ -259,7 +263,8 @@ export default {
             console.log('update characters, group select', this.selectedGroup);
 
             axios.post(url, {
-                group_id: this.selectedGroup
+                group_id: this.selectedGroup,
+                query: this.$refs.search_input.value,
             }).then(response => {
                 console.log('resonse characteres', response);
                 this.characters = response.data;
@@ -282,6 +287,23 @@ export default {
 
         changeGroup(value) {
             this.selectedGroup = value;
+            this.updateCharacters();
+        },
+
+        toggleSearch() {
+            this.isSearchVisible = !this.isSearchVisible;
+
+            if (this.$refs.search_input.value != '') {
+                this.$refs.search_input.value = '';
+                this.search(null);
+            }
+
+            this.$nextTick(() => {
+                this.$refs.search_input.focus();
+            });
+        },
+
+        search(event) {
             this.updateCharacters();
         },
     },
