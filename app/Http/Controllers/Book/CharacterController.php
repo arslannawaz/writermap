@@ -29,6 +29,11 @@ class CharacterController extends Controller
         return Book::find(request('book_id'))->characters()->orderBy('created_at', 'desc')->paginate(8);
     }
 
+    public function groupList()
+    {
+        return Book::find(request('book_id'))->characterGroups()->orderBy('created_at', 'desc')->get();
+    }
+
     public function create()
     {
         $book = Book::findOrFail(request('book_id'));

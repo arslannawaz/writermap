@@ -45,5 +45,6 @@ Route::get('books/{id}/story-plan', [BookController::class, 'storyPlan'])->name(
 
 Route::get('books/{id}/characters', [\App\Http\Controllers\Book\CharacterController::class, 'index'])->name('books.characters');
 Route::any('books/{book_id}/characters/list', [\App\Http\Controllers\Book\CharacterController::class, 'list'])->name('books.characters.list');
+Route::get('books/{book_id}/characters/groups/list', [\App\Http\Controllers\Book\CharacterController::class, 'groupList'])->name('books.characters.list');
 Route::post('books/{book_id}/characters/create', [\App\Http\Controllers\Book\CharacterController::class, 'create'])->name('books.characters');
 Route::post('books/{book_id}/characters/group/create', [\App\Http\Controllers\Book\CharacterController::class, 'createGroup'])->name('books.characters');

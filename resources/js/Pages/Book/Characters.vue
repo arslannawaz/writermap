@@ -170,10 +170,11 @@ export default {
         JetInputError,
     },
 
-    props: ['book', 'groups'],
+    props: ['book'],
 
     mounted() {
         this.updateCharacters();
+        this.updateGroups();
     },
 
     data() {
@@ -182,6 +183,7 @@ export default {
             isGroupModalShow: false,
             isCharacterModalShow: false,
             characters: [],
+            groups: [],
             formGroup: this.$inertia.form({
                 title: '',
                 error: '',
@@ -212,9 +214,7 @@ export default {
                 this.formGroup.error = '';
                 this.formGroup.processing = false;
 
-                // this.$nextTick(() => this.$emit('confirmed'));
-
-                // this.updateBooks();
+                this.updateGroups();
             }).catch(error => {
                 this.formGroup.processing = false;
                 this.formGroup.error = error.response.data.errors.password[0];
@@ -263,6 +263,18 @@ export default {
             }).then(response => {
                 console.log('resonse characteres', response);
                 this.characters = response.data;
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+
+        updateGroups()
+        {
+            const url = '/books/' + this.book.id + '/characters/groups/list';
+            axios.get(url, {
+                group_id: this.selectedGroup
+            }).then(response => {
+                this.groups = response.data;
             }).catch(error => {
                 console.log('error', error);
             });

@@ -12,7 +12,7 @@
                         <h1 class="h2">
                             <input ref="book_name" type="text" class="input-default input-default_p-zero input-default_border-transparent h2" v-model="book.title" @input="updateField('title')">
                         </h1>
-                        <svg class="mt-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" @click="$refs.book_name.focus()">
+                        <svg class="mt-2 cursor-pointer icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" @click="$refs.book_name.focus()">
                             <g fill="none" fill-rule="evenodd">
                                 <g fill="#BEBDB8" fill-rule="nonzero">
                                     <g>
@@ -30,9 +30,9 @@
                                 <span v-else>Cover Page</span>
                             </div>
                             <div class="flex flex-end items-center" v-if="isShowCover">
-                                <svg @click="selectNewCoverImage()" class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                <svg @click="selectNewCoverImage()" class="cursor-pointer icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                                     <g fill="none" fill-rule="evenodd">
-                                        <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g fill="#BEBDB8" fill-rule="nonzero">
                                             <g>
                                                 <path d="M15.455 10.91c-.503 0-.91.406-.91.908v.346L13.2 10.818c-.989-.98-2.584-.98-3.573 0l-.636.637L6.736 9.2c-1-.952-2.572-.952-3.572 0l-1.346 1.345v-5.09c0-.503.407-.91.91-.91H9.09c.502 0 .909-.407.909-.909s-.407-.909-.91-.909H2.728C1.221 2.727 0 3.948 0 5.455v10.909c0 1.506 1.221 2.727 2.727 2.727h10.91c1.506 0 2.727-1.221 2.727-2.727v-4.546c0-.502-.407-.909-.91-.909zM2.727 17.272c-.502 0-.909-.407-.909-.91v-3.245l2.637-2.636c.277-.265.713-.265.99 0l2.882 2.882 3.91 3.909h-9.51zm11.818-.91c0 .175-.058.344-.163.482l-4.1-4.118.636-.636c.132-.134.312-.21.5-.21s.369.076.5.21l2.627 2.645v1.628zm4.282-13.372L16.1.264c-.086-.083-.188-.148-.3-.191-.221-.091-.47-.091-.69 0-.113.043-.214.108-.3.19l-2.728 2.728c-.23.23-.32.567-.236.882.084.315.33.56.645.645.315.084.651-.006.882-.236L14.545 3.1v5.082c0 .502.407.909.91.909.502 0 .909-.407.909-.91V3.1l1.172 1.182c.171.172.403.269.646.269.242 0 .475-.097.645-.27.172-.17.27-.402.27-.645 0-.242-.098-.474-.27-.645z" transform="translate(-538 -152) translate(538 152)"/>
                                             </g>
