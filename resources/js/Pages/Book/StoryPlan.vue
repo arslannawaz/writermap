@@ -5,15 +5,14 @@
             <div class="mt-12 grid grid-cols-1 xl:grid-cols-7 gap-16">
                 <div class="col-span-1 xl:col-span-3 bg-light">
                     <h2 class="h2 px-12 pt-10">Writers Objective</h2>
-                    <div class="mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10">
-                        <p>I made it through school without reading. On my nightstand are The Overstory by Richard Powers and Edge of the Map by Johanna Garton. Coventry by Rachel Cusk calls to me to finish it with a reminder of how lucid close observation can be. There’s a Stephen King open on my Kindle app…which one? Ah, yes, The Institute. Oh, and Joni just finished a loaner copy of Michelle Obama’s Becoming and I get it next.
-
-                            Sometimes, though, you want to lose yourself in a classic adventure tale, where a human sets a goal and then </p>
+                    <div class="mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10 outline-none custom-scroll" contenteditable="true" @input="updateContentEditableField('objective', $event)">
+                        <p v-if="storyPlan.objective == null">Write here your objective text</p>
+                        <p v-else>{{ storyPlan.objective }}</p>
                     </div>
                 </div>
                 <div class="col-span-1 xl:col-span-4 bg-light p-12">
                     <h2 class="h2">Story Inspiration</h2>
-                    <div class="mt-8 flex flex-wrap xl:flex-no-wrap justify-between">
+                    <div class="mt-8 flex flex-wrap xl:flex-no-wrap">
                         <div class="mr-14 flex justify-center text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="230" height="225" viewBox="0 0 230 225">
                             <g fill="none" fill-rule="evenodd">
@@ -206,44 +205,63 @@
                         </svg>
                         </div>
 
-                        <div class="custom-scroll ff-minion fs-14 mt-10 xl:mt-0">
-                            <p>I made it through school without reading. On my nightstand are The Overstory by Richard Powers and Edge of the Map by Johanna Garton. Coventry by Rachel Cusk calls to me to finish it with a reminder of how lucid close observation can be. There’s a Stephen King open on my Kindle app…which o</p>
+                        <div class="w-full text-left custom-scroll ff-minion fs-14 mt-10 xl:mt-0 outline-none custom-scroll" style="word-break: break-word;" contenteditable="true" @input="updateContentEditableField('inspiration', $event)">
+                            <p v-if="storyPlan.inspiration == null">Write here your inspiration text</p>
+                            <p v-else>{{ storyPlan.inspiration }}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-12 flex-none xl:flex xl:justify-between bg-light p-12">
-                <div>
+            <div class="milestones mt-12 flex-none xl:flex xl:justify-between bg-light p-12">
+                <div class="milestones__add-icon" @click="isCreateMilestoneModalShow = !isCreateMilestoneModalShow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill="#FFF">
+                                <g>
+                                    <g>
+                                        <g>
+                                            <path d="M12.44 6.14h-4.2v-4.2c0-.579-.47-1.05-1.05-1.05-.579 0-1.05.471-1.05 1.05v4.2h-4.2c-.579 0-1.05.471-1.05 1.05 0 .58.471 1.05 1.05 1.05h4.2v4.2c0 .58.471 1.05 1.05 1.05.58 0 1.05-.47 1.05-1.05v-4.2h4.2c.58 0 1.05-.47 1.05-1.05 0-.579-.47-1.05-1.05-1.05z" transform="translate(-1363 -486) translate(350 360) translate(995 108) translate(18 18)" />
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="flex-nowrap">
                     <h2 class="h2">Milestones</h2>
                     <p class="fs-13">
-                        You have 000 days to complete your<br>
+                        You have {{ calculateDaysCompleteMilestones() }} days to complete your<br>
                         milestones.
                     </p>
 
                     <div class="mt-12 flex justify-between">
                         <div class="mr-12">
-                            <h3 class="fs-60 font-bold ff-minion">140</h3>
+                            <h3 class="fs-60 font-bold ff-minion">{{ milestonesCompletedCount }}</h3>
                             <div class="form-label uppercase text-color-light">Completed</div>
                         </div>
                         <div>
-                            <h3 class="fs-60 font-bold ff-minion">12</h3>
+                            <h3 class="fs-60 font-bold ff-minion">{{ milestonesInProgressCount }}</h3>
                             <div class="form-label uppercase text-color-light">in progress</div>
                         </div>
                     </div>
 
                     <div class="mt-16">
                         <span class="form-label uppercase text-color-light pr-6">Due date:</span>
-                        <span>September 21, 2020</span>
+                        <span v-if="milestones.data">{{ formatDateFromString(allMilestones[0].due_date, 'F') }} {{ formatDateFromString(allMilestones[0].due_date, 'd') }}, {{ formatDateFromString(allMilestones[0].due_date, 'Y') }}</span>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-12 mt-10 xl:mt-0">
-                    <div class="col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-12 px-8 mt-10 xl:mt-0">
+                    <div
+                        v-for="milestone in milestones.data"
+                        :key="milestone.id"
+                        class="w-60 h-72 col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
                         <div class="milestone-item__date bg-light shadow-lg py-4 px-5 text-center rounded-md">
                             <div>
-                                <span class="h2">24</span>th
+                                <span class="h2">{{ formatDateFromString(milestone.due_date, 'd') }}</span>th
                             </div>
-                            <div class="form-label uppercase text-color-light">Dec</div>
+                            <div class="form-label uppercase text-color-light">{{ formatDateFromString(milestone.due_date, 'M') }}</div>
                         </div>
                         <div class="milestone-item__dots">
                             <svg xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18">
@@ -259,8 +277,8 @@
                             </svg>
                         </div>
 
-                        <div class="mt-4 form-label uppercase text-color-light">Characters:</div>
-                        <div class="fs-15 font-semibold">Protagonists</div>
+                        <div class="mt-4 form-label uppercase text-color-light">{{ milestone.type }}:</div>
+                        <div class="fs-15 font-semibold text-center">{{ milestone.title }}</div>
 
                         <svg class="mt-10" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                             <g fill="none" fill-rule="evenodd">
@@ -276,101 +294,279 @@
                             </g>
                         </svg>
                     </div>
-
-                    <div class="col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
-                        <div class="milestone-item__date bg-light shadow-lg py-4 px-5 text-center rounded-md">
-                            <div>
-                                <span class="h2">24</span>th
-                            </div>
-                            <div class="form-label uppercase text-color-light">Dec</div>
-                        </div>
-                        <div class="milestone-item__dots">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18">
-                                <g fill="none" fill-rule="evenodd">
-                                    <g fill="#BEBDB8">
-                                        <g>
-                                            <g>
-                                                <path d="M172 70c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-860 -628) translate(350 522) translate(340 50)"/>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-
-                        <div class="mt-4 form-label uppercase text-color-light">Characters:</div>
-                        <div class="fs-15 font-semibold">Protagonists</div>
-
-                        <svg class="mt-10" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                            <g fill="none" fill-rule="evenodd">
-                                <g fill="#BEBDB8" fill-rule="nonzero">
-                                    <g>
-                                        <g>
-                                            <g>
-                                                <path d="M9.981 0C6.018.008 2.434 2.355.842 5.984c-1.591 3.629-.89 7.856 1.79 10.776 1.892 2.052 4.557 3.22 7.35 3.22 2.791 0 5.456-1.168 7.35-3.22 2.678-2.92 3.38-7.147 1.788-10.776C17.53 2.354 13.944.008 9.981 0zm0 18c-2.071-.003-4.06-.81-5.55-2.25.925-2.25 3.117-3.72 5.55-3.72s4.626 1.47 5.55 3.72c-1.489 1.44-3.478 2.247-5.55 2.25zm-2-10c0-1.105.896-2 2-2 1.105 0 2 .895 2 2s-.895 2-2 2c-1.104 0-2-.895-2-2zm8.91 6c-.893-1.528-2.268-2.717-3.91-3.38 1.418-1.608 1.316-4.048-.231-5.533-1.548-1.484-3.99-1.484-5.538 0-1.547 1.485-1.649 3.925-.23 5.533-1.642.663-3.017 1.852-3.91 3.38-.713-1.213-1.09-2.594-1.09-4 0-4.418 3.58-8 8-8 4.417 0 8 3.582 8 8-.003 1.406-.379 2.787-1.09 4z" transform="translate(-775 -768) translate(350 522) translate(340 50) translate(85 196)"/>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-
-                    <div class="col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
-                        <div class="milestone-item__date bg-light shadow-lg py-4 px-5 text-center rounded-md">
-                            <div>
-                                <span class="h2">24</span>th
-                            </div>
-                            <div class="form-label uppercase text-color-light">Dec</div>
-                        </div>
-                        <div class="milestone-item__dots">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18">
-                                <g fill="none" fill-rule="evenodd">
-                                    <g fill="#BEBDB8">
-                                        <g>
-                                            <g>
-                                                <path d="M172 70c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-860 -628) translate(350 522) translate(340 50)"/>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-
-                        <div class="mt-4 form-label uppercase text-color-light">Characters:</div>
-                        <div class="fs-15 font-semibold">Protagonists</div>
-
-                        <svg class="mt-10" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                            <g fill="none" fill-rule="evenodd">
-                                <g fill="#BEBDB8" fill-rule="nonzero">
-                                    <g>
-                                        <g>
-                                            <g>
-                                                <path d="M9.981 0C6.018.008 2.434 2.355.842 5.984c-1.591 3.629-.89 7.856 1.79 10.776 1.892 2.052 4.557 3.22 7.35 3.22 2.791 0 5.456-1.168 7.35-3.22 2.678-2.92 3.38-7.147 1.788-10.776C17.53 2.354 13.944.008 9.981 0zm0 18c-2.071-.003-4.06-.81-5.55-2.25.925-2.25 3.117-3.72 5.55-3.72s4.626 1.47 5.55 3.72c-1.489 1.44-3.478 2.247-5.55 2.25zm-2-10c0-1.105.896-2 2-2 1.105 0 2 .895 2 2s-.895 2-2 2c-1.104 0-2-.895-2-2zm8.91 6c-.893-1.528-2.268-2.717-3.91-3.38 1.418-1.608 1.316-4.048-.231-5.533-1.548-1.484-3.99-1.484-5.538 0-1.547 1.485-1.649 3.925-.23 5.533-1.642.663-3.017 1.852-3.91 3.38-.713-1.213-1.09-2.594-1.09-4 0-4.418 3.58-8 8-8 4.417 0 8 3.582 8 8-.003 1.406-.379 2.787-1.09 4z" transform="translate(-775 -768) translate(350 522) translate(340 50) translate(85 196)"/>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
+                    <div @click="nextMilestonesPage()" class="icon-hoverable" style="right: 30px;top: 200px;position: absolute;padding: 10px;">
+                        <svg class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9"><defs><path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"></path></defs> <g fill="none" fill-rule="evenodd"><g><g transform="translate(-1365 -154) rotate(-90 764 -601)"><use fill="#BEBDB8" xlink:href="#b7e3ue085a"></use></g></g></g></svg>
                     </div>
                 </div>
             </div>
         </app-container>
+
+
+
+        <jet-dialog-modal :show="isCreateMilestoneModalShow" @close="isCreateMilestoneModalShow = false">
+            <template #title>
+                <span class="h2">Create new Milestone</span>
+            </template>
+
+            <template #content>
+                <input type="date" class="input-default w-full" v-model="dateSelected">
+
+                <select class="mt-4 input-default w-full" v-model="categorySelected" @change="subCategorySelected = categories[categorySelected][0]">
+                    <option :value="key" v-for="(values, key) in categories">{{ key }}</option>
+                </select>
+
+                <select class="mt-4 input-default w-full" v-model="subCategorySelected">
+                    <option :value="subCategory" v-for="subCategory in categories[categorySelected]">{{ subCategory }}</option>
+                </select>
+
+                <jet-input-error :message="milestoneForm.error" class="mt-2" />
+            </template>
+
+            <template #footer>
+                <button @click="createMilestone()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+            </template>
+        </jet-dialog-modal>
     </app-layout>
 </template>
 
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
+import JetDialogModal from "../../Jetstream/DialogModal";
+import JetInputError from "../../Jetstream/InputError";
 
 export default {
-    components: {AppLayout, AppContainer},
+    components: {AppLayout, AppContainer, JetDialogModal, JetInputError},
 
-    props: [],
+    props: ['book', 'allMilestones', 'storyPlan'],
+
+    data() {
+        return {
+            isCreateMilestoneModalShow: false,
+            dateSelected: null,
+            categorySelected: 'Covers',
+            subCategorySelected: 'Front',
+            categories: {
+                'Covers': ['Front', 'Back', 'Spine'],
+                'Story Planning': ['Objective', 'Milestones'],
+                'Breakdown': ['Characters', 'Settings', 'Problem', 'Solution', 'Key Events'],
+                'Characters': ['Protagonists', 'Antagonists', 'Main Characters', 'Supporting Characters'],
+                'Timeline': ['Main Events', 'Minor Events', 'Beats of EVents'],
+                'Visual': ['Main Inspiration Board', 'Setting', 'Tone', 'Characters'],
+                'Notes': ['Research', 'General', 'Story Ideas'],
+                'Pitching': ['Pitch Copy', 'Pitch Deck', 'Pitch Doc', 'Pitch Meeting'],
+            },
+            milestones: [],
+            milestonesInProgressCount: 0,
+            milestonesCompletedCount: 0,
+            milestoneForm: this.$inertia.form({
+                date: '',
+                category: '',
+                subcategory: '',
+                error: '',
+            }, {
+                bag: 'milestone',
+            }),
+        };
+    },
+
+    mounted() {
+        this.updateMilestonesList();
+        this.updateMilestonesStatusCount();
+    },
 
     methods: {
+        formatDateFromString(dateString, format) {
+            const date = new Date(dateString);
+            return this.dateFormat(date, format);
+        },
 
+        /**
+         * https://gist.github.com/williamd5/56904a0a505fd8e18c646398e94135a6
+         * Return a formated string from a date Object mimicking PHP's date() functionality
+         *
+         * format  string  "Y-m-d H:i:s" or similar PHP-style date format string
+         * date    mixed   Date Object, Datestring, or milliseconds
+         *
+         */
+        dateFormat(date, format) {
+            let string = '',
+                mo = date.getMonth(), // month (0-11)
+                m1 = mo + 1, // month (1-12)
+                dow = date.getDay(), // day of week (0-6)
+                d = date.getDate(), // day of the month (1-31)
+                y = date.getFullYear(), // 1999 or 2003
+                h = date.getHours(), // hour (0-23)
+                mi = date.getMinutes(), // minute (0-59)
+                s = date.getSeconds(); // seconds (0-59)
+
+            for (let i of format.match(/(\\)*./g))
+                switch (i) {
+                    case 'j': // Day of the month without leading zeros  (1 to 31)
+                        string += d;
+                        break;
+
+                    case 'd': // Day of the month, 2 digits with leading zeros (01 to 31)
+                        string += (d < 10) ? "0" + d : d;
+                        break;
+
+                    case 'l': // (lowercase 'L') A full textual representation of the day of the week
+                        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                        string += days[dow];
+                        break;
+
+                    case 'w': // Numeric representation of the day of the week (0=Sunday,1=Monday,...6=Saturday)
+                        string += dow;
+                        break;
+
+                    case 'D': // A textual representation of a day, three letters
+                        var days = ["Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat"];
+                        string += days[dow];
+                        break;
+
+                    case 'm': // Numeric representation of a month, with leading zeros (01 to 12)
+                        string += (m1 < 10) ? "0" + m1 : m1;
+                        break;
+
+                    case 'n': // Numeric representation of a month, without leading zeros (1 to 12)
+                        string += m1;
+                        break;
+
+                    case 'F': // A full textual representation of a month, such as January or March
+                        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                        string += months[mo];
+                        break;
+
+                    case 'M': // A short textual representation of a month, three letters (Jan - Dec)
+                        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        string += months[mo];
+                        break;
+
+                    case 'Y': // A full numeric representation of a year, 4 digits (1999 OR 2003)
+                        string += y;
+                        break;
+
+                    case 'y': // A two digit representation of a year (99 OR 03)
+                        string += y.toString().slice(-2);
+                        break;
+
+                    case 'H': // 24-hour format of an hour with leading zeros (00 to 23)
+                        string += (h < 10) ? "0" + h : h;
+                        break;
+
+                    case 'g': // 12-hour format of an hour without leading zeros (1 to 12)
+                        var hour = (h === 0) ? 12 : h;
+                        string += (hour > 12) ? hour - 12 : hour;
+                        break;
+
+                    case 'h': // 12-hour format of an hour with leading zeros (01 to 12)
+                        var hour = (h === 0) ? 12 : h;
+                        hour = (hour > 12) ? hour - 12 : hour;
+                        string += (hour < 10) ? "0" + hour : hour;
+                        break;
+
+                    case 'a': // Lowercase Ante meridiem and Post meridiem (am or pm)
+                        string += (h < 12) ? "am" : "pm";
+                        break;
+
+                    case 'i': // Minutes with leading zeros (00 to 59)
+                        string += (mi < 10) ? "0" + mi : mi;
+                        break;
+
+                    case 's': // Seconds, with leading zeros (00 to 59)
+                        string += (s < 10) ? "0" + s : s;
+                        break;
+
+                    case 'c': // ISO 8601 date (eg: 2012-11-20T18:05:54.944Z)
+                        string += date.toISOString();
+                        break;
+
+                    default:
+                        if (i.startsWith("\\")) i = i.substr(1);
+                        string += i;
+                }
+
+            return string;
+        },
+        updateMilestonesList(url = null) {
+            if (url === null) {
+                url = '/books/' + this.book.id + '/story-plan/milestones';
+            }
+
+            axios.get(url).then(response => {
+                console.log('update milestone list', response.data);
+                this.milestones = response.data;
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+        createMilestone() {
+            const url = '/books/' + this.book.id + '/story-plan/milestone/create';
+            axios.post(url, {
+                book_id: this.book.id,
+                due_date: this.dateSelected,
+                type: this.categorySelected,
+                title: this.subCategorySelected,
+            }).then(response => {
+                console.log('create milestone', response.data);
+                this.updateMilestonesList();
+                this.isCreateMilestoneModalShow = !this.isCreateMilestoneModalShow;
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+        updateMilestonesStatusCount() {
+            console.log('all milestines', this.allMilestones);
+
+            if (this.allMilestones !== undefined) {
+                let countInProgress = 0;
+                let countCompleted = 0;
+
+                for (const milestone of this.allMilestones) {
+                    if (milestone.status === 0) {
+                        countInProgress++;
+                    }
+
+                    if (milestone.status === 1) {
+                        countCompleted++;
+                    }
+                }
+
+                this.milestonesInProgressCount = countInProgress;
+                this.milestonesCompletedCount = countCompleted;
+            }
+        },
+
+        calculateDaysCompleteMilestones()
+        {
+            const lastKey = this.allMilestones.length - 1;
+            const dueDate = new Date(this.allMilestones[lastKey].due_date);
+            const nowDate = new Date();
+
+            const timeDifference = nowDate.getTime() - dueDate.getTime();
+
+            return parseInt(timeDifference / (1000 * 3600 * 24));
+        },
+
+        nextMilestonesPage() {
+            console.log('click next page');
+            if (this.milestones.data !== undefined) {
+                this.updateMilestonesList(this.milestones.next_page_url);
+            }
+        },
+
+        updateContentEditableField(field, event) {
+            // console.log(field, this.bookItem, this.bookItem[field]);
+            const url = '/books/' + this.book.id + '/story-plan/update';
+            axios.post(url,{
+                field: field,
+                value: event.target.innerText,
+            }).then(response => {
+                console.log('update milestone', response.data);
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
     },
 }
 </script>

@@ -41,7 +41,11 @@ Route::post('books/{book_id}/breakdowns/{breakdown_id}/update', [BreakdownContro
 Route::get('books/{id}/breakdown', [BookController::class, 'breakdown'])->name('books.breakdown');
 Route::get('books/{id}/breakdown/{type}', [BookController::class, 'breakdown'])->name('books.breakdown');
 
-Route::get('books/{id}/story-plan', [BookController::class, 'storyPlan'])->name('books.story-plan');
+Route::get('books/{book_id}/story-plan', [\App\Http\Controllers\Book\StoryPlanController::class, 'index'])->name('books.story-plan');
+Route::post('books/{book_id}/story-plan/update', [\App\Http\Controllers\Book\StoryPlanController::class, 'update'])->name('books.story_plan.update');
+Route::get('books/{book_id}/story-plan/milestones', [\App\Http\Controllers\Book\StoryPlanController::class, 'milestones'])->name('books.story_plan.milestones');
+Route::post('books/{book_id}/story-plan/milestone/create', [\App\Http\Controllers\Book\StoryPlanController::class, 'milestoneCreate'])->name('books.story_plan.milestone.create');
+Route::post('books/{book_id}/story-plan/milestone/update', [\App\Http\Controllers\Book\StoryPlanController::class, 'milestoneUpdate'])->name('books.story_plan.milestones.update');
 
 Route::get('books/{id}/characters', [\App\Http\Controllers\Book\CharacterController::class, 'index'])->name('books.characters');
 Route::any('books/{book_id}/characters/list', [\App\Http\Controllers\Book\CharacterController::class, 'list'])->name('books.characters.list');

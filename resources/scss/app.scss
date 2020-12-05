@@ -255,6 +255,8 @@ label {
 }
 
 .icon-hoverable {
+    cursor: pointer;
+
     &:hover {
         g, use {
             fill: #4e4d4b;

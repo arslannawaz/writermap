@@ -82,6 +82,11 @@ class Book extends Model
         return $this->hasMany(Character::class);
     }
 
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class);
+    }
+
     /**
      * Update the user's profile photo.
      *

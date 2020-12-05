@@ -85,9 +85,4 @@ class BookController extends Controller
 
         return $book;
     }
-
-    public function storyPlan()
-    {
-        return inertia('Book/StoryPlan', []);
-    }
 }
