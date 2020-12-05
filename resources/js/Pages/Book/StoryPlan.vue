@@ -544,7 +544,7 @@ export default {
                 const dueDate = new Date(this.allMilestones[lastKey].due_date);
                 const nowDate = new Date();
 
-                const timeDifference = nowDate.getTime() - dueDate.getTime();
+                const timeDifference = dueDate.getTime() - nowDate.getTime();
 
                 return parseInt(timeDifference / (1000 * 3600 * 24));
             }
