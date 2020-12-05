@@ -249,7 +249,7 @@
 
                     <div class="mt-16">
                         <span class="form-label uppercase text-color-light pr-6">Due date:</span>
-                        <span v-if="milestones.data">{{ formatDateFromString(allMilestones[0].due_date, 'F') }} {{ formatDateFromString(allMilestones[0].due_date, 'd') }}, {{ formatDateFromString(allMilestones[0].due_date, 'Y') }}</span>
+                        <span v-if="allMilestones.length > 0">{{ formatDateFromString(allMilestones[0].due_date, 'F') }} {{ formatDateFromString(allMilestones[0].due_date, 'd') }}, {{ formatDateFromString(allMilestones[0].due_date, 'Y') }}</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-12 px-8 mt-10 xl:mt-0">
@@ -539,13 +539,17 @@ export default {
 
         calculateDaysCompleteMilestones()
         {
-            const lastKey = this.allMilestones.length - 1;
-            const dueDate = new Date(this.allMilestones[lastKey].due_date);
-            const nowDate = new Date();
+            if (this.allMilestones.length > 0) {
+                const lastKey = this.allMilestones.length - 1;
+                const dueDate = new Date(this.allMilestones[lastKey].due_date);
+                const nowDate = new Date();
 
-            const timeDifference = nowDate.getTime() - dueDate.getTime();
+                const timeDifference = nowDate.getTime() - dueDate.getTime();
 
-            return parseInt(timeDifference / (1000 * 3600 * 24));
+                return parseInt(timeDifference / (1000 * 3600 * 24));
+            }
+
+            return 0;
         },
 
         nextMilestonesPage() {
