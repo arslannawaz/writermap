@@ -229,7 +229,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="flex-nowrap">
+                <div class="flex-nowrap mt-0 xl:mt-8">
                     <h2 class="h2">Milestones</h2>
                     <p class="fs-13">
                         You have {{ calculateDaysCompleteMilestones() }} days to complete your<br>
@@ -256,14 +256,14 @@
                     <div
                         v-for="milestone in milestones.data"
                         :key="milestone.id"
-                        class="w-60 h-72 col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
+                        class="w-60 h-80 col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
                         <div class="milestone-item__date bg-light shadow-lg py-4 px-5 text-center rounded-md">
                             <div>
                                 <span class="h2">{{ formatDateFromString(milestone.due_date, 'd') }}</span>th
                             </div>
                             <div class="form-label uppercase text-color-light">{{ formatDateFromString(milestone.due_date, 'M') }}</div>
                         </div>
-                        <div class="milestone-item__dots">
+                        <div class="milestone-item__dots icon-hoverable p-4" @click="isChangeMilestoneModalShow = !isChangeMilestoneModalShow; changeMilestone = {...milestone}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#BEBDB8">
@@ -293,6 +293,12 @@
                                 </g>
                             </g>
                         </svg>
+
+                        <div v-if="milestone.status === 0" class="mt-8 fs-12 text-color-light uppercase">IN PROGRESS</div>
+                        <div v-if="milestone.status === 1" class="mt-8 fs-12 text-color-light uppercase">Completed</div>
+                        <div v-if="milestone.status === 2" class="mt-8 fs-12 text-color-light uppercase">To plan</div>
+                        <div v-if="milestone.status === 3" class="mt-8 fs-12 text-color-light uppercase">Todo</div>
+                        <div v-if="milestone.status === 4" class="mt-8 fs-12 text-color-light uppercase">On hold</div>
                     </div>
                     <div @click="nextMilestonesPage()" class="icon-hoverable" style="right: 30px;top: 200px;position: absolute;padding: 10px;">
                         <svg class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9"><defs><path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"></path></defs> <g fill="none" fill-rule="evenodd"><g><g transform="translate(-1365 -154) rotate(-90 764 -601)"><use fill="#BEBDB8" xlink:href="#b7e3ue085a"></use></g></g></g></svg>
@@ -326,6 +332,29 @@
                 <button @click="createMilestone()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
             </template>
         </jet-dialog-modal>
+
+        <jet-dialog-modal portal="modal_second" :show="isChangeMilestoneModalShow" @close="isChangeMilestoneModalShow = false">
+            <template #title>
+                <span class="h2">Change milestone</span>
+            </template>
+
+            <template #content v-if="changeMilestone.id">
+                <input type="date" class="input-default w-full" v-model="changeMilestone.due_date">
+
+                <select class="mt-4 input-default w-full" v-model="changeMilestone.status">
+                    <option :value="key" v-for="(text, key) in milestoneStatuses">{{ text }}</option>
+                </select>
+
+                <jet-input-error :message="milestoneForm.error" class="mt-2" />
+            </template>
+
+            <template #footer>
+                <div class="flex justify-between">
+                    <button @click="updateMilestone()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    <button @click="deleteMilestone()" class="button rounded-lg bg-danger px-8 py-2 font-semibold text-white">Delete</button>
+                </div>
+            </template>
+        </jet-dialog-modal>
     </app-layout>
 </template>
 
@@ -338,14 +367,24 @@ import JetInputError from "../../Jetstream/InputError";
 export default {
     components: {AppLayout, AppContainer, JetDialogModal, JetInputError},
 
-    props: ['book', 'allMilestones', 'storyPlan'],
+    props: ['book', 'storyPlan'],
 
     data() {
         return {
+            allMilestones: [],
             isCreateMilestoneModalShow: false,
+            isChangeMilestoneModalShow: false,
+            changeMilestone: {},
             dateSelected: null,
             categorySelected: 'Covers',
             subCategorySelected: 'Front',
+            milestoneStatuses: {
+                0: 'In progress',
+                1: 'Completed',
+                2: 'To plan',
+                3: 'Todo',
+                4: 'On hold',
+            },
             categories: {
                 'Covers': ['Front', 'Back', 'Spine'],
                 'Story Planning': ['Objective', 'Milestones'],
@@ -488,6 +527,7 @@ export default {
 
             return string;
         },
+
         updateMilestonesList(url = null) {
             if (url === null) {
                 url = '/books/' + this.book.id + '/story-plan/milestones';
@@ -496,11 +536,29 @@ export default {
             axios.get(url).then(response => {
                 console.log('update milestone list', response.data);
                 this.milestones = response.data;
+                this.updateAllMilestonesList();
             }).catch(error => {
                 console.log('error', error);
             });
         },
+
+        updateAllMilestonesList(url = null) {
+            if (url === null) {
+                url = '/books/' + this.book.id + '/story-plan/milestones/all';
+            }
+
+            axios.get(url).then(response => {
+                console.log('update milestone list', response.data);
+                this.allMilestones = response.data;
+                this.updateMilestonesStatusCount();
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+
         createMilestone() {
+            this.isCreateMilestoneModalShow = !this.isCreateMilestoneModalShow;
+
             const url = '/books/' + this.book.id + '/story-plan/milestone/create';
             axios.post(url, {
                 book_id: this.book.id,
@@ -510,11 +568,35 @@ export default {
             }).then(response => {
                 console.log('create milestone', response.data);
                 this.updateMilestonesList();
-                this.isCreateMilestoneModalShow = !this.isCreateMilestoneModalShow;
             }).catch(error => {
                 console.log('error', error);
             });
         },
+
+        updateMilestone() {
+            this.isChangeMilestoneModalShow = !this.isChangeMilestoneModalShow;
+
+            const url = '/books/' + this.book.id + '/story-plan/milestone/update';
+            axios.post(url, this.changeMilestone).then(response => {
+                console.log('update milestone', response.data);
+                this.updateMilestonesList();
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+
+        deleteMilestone() {
+            this.isChangeMilestoneModalShow = !this.isChangeMilestoneModalShow;
+
+            const url = '/books/' + this.book.id + '/story-plan/milestone/delete';
+            axios.post(url, this.changeMilestone).then(response => {
+                console.log('delete milestone', response.data);
+                this.updateMilestonesList();
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+
         updateMilestonesStatusCount() {
             console.log('all milestines', this.allMilestones);
 

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $book_id
+ * @property integer $status
  * @property string $due_date
  * @property string $type
  * @property string $title
@@ -34,6 +35,9 @@ class Milestone extends Model
 
     const STATUS_IN_PROGRESS = 0;
     const STATUS_COMPLETED = 1;
+    const STATUS_TO_PLAN = 2;
+    const STATUS_TODO = 3;
+    const STATUS_ON_HOLD = 4;
 
     protected $fillable = ['type', 'title', 'due_date', 'book_id', 'status'];
 

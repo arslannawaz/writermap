@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\Book\StoryPlanController;
+use App\Http\Controllers\Book\CharacterController;
+use App\Http\Controllers\Book\StoryPlan\MilestoneController;
 use App\Http\Controllers\Book\BreakdownController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,14 +44,16 @@ Route::post('books/{book_id}/breakdowns/{breakdown_id}/update', [BreakdownContro
 Route::get('books/{id}/breakdown', [BookController::class, 'breakdown'])->name('books.breakdown');
 Route::get('books/{id}/breakdown/{type}', [BookController::class, 'breakdown'])->name('books.breakdown');
 
-Route::get('books/{book_id}/story-plan', [\App\Http\Controllers\Book\StoryPlanController::class, 'index'])->name('books.story-plan');
-Route::post('books/{book_id}/story-plan/update', [\App\Http\Controllers\Book\StoryPlanController::class, 'update'])->name('books.story_plan.update');
-Route::get('books/{book_id}/story-plan/milestones', [\App\Http\Controllers\Book\StoryPlanController::class, 'milestones'])->name('books.story_plan.milestones');
-Route::post('books/{book_id}/story-plan/milestone/create', [\App\Http\Controllers\Book\StoryPlanController::class, 'milestoneCreate'])->name('books.story_plan.milestone.create');
-Route::post('books/{book_id}/story-plan/milestone/update', [\App\Http\Controllers\Book\StoryPlanController::class, 'milestoneUpdate'])->name('books.story_plan.milestones.update');
+Route::get('books/{book_id}/story-plan', [StoryPlanController::class, 'index'])->name('books.story-plan');
+Route::post('books/{book_id}/story-plan/update', [StoryPlanController::class, 'update'])->name('books.story_plan.update');
+Route::get('books/{book_id}/story-plan/milestones', [MilestoneController::class, 'index'])->name('books.story_plan.milestones');
+Route::get('books/{book_id}/story-plan/milestones/all', [MilestoneController::class, 'all'])->name('books.story_plan.milestones.all');
+Route::post('books/{book_id}/story-plan/milestone/create', [MilestoneController::class, 'create'])->name('books.milestone.create');
+Route::post('books/{book_id}/story-plan/milestone/update', [MilestoneController::class, 'update'])->name('books.milestones.update');
+Route::post('books/{book_id}/story-plan/milestone/delete', [MilestoneController::class, 'delete'])->name('books.milestones.delete');
 
-Route::get('books/{id}/characters', [\App\Http\Controllers\Book\CharacterController::class, 'index'])->name('books.characters');
-Route::any('books/{book_id}/characters/list', [\App\Http\Controllers\Book\CharacterController::class, 'list'])->name('books.characters.list');
-Route::get('books/{book_id}/characters/groups/list', [\App\Http\Controllers\Book\CharacterController::class, 'groupList'])->name('books.characters.list');
-Route::post('books/{book_id}/characters/create', [\App\Http\Controllers\Book\CharacterController::class, 'create'])->name('books.characters');
-Route::post('books/{book_id}/characters/group/create', [\App\Http\Controllers\Book\CharacterController::class, 'createGroup'])->name('books.characters');
+Route::get('books/{id}/characters', [CharacterController::class, 'index'])->name('books.characters');
+Route::any('books/{book_id}/characters/list', [CharacterController::class, 'list'])->name('books.characters.list');
+Route::get('books/{book_id}/characters/groups/list', [CharacterController::class, 'groupList'])->name('books.characters.list');
+Route::post('books/{book_id}/characters/create', [CharacterController::class, 'create'])->name('books.characters');
+Route::post('books/{book_id}/characters/group/create', [CharacterController::class, 'createGroup'])->name('books.characters');
