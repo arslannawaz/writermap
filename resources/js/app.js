@@ -5,6 +5,10 @@ import Vue from 'vue';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
+import svgSpriteLoader from './helpers/svg-sprite-loader';
+
+// const __svg__ = { path: './../images/icons/*.svg', name: 'assets/images/[hash].sprite.svg' };
+// svgSpriteLoader(__svg__.filename);
 
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);

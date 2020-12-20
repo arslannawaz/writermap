@@ -54,6 +54,8 @@ Route::post('books/{book_id}/story-plan/milestone/delete', [MilestoneController:
 
 Route::get('books/{id}/characters', [CharacterController::class, 'index'])->name('books.characters');
 Route::any('books/{book_id}/characters/list', [CharacterController::class, 'list'])->name('books.characters.list');
+Route::get('books/{book_id}/characters/{character_id}/edit', [CharacterController::class, 'edit'])->name('books.characters.edit');
+Route::post('books/{book_id}/characters/{character_id}/attributes/update', [CharacterController::class, 'updateAttribute'])->name('books.characters.attributes.update');
 Route::get('books/{book_id}/characters/groups/list', [CharacterController::class, 'groupList'])->name('books.characters.list');
 Route::post('books/{book_id}/characters/create', [CharacterController::class, 'create'])->name('books.characters');
 Route::post('books/{book_id}/characters/group/create', [CharacterController::class, 'createGroup'])->name('books.characters');

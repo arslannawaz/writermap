@@ -41,7 +41,7 @@
             </div>
 
             <div class="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                <div class="border-default p-4" v-for="character in characters.data" :key="character.id">
+                <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="border-default p-4" v-for="character in characters.data" :key="character.id">
                     <div class="bg-light p-8 flex flex-col items-center justify-center text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="84" height="84" viewBox="0 0 84 84">
                             <defs>
@@ -71,7 +71,7 @@
                             Default description
                         </p>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="pagination mt-12 flex justify-center items-center noselect" v-if="characters">
                 <div class="pagination__page" v-for="(page, index) in characters.links" :key="index"

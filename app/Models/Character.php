@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Character whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CharacterAttribute[] $attributes
+ * @property-read int|null $attributes_count
  */
 class Character extends Model
 {
@@ -35,5 +37,10 @@ class Character extends Model
     public function group()
     {
         return $this->belongsTo(CharacterGroup::class);
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(CharacterAttribute::class);
     }
 }

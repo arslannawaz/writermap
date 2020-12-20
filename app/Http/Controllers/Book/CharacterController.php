@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Character;
+use App\Models\CharacterAttribute;
 use App\Models\CharacterGroup;
+use Inertia\Inertia;
 
 class CharacterController extends Controller
 {
@@ -46,6 +49,52 @@ class CharacterController extends Controller
             'name' => request('name'),
             'group_id' => request('group_id'),
         ]);
+    }
+
+    public function edit()
+    {
+        $character = Character::findOrFail(request('character_id'));
+        return inertia('Book/Characters/Edit', [
+            'book' => Book::findOrFail(request('book_id')),
+            'character' => $character,
+            'attributes' => $character->attributes,
+        ]);
+    }
+
+    public function update()
+    {
+        $characterAttribute = CharacterAttribute::findOrFail([
+            'type' => request('type'),
+            'field' => request('field'),
+        ]);
+
+        return $characterAttribute;
+    }
+
+    public function updateAttribute()
+    {
+        $characterAttribute = CharacterAttribute::firstOrCreate([
+            'book_id' => request('book_id'),
+            'character_id' => request('character_id'),
+            'group' => request('group'),
+            'field' => request('field'),
+        ]);
+
+        if (request()->has('value')) {
+            $characterAttribute->value = request('value');
+        }
+
+        if (request()->has('description')) {
+            $characterAttribute->description = request('description');
+        }
+
+        if (request()->has('extra')) {
+            $characterAttribute->extra = request('extra');
+        }
+
+        $characterAttribute->save();
+
+        return ['status' => $characterAttribute];
     }
 
     public function createGroup()

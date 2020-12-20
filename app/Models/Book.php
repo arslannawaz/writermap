@@ -46,6 +46,8 @@ use Illuminate\Support\Facades\Storage;
  * @property-read int|null $character_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Character[] $characters
  * @property-read int|null $characters_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Milestone[] $milestones
+ * @property-read int|null $milestones_count
  */
 class Book extends Model
 {

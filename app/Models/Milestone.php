@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Milestone whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Milestone whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Milestone whereStatus($value)
  */
 class Milestone extends Model
 {
