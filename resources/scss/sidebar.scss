@@ -29,6 +29,12 @@
     cursor: pointer;
 }
 
+.left-sidebar.bg-default {
+    .small-menu-button {
+        background-color: #EDE9E0 !important;
+    }
+}
+
 .nav-sidebar {
     a {
         color: #adaaa5;

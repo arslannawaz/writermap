@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\Book\StoryPlanController;
 use App\Http\Controllers\Book\CharacterController;
+use App\Http\Controllers\Book\NoteController;
 use App\Http\Controllers\Book\StoryPlan\MilestoneController;
 use App\Http\Controllers\Book\BreakdownController;
 use Illuminate\Support\Facades\Route;
@@ -59,3 +60,9 @@ Route::post('books/{book_id}/characters/{character_id}/attributes/update', [Char
 Route::get('books/{book_id}/characters/groups/list', [CharacterController::class, 'groupList'])->name('books.characters.list');
 Route::post('books/{book_id}/characters/create', [CharacterController::class, 'create'])->name('books.characters');
 Route::post('books/{book_id}/characters/group/create', [CharacterController::class, 'createGroup'])->name('books.characters');
+
+
+Route::post('books/{book_id}/notes/create', [NoteController::class, 'create'])->name('books.notes.create');
+Route::post('books/{book_id}/notes/update', [NoteController::class, 'update'])->name('books.notes.update');
+Route::get('books/{book_id}/notes/{note_id}/edit', [NoteController::class, 'edit'])->name('books.notes.edit');
+Route::any('books/{book_id}/notes/group/{group}', [NoteController::class, 'index'])->name('books.notes.group');

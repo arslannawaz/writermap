@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterAttribute whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CharacterAttribute whereValue($value)
  * @mixin \Eloquent
+ * @property string|null $group
+ * @method static \Illuminate\Database\Eloquent\Builder|CharacterAttribute whereGroup($value)
  */
 class CharacterAttribute extends Model
 {

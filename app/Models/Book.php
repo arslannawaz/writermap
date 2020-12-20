@@ -48,6 +48,8 @@ use Illuminate\Support\Facades\Storage;
  * @property-read int|null $characters_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Milestone[] $milestones
  * @property-read int|null $milestones_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
+ * @property-read int|null $notes_count
  */
 class Book extends Model
 {
@@ -87,6 +89,11 @@ class Book extends Model
     public function milestones()
     {
         return $this->hasMany(Milestone::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
     }
 
     /**

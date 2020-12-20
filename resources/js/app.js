@@ -10,6 +10,16 @@ import svgSpriteLoader from './helpers/svg-sprite-loader';
 // const __svg__ = { path: './../images/icons/*.svg', name: 'assets/images/[hash].sprite.svg' };
 // svgSpriteLoader(__svg__.filename);
 
+const truncateFilter = function(text, length, clamp){
+    clamp = clamp || '...';
+    var node = document.createElement('div');
+    node.innerHTML = text;
+    var content = node.textContent;
+    return content.length > length ? content.slice(0, length) + clamp : content;
+};
+
+Vue.filter('truncate', truncateFilter);
+
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
