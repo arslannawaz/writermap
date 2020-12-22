@@ -14,14 +14,21 @@ class NoteController extends Controller
     {
         $book = Book::find(request('book_id'));
         $notes = $book->notes()->where('group', Note::getGroupByString(request('group')))->orderBy('created_at', 'desc')->get();
+        $note = null;
 
         Inertia::share('book', $book);
         Inertia::share('notes', $notes);
         Inertia::share('note_group', \request('group'));
 
+        foreach ($notes as $item) {
+            $note = $item;
+            break;
+        }
+
         return inertia('Book/Notes', [
             'book' => $book,
             'notes' => $notes,
+            'note' => $note,
         ]);
     }
 

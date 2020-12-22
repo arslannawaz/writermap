@@ -48,14 +48,16 @@
                         </div>
                     </div>
 
+                    <hr class="mt-10 block w-full border-gray-300">
+
                     <div class="mt-8 text-color-light text-sm uppercase">Physicality</div>
                     <div class="mt-2 bg-light p-10">
                         <div class="flex justify-between">
-                            <div class="image"></div>
+<!--                            <div class="image"></div>-->
                             <div>
                                 <div class="label-default">Describe your character’s physicality</div>
                                 <div class="mt-2">
-                                    A tall (maybe 6ft) Amazonian Mulatto goddess walks down her hallway, dressed in a baby tee, and panties that her big ass (a good thing) spill out of, and her long legs grow out of….
+                                    {{ getAttributeDescription('physicality') | truncate(60, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                     @click="selectAttributeInEdit('physicality', 'physicality', 'Describe your character’s physicality. How do they carry themselves when they walk? What kind of clothing do they wear? Do they look dishevelled or glamorous?')">
@@ -76,13 +78,15 @@
                         </div>
                     </div>
 
+                    <hr class="mt-10 block w-full border-gray-300">
+
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="text-color-light text-sm uppercase">Traits</div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default">Explain character trait</div>
                                 <div class="mt-2">
-                                    A tall (maybe 6ft) Amazonian Mulatto goddess walks down her hallway, dressed in ...
+                                    {{ getAttributeDescription('trait_1') | truncate(60, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('traits', 'trait_1', 'Select and explain character trait')">
@@ -107,7 +111,7 @@
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default">Explain character trait</div>
                                 <div class="mt-2">
-                                    A tall (maybe 6ft) Amazonian Mulatto goddess walks down her hallway, dressed in ...
+                                    {{ getAttributeDescription('trait_2') | truncate(60, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('traits', 'trait_2', 'Select and explain character trait')">
@@ -133,7 +137,7 @@
 
                         <div class="label-default">Explain character trait</div>
                         <div class="mt-2">
-                            A tall (maybe 6ft) Amazonian Mulatto goddess walks down her hallway, dressed in ...
+                            {{ getAttributeDescription('trait_3') | truncate(60, '..') }}
                         </div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('traits', 'trait_3', 'Select and explain character trait')">
@@ -153,15 +157,18 @@
 
                     </div>
 
+                    <hr class="mt-10 block w-full border-gray-300">
+
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="text-color-light text-sm uppercase">Views</div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default">Explain character trait</div>
                                 <div class="mt-2">
-                                    A tall (maybe 6ft) Amazonian Mulatto goddess walks down her hallway, dressed in ...
+                                    {{ getAttributeDescription('religion') | truncate(60, '..') }}
                                 </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center">
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('views', 'religion', 'Do they have a religion? Explain their beliefs')">
                                     <span>View</span>
                                     <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
                                         <g fill="none" fill-rule="evenodd">
@@ -183,9 +190,10 @@
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default">Explain character trait</div>
                                 <div class="mt-2">
-                                    A tall (maybe 6ft) Amazonian Mulatto goddess walks down her hallway, dressed in ...
+                                    {{ getAttributeDescription('optimistic') | truncate(60, '..') }}
                                 </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center">
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('views', 'optimistic', 'Are they optimistic or pessimistic? How do they view things?')">
                                     <span>View</span>
                                     <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
                                         <g fill="none" fill-rule="evenodd">
@@ -203,39 +211,365 @@
                         </div>
                     </div>
 
+                    <hr class="mt-10 block w-full border-gray-300">
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What social class do they sit in?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('background_1') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('background', 'background_1', 'What social class do they sit in?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What kind of intelligence do they have?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('background_2') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('background', 'background_2', 'What kind of intelligence do they have?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What education does your character have?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('background_3') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('background', 'background_3', 'What education does your character have?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What is their hometown and what was it like</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('background_4') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('background', 'background_4', 'What is their hometown and what was it like for them growing up? Describe their\n'+
+'childhood and the effects it has on them. Do they have a favourite place?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What is their occupation?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('background_5') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('background', 'background_5', 'What is their occupation? What does their resume look like?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What are some major turning points?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('background_6') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('background', 'background_6', 'What are some major turning points in your characters life? What events took place\n'+
+'that influenced who they are today and their perceptions?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="mt-10 block w-full border-gray-300">
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">Who is your characters family?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('relationship_1') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('relationships', 'relationship_1', 'Who is your characters family? What relationship do they have with them?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">Who are your characters friends?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('relationship_2') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('relationships', 'relationship_2', 'Who are your characters friends? How did they meet? What kind of relationship do\n'+
+'they have?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">Is your character in a relationship?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('relationship_3') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('relationships', 'relationship_3', 'Is your character in a relationship with someone? How do they feel about\n'+
+'relationships? Will there be a love interest? How will it make your character feel and\n'+
+'act?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">Sexuality, who are they interested in?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('relationship_4') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('relationships', 'relationship_4', 'Sexuality, who are they interested in?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="mt-10 block w-full border-gray-300">
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Struggles</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">What are your characters insecurities?</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('struggles_1') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('struggles', 'struggles_1', 'What are your characters insecurities?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-color-light text-sm uppercase">Struggles</div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default">Biggest fear</div>
+                                <div class="mt-2">
+                                    {{ getAttributeDescription('struggles_2') | truncate(60, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('struggles', 'struggles_2', 'Biggest fear. What does your character fear the most, big or small? What, if needed to\n'+
+'be confronted - would keep them up at night?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div v-if="attributeInEdit !== null">
-                    <div class="label-default">{{ attributeInEdit.group }}</div>
-                    <div class="mt-2 p-4 border border-gray-300">
-                        <div class="bg-light p-10">
-                            <div class="fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
-                            <div v-if="attributeInEdit.group === 'traits'">
-                                <div class="mt-6 label-default">Select from dropdown</div>
-                                <select class="mt-2 block input-default w-full"
-                                    v-model="attributeInEdit.value"
-                                    @change="updateCharacterAttribute({ group: attributeInEdit.group, field: attributeInEdit.field, value: $event.target.value })">
-                                    <option v-for="option in traitOptions" :value="option">{{ option }}</option>
-                                </select>
+                    <div class="fixed" style="width: 40.5%">
+                        <div></div>
+                        <div class="label-default">{{ attributeInEdit.group }}</div>
+                        <div class="mt-2 p-4 border border-gray-300">
+                            <div class="bg-light p-10" style="height: 1020px">
+                                <div class="fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
+                                <div v-if="attributeInEdit.group === 'traits'">
+                                    <div class="mt-6 label-default">Select from dropdown</div>
+                                    <select class="mt-2 block input-default w-full"
+                                        v-model="attributeInEdit.value"
+                                        @change="updateCharacterAttribute({ group: attributeInEdit.group, field: attributeInEdit.field, value: $event.target.value })">
+                                        <option v-for="option in traitOptions" :value="option">{{ option }}</option>
+                                    </select>
 
-                                <div class="mt-6 label-default">Enter description</div>
-                                <div class="mt-2 editor outline-none">
-                                    <editor-content class="editor__content outline-none" :editor="editor" />
+                                    <div class="mt-6 label-default">Enter description</div>
+                                    <div class="mt-2 editor outline-none">
+                                        <editor-content class="editor__content outline-none" :editor="editor" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div v-else>
-                                <div class="mt-6 label-default">Enter description</div>
+                                <div v-else>
+                                    <div class="mt-6 label-default">Enter description</div>
 
-<!--                                <div class="mt-2 outline-none" v-model="attributeInEdit.description" contenteditable="true"-->
-<!--                                     @input="updateCharacterAttribute({ group: attributeInEdit.group, field: attributeInEdit.field, description: $event.target.innerText })">-->
-<!--                                    {{ attributeInEdit.description }}-->
-<!--                                </div>-->
+    <!--                                <div class="mt-2 outline-none" v-model="attributeInEdit.description" contenteditable="true"-->
+    <!--                                     @input="updateCharacterAttribute({ group: attributeInEdit.group, field: attributeInEdit.field, description: $event.target.innerText })">-->
+    <!--                                    {{ attributeInEdit.description }}-->
+    <!--                                </div>-->
 
-                                <div class="mt-2 editor outline-none">
-                                    <editor-content class="editor__content outline-none" :editor="editor" />
+                                    <div class="mt-2 editor outline-none">
+                                        <editor-content class="editor__content outline-none" :editor="editor" />
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -418,6 +752,8 @@ export default {
                 description: null,
                 question: question,
             };
+
+            this.editor.setContent('Example text. Please change it for save.');
         },
 
         getAttributeValue(field) {

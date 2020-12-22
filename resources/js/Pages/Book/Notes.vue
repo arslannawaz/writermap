@@ -16,9 +16,9 @@
             </div>
 
             <div v-if="note" class="mt-24">
-                <input type="text" class="input-default input-default_border-none h2" v-model="note.title"
+                <input type="text" class="input-default input-default_border-none h2 w-full" v-model="note.title"
                        @change="updateNoteField('title', $event.target.value)" />
-                <div class="mt-4 editor">
+                <div class="mt-4 editor w-full">
                     <editor-content class="editor__content outline-none" :editor="editor" />
                 </div>
             </div>
@@ -61,6 +61,12 @@ export default {
 
     mounted() {
         if (this.note) {
+            let content = this.note.content;
+
+            if (content === null) {
+                content = 'Write some content here..';
+            }
+
             this.editor = new Editor({
                 extensions: [
                     new Blockquote(),
@@ -80,7 +86,7 @@ export default {
                     new Underline(),
                     new History(),
                 ],
-                content: this.note.content,
+                content: content,
                 onUpdate: ({ getHTML }) => {
                     this.updateNoteField('content', getHTML());
                 },
