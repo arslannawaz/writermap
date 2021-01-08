@@ -1,7 +1,7 @@
 <template>
     <div class="md:col-span-1">
         <div class="px-4 sm:px-0">
-            <h3 class="uppercase text-color-light">
+            <h3 class="uppercase text-color-light fs-12">
                 <slot name="title"></slot>
             </h3>
 

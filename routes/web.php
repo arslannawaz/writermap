@@ -37,7 +37,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::post('books', [BookController::class, 'index'])->name('books.index');
 Route::post('books/create', [BookController::class, 'create'])->name('books.create');
 
-
+Route::post('profile/add-card', [\App\Http\Controllers\ProfileController::class, 'addCard']);
+Route::get('profile/current-subscription', [\App\Http\Controllers\ProfileController::class, 'currentSubscription']);
+Route::post('profile/change-subscription', [\App\Http\Controllers\ProfileController::class, 'changeSubscription']);
+Route::post('profile/cancel-subscription', [\App\Http\Controllers\ProfileController::class, 'cancelSubscription']);
+Route::get('profile/invoices', [\App\Http\Controllers\ProfileController::class, 'invoices']);
 
 Route::get('books/{id}/pages', [BookController::class, 'pages'])->name('books.pages');
 Route::post('books/{id}/update', [BookController::class, 'update'])->name('books.update');

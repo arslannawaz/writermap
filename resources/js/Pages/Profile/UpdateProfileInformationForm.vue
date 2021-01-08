@@ -146,6 +146,10 @@
                 </jet-action-message>
             </div>
         </template>
+
+        <template #after>
+            <stripe></stripe>
+        </template>
     </jet-form-section>
 </template>
 
@@ -157,6 +161,7 @@ import JetInputError from './../../Jetstream/InputError'
 import JetLabel from './../../Jetstream/Label'
 import JetActionMessage from './../../Jetstream/ActionMessage'
 import JetSecondaryButton from './../../Jetstream/SecondaryButton'
+import Stripe from "./Stripe";
 
 export default {
     components: {
@@ -167,6 +172,7 @@ export default {
         JetInputError,
         JetLabel,
         JetSecondaryButton,
+        Stripe,
     },
 
     props: ['first_name', 'last_name', 'pen_name', 'email', 'password', 'password_confirmation'],

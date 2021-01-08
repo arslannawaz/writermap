@@ -355,7 +355,7 @@
                             <div class="leave-feedback__label">Write your feeback</div>
                             <textarea class="leave-feedback__field custom-scroll input-default input-default_border-none input-default_border-hover-none w-full mb-8" rows="3" placeholder="Enter Message"></textarea>
                         </div>
-                        <button class="-mt-4 button rounded-lg bg-dark px-10 py-3 font-semibold text-white cursor-pointer">Send Feedback</button>
+                        <button class="-mt-4 button rounded-lg bg-dark px-10 py-3 fs-15 text-white cursor-pointer">Send Feedback</button>
                     </div>
 
                     <div v-if="isBookMenu" class="text-center flex-shrink-0 flex justify-center">

@@ -20,6 +20,8 @@
                 </div>
             </form>
         </div>
+
+        <slot name="after"></slot>
     </div>
 </template>
 

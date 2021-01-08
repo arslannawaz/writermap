@@ -9,6 +9,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Stripe\StripeClient;
 
 /**
  * App\Models\User
@@ -26,6 +27,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $remember_token
  * @property int|null $current_team_id
  * @property string|null $profile_photo_path
+ * @property string|null $stripe_customer
+ * @property string|null $stripe_subscription
+ * @property string|null $stripe_card
+ * @property string|null $stripe_card_last_4
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Team|null $currentTeam
