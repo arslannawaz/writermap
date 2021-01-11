@@ -495,8 +495,10 @@ export default {
         },
 
         sendFeedback() {
-            this.$inertia.post('/send-feedback', {
+            axios.post('/send-feedback', {
                 message: this.$refs.feedback_message.value,
+            }).then(() => {
+                this.$refs.feedback_message.value = null;
             });
         },
 
