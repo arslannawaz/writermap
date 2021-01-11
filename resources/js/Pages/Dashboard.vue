@@ -4431,7 +4431,7 @@
 
     <jet-dialog-modal :show="isModalShow" @close="isModalShow = false">
         <template #title>
-            <span class="h2">Create new Book</span>
+            <span class="h2">Create New Book</span>
         </template>
 
         <template #content>

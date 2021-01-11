@@ -33,6 +33,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     ]);
 })->name('dashboard');
 
+Route::post('send-feedback', function () {
+    Mail::to('maxsprite.work@gmail.com')->send(new \App\Mail\FeedbackMail(request()->post('message')));
+});
+
+Route::get('writers-room', function () {
+    return inertia('WritersRoom');
+});
 
 Route::post('books', [BookController::class, 'index'])->name('books.index');
 Route::post('books/create', [BookController::class, 'create'])->name('books.create');

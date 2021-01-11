@@ -23,6 +23,7 @@ $color-grey: #dddddd;
 @import "editor";
 @import "menubar";
 @import "menububble";
+@import "writers-room";
 
 @font-face {
     font-family: MinionPro;
@@ -323,5 +324,11 @@ label {
 
     @media (min-width: 2200px) {
         max-width: 1960px;
+    }
+}
+
+.h-screen {
+    @media (max-height: 565px) {
+        height: auto !important;
     }
 }
