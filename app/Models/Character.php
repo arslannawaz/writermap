@@ -11,7 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $book_id
  * @property int|null $group_id
+ * @property int|null $type
  * @property string $name
+ * @property string $first_name
+ * @property string $last_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\CharacterGroup|null $group
@@ -32,7 +35,21 @@ class Character extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'group_id'];
+    const TYPE_MAIN = 0;
+    const TYPE_SUPPORTING = 1;
+    const TYPE_ANTAGONIST = 2;
+    const TYPE_PROTAGONIST = 3;
+
+    protected $fillable = ['type','name', 'first_name', 'last_name', 'group_id'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'type_title',
+    ];
 
     public function group()
     {
@@ -42,5 +59,21 @@ class Character extends Model
     public function attributes()
     {
         return $this->hasMany(CharacterAttribute::class);
+    }
+
+    public function getTypeTitleAttribute()
+    {
+        switch ($this->type) {
+            case self::TYPE_MAIN:
+                return 'Main Character';
+            case self::TYPE_SUPPORTING:
+                return 'Supporting Character';
+            case self::TYPE_ANTAGONIST:
+                return 'Antagonist';
+            case self::TYPE_PROTAGONIST:
+                return 'Protagonist';
+            default:
+                return 'None';
+        }
     }
 }

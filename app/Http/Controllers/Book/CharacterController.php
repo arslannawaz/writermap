@@ -46,9 +46,18 @@ class CharacterController extends Controller
     {
         $book = Book::findOrFail(request('book_id'));
         return $book->characters()->create([
-            'name' => request('name'),
+            'type' => request('type'),
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'name' => request('first_name') . ' ' . request('last_name'),
             'group_id' => request('group_id'),
         ]);
+    }
+
+    public function delete()
+    {
+        $book = Book::findOrFail(request('book_id'));
+        return $book->characters()->where('id', request('character_id'))->delete();
     }
 
     public function edit()

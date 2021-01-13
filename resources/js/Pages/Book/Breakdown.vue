@@ -20,7 +20,7 @@
                     <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-2 px-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 px-16">
                 <!-- BEGIN Left block -->
                 <div>
                     <div class="mt-85px">

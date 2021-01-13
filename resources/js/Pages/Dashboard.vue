@@ -4435,13 +4435,16 @@
         </template>
 
         <template #content>
-            <input type="text" class="input-default w-full" v-model="form.title">
-
-            <jet-input-error :message="form.error" class="mt-2" />
+            <form v-on:keyup.enter="createBook">
+                <input type="text" class="input-default w-full" v-model="form.title">
+                <jet-input-error :message="form.error" class="mt-2" />
+            </form>
         </template>
 
         <template #footer>
-            <button @click="createBook()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+            <div class="flex justify-center">
+                <button @click="createBook()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+            </div>
         </template>
     </jet-dialog-modal>
 </app-layout>

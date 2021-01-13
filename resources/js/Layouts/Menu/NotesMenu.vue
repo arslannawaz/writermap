@@ -42,7 +42,7 @@
 
         <jet-dialog-modal :show="isCreateNoteModalShow" @close="isCreateNoteModalShow = false">
             <template #title>
-                <span class="h2">Create new Note</span>
+                <span class="h2">Create New Note</span>
             </template>
 
             <template #content>
@@ -53,7 +53,9 @@
             </template>
 
             <template #footer>
-                <button @click="createNote()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                <div class="flex justify-center">
+                    <button @click="createNote()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                </div>
             </template>
         </jet-dialog-modal>
     </div>

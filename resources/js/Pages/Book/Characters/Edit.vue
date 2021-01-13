@@ -8,13 +8,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
                                 <label class="block label-default">First name</label>
-                                <input type="text" :value="getAttributeValue('first_name')" class="input-default input-default_border-none w-full" placeholder="First name"
+                                <input type="text" :value="character.first_name" class="input-default input-default_border-none w-full" placeholder="First name"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'first_name', value: $event.target.value })">
                             </div>
 
                             <div>
                                 <label class="block label-default">Last name</label>
-                                <input type="text" :value="getAttributeValue('last_name')" class="input-default input-default_border-none w-full" placeholder="First name"
+                                <input type="text" :value="character.last_name" class="input-default input-default_border-none w-full" placeholder="Last name"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'last_name', value: $event.target.value })">
                             </div>
                         </div>

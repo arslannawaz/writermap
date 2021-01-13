@@ -1,11 +1,11 @@
 <template>
     <app-layout>
-        <app-container>
+        <app-container width="w-container">
             <div class="grid grid-cols-2 grid-background absolute z-0 invisible lg:visible">
                 <div class="col-span-1"></div>
                 <div class="col-span-1 col-bg"></div>
             </div>
-            <div class="grid grid-cols-1 xl:grid-cols-2 relative z-10 h-full">
+            <div class="grid grid-cols-1 xl:grid-cols-2 relative z-10 h-full h-screen">
                 <!-- BEGIN Left block -->
                 <div class="px-12">
                     <div class="flex justify-between pl-6">

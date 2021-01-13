@@ -2,7 +2,7 @@
     <div :class="'h-screen flex bg-default ' + after_body_class">
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:flex-shrink-0">
-            <div class="flex flex-col justify-between w-76 left-sidebar" :class="{ 'small-menu': isMenuHide == true, 'bg-semilight': !$page.notes, 'bg-default': $page.notes }">
+            <div class="flex flex-col justify-between w-76 left-sidebar" :class="{ 'small-menu': isMenuHide == true && !isUrlContain('notes'), 'bg-semilight': !$page.notes, 'bg-default': $page.notes }">
                 <div>
                     <div class="flex flex-col relative">
                         <div v-if="!$page.notes" class="small-menu-button" @click="hideMenu(!isMenuHide)">
