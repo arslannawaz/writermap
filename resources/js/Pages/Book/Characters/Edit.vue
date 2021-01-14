@@ -50,31 +50,36 @@
 
                     <hr class="mt-10 block w-full border-gray-300">
 
-                    <div class="mt-8 text-color-light text-sm uppercase">Physicality</div>
+                    <div class="mt-8 flex justify-between">
+                        <div class="text-color-light text-sm uppercase">Physicality</div>
+                        <div>Editing</div>
+                    </div>
                     <div class="mt-2 bg-light p-10">
-                        <div class="flex justify-between">
-<!--                            <div class="image"></div>-->
-                            <div>
+                        <div class="flex">
+                            <div class="image w-4/5">
+                                <img src="/images/oval-2-copy.png" alt="photo">
+                            </div>
+                            <div class="ml-10">
                                 <div class="label-default">Describe your character’s physicality</div>
                                 <div class="mt-2">
-                                    {{ getAttributeDescription('physicality') | truncate(60, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                    @click="selectAttributeInEdit('physicality', 'physicality', 'Describe your character’s physicality. How do they carry themselves when they walk? What kind of clothing do they wear? Do they look dishevelled or glamorous?')">
-                                    <span>Answers</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
+                                    {{ getAttributeDescription('physicality') | truncate(220, '...') }}
                                 </div>
                             </div>
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('physicality', 'physicality', 'Describe your character’s physicality. How do they carry themselves when they walk? What kind of clothing do they wear? Do they look dishevelled or glamorous?')">
+                            <span>Answers</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
                     </div>
 
@@ -542,8 +547,39 @@
                         <div class="label-default">{{ attributeInEdit.group }}</div>
                         <div class="mt-2 p-4 border border-gray-300">
                             <div class="bg-light p-10" style="height: 1020px">
-                                <div class="fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
-                                <div v-if="attributeInEdit.group === 'traits'">
+                                <div v-if="attributeInEdit.group === 'physicality'">
+                                    <div class="flex mr-4">
+                                        <img src="/images/oval-2-copy.png" alt="photo" style="height: 84px;">
+                                        <div class="ml-8 flex-shrink-0 flex-grow-0">
+                                            <div class="label-default">Uploaded image:</div>
+                                            <div class="mt-2 flex justify-between fs-12">
+                                                <div class="font-semibold">Format:</div>
+                                                <div class="text-color-light">PNG</div>
+                                            </div>
+                                            <div class="mt-2 flex justify-between fs-12">
+                                                <div class="font-semibold">Size:</div>
+                                                <div class="text-color-light">11 Kb</div>
+                                            </div>
+                                            <div class="mt-2 flex justify-between fs-12">
+                                                <div class="font-semibold">Last Updated:</div>
+                                                <div class="text-color-light ml-4">Jan 13, 2021</div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-8 flex flex-col justify-end">
+                                            <div class="mt-6 button rounded-lg bg-dark px-8 py-2 font-semibold fs-12 text-white">Upload</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-8 fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
+
+                                    <div class="mt-6 label-default">Enter description</div>
+                                    <div class="mt-2 editor outline-none">
+                                        <editor-content class="editor__content outline-none" :editor="editor" />
+                                    </div>
+                                </div>
+                                <div v-else-if="attributeInEdit.group === 'traits'">
+                                    <div class="fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
+
                                     <div class="mt-6 label-default">Select from dropdown</div>
                                     <select class="mt-2 block input-default w-full"
                                         v-model="attributeInEdit.value"
@@ -557,6 +593,7 @@
                                     </div>
                                 </div>
                                 <div v-else>
+                                    <div class="fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
                                     <div class="mt-6 label-default">Enter description</div>
 
     <!--                                <div class="mt-2 outline-none" v-model="attributeInEdit.description" contenteditable="true"-->
@@ -764,10 +801,17 @@ export default {
             }
         },
 
+        truncateString(str, num) {
+            if (str.length <= num) {
+                return str
+            }
+            return str.slice(0, num) + '...'
+        },
+
         getAttributeDescription(field) {
             for (let attribute of this.attributes) {
                 if (attribute.field === field) {
-                    return attribute.description;
+                    return attribute.description ? attribute.description : null;
                 }
             }
         },
