@@ -19,7 +19,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
-        "stripe/stripe-php": "^7.67"
+        "stripe/stripe-php": "^7.68"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",

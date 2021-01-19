@@ -96,6 +96,11 @@ class Book extends Model
         return $this->hasMany(Note::class);
     }
 
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
+
     /**
      * Update the user's profile photo.
      *

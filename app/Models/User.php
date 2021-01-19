@@ -64,6 +64,10 @@ use Stripe\StripeClient;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Book[] $books
  * @property-read int|null $books_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeCardLast4($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeCustomer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeSubscription($value)
  */
 class User extends Authenticatable
 {

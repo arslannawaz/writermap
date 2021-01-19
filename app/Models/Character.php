@@ -30,6 +30,10 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CharacterAttribute[] $attributes
  * @property-read int|null $attributes_count
+ * @property-read mixed $type_title
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Character whereType($value)
  */
 class Character extends Model
 {

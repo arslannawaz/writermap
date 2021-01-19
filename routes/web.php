@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\Book\StoryPlanController;
 use App\Http\Controllers\Book\CharacterController;
 use App\Http\Controllers\Book\NoteController;
+use App\Http\Controllers\Book\Writing\ChaptersController;
 use App\Http\Controllers\Book\StoryPlan\MilestoneController;
 use App\Http\Controllers\Book\BreakdownController;
 use Illuminate\Support\Facades\Route;
@@ -79,3 +80,8 @@ Route::post('books/{book_id}/notes/create', [NoteController::class, 'create'])->
 Route::post('books/{book_id}/notes/update', [NoteController::class, 'update'])->name('books.notes.update');
 Route::get('books/{book_id}/notes/{note_id}/edit', [NoteController::class, 'edit'])->name('books.notes.edit');
 Route::any('books/{book_id}/notes/group/{group}', [NoteController::class, 'index'])->name('books.notes.group');
+
+Route::post('books/{book_id}/chapters/create', [ChaptersController::class, 'create'])->name('books.chapters.create');
+Route::post('books/{book_id}/chapters/update', [ChaptersController::class, 'update'])->name('books.chapters.update');
+Route::get('books/{book_id}/chapters/{chapter_id}/edit', [ChaptersController::class, 'editPage'])->name('books.chapters.edit_page');
+Route::any('books/{book_id}/chapters', [ChaptersController::class, 'index'])->name('books.notes.index_page');

@@ -41,6 +41,9 @@
                         <div v-if="isUrlContain('notes')" class="">
                             <notes-menu></notes-menu>
                         </div>
+                        <div v-if="isUrlContain('chapters')" class="">
+                            <writing-menu></writing-menu>
+                        </div>
 
                         <div v-else>
                             <a href="/dashboard" class="mt-4 mb-6 flex items-center justify-center flex-shrink-0 px-4">
@@ -374,7 +377,7 @@
                                 </g>
                             </svg>
                         </a>
-                        <a v-else href="#" class="mt-6 button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>
+                        <a v-else :href="'/books/' + bookId + '/chapters'" class="mt-6 button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>
                     </div>
 
                     <div class="flex-shrink-0 flex mt-4 pt-4 pb-8" :class="{'px-13': isMenuHide == false, 'px-9': isMenuHide == true}">
@@ -436,9 +439,11 @@ import JetNavLink from './../Jetstream/NavLink'
 import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
 import Button from "../Jetstream/Button";
 import NotesMenu from "./Menu/NotesMenu";
+import WritingMenu from "./Menu/WritingMenu";
 
 export default {
     components: {
+        WritingMenu,
         NotesMenu,
         Button,
         JetApplicationLogo,
