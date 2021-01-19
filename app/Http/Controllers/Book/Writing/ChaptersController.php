@@ -21,7 +21,10 @@ class ChaptersController extends Controller
 
     public function index()
     {
+        $chapters = $this->book->chapters()->orderBy('created_at', 'asc')->get();
         $chapter = $this->book->chapters()->orderBy('created_at', 'desc')->first();
+
+        Inertia::share('chapters', $chapters);
 
         if ($chapter === null) {
             return \inertia('Book/Writing', [
@@ -37,8 +40,10 @@ class ChaptersController extends Controller
 
     public function create()
     {
+        $chaptersCount = $this->book->chapters()->count();
         $chapter = $this->book->chapters()->create([
-            'title' => \request('title')
+            'number' => $chaptersCount + 1,
+            'title' => \request('title'),
         ]);
 
         return $chapter;
@@ -56,9 +61,13 @@ class ChaptersController extends Controller
 
     public function editPage()
     {
-        $chapter = $this->book->notes()->where('id', \request('chapter_id'))->first();
+        $chapters = $this->book->chapters()->orderBy('created_at', 'asc')->get();
+        $chapter = $this->book->chapters()->where('id', \request('chapter_id'))->first();
 
-        return inertia('Book/Notes', [
+        Inertia::share('chapters', $chapters);
+        Inertia::share('page_chapter', $chapter);
+
+        return inertia('Book/Writing', [
             'book' => $this->book,
             'chapter' => $chapter,
         ]);

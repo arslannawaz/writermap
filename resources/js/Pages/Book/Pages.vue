@@ -98,7 +98,7 @@
                 <div class="px-12 mt-16 lg:mt-0">
                     <div class="flex justify-between mt-2">
                         <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <svg @click="runEditorCommand('find', $refs['chapter_search_input'].value)" class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#BEBDB8" fill-rule="nonzero">
                                         <g>
@@ -109,7 +109,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <input type="text" class="input-default input-default_p-zero ml-4">
+                            <input ref="chapter_search_input" type="text" class="input-default input-default_p-zero ml-4">
                         </div>
 
                         <div class="flex justify-end">
@@ -125,7 +125,7 @@
                                 </g>
                             </svg>
 
-                            <svg class="ml-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <svg class="ml-6 icon-hoverable" @click="$htmlToPaper('chapter-print')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#BEBDB8" fill-rule="nonzero">
                                         <g>
@@ -139,19 +139,62 @@
                         </div>
                     </div>
 
-                    <div class="mt-85px pt-4">
+                    <div class="mt-85px pt-4 outline-none">
                         <div class="flex justify-between px-6">
                             <span class="book-label">Page Preview</span>
                         </div>
 
                         <div class="book-page flex justify-center mt-2">
-                            <div class="book-page__paper flex flex-col justify-end">
-                                <span class="book-page__chapter">Chapter One</span>
+                            <div class="book-page__paper flex flex-col justify-end disable-scroll">
+<!--                                <span class="book-page__chapter">Chapter One</span>-->
 
-                                <div class="book-page__content book-page__content_first-letter">
-                                    <p>Don’t know about you, but I’m getting a lot of reading done these days. I just finished To Kill a Mockingbird, which I still can’t believe  school without reading. On my nightstand are The Overstory by Richard Powers and Edge of the Map by Johanna Garton. Coventry by Rachel Cusk calls to me to finish it with a reminder of how lucid close observation can be. There’s a Stephen King open on my Kindle app…which one? Ah, yes, The Institute. Oh, and Joni just finished a loaner copy of Michelle Obama’s Becoming and I get it next.</p>
-                                    <p>Sometimes, though, you want to lose yourself in a classic adventure tale, where a human sets a goal and then launches on a quest to accomplish that goal. Can they climb this? Can they paddle this faster than anyone? Can they survive a plane crash in the Sahara? These five are some of my faves (four in photo because Emerald Mile is out on loan). I’ve read them all more than once, and each time I discover new delights within.</p>
+                                <div id="chapter-print" spellcheck="false" class="book-page__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">
+                                    <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>
+                                    <h1 class="mt-2 fs-18 ff-minion font-semibold">Chapter {{ first_chapter.title }}</h1>
+                                    <editor-content class="mt-6 editor__content outline-none fs-15 ff-minion" :editor="editor" />
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2 flex items-center">
+                            <div class="mr-auto text-left icon-hoverable p-4 pl-0" @click="scrollChapterPrev()">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                                    <defs>
+                                        <path id="y27zllhg2a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                                    </defs>
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g>
+                                            <g>
+                                                <g>
+                                                    <g transform="translate(-895 -875) translate(860) translate(35 873) matrix(0 -1 -1 0 5 11)">
+                                                        <use fill="#BEBDB8" xlink:href="#y27zllhg2a"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div class="mx-auto outline-none">Page {{ scrollPage }}</div>
+
+                            <div class="ml-auto text-right icon-hoverable p-4 pr-0" @click="scrollChapterNext()">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                                    <defs>
+                                        <path id="g9v4xrr1ba" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                                    </defs>
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g>
+                                            <g>
+                                                <g>
+                                                    <g transform="translate(-1401 -875) translate(860) translate(35 873) matrix(0 -1 1 0 506 11)">
+                                                        <use fill="#BEBDB8" xlink:href="#g9v4xrr1ba"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -166,16 +209,33 @@
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 
+import {Editor, EditorContent, EditorMenuBar} from "tiptap";
+import {
+    Blockquote, Bold,
+    BulletList, Code,
+    CodeBlock,
+    HardBreak,
+    Heading, History, Italic, Link,
+    ListItem,
+    OrderedList, Strike,
+    TodoItem, TodoList, Underline,
+    Search,
+} from "tiptap-extensions";
+
 export default {
-    props: ['book_data'],
+    props: ['book_data', 'first_chapter'],
 
     components: {
         AppLayout,
         AppContainer,
+        EditorMenuBar,
+        EditorContent
     },
 
     data() {
         return {
+            editor: null,
+            scrollPage: 1,
             book: this.book_data,
             previewCover: null,
             coverImage: null,
@@ -185,7 +245,41 @@ export default {
     },
 
     mounted() {
-        console.log('mounted')
+        console.log('mounted');
+
+        if (this.first_chapter) {
+            let content = this.first_chapter.content;
+
+            if (content === null) {
+                content = 'Type here...';
+            }
+
+            this.editor = new Editor({
+                extensions: [
+                    new Blockquote(),
+                    new BulletList(),
+                    new CodeBlock(),
+                    new HardBreak(),
+                    new Heading({ levels: [1, 2, 3] }),
+                    new ListItem(),
+                    new OrderedList(),
+                    new TodoItem(),
+                    new TodoList(),
+                    new Link(),
+                    new Bold(),
+                    new Code(),
+                    new Italic(),
+                    new Strike(),
+                    new Underline(),
+                    new History(),
+                    new Search(),
+                ],
+                content: content,
+                // editable: false,
+            });
+
+            // this.editor.extensions.
+        }
     },
 
     methods: {
@@ -253,6 +347,33 @@ export default {
 
         selectNewCoverImage() {
             this.$refs.cover.click();
+        },
+
+        runEditorCommand(command, params = null) {
+            console.log('run command: ', command);
+            if (params === null) {
+                this.editor.commands[command]();
+            } else {
+                this.editor.commands[command](params);
+            }
+        },
+
+        scrollChapterPrev() {
+            let prevScrollTop = document.getElementById('chapter-print').scrollTop;
+            document.getElementById('chapter-print').scrollTop = document.getElementById('chapter-print').scrollTop - 580;
+
+            if (document.getElementById('chapter-print').scrollTop < prevScrollTop) {
+                this.scrollPage--;
+            }
+        },
+
+        scrollChapterNext() {
+            let prevScrollTop = document.getElementById('chapter-print').scrollTop;
+            document.getElementById('chapter-print').scrollTop = document.getElementById('chapter-print').scrollTop + 580;
+
+            if (document.getElementById('chapter-print').scrollTop > prevScrollTop) {
+                this.scrollPage++;
+            }
         },
     },
 }

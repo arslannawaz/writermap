@@ -54,15 +54,16 @@
 
                 <template #footer>
                     <div class="flex justify-center">
-                        <button @click="createNote()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                        <button @click="createChapter()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
                     </div>
                 </template>
             </jet-dialog-modal>
         </div>
 
-        <div v-for="chapter in $page.chapters" class="mt-8 px-10">
-            <a :href="'/books/'+ $page.book.id +'/chapter/'+ chapter.id +'/edit'" class="fs-16 text-color-dark">{{ chapter.title }}</a>
-            <div v-if="chapter.content" class="mt-2 text-color-light">{{ chapter.content | truncate(96, '...') }}</div>
+        <div class="mt-20"></div>
+        <div v-for="chapter in $page.chapters" class="flex flex-col mt-4 px-10 py-4" :class="{'border-r-4 border-gray-400': $page.page_chapter.id === chapter.id}">
+            <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" class="fs-16 font-semibold text-color-dark">Chapter {{ chapter.number }}</a>
+            <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" v-if="chapter.title" class="mt-2 text-color-light" :class="{'text-color-dark': $page.page_chapter.id === chapter.id}">{{ chapter.title | truncate(96, '...') }}</a>
         </div>
     </div>
 </template>
@@ -82,9 +83,7 @@ export default {
             isCreateModalShow: false,
             newForm: this.$inertia.form({
                 book_id: this.$page.book.id,
-                group: this.$page.note_group,
                 title: null,
-                content: null,
                 error: '',
             }, {
                 bag: 'milestone',
@@ -93,11 +92,11 @@ export default {
     },
 
     methods: {
-        createNote() {
-            const url = '/books/'+ this.$page.book.id +'/notes/create';
+        createChapter() {
+            const url = '/books/'+ this.$page.book.id +'/chapters/create';
             axios.post(url, this.newForm).then((response) => {
-                console.log('create new note', response.data);
-                window.location.href = '/books/'+ this.$page.book.id +'/notes/'+ response.data.id +'/edit';
+                console.log('create new chapter', response.data);
+                window.location.href = '/books/'+ this.$page.book.id +'/chapters/'+ response.data.id +'/edit';
             });
         },
     },

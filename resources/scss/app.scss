@@ -125,6 +125,10 @@ textarea {
     font-size: 16px;
 }
 
+.fs-18 {
+    font-size: 18px;
+}
+
 .fs-20 {
     font-size: 20px;
 }
@@ -336,4 +340,8 @@ label {
     @media (max-height: 565px) {
         height: auto !important;
     }
+}
+
+.disable-scroll {
+    overflow-y: hidden;
 }

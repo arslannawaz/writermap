@@ -54,6 +54,7 @@
         line-height: 1.43;
         font-size: 14px;
         overflow-y: auto;
+        word-break: break-all;
 
         &::-webkit-scrollbar {
             width: 2px;
@@ -77,6 +78,12 @@
 
         p {
             margin: 20px 0;
+        }
+
+        &_editor {
+            p {
+                margin: 0;
+            }
         }
 
         &_first-letter {

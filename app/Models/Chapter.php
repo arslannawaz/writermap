@@ -30,7 +30,7 @@ class Chapter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['book_id', 'title', 'content'];
+    protected $fillable = ['book_id', 'number', 'title', 'content'];
 
     public function book()
     {

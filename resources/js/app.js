@@ -6,6 +6,7 @@ import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import svgSpriteLoader from './helpers/svg-sprite-loader';
+import VueHtmlToPaper from "vue-html-to-paper/src";
 
 // const __svg__ = { path: './../images/icons/*.svg', name: 'assets/images/[hash].sprite.svg' };
 // svgSpriteLoader(__svg__.filename);
@@ -23,6 +24,20 @@ Vue.filter('truncate', truncateFilter);
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
+
+const options = {
+    name: '_blank',
+    specs: [
+        'fullscreen=yes',
+        'titlebar=yes',
+        'scrollbars=yes'
+    ],
+    styles: [
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        'https://unpkg.com/kidlat-css/css/kidlat.css'
+    ]
+}
+Vue.use(VueHtmlToPaper);
 
 const app = document.getElementById('app');
 

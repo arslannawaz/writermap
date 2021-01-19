@@ -18,7 +18,7 @@
             <div v-if="note" class="mt-24">
                 <input type="text" class="input-default input-default_border-none h2 w-full" v-model="note.title"
                        @change="updateNoteField('title', $event.target.value)" />
-                <div class="mt-4 editor w-full">
+                <div class="mt-4 editor w-full" spellcheck="false">
                     <editor-content class="editor__content outline-none" :editor="editor" />
                 </div>
             </div>
