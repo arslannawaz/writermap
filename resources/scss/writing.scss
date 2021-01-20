@@ -1,0 +1,23 @@
+.chapter-container {
+    border: solid 1px #d3d3d3;
+    padding: 30px;
+
+    &__inner {
+        &_default-style {
+            padding: 70px;
+            background-color: transparent;
+        }
+
+        &_a4-style {
+            padding: 100px;
+            background-color: #fefcf8;
+        }
+
+        &_book-style {
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: transparent;
+        }
+    }
+}

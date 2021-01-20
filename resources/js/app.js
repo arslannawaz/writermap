@@ -7,6 +7,12 @@ import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import svgSpriteLoader from './helpers/svg-sprite-loader';
 import VueHtmlToPaper from "vue-html-to-paper/src";
+import vClickOutside from 'v-click-outside'
+
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+// import VueProgressBar from 'vue-progressbar'
 
 // const __svg__ = { path: './../images/icons/*.svg', name: 'assets/images/[hash].sprite.svg' };
 // svgSpriteLoader(__svg__.filename);
@@ -24,6 +30,13 @@ Vue.filter('truncate', truncateFilter);
 Vue.use(InertiaApp);
 Vue.use(InertiaForm);
 Vue.use(PortalVue);
+Vue.use(vClickOutside);
+Vue.use(VueSweetalert2);
+// Vue.use(VueProgressBar, {
+//     color: 'rgb(255,233,143)',
+//     failedColor: 'red',
+//     height: '2px'
+// })
 
 const options = {
     name: '_blank',

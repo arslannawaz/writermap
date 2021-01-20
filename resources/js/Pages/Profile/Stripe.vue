@@ -99,8 +99,10 @@
 
 
 <script>
+// import Vue;
 import {loadStripe} from '@stripe/stripe-js';
 import Label from "../../Jetstream/Label";
+import Vue from "vue";
 
 export default  {
     components: {Label},
@@ -137,6 +139,11 @@ export default  {
                 self.$refs.card_number.value = '····  ····  ····  ' + response.data.last4;
                 self.$refs.card_exp.value = '';
                 self.$refs.card_cvv.value = '';
+
+                Vue.swal('Submit Card', '', 'success');
+            }).catch(function (error) {
+                console.log(error);
+                Vue.swal('Add Card', 'Provide valid information', 'error');
             });
         },
 
@@ -146,6 +153,11 @@ export default  {
                 console.log('change subscription', response);
                 self.getCurrentSubscription();
                 self.getInvoices();
+
+                Vue.swal('Change Subscription', '', 'success');
+            }).catch(function (error) {
+                console.log(error);
+                Vue.swal('Change Subscription', 'You need attach your credit card', 'error');
             });
         },
 
@@ -154,6 +166,11 @@ export default  {
             axios.post('/profile/cancel-subscription', {}).then(function (response) {
                 console.log('change subscription', response);
                 self.getCurrentSubscription();
+
+                Vue.swal('Cancel Subscription', '', 'success');
+            }).catch((error) => {
+                console.log(error);
+                Vue.swal('Cancel Subscription', 'Some error', 'error');
             });
         },
 

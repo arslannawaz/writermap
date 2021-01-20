@@ -1,102 +1,107 @@
 <template>
     <app-layout>
         <app-container>
-            <div class="flex items-center px-16">
-                <h1 class="h2">Breakdown</h1>
-                <div class="flex-wrap ml-16 breakdown-header-links mt-1 hidden xl:flex">
-                    <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
-                    <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
-                    <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
-                    <a :href="'/books/' + book.id + '/breakdown/solution'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/solution') }">Solution</a>
-                    <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
-                </div>
-            </div>
-
-            <div class="px-10 flex-wrap breakdown-header-links mt-1 flex xl:hidden">
-                    <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
-                    <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
-                    <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
-                    <a :href="'/books/' + book.id + '/breakdown/solution'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/solution') }">Solution</a>
-                    <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 px-16">
-                <!-- BEGIN Left block -->
-                <div>
-                    <div class="mt-85px">
-                        <a :href="'/books/' + book.id + '/breakdown/' + prev_type" class="flex justify-start cursor-pointer icon-hoverable pb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
-                                <defs>
-                                    <path id="mn9mdf2o2a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <g>
-                                        <g transform="translate(-350 -154) matrix(0 -1 -1 0 355 163)">
-                                            <use fill="#BEBDB8" xlink:href="#mn9mdf2o2a"/>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                        </a>
-                        <div class="book-page flex justify-center">
-                            <div class="book-page__paper flex flex-col ff-minion">
-                                <span class="book-page__chapter fs-24 capitalize mt-16">{{ type }}</span>
-
-                                <span class="book-page__chapter mt-4">Paragraph</span>
-
-                                <div class="book-page__content -mt-4">
-                                    <p :ref="'content_' + index" contenteditable="true" v-for="(item, index) in decodeContent" :key="index"
-                                       @input="updateContentEditableField('content', $event, index)"
-                                       v-on:keypress="checkContentKey"
-                                       class="outline-none"
-                                    >
-                                        {{ item }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+            <div :class="{'hidden': !$page.user.stripe_subscription}">
+                <div class="flex items-center px-16">
+                    <h1 class="h2">Breakdown</h1>
+                    <div class="flex-wrap ml-16 breakdown-header-links mt-1 hidden xl:flex">
+                        <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
+                        <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
+                        <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
+                        <a :href="'/books/' + book.id + '/breakdown/solution'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/solution') }">Solution</a>
+                        <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
                     </div>
                 </div>
-                <!-- END Left block -->
 
-                <!-- BEGIN Right block -->
-                <div>
-                    <div class="mt-85px">
-                        <a :href="'/books/' + book.id + '/breakdown/' + next_type" class="icon-hoverable cursor-pointer flex justify-end pb-5">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
-                                <defs>
-                                    <path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <g>
-                                        <g transform="translate(-1365 -154) rotate(-90 764 -601)">
-                                            <use fill="#BEBDB8" xlink:href="#b7e3ue085a"/>
+                <div class="px-10 flex-wrap breakdown-header-links mt-1 flex xl:hidden">
+                    <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
+                    <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
+                    <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
+                    <a :href="'/books/' + book.id + '/breakdown/solution'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/solution') }">Solution</a>
+                    <a :href="'/books/' + book.id + '/breakdown/key-events'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/key-events') }">Key Events</a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 px-16">
+                    <!-- BEGIN Left block -->
+                    <div>
+                        <div class="mt-85px">
+                            <a :href="'/books/' + book.id + '/breakdown/' + prev_type" class="flex justify-start cursor-pointer icon-hoverable pb-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                                    <defs>
+                                        <path id="mn9mdf2o2a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                                    </defs>
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g>
+                                            <g transform="translate(-350 -154) matrix(0 -1 -1 0 355 163)">
+                                                <use fill="#BEBDB8" xlink:href="#mn9mdf2o2a"/>
+                                            </g>
                                         </g>
                                     </g>
-                                </g>
-                            </svg>
-                        </a>
-                        <div class="book-page flex justify-center">
-                            <div class="book-page__paper flex flex-col ff-minion">
-                                <div class="mb-2"></div>
-                                <span class="book-page__chapter mt-32">Key Points</span>
+                                </svg>
+                            </a>
+                            <div class="book-page flex justify-center">
+                                <div class="book-page__paper flex flex-col ff-minion">
+                                    <span class="book-page__chapter fs-24 capitalize mt-16">{{ type }}</span>
 
-                                <div class="book-page__content">
-                                    <ul class="list-disc ml-4">
-                                        <li :ref="'point_' + index" contenteditable="true" v-for="(item, index) in decodeKeyPoints" :key="index"
-                                           @input="updatePointEditableField('key_points', $event, index)"
-                                           v-on:keypress="checkPointsKey"
+                                    <span class="book-page__chapter mt-4">Paragraph</span>
+
+                                    <div class="book-page__content -mt-4">
+                                        <p :ref="'content_' + index" contenteditable="true" v-for="(item, index) in decodeContent" :key="index"
+                                           @input="updateContentEditableField('content', $event, index)"
+                                           v-on:keypress="checkContentKey"
                                            class="outline-none"
                                         >
                                             {{ item }}
-                                        </li>
-                                    </ul>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- END Right block -->
+                    <!-- END Left block -->
+
+                    <!-- BEGIN Right block -->
+                    <div>
+                        <div class="mt-85px">
+                            <a :href="'/books/' + book.id + '/breakdown/' + next_type" class="icon-hoverable cursor-pointer flex justify-end pb-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
+                                    <defs>
+                                        <path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"/>
+                                    </defs>
+                                    <g fill="none" fill-rule="evenodd">
+                                        <g>
+                                            <g transform="translate(-1365 -154) rotate(-90 764 -601)">
+                                                <use fill="#BEBDB8" xlink:href="#b7e3ue085a"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+                            <div class="book-page flex justify-center">
+                                <div class="book-page__paper flex flex-col ff-minion">
+                                    <div class="mb-2"></div>
+                                    <span class="book-page__chapter mt-32">Key Points</span>
+
+                                    <div class="book-page__content">
+                                        <ul class="list-disc ml-4">
+                                            <li :ref="'point_' + index" contenteditable="true" v-for="(item, index) in decodeKeyPoints" :key="index"
+                                                @input="updatePointEditableField('key_points', $event, index)"
+                                                v-on:keypress="checkPointsKey"
+                                                class="outline-none"
+                                            >
+                                                {{ item }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Right block -->
+                    </div>
                 </div>
+            </div>
+            <div :class="{'block': !$page.user.stripe_subscription, 'hidden': $page.user.stripe_subscription}">
+                <NeedSubscription></NeedSubscription>
             </div>
         </app-container>
     </app-layout>
@@ -105,11 +110,13 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
+import NeedSubscription from "../NeedSubscription";
 
 export default {
     props: ['book', 'type', 'breakdown', 'prev_type', 'next_type'],
 
     components: {
+        NeedSubscription,
         AppLayout,
         AppContainer,
     },

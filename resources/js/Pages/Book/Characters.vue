@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <app-container>
-            <div @click="hideDropdowns($event)">
+            <div :class="{'hidden': !$page.user.stripe_subscription}" @click="hideDropdowns($event)">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <h1 class="h2 mr-6">Characters</h1>
@@ -127,56 +127,58 @@
                         <span v-else>{{ page.label }}</span>
                     </div>
                 </div>
+
+                <jet-dialog-modal :show="isGroupModalShow" @close="isGroupModalShow = false">
+                    <template #title>
+                        <span class="h2">Create new Group</span>
+                    </template>
+
+                    <template #content>
+                        <input type="text" class="input-default w-full" v-model="formGroup.title">
+
+                        <jet-input-error :message="formGroup.error" class="mt-2" />
+                    </template>
+
+                    <template #footer>
+                        <button @click="createCharacterGroup()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    </template>
+                </jet-dialog-modal>
+
+                <jet-dialog-modal :portal="'modal_second'" :show="isCharacterModalShow" @close="isCharacterModalShow = false">
+                    <template #title>
+                        <span class="h2">Create new Character</span>
+                    </template>
+
+                    <template #content>
+                        <form v-on:keyup.enter="createCharacter">
+                            <select class="mt-10 input-default w-full" v-model="formCharacter.group_id">
+                                <option value="null">Select character group</option>
+                                <option :value="group.id" v-for="group in groups" :selected="selectedGroup === group.id">{{ group.title }}</option>
+                            </select>
+
+                            <select class="mt-10 input-default w-full" v-model="formCharacter.type">
+                                <option value="null" :selected="selectedType === null">Select character type</option>
+                                <option :value="group.type" v-for="group in characterTypes" :selected="selectedType === group.type">{{ group.title }}</option>
+                            </select>
+
+                            <input type="text" class="mt-10 input-default w-full" v-model="formCharacter.first_name" placeholder="Character first name">
+                            <input type="text" class="mt-10 input-default w-full" v-model="formCharacter.last_name" placeholder="Character last name">
+
+                            <jet-input-error :message="formCharacter.error" class="mt-2" />
+                        </form>
+                    </template>
+
+                    <template #footer>
+                        <div class="flex justify-center">
+                            <button @click="createCharacter()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                        </div>
+                    </template>
+                </jet-dialog-modal>
+            </div>
+            <div :class="{'block': !$page.user.stripe_subscription, 'hidden': $page.user.stripe_subscription}">
+                <NeedSubscription></NeedSubscription>
             </div>
         </app-container>
-
-
-        <jet-dialog-modal :show="isGroupModalShow" @close="isGroupModalShow = false">
-            <template #title>
-                <span class="h2">Create new Group</span>
-            </template>
-
-            <template #content>
-                <input type="text" class="input-default w-full" v-model="formGroup.title">
-
-                <jet-input-error :message="formGroup.error" class="mt-2" />
-            </template>
-
-            <template #footer>
-                <button @click="createCharacterGroup()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
-            </template>
-        </jet-dialog-modal>
-
-        <jet-dialog-modal :portal="'modal_second'" :show="isCharacterModalShow" @close="isCharacterModalShow = false">
-            <template #title>
-                <span class="h2">Create new Character</span>
-            </template>
-
-            <template #content>
-                <form v-on:keyup.enter="createCharacter">
-                    <select class="mt-10 input-default w-full" v-model="formCharacter.group_id">
-                        <option value="null">Select character group</option>
-                        <option :value="group.id" v-for="group in groups" :selected="selectedGroup === group.id">{{ group.title }}</option>
-                    </select>
-
-                    <select class="mt-10 input-default w-full" v-model="formCharacter.type">
-                        <option value="null" :selected="selectedType === null">Select character type</option>
-                        <option :value="group.type" v-for="group in characterTypes" :selected="selectedType === group.type">{{ group.title }}</option>
-                    </select>
-
-                    <input type="text" class="mt-10 input-default w-full" v-model="formCharacter.first_name" placeholder="Character first name">
-                    <input type="text" class="mt-10 input-default w-full" v-model="formCharacter.last_name" placeholder="Character last name">
-
-                    <jet-input-error :message="formCharacter.error" class="mt-2" />
-                </form>
-            </template>
-
-            <template #footer>
-                <div class="flex justify-center">
-                    <button @click="createCharacter()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
-                </div>
-            </template>
-        </jet-dialog-modal>
     </app-layout>
 </template>
 
@@ -186,9 +188,11 @@ import AppContainer from "../../Layouts/AppContainer";
 import Button from "../../Jetstream/Button";
 import JetDialogModal from "../../Jetstream/DialogModal";
 import JetInputError from "../../Jetstream/InputError";
+import NeedSubscription from "../NeedSubscription";
 
 export default {
     components: {
+        NeedSubscription,
         Button,
         AppLayout,
         AppContainer,

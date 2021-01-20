@@ -1,5 +1,5 @@
 <template>
-    <div :class="'h-screen flex bg-default ' + after_body_class">
+    <div ref="main_container" :class="'h-screen flex bg-default ' + after_body_class" @click="clickMainContainer()">
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:flex-shrink-0">
             <div class="flex flex-col justify-between w-76 left-sidebar" :class="{ 'small-menu': isMenuHide == true && !isUrlContain('notes'), 'bg-semilight': !$page.notes, 'bg-default': $page.notes }">
@@ -38,13 +38,10 @@
                             </svg>
                         </div>
 
-                        <div v-if="isUrlContain('notes')" class="">
-                            <notes-menu></notes-menu>
+                        <div v-if="isUrlContain('notes') || isUrlContain('chapters')" class="">
+                            <notes-menu v-if="isUrlContain('notes')"></notes-menu>
+                            <writing-menu v-if="isUrlContain('chapters')"></writing-menu>
                         </div>
-                        <div v-if="isUrlContain('chapters')" class="">
-                            <writing-menu></writing-menu>
-                        </div>
-
                         <div v-else>
                             <a href="/dashboard" class="mt-4 mb-6 flex items-center justify-center flex-shrink-0 px-4">
                                 <svg v-if="isMenuHide == true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37" height="48" viewBox="0 0 37 48">
@@ -440,6 +437,7 @@ import JetResponsiveNavLink from './../Jetstream/ResponsiveNavLink'
 import Button from "../Jetstream/Button";
 import NotesMenu from "./Menu/NotesMenu";
 import WritingMenu from "./Menu/WritingMenu";
+import Vue from "vue";
 
 export default {
     components: {
@@ -504,6 +502,9 @@ export default {
                 message: this.$refs.feedback_message.value,
             }).then(() => {
                 this.$refs.feedback_message.value = null;
+                Vue.swal('Send Feedback', '', 'success');
+            }).catch((error) => {
+                Vue.swal('Send Feedback', 'Some error', 'error');
             });
         },
 
@@ -511,6 +512,10 @@ export default {
             axios.post('/logout').then(response => {
                 window.location = '/';
             })
+        },
+
+        clickMainContainer() {
+
         },
     },
 

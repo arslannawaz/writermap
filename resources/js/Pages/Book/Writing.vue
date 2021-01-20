@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <app-container>
+        <app-container v-if="chapter">
             <div class="flex items-center w-full">
                 <div @click="runEditorCommand('undo')" class="icon-hoverable cursor-pointer hover:text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
@@ -34,7 +34,7 @@
 
                 <div class="text-right ml-auto flex">
                     <div class="icon-hoverable flex items-center relative">
-                        <div class="relative flex items-center" @click="toggleDropdown(chapter.id)">
+                        <div class="relative flex items-center toggle-dropdown" @click="toggleDropdown(chapter.id)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#BEBDB8" fill-rule="nonzero">
@@ -60,10 +60,10 @@
                             </svg>
                         </div>
 
-                        <div :id="'dropdown-menu-' + chapter.id" class="character-in-list__dropdown-menu character-in-list__dropdown-menu_bottom bg-light flex flex-col opacity-0">
-                            <div class="hover:text-black">Display book</div>
-                            <div class="mt-4 hover:text-black">A4</div>
-                            <div class="mt-4 hover:text-black">Default</div>
+                        <div v-click-outside="hideDropdowns" :id="'dropdown-menu-' + chapter.id" class="character-in-list__dropdown-menu dropdown-menu character-in-list__dropdown-menu_bottom bg-light flex flex-col opacity-0 hidden">
+                            <div class="hover:text-black" @click="setEditorStyle('book-style')">Display book</div>
+                            <div class="mt-4 hover:text-black" @click="setEditorStyle('a4-style')">A4</div>
+                            <div class="mt-4 hover:text-black" @click="setEditorStyle('default-style')">Default</div>
                         </div>
                     </div>
 
@@ -79,18 +79,20 @@
                 </div>
             </div>
 
-            <div v-if="chapter" class="mt-24 border-2 border-gray-300 px-14 py-20">
-                <div class="fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
-                <input type="text" class="input-default input-default_border-none h2 w-full" v-model="chapter.title"
-                       @change="updateChapterField('title', $event.target.value)" />
-                <div class="mt-12 editor w-full" spellcheck="false">
-                    <editor-content class="editor__content outline-none fs-18 ff-minion" :editor="editor" />
-                </div>
+            <div v-if="chapter" class="mt-24 chapter-container">
+                <div class="chapter-container__inner" :class="'chapter-container__inner_'+ editor_style">
+                    <div class="fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
+                    <input type="text" class="input-default input-default_border-none h2 w-full" v-model="chapter.title"
+                           @change="updateChapterField('title', $event.target.value)" />
+                    <div class="    mt-12 editor w-full" spellcheck="false">
+                        <editor-content class="editor__content outline-none fs-18 ff-minion" :editor="editor" />
+                    </div>
 
-                <div id="chapter-print" class="hidden" v-if="editor">
-                    <h3>Chapter {{ chapter.number }}</h3>
-                    <h1>{{ chapter.title }}</h1>
-                    <div v-html="chapter.content"></div>
+                    <div id="chapter-print" class="hidden" v-if="editor">
+                        <h3>Chapter {{ chapter.number }}</h3>
+                        <h1>{{ chapter.title }}</h1>
+                        <div v-html="chapter.content"></div>
+                    </div>
                 </div>
             </div>
         </app-container>
@@ -101,6 +103,7 @@
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 import {Editor, EditorContent, EditorMenuBar} from "tiptap";
+import vClickOutside from 'v-click-outside'
 import {
     Blockquote, Bold,
     BulletList, Code,
@@ -118,14 +121,23 @@ export default {
 
     props: ['chapter'],
 
+    directives: {
+        clickOutside: vClickOutside.directive
+    },
+
     data() {
         return {
             editor: null,
+            editor_style: 'default-style'
         }
     },
 
     mounted() {
         if (this.chapter) {
+            if (localStorage.getItem('editor_style')) {
+                this.editor_style = localStorage.getItem('editor_style');
+            }
+
             let content = this.chapter.content;
 
             if (content === null) {
@@ -188,7 +200,34 @@ export default {
         toggleDropdown(chapterId) {
             console.log('toggle dropdown');
             document.getElementById('dropdown-menu-' + chapterId).classList.toggle('opacity-0');
+            document.getElementById('dropdown-menu-' + chapterId).classList.toggle('hidden');
             document.getElementById('dropdown-menu-' + chapterId).classList.toggle('active');
+        },
+
+        hideDropdowns(event) {
+            console.log('hide dropdowns', event);
+
+            const composedPaths = event.composedPath();
+            for (let i = 0; i < composedPaths.length; i++) {
+                if (
+                    composedPaths[i].classList !== undefined
+                    && composedPaths[i].classList.contains('toggle-dropdown')
+                ) {
+                    return false;
+                }
+            }
+
+            const elements = document.querySelectorAll('.dropdown-menu.active');
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.add('opacity-0');
+                elements[i].classList.add('hidden');
+                elements[i].classList.remove('active');
+            }
+        },
+
+        setEditorStyle(style) {
+            this.editor_style = style;
+            localStorage.setItem('editor_style', style);
         },
     },
 }
