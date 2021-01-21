@@ -7,6 +7,8 @@ use App\Models\Book;
 use App\Models\Character;
 use App\Models\CharacterAttribute;
 use App\Models\CharacterGroup;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CharacterController extends Controller
@@ -66,7 +68,7 @@ class CharacterController extends Controller
         return inertia('Book/Characters/Edit', [
             'book' => Book::findOrFail(request('book_id')),
             'character' => $character,
-            'attributes' => $character->attributes,
+            'prop_attributes' => $character->attributes,
         ]);
     }
 
@@ -80,6 +82,21 @@ class CharacterController extends Controller
         return $characterAttribute;
     }
 
+    public function uploadAttributeImage(CharacterAttribute $model, UploadedFile $file)
+    {
+        tap($model->value, function ($previous) use ($model, $file) {
+            $model->forceFill([
+                'value' => $file->storePublicly(
+                    'character-attributes', ['disk' => 'public']
+                ),
+            ])->save();
+
+            if ($previous) {
+                Storage::disk('public')->delete($previous);
+            }
+        });
+    }
+
     public function updateAttribute()
     {
         $characterAttribute = CharacterAttribute::firstOrCreate([
@@ -90,7 +107,13 @@ class CharacterController extends Controller
         ]);
 
         if (request()->has('value')) {
-            $characterAttribute->value = request('value');
+            if ($characterAttribute->field === 'image') {
+                /** @var UploadedFile $file */
+                $file = request('value');
+                $this->uploadAttributeImage($characterAttribute, $file);
+            } else {
+                $characterAttribute->value = request('value');
+            }
         }
 
         if (request()->has('description')) {
@@ -103,7 +126,7 @@ class CharacterController extends Controller
 
         $characterAttribute->save();
 
-        return ['status' => $characterAttribute];
+        return $characterAttribute;
     }
 
     public function createGroup()

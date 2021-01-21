@@ -7,13 +7,13 @@
                     <div class="mt-2 bg-light p-10">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
-                                <label class="block label-default">First name</label>
+                                <label class="block label-default h-35px">First name</label>
                                 <input type="text" :value="character.first_name" class="input-default input-default_border-none w-full" placeholder="First name"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'first_name', value: $event.target.value })">
                             </div>
 
                             <div>
-                                <label class="block label-default">Last name</label>
+                                <label class="block label-default h-35px">Last name</label>
                                 <input type="text" :value="character.last_name" class="input-default input-default_border-none w-full" placeholder="Last name"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'last_name', value: $event.target.value })">
                             </div>
@@ -21,13 +21,13 @@
 
                         <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
-                                <label class="block label-default">Nickname</label>
+                                <label class="block label-default h-35px">Nickname</label>
                                 <input type="text" :value="getAttributeValue('nickname')" class="input-default input-default_border-none w-full" placeholder="Nickname"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'nickname', value: $event.target.value })">
                             </div>
 
                             <div>
-                                <label class="block label-default">Gender</label>
+                                <label class="block label-default h-35px">Gender</label>
                                 <input type="text" :value="getAttributeValue('gender')" class="input-default input-default_border-none w-full" placeholder="Gender"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'gender', value: $event.target.value })">
                             </div>
@@ -35,13 +35,13 @@
 
                         <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
-                                <label class="block label-default">Age</label>
+                                <label class="block label-default h-35px">Age</label>
                                 <input type="text" :value="getAttributeValue('age')" class="input-default input-default_border-none w-full" placeholder="Age"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'age', value: $event.target.value })">
                             </div>
 
                             <div>
-                                <label class="block label-default">Naitonality</label>
+                                <label class="block label-default h-35px">Naitonality</label>
                                 <input type="text" :value="getAttributeValue('nationality')" class="input-default input-default_border-none w-full" placeholder="Naitonality"
                                        @change="updateCharacterAttribute({ group: 'basics', field: 'nationality', value: $event.target.value })">
                             </div>
@@ -50,18 +50,16 @@
 
                     <hr class="mt-10 block w-full border-gray-300">
 
-                    <div class="mt-8 flex justify-between">
+                    <div class="mt-8 flex justify-between items-center h-6">
                         <div class="text-color-light text-sm uppercase">Physicality</div>
-                        <div>Editing</div>
+                        <div v-if="attributeInEdit && attributeInEdit.group === 'physicality'">Editing</div>
                     </div>
                     <div class="mt-2 bg-light p-10">
-                        <div class="flex">
-                            <div class="image w-4/5">
-                                <img src="/images/oval-2-copy.png" alt="photo">
-                            </div>
+                        <div class="flex justify-start">
+                            <img ref="preview_physicality_image" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" alt="photo" height="84px" style="height: 84px;" class="rounded-full">
                             <div class="ml-10">
-                                <div class="label-default">Describe your character’s physicality</div>
-                                <div class="mt-2">
+                                <div class="label-default h-35px">Describe your character’s physicality</div>
+                                <div ref="preview_physicality" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('physicality') | truncate(220, '...') }}
                                 </div>
                             </div>
@@ -86,12 +84,17 @@
                     <hr class="mt-10 block w-full border-gray-300">
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
-                        <div>
-                            <div class="text-color-light text-sm uppercase">Traits</div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Explain character trait</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('trait_1') | truncate(60, '..') }}
+                        <div class="chet-preview">
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Traits</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'trait_1'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
+                                <div>
+                                    <div class="label-default h-35px">Explain character trait</div>
+                                    <div class="mt-2 break-all h-100px">
+                                        {{ getAttributeDescription('trait_1') | truncate(120, '..') }}
+                                    </div>
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('traits', 'trait_1', 'Select and explain character trait')">
@@ -111,12 +114,15 @@
                             </div>
                         </div>
 
-                        <div>
-                            <div class="text-color-light text-sm uppercase">Traits</div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Explain character trait</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('trait_2') | truncate(60, '..') }}
+                        <div class="chet-preview">
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Traits</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'trait_2'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
+                                <div class="label-default h-35px">Explain character trait</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('trait_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('traits', 'trait_2', 'Select and explain character trait')">
@@ -137,12 +143,15 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 text-color-light text-sm uppercase">Traits</div>
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Traits</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'trait_3'">Editing</div>
+                    </div>
                     <div class="mt-2 bg-light p-10">
 
-                        <div class="label-default">Explain character trait</div>
-                        <div class="mt-2">
-                            {{ getAttributeDescription('trait_3') | truncate(60, '..') }}
+                        <div class="label-default h-35px">Explain character trait</div>
+                        <div class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('trait_3') | truncate(120, '..') }}
                         </div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('traits', 'trait_3', 'Select and explain character trait')">
@@ -166,11 +175,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Views</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Views</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'religion'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Explain character trait</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('religion') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Explain character trait</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('religion') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('views', 'religion', 'Do they have a religion? Explain their beliefs')">
@@ -191,11 +203,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Views</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Views</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'optimistic'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Explain character trait</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('optimistic') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Explain character trait</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('optimistic') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('views', 'optimistic', 'Are they optimistic or pessimistic? How do they view things?')">
@@ -220,11 +235,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_1'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What social class do they sit in?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('background_1') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What social class do they sit in?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('background_1') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_1', 'What social class do they sit in?')">
@@ -245,11 +263,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_2'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What kind of intelligence do they have?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('background_2') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What kind of intelligence do they have?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('background_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_2', 'What kind of intelligence do they have?')">
@@ -272,11 +293,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_3'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What education does your character have?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('background_3') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What education does your character have?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('background_3') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_3', 'What education does your character have?')">
@@ -297,11 +321,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_4'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What is their hometown and what was it like</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('background_4') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What is their hometown and what was it like</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('background_4') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_4', 'What is their hometown and what was it like for them growing up? Describe their\n'+
@@ -325,11 +352,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_5'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What is their occupation?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('background_5') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What is their occupation?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('background_5') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_5', 'What is their occupation? What does their resume look like?')">
@@ -350,11 +380,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Background</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_6'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What are some major turning points?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('background_6') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What are some major turning points?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('background_6') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_6', 'What are some major turning points in your characters life? What events took place\n'+
@@ -380,11 +413,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Relationships</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_1'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Who is your characters family?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('relationship_1') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Who is your characters family?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('relationship_1') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('relationships', 'relationship_1', 'Who is your characters family? What relationship do they have with them?')">
@@ -405,11 +441,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Relationships</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_2'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Who are your characters friends?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('relationship_2') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Who are your characters friends?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('relationship_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('relationships', 'relationship_2', 'Who are your characters friends? How did they meet? What kind of relationship do\n'+
@@ -433,11 +472,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Relationships</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_3'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Is your character in a relationship?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('relationship_3') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Is your character in a relationship?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('relationship_3') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('relationships', 'relationship_3', 'Is your character in a relationship with someone? How do they feel about\n'+
@@ -460,11 +502,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Relationships</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Relationships</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_4'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Sexuality, who are they interested in?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('relationship_4') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Sexuality, who are they interested in?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('relationship_4') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('relationships', 'relationship_4', 'Sexuality, who are they interested in?')">
@@ -489,11 +534,14 @@
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
-                            <div class="text-color-light text-sm uppercase">Struggles</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_1'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">What are your characters insecurities?</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('struggles_1') | truncate(60, '..') }}
+                                <div class="label-default h-35px">What are your characters insecurities?</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('struggles_1') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('struggles', 'struggles_1', 'What are your characters insecurities?')">
@@ -514,11 +562,14 @@
                         </div>
 
                         <div>
-                            <div class="text-color-light text-sm uppercase">Struggles</div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_2'">Editing</div>
+                            </div>
                             <div class="mt-2 bg-light p-10">
-                                <div class="label-default">Biggest fear</div>
-                                <div class="mt-2">
-                                    {{ getAttributeDescription('struggles_2') | truncate(60, '..') }}
+                                <div class="label-default h-35px">Biggest fear</div>
+                                <div class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('struggles_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('struggles', 'struggles_2', 'Biggest fear. What does your character fear the most, big or small? What, if needed to\n'+
@@ -542,31 +593,36 @@
                 </div>
 
                 <div v-if="attributeInEdit !== null">
-                    <div class="fixed" style="width: 40.5%">
+                    <div class="che-rt-block">
                         <div></div>
                         <div class="label-default">{{ attributeInEdit.group }}</div>
-                        <div class="mt-2 p-4 border border-gray-300">
-                            <div class="bg-light p-10" style="height: 1020px">
+                        <div class="mt-2 p-4 border border-gray-300" style="height: 92.8vh;">
+                            <div class="bg-light p-10" style="height: 90vh;">
                                 <div v-if="attributeInEdit.group === 'physicality'">
                                     <div class="flex mr-4">
-                                        <img src="/images/oval-2-copy.png" alt="photo" style="height: 84px;">
-                                        <div class="ml-8 flex-shrink-0 flex-grow-0">
-                                            <div class="label-default">Uploaded image:</div>
-                                            <div class="mt-2 flex justify-between fs-12">
-                                                <div class="font-semibold">Format:</div>
-                                                <div class="text-color-light">PNG</div>
-                                            </div>
-                                            <div class="mt-2 flex justify-between fs-12">
-                                                <div class="font-semibold">Size:</div>
-                                                <div class="text-color-light">11 Kb</div>
-                                            </div>
-                                            <div class="mt-2 flex justify-between fs-12">
-                                                <div class="font-semibold">Last Updated:</div>
-                                                <div class="text-color-light ml-4">Jan 13, 2021</div>
+                                        <div class="flex items-center">
+                                            <img ref="preview_input_physicality_image" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" height="84px" alt="photo" style="height: 84px;" class="rounded-full">
+                                            <input ref="input_physicality_image" type="file" class="hidden" @change="updateCharacterAttribute({ group: attributeInEdit.group, field: 'image', value: $event.target.files[0] })">
+
+                                            <div class="ml-8 flex-shrink-0 flex-grow-0">
+                                                <div class="label-default">Uploaded image:</div>
+                                                <div class="mt-2 flex justify-between fs-12">
+                                                    <div class="font-semibold">Format:</div>
+                                                    <div class="text-color-light">PNG</div>
+                                                </div>
+                                                <div class="mt-2 flex justify-between fs-12">
+                                                    <div class="font-semibold">Size:</div>
+                                                    <div class="text-color-light">11 Kb</div>
+                                                </div>
+                                                <div class="mt-2 flex justify-between fs-12">
+                                                    <div class="font-semibold">Last Updated:</div>
+                                                    <div class="text-color-light ml-4">Jan 13, 2021</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="ml-8 flex flex-col justify-end">
-                                            <div class="mt-6 button rounded-lg bg-dark px-8 py-2 font-semibold fs-12 text-white">Upload</div>
+                                            <div class="mt-6 button rounded-lg bg-dark px-8 py-2 font-semibold fs-12 text-white cursor-pointer"
+                                                @click="$refs.input_physicality_image.click()">Upload</div>
                                         </div>
                                     </div>
 
@@ -594,7 +650,7 @@
                                 </div>
                                 <div v-else>
                                     <div class="fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
-                                    <div class="mt-6 label-default">Enter description</div>
+                                    <div class="mt-6 label-default h-35px">Enter description</div>
 
     <!--                                <div class="mt-2 outline-none" v-model="attributeInEdit.description" contenteditable="true"-->
     <!--                                     @input="updateCharacterAttribute({ group: attributeInEdit.group, field: attributeInEdit.field, description: $event.target.innerText })">-->
@@ -655,10 +711,11 @@ export default {
         Icon,
     },
 
-    props: ['book', 'character', 'attributes'],
+    props: ['book', 'character', 'prop_attributes'],
 
     data() {
         return {
+            attributes: {},
             editor: null,
             attributeInEdit: null,
             traitOptions: [
@@ -723,6 +780,10 @@ export default {
     },
 
     mounted() {
+        this.attributes = this.prop_attributes;
+
+        console.log('init attr', this.attributes);
+
         this.getCharacterAttributes();
         this.editor = new Editor({
             extensions: [
@@ -743,7 +804,7 @@ export default {
                 new Underline(),
                 new History(),
             ],
-            content: `Example text. Please change it for save.`,
+            content: `Type here...`,
             onUpdate: ({ getHTML }) => {
                 this.updateCharacterAttribute({ group: this.attributeInEdit.group, field: this.attributeInEdit.field, description: getHTML() });
             },
@@ -762,9 +823,46 @@ export default {
         updateCharacterAttribute(data) {
             const url = '/books/'+ this.book.id +'/characters/'+ this.character.id +'/attributes/update';
 
-            axios.post(url, data).then((response) => {
+            const formData = new FormData();
+            for (let key in data) {
+                formData.append(key, data[key]);
+            }
+
+            const options = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            };
+
+            axios.post(url, formData, options).then((response) => {
                 console.log('update character attribute', response.data);
+                this.updatePreviews(response.data);
             });
+        },
+
+        updatePreviews(data)
+        {
+            if (data.description === null) {
+                if (data.field === 'image') {
+                    this.$refs['preview_input_' + data.group + '_' + data.field]
+                        .setAttribute('src', this.generateStorageUrl(data.value));
+
+                    this.$refs['preview_' + data.group + '_' + data.field]
+                        .setAttribute('src', this.generateStorageUrl(data.value));
+                }
+            } else {
+                let node = document.createElement('div');
+                node.innerHTML = data.description;
+                let content = node.textContent;
+
+                console.log(this.$refs['preview_' + data.field]);
+
+                if (content.length > 60) {
+                    this.$refs['preview_' + data.field].innerHTML = content.slice(0, 60) + '...';
+                } else {
+                    this.$refs['preview_' + data.field].innerHTML = content;
+                }
+            }
         },
 
         selectAttributeInEdit(group, field, question = null) {
@@ -790,13 +888,21 @@ export default {
                 question: question,
             };
 
-            this.editor.setContent('Example text. Please change it for save.');
+            this.editor.setContent('Type here...');
         },
 
-        getAttributeValue(field) {
-            for (let attribute of this.attributes) {
-                if (attribute.field === field) {
-                    return attribute.value;
+        getAttributeValue(field, group = null) {
+            if (group === null) {
+                for (let attribute of this.attributes) {
+                    if (attribute.field === field) {
+                        return attribute.value;
+                    }
+                }
+            } else {
+                for (let attribute of this.attributes) {
+                    if (attribute.group === group && attribute.field === field) {
+                        return attribute.value;
+                    }
                 }
             }
         },
@@ -814,6 +920,12 @@ export default {
                     return attribute.description ? attribute.description : null;
                 }
             }
+
+            return null;
+        },
+
+        generateStorageUrl(path) {
+            return '/storage/' + path;
         },
     },
 }

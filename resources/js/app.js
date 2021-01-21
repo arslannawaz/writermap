@@ -52,6 +52,10 @@ const options = {
 }
 Vue.use(VueHtmlToPaper);
 
+Vue.config.errorHandler = err => {
+    console.log('Exception: ', err)
+}
+
 const app = document.getElementById('app');
 
 new Vue({

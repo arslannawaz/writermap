@@ -25,13 +25,21 @@
 
 .small-menu-button {
     position: absolute;
-    right: -20px;
+    right: -27px;
     top: 60px;
     background-color: #f7f4ed;
-    padding: 20px 15px;
     border-radius: 50%;
     z-index: 1;
     cursor: pointer;
+    width: 57px;
+    height: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        margin-left: 15px;
+    }
 }
 
 .left-sidebar.bg-default {
