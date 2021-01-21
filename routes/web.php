@@ -37,7 +37,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     Route::post('send-feedback', function () {
-        Mail::to('maxsprite.work@gmail.com')->send(new \App\Mail\FeedbackMail(request()->post('message')));
+        Mail::to('contact@writersmap.co')->send(new \App\Mail\FeedbackMail(request()->post('message')));
         return true;
     });
 
