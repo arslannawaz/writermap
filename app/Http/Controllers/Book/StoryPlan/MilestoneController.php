@@ -12,12 +12,18 @@ class MilestoneController extends Controller
 {
     public function index()
     {
-        return Book::find(request('book_id'))->milestones()->orderBy('due_date', 'asc')->paginate(3);
+        return Book::find(request('book_id'))->milestones()
+            ->orderByRaw('FIELD(status, "'. Milestone::STATUS_COMPLETED .'", "'. Milestone::STATUS_ON_HOLD .'",
+            "'. Milestone::STATUS_IN_PROGRESS .'", "'. Milestone::STATUS_TODO .'", "'. Milestone::STATUS_TO_PLAN .'") DESC')
+            ->orderBy('due_date', 'asc')
+            ->paginate(3);
     }
 
     public function all()
     {
-        return Book::find(request('book_id'))->milestones()->orderBy('due_date', 'asc')->get();
+        return Book::find(request('book_id'))->milestones()
+            ->orderBy('due_date', 'asc')
+            ->get();
     }
 
     public function create()

@@ -7,7 +7,7 @@
                     <div class="col-span-1 xl:col-span-3 bg-light">
                         <h2 class="h2 px-12 pt-10">Writers Objective</h2>
                         <div class="mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10 outline-none custom-scroll" contenteditable="true" @input="updateContentEditableField('objective', $event)">
-                            <p v-if="storyPlan.objective == null">Write here your objective text</p>
+                            <p v-if="storyPlan.objective == null" @click="removeTypeHere">Type here...</p>
                             <p v-else>{{ storyPlan.objective }}</p>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                             </div>
 
                             <div class="w-full text-left custom-scroll ff-minion fs-14 mt-10 xl:mt-0 outline-none custom-scroll" style="word-break: break-word;" contenteditable="true" @input="updateContentEditableField('inspiration', $event)">
-                                <p v-if="storyPlan.inspiration == null">Write here your inspiration text</p>
+                                <p v-if="storyPlan.inspiration == null" @click="removeTypeHere">Type here...</p>
                                 <p v-else>{{ storyPlan.inspiration }}</p>
                             </div>
                         </div>
@@ -250,10 +250,13 @@
 
                         <div class="mt-16">
                             <span class="form-label uppercase text-color-light pr-6">Due date:</span>
-                            <span v-if="allMilestones.length > 0">{{ formatDateFromString(allMilestones[0].due_date, 'F') }} {{ formatDateFromString(allMilestones[0].due_date, 'd') }}, {{ formatDateFromString(allMilestones[0].due_date, 'Y') }}</span>
+                            <span v-if="allMilestones.length > 0">{{ generateDueDate() }}</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-12 px-8 mt-10 xl:mt-0">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 py-12 px-8 mt-10 xl:mt-0 relative">
+                        <div v-if="milestones.prev_page_url !== null" @click="prevMilestonesPage()" class="icon-hoverable" style="left: -15px;top: 180px;position: absolute;padding: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="6" height="9" viewBox="0 0 6 9"><defs><path id="qbz8nczqla" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"></path></defs> <g fill="none" fill-rule="evenodd"><g><g><g transform="translate(-110 -108) translate(75 84) matrix(0 -1 -1 0 40.5 32.5)"><use fill="#BEBDB8" xlink:href="#qbz8nczqla"></use></g></g></g></g></svg>
+                        </div>
                         <div
                             v-for="milestone in milestones.data"
                             :key="milestone.id"
@@ -301,7 +304,7 @@
                             <div v-if="milestone.status === 3" class="mt-8 fs-12 text-color-light uppercase">Todo</div>
                             <div v-if="milestone.status === 4" class="mt-8 fs-12 text-color-light uppercase">On hold</div>
                         </div>
-                        <div @click="nextMilestonesPage()" class="icon-hoverable" style="right: 30px;top: 200px;position: absolute;padding: 10px;">
+                        <div @click="nextMilestonesPage()" class="icon-hoverable" style="right: -15px;top: 180px;position: absolute;padding: 10px;">
                             <svg class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9"><defs><path id="b7e3ue085a" d="M4.167 2.988L1.423.244C1.097-.08.57-.08.244.244c-.325.326-.325.853 0 1.179l3.333 3.333c.326.325.853.325 1.179 0l3.333-3.333c.326-.326.326-.853 0-1.179-.325-.325-.853-.325-1.178 0L4.167 2.988z"></path></defs> <g fill="none" fill-rule="evenodd"><g><g transform="translate(-1365 -154) rotate(-90 764 -601)"><use fill="#BEBDB8" xlink:href="#b7e3ue085a"></use></g></g></g></svg>
                         </div>
                     </div>
@@ -326,9 +329,10 @@
                     <option :value="key" v-for="(values, key) in categories">{{ key }}</option>
                 </select>
 
-                <select class="mt-4 input-default w-full" v-model="subCategorySelected">
+                <select v-if="categories[categorySelected].length > 0" class="mt-4 input-default w-full" v-model="subCategorySelected">
                     <option :value="subCategory" v-for="subCategory in categories[categorySelected]">{{ subCategory }}</option>
                 </select>
+                <input v-else type="text" class="mt-4 input-default w-full" v-model="subCategorySelected" placeholder="Type here...">
 
                 <jet-input-error :message="milestoneForm.error" class="mt-2" />
             </template>
@@ -400,6 +404,7 @@ export default {
                 'Visual': ['Main Inspiration Board', 'Setting', 'Tone', 'Characters'],
                 'Notes': ['Research', 'General', 'Story Ideas'],
                 'Pitching': ['Pitch Copy', 'Pitch Deck', 'Pitch Doc', 'Pitch Meeting'],
+                'Writing': [],
             },
             milestones: [],
             milestonesInProgressCount: 0,
@@ -640,6 +645,13 @@ export default {
             return 0;
         },
 
+        prevMilestonesPage() {
+            console.log('click next page');
+            if (this.milestones.data !== undefined) {
+                this.updateMilestonesList(this.milestones.prev_page_url);
+            }
+        },
+
         nextMilestonesPage() {
             console.log('click next page');
             if (this.milestones.data !== undefined) {
@@ -659,6 +671,14 @@ export default {
                 console.log('error', error);
             });
         },
+
+        generateDueDate()
+        {
+            const lastIndex = this.allMilestones.length-1;
+            return this.formatDateFromString(this.allMilestones[lastIndex].due_date, 'F') + ' '
+                + this.formatDateFromString(this.allMilestones[lastIndex].due_date, 'd') + ', '
+                + this.formatDateFromString(this.allMilestones[lastIndex].due_date, 'Y')
+        }
     },
 }
 </script>

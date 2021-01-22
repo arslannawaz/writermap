@@ -92,7 +92,7 @@
                             <div class="mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
                                 <div>
                                     <div class="label-default h-35px">Explain character trait</div>
-                                    <div class="mt-2 break-all h-100px">
+                                    <div ref="preview_trait_1" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('trait_1') | truncate(120, '..') }}
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
                                 <div class="label-default h-35px">Explain character trait</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_trait_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('trait_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -150,7 +150,7 @@
                     <div class="mt-2 bg-light p-10">
 
                         <div class="label-default h-35px">Explain character trait</div>
-                        <div class="mt-2 break-all h-100px">
+                        <div ref="preview_trait_3" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('trait_3') | truncate(120, '..') }}
                         </div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -181,7 +181,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Explain character trait</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_religion" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('religion') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -209,7 +209,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Explain character trait</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_optimistic" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('optimistic') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -241,7 +241,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What social class do they sit in?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_background_1" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_1') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -269,7 +269,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What kind of intelligence do they have?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_background_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -299,7 +299,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What education does your character have?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_background_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_3') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -327,7 +327,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What is their hometown and what was it like</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_background_4" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_4') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -358,7 +358,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What is their occupation?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_background_5" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_5') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -386,7 +386,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What are some major turning points?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_background_6" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_6') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -419,7 +419,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Who is your characters family?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_relationship_1" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('relationship_1') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -447,7 +447,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Who are your characters friends?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_relationship_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('relationship_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -478,7 +478,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Is your character in a relationship?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_relationship_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('relationship_3') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -508,7 +508,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Sexuality, who are they interested in?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_relationship_4" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('relationship_4') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -540,7 +540,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What are your characters insecurities?</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_struggles_1" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('struggles_1') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -568,7 +568,7 @@
                             </div>
                             <div class="mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Biggest fear</div>
-                                <div class="mt-2 break-all h-100px">
+                                <div ref="preview_struggles_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('struggles_2') | truncate(120, '..') }}
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
@@ -842,25 +842,27 @@ export default {
 
         updatePreviews(data)
         {
-            if (data.description === null) {
-                if (data.field === 'image') {
-                    this.$refs['preview_input_' + data.group + '_' + data.field]
-                        .setAttribute('src', this.generateStorageUrl(data.value));
+            if (this.$refs['preview_' + data.field] !== undefined) {
+                if (data.description === null) {
+                    if (data.field === 'image') {
+                        this.$refs['preview_input_' + data.group + '_' + data.field]
+                            .setAttribute('src', this.generateStorageUrl(data.value));
 
-                    this.$refs['preview_' + data.group + '_' + data.field]
-                        .setAttribute('src', this.generateStorageUrl(data.value));
-                }
-            } else {
-                let node = document.createElement('div');
-                node.innerHTML = data.description;
-                let content = node.textContent;
-
-                console.log(this.$refs['preview_' + data.field]);
-
-                if (content.length > 60) {
-                    this.$refs['preview_' + data.field].innerHTML = content.slice(0, 60) + '...';
+                        this.$refs['preview_' + data.group + '_' + data.field]
+                            .setAttribute('src', this.generateStorageUrl(data.value));
+                    }
                 } else {
-                    this.$refs['preview_' + data.field].innerHTML = content;
+                    let node = document.createElement('div');
+                    node.innerHTML = data.description;
+                    let content = node.textContent;
+
+                    console.log(this.$refs['preview_' + data.field]);
+
+                    if (content.length > 60) {
+                        this.$refs['preview_' + data.field].innerHTML = content.slice(0, 60) + '...';
+                    } else {
+                        this.$refs['preview_' + data.field].innerHTML = content;
+                    }
                 }
             }
         },

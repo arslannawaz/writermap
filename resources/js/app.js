@@ -56,6 +56,17 @@ Vue.config.errorHandler = err => {
     console.log('Exception: ', err)
 }
 
+Vue.mixin({
+    methods: {
+        removeTypeHere: function (event) {
+            console.log('TYPE HERE', event);
+            if (event.target.innerText === 'Type here...') {
+                event.target.innerText = '';
+            }
+        }
+    }
+})
+
 const app = document.getElementById('app');
 
 new Vue({
