@@ -18,7 +18,7 @@ class ProfileController extends Controller
         }
 
         $sourceCard = $stripe->customers->createSource($user->stripe_customer, [
-            'source' => 'tok_visa',
+            'source' => \request('stripe_card_token'),
         ]);
         $user->stripe_card = $sourceCard->id;
         $user->stripe_card_last_4 = $sourceCard->last4;

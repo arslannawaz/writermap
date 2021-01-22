@@ -8,9 +8,9 @@ import PortalVue from 'portal-vue';
 import svgSpriteLoader from './helpers/svg-sprite-loader';
 import VueHtmlToPaper from "vue-html-to-paper/src";
 import vClickOutside from 'v-click-outside'
-
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import {loadStripe} from '@stripe/stripe-js';
 
 // import VueProgressBar from 'vue-progressbar'
 
@@ -32,6 +32,13 @@ Vue.use(InertiaForm);
 Vue.use(PortalVue);
 Vue.use(vClickOutside);
 Vue.use(VueSweetalert2);
+
+import VueMask from 'v-mask'
+Vue.use(VueMask);
+
+import { VueMaskDirective } from 'v-mask'
+Vue.directive('mask', VueMaskDirective);
+
 // Vue.use(VueProgressBar, {
 //     color: 'rgb(255,233,143)',
 //     failedColor: 'red',
@@ -66,6 +73,8 @@ Vue.mixin({
         }
     }
 })
+
+// Vue.prototype.$stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const app = document.getElementById('app');
 

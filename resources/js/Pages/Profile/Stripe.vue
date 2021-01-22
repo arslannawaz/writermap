@@ -34,30 +34,37 @@
             </div>
             <div class="col-span-1">
                 <div class="uppercase text-color-light fs-12">
-                    Payment Method
+                    <div class="flex items-center justify-between">
+                        <div>Payment Method</div>
+                        <div v-if="card_last_4" class="text-right">**** **** **** {{ card_last_4 }}</div>
+                    </div>
                 </div>
 
                 <div class="mt-2 bg-light p-10">
                     <form>
                         <div class="flex flex-col">
                             <div class="label-default">Card number</div>
-                            <input type="text" ref="card_number" class="input-default" placeholder="Card number" :value="card_last_4 == null ? '' : '····  ····  ····  ' + $page.user.stripe_card_last_4">
+                            <div id="stripeCardNumber"></div>
                         </div>
-                        <div class="mt-12 flex justify-between">
-                            <div>
+                        <div class="mt-12 flex justify-between w-full">
+                            <div class="w-1/3">
                                 <div class="label-default">Date</div>
-                                <input ref="card_exp" type="text" class="input-default" placeholder="MM/YY">
+                                <div id="stripeCardExpiry"></div>
                             </div>
 
-                            <div>
+                            <div class="w-1/3">
                                 <div class="label-default">CVV</div>
-                                <input ref="card_cvv" type="password" class="input-default" placeholder="***">
+                                <div id="stripeCardCvc"></div>
                             </div>
                         </div>
                     </form>
-                    <button @click="submitCard" class="mt-11 button rounded-lg bg-dark px-6 py-2 text-white fs-15 font-normal">Change Payment method</button>
+                    <button @click="submitCard" class="mt-14 button rounded-lg bg-dark px-6 py-2 text-white fs-15 font-normal">Change Payment method</button>
                 </div>
             </div>
+        </div>
+
+        <div class="my-12">
+            <div id="card-element"></div>
         </div>
 
         <div class="mt-10">
@@ -113,13 +120,50 @@ export default  {
         invoices: null,
         currentSubscription: null,
         card_last_4: null,
+        card_number: null,
+        card_exp: null,
+        card_cvv: null,
+
+          stripeCardNumber: null,
+          stripeCardExpiry: null,
+          stripeCardCvc: null,
       }
     },
 
     async mounted() {
-        this.stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
         this.getInvoices();
         this.getCurrentSubscription();
+
+
+        this.stripe = await loadStripe('pk_test_51I701bBSVLSB8icBg7Qbt2yVX4YkQrEKL3jCUWuSlMJgYjXSj7wWUIKPbdEkhsjDQGahxFueamW8X1Cq4uAHmMzw00pdWddy2G');
+
+        console.log('local stripe', this.stripe);
+
+        const elements = this.stripe.elements();
+        // const cardElement = elements.create('card');
+        // cardElement.mount('#card-element');
+
+        this.stripeCardNumber = elements.create('cardNumber', {
+            classes: {
+                base: 'input-default w-full'
+            }
+        });
+        this.stripeCardExpiry = elements.create('cardExpiry', {
+            classes: {
+                base: 'input-default w-full'
+            }
+        });
+        this.stripeCardCvc = elements.create('cardCvc', {
+            classes: {
+                base: 'input-default w-full'
+            }
+        });
+
+        this.stripeCardNumber.mount('#stripeCardNumber');
+        this.stripeCardExpiry.mount('#stripeCardExpiry');
+        this.stripeCardCvc.mount('#stripeCardCvc');
+
+        // console.log('cardElement', cardElement);
 
         if (this.$page.user.stripe_card_last_4 !== null) {
             this.card_last_4 = this.$page.user.stripe_card_last_4;
@@ -129,21 +173,23 @@ export default  {
     methods: {
         submitCard() {
             const self = this;
-            axios.post('/profile/add-card', {
-                'number': '4242424242424242',
-                'exp_month': '08',
-                'exp_year': '2024',
-                'cvc': '123'
-            }).then(function (response) {
-                console.log('add card', response);
-                self.$refs.card_number.value = '····  ····  ····  ' + response.data.last4;
-                self.$refs.card_exp.value = '';
-                self.$refs.card_cvv.value = '';
 
-                Vue.swal('Submit Card', '', 'success');
-            }).catch(function (error) {
-                console.log(error);
-                Vue.swal('Add Card', 'Provide valid information', 'error');
+            this.stripe.createToken(this.stripeCardNumber).then((result) => {
+                if (result.error) {
+                    Vue.swal('Add Card', result.error.message, 'error');
+                } else {
+                    console.log('stripe token result', result.token);
+
+                    axios.post('/profile/add-card', {
+                        'stripe_card_token': result.token.id
+                    }).then(function (response) {
+                        console.log('add card', response);
+                        Vue.swal('Submit Card', '', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                        Vue.swal('Add Card', 'Oops..', 'error');
+                    });
+                }
             });
         },
 
