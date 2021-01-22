@@ -1,6 +1,10 @@
 .small-menu {
     width: 100px !important;
 
+    &_very {
+        width: 10px !important;
+    }
+
     .menu-link {
         width: 100px;
         justify-content: center;

@@ -2,7 +2,13 @@
     <div ref="main_container" :class="'h-screen flex bg-default ' + after_body_class" @click="clickMainContainer()">
         <!-- Static sidebar for desktop -->
         <div class="hidden md:flex md:flex-shrink-0">
-            <div class="flex flex-col justify-between w-76 left-sidebar" :class="{ 'small-menu': isMenuHide == true && !isUrlContain('notes'), 'bg-semilight': !$page.notes, 'bg-default': $page.notes }">
+            <div class="flex flex-col justify-between w-76 left-sidebar"
+                 :class="{
+                    'small-menu': isMenuHide == true && !isUrlContain('notes'),
+                    'small-menu_very': isMenuHide == true && isUrlContain('chapters'),
+                    'bg-semilight': !$page.notes,
+                    'bg-default': $page.notes
+                }">
                 <div>
                     <div class="flex flex-col relative">
                         <div v-if="!$page.notes" class="small-menu-button" @click="hideMenu(!isMenuHide)">
@@ -38,11 +44,11 @@
                             </svg>
                         </div>
 
-                        <div v-if="isUrlContain('notes') || isUrlContain('chapters')" class="">
+                        <div v-if="isUrlContain('notes') || isUrlContain('chapters')" class="overflow-hidden">
                             <notes-menu v-if="isUrlContain('notes')"></notes-menu>
                             <writing-menu v-if="isUrlContain('chapters')"></writing-menu>
                         </div>
-                        <div v-else>
+                        <div v-else class="overflow-hidden">
                             <a href="/dashboard" class="mt-4 mb-6 flex items-center justify-center flex-shrink-0 px-4">
                                 <svg v-if="isMenuHide == true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37" height="48" viewBox="0 0 37 48">
                                     <defs>
@@ -374,18 +380,18 @@
                                 </g>
                             </svg>
                         </a>
-                        <a v-else :href="'/books/' + bookId + '/chapters'" class="mt-6 button rounded-lg bg-dark px-12 py-4 font-semibold text-white">Write Story</a>
+                        <a v-else :href="'/books/' + bookId + '/chapters'" class="mt-6 button rounded-lg bg-dark px-12 py-3 font-semibold text-white fs-14">Write Story</a>
                     </div>
 
-                    <div class="flex-shrink-0 flex mt-4 pt-4 pb-8" :class="{'px-13': isMenuHide == false, 'px-9': isMenuHide == true}">
-                        <a href="/user/profile" class="flex-shrink-0 group block focus:outline-none">
+                    <div v-if="!isMenuHide && !isUrlContain('chapters')" class="flex-shrink-0 flex mt-4 pt-4 pb-8" :class="{'px-13': isMenuHide == false, 'px-9': isMenuHide == true}">
+                        <a href="/user/profile" class="flex-shrink-0 group block focus:outline-none overflow-hidden">
                             <div class="flex items-center">
                                 <div>
                                     <img class="inline-block h-9 w-9 rounded-full"
                                          :src="$page.user.profile_photo_url"
                                          alt=""/>
                                 </div>
-                                <div class="ml-8 flex flex-col justify-center" v-if="isMenuHide == false">
+                                <div class="ml-6 flex flex-col justify-center" v-if="isMenuHide == false">
                                     <p v-if="$page.user.pen_name" class="text-md leading-5 font-semibold text-color-dark">
                                         {{ $page.user.pen_name }}
                                     </p>
