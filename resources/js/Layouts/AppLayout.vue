@@ -355,7 +355,7 @@
                     </div>
 
 
-                    <div v-if="isUrlContain('notes') === false">
+                    <div v-if="isUrlContain('notes') === false && isUrlContain('chapters') === false" class="overflow-hidden">
                     <div class="flex flex-col justify-center items-center mt-16 my-8" v-if="!isBookMenu && !isMenuHide">
                         <div class="leave-feedback">
                             <div class="leave-feedback__label">Write your feeback</div>
@@ -365,7 +365,7 @@
                     </div>
 
                     <div v-if="isBookMenu && isUrlContain('chapters') === false" class="text-center flex-shrink-0 flex justify-center">
-                        <a v-if="isMenuHide == true" href="#" class="button rounded-full bg-dark px-4 py-4 font-semibold text-white" :class="{'mt-6': isMenuHide == true}">
+                        <a v-if="isMenuHide == true" :href="'/books/' + bookId + '/chapters'" class="button rounded-full bg-dark px-4 py-4 font-semibold text-white" :class="{'mb-6': isMenuHide == true}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#FFF">
@@ -383,7 +383,7 @@
                         <a v-else :href="'/books/' + bookId + '/chapters'" class="mt-6 button rounded-lg bg-dark px-12 py-3 font-semibold text-white fs-14">Write Story</a>
                     </div>
 
-                    <div v-if="!isMenuHide && !isUrlContain('chapters')" class="flex-shrink-0 flex mt-4 pt-4 pb-8" :class="{'px-13': isMenuHide == false, 'px-9': isMenuHide == true}">
+                    <div class="flex-shrink-0 flex mt-4 pt-4 pb-8" :class="{'px-13': isMenuHide == false, 'px-9': isMenuHide == true}">
                         <a href="/user/profile" class="flex-shrink-0 group block focus:outline-none overflow-hidden">
                             <div class="flex items-center">
                                 <div>

@@ -84,7 +84,7 @@
                     <div class="fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
                     <input type="text" class="input-default input-default_border-none h2 w-full" v-model="chapter.title"
                            @change="updateChapterField('title', $event.target.value)" />
-                    <div class="    mt-12 editor w-full" spellcheck="false">
+                    <div class="mt-12 editor w-full" spellcheck="false">
                         <editor-content class="editor__content outline-none fs-18 ff-minion" :editor="editor" />
                     </div>
 

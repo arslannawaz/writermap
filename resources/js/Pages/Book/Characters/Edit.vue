@@ -645,7 +645,7 @@
 
                                     <div class="mt-6 label-default">Enter description</div>
                                     <div class="mt-2 editor outline-none">
-                                        <editor-content class="editor__content outline-none" :editor="editor" />
+                                        <editor-content class="editor__content outline-none" @click="removeTypeHere" :editor="editor" />
                                     </div>
                                 </div>
                                 <div v-else>

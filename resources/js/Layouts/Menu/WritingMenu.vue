@@ -38,7 +38,7 @@
         <div class="mt-8 px-10">
             <div
                 @click="isCreateModalShow = !isCreateModalShow"
-                class="w-48 button rounded-lg bg-dark px-12 py-4 font-semibold text-white text-center cursor-pointer fs-14">Add Chapter</div>
+                class="w-48 button rounded-lg bg-dark px-12 py-3 font-semibold text-white text-center cursor-pointer fs-14">Add Chapter</div>
 
             <jet-dialog-modal :show="isCreateModalShow" @close="isCreateModalShow = false">
                 <template #title>
@@ -60,7 +60,7 @@
             </jet-dialog-modal>
         </div>
 
-        <div class="mt-20"></div>
+        <div class="mt-8"></div>
         <div v-for="chapter in $page.chapters" class="flex flex-col mt-4 px-10 py-4" :class="{'border-r-4 border-gray-400': $page.page_chapter.id === chapter.id}">
             <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" class="fs-16 font-semibold text-color-dark">Chapter {{ chapter.number }}</a>
             <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" v-if="chapter.title" class="mt-2 text-color-light" :class="{'text-color-dark': $page.page_chapter.id === chapter.id}">{{ chapter.title | truncate(96, '...') }}</a>
