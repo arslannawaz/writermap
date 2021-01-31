@@ -1,0 +1,53 @@
+.timeline {
+    margin-top: 100px;
+}
+
+.timeline-event {
+    &__wrapper {
+        border: solid 1px #ccc;
+        padding: 20px;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #4e4d4b;
+    }
+
+    &__description {
+        font-size: 12px;
+        color: #adaaa5;
+    }
+}
+
+.timeline-event-item {
+    cursor: pointer;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #fefcf8;
+
+    &__title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #4e4d4b;
+    }
+
+    &__description {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #4e4d4b;
+    }
+
+    &__order {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #adaaa5;
+    }
+
+    &__user-avatar {
+        margin-top: 8px;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+    }
+}

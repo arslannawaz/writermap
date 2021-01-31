@@ -8,6 +8,8 @@ use App\Http\Controllers\Book\NoteController;
 use App\Http\Controllers\Book\Writing\ChaptersController;
 use App\Http\Controllers\Book\StoryPlan\MilestoneController;
 use App\Http\Controllers\Book\BreakdownController;
+use App\Http\Controllers\Book\TimelineController;
+use App\Http\Controllers\Book\Event\ItemController as EventItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,5 +90,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('books/{book_id}/chapters/{chapter_id}/edit', [ChaptersController::class, 'editPage'])->name('books.chapters.edit_page');
     Route::any('books/{book_id}/chapters', [ChaptersController::class, 'index'])->name('books.notes.index_page');
 
-
+    Route::get('books/{book_id}/timeline', [TimelineController::class, 'indexPage'])->name('books.timeline');
+    Route::get('books/{book_id}/timeline/events/list', [TimelineController::class, 'eventsList'])->name('books.events.list');
+    Route::post('books/{book_id}/timeline/events/{event_id}/items/reorder', [EventItemController::class, 'reorder'])->name('books.events.items.reorder');
 });

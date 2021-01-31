@@ -50,6 +50,8 @@ use Illuminate\Support\Facades\Storage;
  * @property-read int|null $milestones_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Note[] $notes
  * @property-read int|null $notes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Chapter[] $chapters
+ * @property-read int|null $chapters_count
  */
 class Book extends Model
 {
@@ -99,6 +101,11 @@ class Book extends Model
     public function chapters()
     {
         return $this->hasMany(Chapter::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
 
     /**

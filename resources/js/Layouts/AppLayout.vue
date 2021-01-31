@@ -244,7 +244,7 @@
                                         <span class="menu-link-title">Characters</span>
                                     </a>
 
-                                    <a href="#"
+                                    <a :href="'/books/' + bookId + '/timeline'"
                                        class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                         <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                             <g fill="none" fill-rule="evenodd">
