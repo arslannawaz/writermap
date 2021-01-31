@@ -18,7 +18,7 @@
                         </g>
                     </svg>
 
-                    <svg class="icon-hoverable ml-6" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                    <svg @click="isEventCreateModalShow = true;" class="icon-hoverable ml-6" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                         <g fill="none" fill-rule="evenodd">
                             <g fill="#BEBDB8" fill-rule="nonzero">
                                 <g>
@@ -28,7 +28,7 @@
                         </g>
                     </svg>
 
-                    <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12">Create New</button>
+                    <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12" @click="isEventItemCreateModalShow = true;">Create New</button>
                 </div>
             </div>
             <div class="timeline grid grid-cols-3 gap-10">
@@ -73,10 +73,25 @@
 <!--                </div>-->
 
                 <div class="timeline-event__wrapper" v-for="(event, eventIndex) in events">
-                    <h3 class="timeline-event__title">{{ event.title }}</h3>
-                    <h3 class="timeline-event__description">
-                        {{ event.description }}
-                    </h3>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="timeline-event__title">{{ event.title }}</h3>
+                            <div class="timeline-event__description">
+                                {{ event.description }}
+                            </div>
+                        </div>
+
+                        <div class="timeline-event__icon-edit icon-hoverable px-4" @click="openEventEditModal(event)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#BEBDB8">
+                                        <path d="M618 214c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-616 -200)"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
                     <draggable class="list-group"
                                :list="event.items"
                                group="people"
@@ -91,11 +106,25 @@
                         >
                             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
                                 <div :key="index">
-                                    <div class="timeline-event-item__title">
-                                        {{ element.title }}
-                                    </div>
-                                    <div class="timeline-event-item__description">
-                                        {{ element.description }}
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <div class="timeline-event-item__title">
+                                                {{ element.title }}
+                                            </div>
+                                            <div class="timeline-event-item__description">
+                                                {{ element.description }}
+                                            </div>
+                                        </div>
+
+                                        <div class="icon-hoverable px-1" @click="openEventItemEditModal(event, element)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18">
+                                                <g fill="none" fill-rule="evenodd">
+                                                    <g fill="#BEBDB8">
+                                                        <path d="M618 214c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-616 -200)"/>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
                                     </div>
 
                                     <div class="flex justify-between">
@@ -114,6 +143,117 @@
 
             </div>
         </app-container>
+
+        <template v-slot:modals>
+            <portal-target name="modal_event_item_create"></portal-target>
+            <jet-dialog-modal :portal="'modal_event_item_create'" :show="isEventItemCreateModalShow" @close="isEventItemCreateModalShow = false">
+                <template #title>
+                    <span class="h2">Create new Event Item</span>
+                </template>
+
+                <template #content>
+                    <div class="flex flex-col">
+                        <label class="label-default">Title</label>
+                        <select ref="event_item_input_event_id" class="input-default w-full">
+                            <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>
+                        </select>
+
+                        <label class="mt-6 label-default">Title</label>
+                        <input ref="event_item_input_title" type="text" class="input-default w-full">
+
+                        <label class="mt-6 label-default">Description</label>
+                        <textarea ref="event_item_input_description" class="input-default w-full"></textarea>
+                    </div>
+                </template>
+
+                <template #footer>
+                    <div class="flex justify-center">
+                        <button @click="createEventItem()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    </div>
+                </template>
+            </jet-dialog-modal>
+
+            <portal-target name="modal_event_item_edit"></portal-target>
+            <jet-dialog-modal :portal="'modal_event_item_edit'" :show="isEventItemEditModalShow" @close="isEventItemEditModalShow = false">
+                <template #title>
+                    <span class="h2">Edit Event Item</span>
+                </template>
+
+                <template #content>
+                    <div class="flex flex-col">
+<!--                        <label class="label-default">Title</label>-->
+<!--                        <select ref="event_item_input_event_id" class="input-default w-full">-->
+<!--                            <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>-->
+<!--                        </select>-->
+
+                        <label class="mt-6 label-default">Title</label>
+                        <input v-model="eventItemEdit.title" type="text" class="input-default w-full">
+
+                        <label class="mt-6 label-default">Description</label>
+                        <textarea v-model="eventItemEdit.description" class="input-default w-full"></textarea>
+                    </div>
+                </template>
+
+                <template #footer>
+                    <div class="flex justify-between">
+                        <button @click="updateEventItem()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                        <button @click="deleteEventItem()" class="button rounded-lg bg-danger px-8 py-2 font-semibold text-white">Delete</button>
+                    </div>
+                </template>
+            </jet-dialog-modal>
+
+            <portal-target name="modal_event_create"></portal-target>
+            <jet-dialog-modal :portal="'modal_event_create'" :show="isEventCreateModalShow" @close="isEventCreateModalShow = false">
+                <template #title>
+                    <span class="h2">Create new Event</span>
+                </template>
+
+                <template #content>
+                    <div class="flex flex-col">
+                        <label class="mt-6 label-default">Title</label>
+                        <input ref="event_input_title" type="text" class="input-default w-full">
+
+                        <label class="mt-6 label-default">Description</label>
+                        <textarea ref="event_input_description" class="input-default w-full"></textarea>
+                    </div>
+                </template>
+
+                <template #footer>
+                    <div class="flex justify-center">
+                        <button @click="createEvent()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    </div>
+                </template>
+            </jet-dialog-modal>
+
+            <portal-target name="modal_event_edit"></portal-target>
+            <jet-dialog-modal :portal="'modal_event_edit'" :show="isEventEditModalShow" @close="isEventEditModalShow = false">
+                <template #title>
+                    <span class="h2">Edit Event</span>
+                </template>
+
+                <template #content>
+                    <div class="flex flex-col">
+                        <!--                        <label class="label-default">Title</label>-->
+                        <!--                        <select ref="event_item_input_event_id" class="input-default w-full">-->
+                        <!--                            <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>-->
+                        <!--                        </select>-->
+
+                        <label class="mt-6 label-default">Title</label>
+                        <input v-model="eventEdit.title" type="text" class="input-default w-full">
+
+                        <label class="mt-6 label-default">Description</label>
+                        <textarea v-model="eventEdit.description" class="input-default w-full"></textarea>
+                    </div>
+                </template>
+
+                <template #footer>
+                    <div class="flex justify-between">
+                        <button @click="updateEvent()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                        <button @click="deleteEvent()" class="button rounded-lg bg-danger px-8 py-2 font-semibold text-white">Delete</button>
+                    </div>
+                </template>
+            </jet-dialog-modal>
+        </template>
     </app-layout>
 </template>
 
@@ -124,14 +264,20 @@ import AppContainer from "../../Layouts/AppContainer";
 
 import draggable from "vuedraggable";
 import Vue from "vue";
-
+import JetDialogModal from "../../Jetstream/DialogModal";
 
 export default {
-    components: {AppContainer, AppLayout, draggable},
+    components: {AppContainer, AppLayout, draggable, JetDialogModal},
     data() {
         return {
             events: [],
             drag: false,
+            eventEdit: {},
+            eventItemEdit: {},
+            isEventCreateModalShow: false,
+            isEventEditModalShow: false,
+            isEventItemEditModalShow: false,
+            isEventItemCreateModalShow: false,
             list1: [
                 { name: "John", id: 1 },
                 { name: "Joao", id: 2 },
@@ -183,6 +329,128 @@ export default {
             }
         },
 
+        openEventItemEditModal(event, eventItem) {
+            this.eventItemEdit = eventItem;
+            this.eventItemEdit.event_id = event.id;
+            this.isEventItemEditModalShow = true;
+        },
+
+        openEventEditModal(event) {
+            this.eventEdit = event;
+            this.isEventEditModalShow = true;
+        },
+
+        resetModalInputs() {
+            this.$refs['event_item_input_event_id'].value = this.events[0].id;
+            this.$refs['event_item_input_title'].value = null;
+            this.$refs['event_item_input_description'].value = null;
+        },
+
+        createEvent() {
+            this.isEventCreateModalShow = false;
+
+            console.log(this.$refs['event_input_title'].value);
+            console.log(this.$refs['event_input_description'].value);
+
+            const url = '/books/' + this.$page.book.id + '/timeline/events/create';
+            axios.post(url, {
+                title: this.$refs['event_input_title'].value,
+                description: this.$refs['event_input_description'].value,
+            }).then((response) => {
+                console.log(response.data);
+                this.updateEventsList();
+                this.$refs['event_input_title'].value = null;
+                this.$refs['event_input_description'].value = null;
+            }).catch((error) => {
+                console.log('error', error);
+                Vue.swal('createEvent', 'Oops..', 'error');
+            });
+        },
+
+        createEventItem() {
+            this.isEventItemCreateModalShow = false;
+
+            console.log(this.$refs['event_item_input_event_id'].value);
+            console.log(this.$refs['event_item_input_title'].value);
+            console.log(this.$refs['event_item_input_description'].value);
+
+            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.$refs['event_item_input_event_id'].value +'/items/create';
+            axios.post(url, {
+                event_id: this.$refs['event_item_input_event_id'].value,
+                title: this.$refs['event_item_input_title'].value,
+                description: this.$refs['event_item_input_description'].value,
+            }).then((response) => {
+                console.log(response.data);
+                this.updateEventsList();
+                this.resetModalInputs();
+            }).catch((error) => {
+                console.log('error', error);
+                Vue.swal('createEventItem', 'Oops..', 'error');
+            });
+        },
+
+        deleteEvent() {
+            this.isEventEditModalShow = false;
+
+            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventEdit.id +'/delete';
+            axios.post(url).then((response) => {
+                console.log(response.data);
+                this.updateEventsList();
+                this.resetModalInputs();
+            }).catch((error) => {
+                console.log('error', error);
+                Vue.swal('deleteEvent', 'Oops..', 'error');
+            });
+        },
+
+        updateEvent() {
+            this.isEventEditModalShow = false;
+
+            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventEdit.id +'/update';
+            axios.post(url, {
+                title: this.eventEdit.title,
+                description: this.eventEdit.description,
+            }).then((response) => {
+                console.log(response.data);
+                // this.updateEventsList();
+                this.resetModalInputs();
+            }).catch((error) => {
+                console.log('error', error);
+                Vue.swal('updateEvent', 'Oops..', 'error');
+            });
+        },
+
+        updateEventItem() {
+            this.isEventItemEditModalShow = false;
+
+            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventItemEdit.event_id +'/items/'+ this.eventItemEdit.id +'/update';
+            axios.post(url, {
+                title: this.eventItemEdit.title,
+                description: this.eventItemEdit.description,
+            }).then((response) => {
+                console.log(response.data);
+                // this.updateEventsList();
+                this.resetModalInputs();
+            }).catch((error) => {
+                console.log('error', error);
+                Vue.swal('updateEventItem', 'Oops..', 'error');
+            });
+        },
+
+        deleteEventItem() {
+            this.isEventItemEditModalShow = false;
+
+            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventItemEdit.event_id +'/items/'+ this.eventItemEdit.id +'/delete';
+            axios.post(url).then((response) => {
+                console.log(response.data);
+                this.updateEventsList();
+                this.resetModalInputs();
+            }).catch((error) => {
+                console.log('error', error);
+                Vue.swal('deleteEventItem', 'Oops..', 'error');
+            });
+        },
+
         updateEventsList() {
             const url = '/books/' + this.$page.book.id + '/timeline/events/list';
             axios.get(url).then((response) => {
@@ -194,19 +462,19 @@ export default {
             });
         },
 
-        updateEventItem(event_id, item_id, field, value) {
-            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ event_id +'/items/'+ item_id +'/update';
-            axios.post(url, {
-                field: field,
-                value: value,
-            }).then((response) => {
-                console.log(response.data);
-                this.events = response.data;
-            }).catch((error) => {
-                console.log('error', error);
-                Vue.swal('updateEventsList', 'Oops..', 'error');
-            });
-        },
+        // updateEventItem(event_id, item_id, field, value) {
+        //     const url = '/books/' + this.$page.book.id + '/timeline/events/'+ event_id +'/items/'+ item_id +'/update';
+        //     axios.post(url, {
+        //         field: field,
+        //         value: value,
+        //     }).then((response) => {
+        //         console.log(response.data);
+        //         this.events = response.data;
+        //     }).catch((error) => {
+        //         console.log('error', error);
+        //         Vue.swal('updateEventsList', 'Oops..', 'error');
+        //     });
+        // },
 
         updateOrderForEventItems(eventIndex) {
             const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.events[eventIndex].id +'/items/reorder';
@@ -214,7 +482,7 @@ export default {
                 items: this.events[eventIndex].items,
             }).then((response) => {
                 console.log('updateOrderForEventItems response', response.data);
-                // this.events = response.data;
+                // this.events[eventIndex].items = response.data;
             }).catch((error) => {
                 console.log('updateOrderForEventItems error', error);
                 Vue.swal('updateOrderForEventItems', 'Oops..', 'error');

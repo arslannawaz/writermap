@@ -20,7 +20,7 @@ class ItemController extends Controller
     public function __construct()
     {
         $this->book = Book::find(request('book_id'));
-        $this->event = Book::find(request('event_id'));
+        $this->event = Event::find(request('event_id'));
 
         Inertia::share('book', $this->book);
         Inertia::share('event', $this->event);
@@ -35,6 +35,30 @@ class ItemController extends Controller
             $eventItem->save();
         }
 
-        return true;
+        return $this->event->items()->orderBy('order')->get();
+    }
+
+    public function create()
+    {
+        return EventItem::create([
+            'event_id' => \request('event_id'),
+            'title' => \request('title'),
+            'description' => \request('description'),
+        ]);
+    }
+
+    public function update()
+    {
+        $eventItem = EventItem::find(\request('event_item_id'));
+        $eventItem->title = \request('title');
+        $eventItem->description = \request('description');
+
+        return $eventItem->save();
+    }
+
+    public function delete()
+    {
+        $eventItem = EventItem::find(\request('event_item_id'));
+        return $eventItem->delete();
     }
 }

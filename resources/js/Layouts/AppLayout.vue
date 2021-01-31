@@ -430,6 +430,8 @@
 
         <portal-target name="modal"></portal-target>
         <portal-target name="modal_second"></portal-target>
+
+        <slot name="modals"></slot>
     </div>
 </template>
 

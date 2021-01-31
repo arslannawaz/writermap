@@ -93,4 +93,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('books/{book_id}/timeline', [TimelineController::class, 'indexPage'])->name('books.timeline');
     Route::get('books/{book_id}/timeline/events/list', [TimelineController::class, 'eventsList'])->name('books.events.list');
     Route::post('books/{book_id}/timeline/events/{event_id}/items/reorder', [EventItemController::class, 'reorder'])->name('books.events.items.reorder');
+    Route::post('books/{book_id}/timeline/events/create', [TimelineController::class, 'createEvent'])->name('books.events.create');
+    Route::post('books/{book_id}/timeline/events/{event_id}/update', [TimelineController::class, 'updateEvent'])->name('books.events.update');
+    Route::post('books/{book_id}/timeline/events/{event_id}/delete', [TimelineController::class, 'deleteEvent'])->name('books.events.delete');
+    Route::post('books/{book_id}/timeline/events/{event_id}/items/create', [EventItemController::class, 'create'])->name('books.events.items.create');
+    Route::post('books/{book_id}/timeline/events/{event_id}/items/{event_item_id}/update', [EventItemController::class, 'update'])->name('books.events.items.update');
+    Route::post('books/{book_id}/timeline/events/{event_id}/items/{event_item_id}/delete', [EventItemController::class, 'delete'])->name('books.events.items.delete');
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Event;
+use App\Models\EventItem;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -28,5 +30,28 @@ class TimelineController extends Controller
         return $this->book->events()->with('items', function ($query) {
             $query->orderBy('order');
         })->get();
+    }
+
+    public function createEvent()
+    {
+        return $this->book->events()->create([
+            'title' => \request('title'),
+            'description' => \request('description'),
+        ]);
+    }
+
+    public function updateEvent()
+    {
+        $event = Event::find(\request('event_id'));
+        $event->title = \request('title');
+        $event->description = \request('description');
+
+        return $event->save();
+    }
+
+    public function deleteEvent()
+    {
+        $event = Event::find(\request('event_id'));
+        return $event->delete();
     }
 }
