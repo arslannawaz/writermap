@@ -6,7 +6,7 @@
 
 
                 <div class="flex items-center justify-end">
-                    <svg class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
+                    <svg @click="$refs.search_input.classList.toggle('hidden'); $refs.search_input.focus()" class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
                         <g fill="none" fill-rule="evenodd">
                             <g fill="#BEBDB8" fill-rule="nonzero">
                                 <g>
@@ -17,6 +17,8 @@
                             </g>
                         </g>
                     </svg>
+
+                    <input ref="search_input" type="text" class="ml-2 input-default input-default_p-zero hidden" @keyup="search($event)">
 
                     <svg @click="isEventCreateModalShow = true;" class="icon-hoverable ml-6" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                         <g fill="none" fill-rule="evenodd">
@@ -487,6 +489,26 @@ export default {
                 console.log('updateOrderForEventItems error', error);
                 Vue.swal('updateOrderForEventItems', 'Oops..', 'error');
             });
+        },
+
+        search(event) {
+            console.log('search', event, this.$refs.search_input.value);
+
+            if (this.$refs.search_input.value == '') {
+                // this.$refs.search_input.classList.toggle('hidden');
+                this.updateEventsList();
+            } else {
+                const url = '/books/' + this.$page.book.id + '/timeline/search';
+                axios.post(url, {
+                    query: this.$refs.search_input.value,
+                }).then((response) => {
+                    console.log('search response', response.data);
+                    this.events = response.data;
+                }).catch((error) => {
+                    console.log('search error', error);
+                    Vue.swal('Search', 'Oops..', 'error');
+                });
+            }
         },
     }
 }

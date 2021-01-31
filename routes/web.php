@@ -91,6 +91,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::any('books/{book_id}/chapters', [ChaptersController::class, 'index'])->name('books.notes.index_page');
 
     Route::get('books/{book_id}/timeline', [TimelineController::class, 'indexPage'])->name('books.timeline');
+    Route::post('books/{book_id}/timeline/search', [TimelineController::class, 'search'])->name('books.timeline.search');
+
     Route::get('books/{book_id}/timeline/events/list', [TimelineController::class, 'eventsList'])->name('books.events.list');
     Route::post('books/{book_id}/timeline/events/{event_id}/items/reorder', [EventItemController::class, 'reorder'])->name('books.events.items.reorder');
     Route::post('books/{book_id}/timeline/events/create', [TimelineController::class, 'createEvent'])->name('books.events.create');

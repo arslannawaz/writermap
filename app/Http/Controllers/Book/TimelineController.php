@@ -54,4 +54,11 @@ class TimelineController extends Controller
         $event = Event::find(\request('event_id'));
         return $event->delete();
     }
+
+    public function search()
+    {
+        return $this->book->events()->with('items', function ($query) {
+            $query->where('title', 'like', '%'.\request('query').'%')->orderBy('order');
+        })->get();
+    }
 }
