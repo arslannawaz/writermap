@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <app-container>
-            <div :class="{'hidden': !$page.user.stripe_subscription}" @click="hideDropdowns($event)">
+            <div :class="{'block': !$page.user.stripe_subscription}" @click="hideDropdowns($event)">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <h1 class="h2 mr-6">Characters</h1>
@@ -175,10 +175,12 @@
                     </template>
                 </jet-dialog-modal>
             </div>
-            <div :class="{'block': !$page.user.stripe_subscription, 'hidden': $page.user.stripe_subscription}">
-                <NeedSubscription></NeedSubscription>
-            </div>
         </app-container>
+
+
+        <template v-slot:modals>
+            <need-subscription></need-subscription>
+        </template>
     </app-layout>
 </template>
 
@@ -188,7 +190,7 @@ import AppContainer from "../../Layouts/AppContainer";
 import Button from "../../Jetstream/Button";
 import JetDialogModal from "../../Jetstream/DialogModal";
 import JetInputError from "../../Jetstream/InputError";
-import NeedSubscription from "../NeedSubscription";
+import NeedSubscription from "../../components/NeedSubscription";
 
 export default {
     components: {

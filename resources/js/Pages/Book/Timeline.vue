@@ -130,9 +130,7 @@
                                     </div>
 
                                     <div class="flex justify-between">
-                                        <div class="timeline-event-item__order">
-                                            {{ (index + 1) }}
-                                        </div>
+                                        <div class="timeline-event-item__order" v-html="(eventIndex + 1) + '.' + (index + 1)"></div>
                                         <div class="timeline-event-item__user-avatar">
                                             <img :src="$page.user.profile_photo_url" alt="user-avatar">
                                         </div>
@@ -513,3 +511,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.list-group {
+    min-height: 300px;
+}
+</style>
