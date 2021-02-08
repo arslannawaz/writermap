@@ -145,114 +145,7 @@
         </app-container>
 
         <template v-slot:modals>
-            <portal-target name="modal_event_item_create"></portal-target>
-            <jet-dialog-modal :portal="'modal_event_item_create'" :show="isEventItemCreateModalShow" @close="isEventItemCreateModalShow = false">
-                <template #title>
-                    <span class="h2">Create new Event Item</span>
-                </template>
-
-                <template #content>
-                    <div class="flex flex-col">
-                        <label class="label-default">Title</label>
-                        <select ref="event_item_input_event_id" class="input-default w-full">
-                            <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>
-                        </select>
-
-                        <label class="mt-6 label-default">Title</label>
-                        <input ref="event_item_input_title" type="text" class="input-default w-full">
-
-                        <label class="mt-6 label-default">Description</label>
-                        <textarea ref="event_item_input_description" class="input-default w-full"></textarea>
-                    </div>
-                </template>
-
-                <template #footer>
-                    <div class="flex justify-center">
-                        <button @click="createEventItem()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
-                    </div>
-                </template>
-            </jet-dialog-modal>
-
-            <portal-target name="modal_event_item_edit"></portal-target>
-            <jet-dialog-modal :portal="'modal_event_item_edit'" :show="isEventItemEditModalShow" @close="isEventItemEditModalShow = false">
-                <template #title>
-                    <span class="h2">Edit Event Item</span>
-                </template>
-
-                <template #content>
-                    <div class="flex flex-col">
-<!--                        <label class="label-default">Title</label>-->
-<!--                        <select ref="event_item_input_event_id" class="input-default w-full">-->
-<!--                            <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>-->
-<!--                        </select>-->
-
-                        <label class="mt-6 label-default">Title</label>
-                        <input v-model="eventItemEdit.title" type="text" class="input-default w-full">
-
-                        <label class="mt-6 label-default">Description</label>
-                        <textarea v-model="eventItemEdit.description" class="input-default w-full"></textarea>
-                    </div>
-                </template>
-
-                <template #footer>
-                    <div class="flex justify-between">
-                        <button @click="updateEventItem()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
-                        <button @click="deleteEventItem()" class="button rounded-lg bg-danger px-8 py-2 font-semibold text-white">Delete</button>
-                    </div>
-                </template>
-            </jet-dialog-modal>
-
-            <portal-target name="modal_event_create"></portal-target>
-            <jet-dialog-modal :portal="'modal_event_create'" :show="isEventCreateModalShow" @close="isEventCreateModalShow = false">
-                <template #title>
-                    <span class="h2">Create new Event</span>
-                </template>
-
-                <template #content>
-                    <div class="flex flex-col">
-                        <label class="mt-6 label-default">Title</label>
-                        <input ref="event_input_title" type="text" class="input-default w-full">
-
-                        <label class="mt-6 label-default">Description</label>
-                        <textarea ref="event_input_description" class="input-default w-full"></textarea>
-                    </div>
-                </template>
-
-                <template #footer>
-                    <div class="flex justify-center">
-                        <button @click="createEvent()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
-                    </div>
-                </template>
-            </jet-dialog-modal>
-
-            <portal-target name="modal_event_edit"></portal-target>
-            <jet-dialog-modal :portal="'modal_event_edit'" :show="isEventEditModalShow" @close="isEventEditModalShow = false">
-                <template #title>
-                    <span class="h2">Edit Event</span>
-                </template>
-
-                <template #content>
-                    <div class="flex flex-col">
-                        <!--                        <label class="label-default">Title</label>-->
-                        <!--                        <select ref="event_item_input_event_id" class="input-default w-full">-->
-                        <!--                            <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>-->
-                        <!--                        </select>-->
-
-                        <label class="mt-6 label-default">Title</label>
-                        <input v-model="eventEdit.title" type="text" class="input-default w-full">
-
-                        <label class="mt-6 label-default">Description</label>
-                        <textarea v-model="eventEdit.description" class="input-default w-full"></textarea>
-                    </div>
-                </template>
-
-                <template #footer>
-                    <div class="flex justify-between">
-                        <button @click="updateEvent()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
-                        <button @click="deleteEvent()" class="button rounded-lg bg-danger px-8 py-2 font-semibold text-white">Delete</button>
-                    </div>
-                </template>
-            </jet-dialog-modal>
+            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
         </template>
     </app-layout>
 </template>
@@ -261,13 +154,13 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
-
+import NeedSubscription from "../../Components/NeedSubscription";
 import draggable from "vuedraggable";
 import Vue from "vue";
 import JetDialogModal from "../../Jetstream/DialogModal";
 
 export default {
-    components: {AppContainer, AppLayout, draggable, JetDialogModal},
+    components: {AppContainer, AppLayout, draggable, JetDialogModal, NeedSubscription},
     data() {
         return {
             events: [],

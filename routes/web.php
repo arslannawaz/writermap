@@ -24,17 +24,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('dashboard');
+    return redirect('scriptorium');
 });
 
 Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->name('social_login');
 Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/scriptorium', function () {
     return Inertia\Inertia::render('Dashboard', [
         'books' => Auth::user()->books()->orderBy('created_at', 'desc')->paginate(4),
     ]);
-})->name('dashboard');
+})->name('scriptorium');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 

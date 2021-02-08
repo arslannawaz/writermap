@@ -49,7 +49,7 @@
                             <writing-menu v-if="isUrlContain('chapters')"></writing-menu>
                         </div>
                         <div v-else class="overflow-hidden">
-                            <a href="/dashboard" class="mt-4 mb-6 flex items-center justify-center flex-shrink-0 px-4">
+                            <a href="/scriptorium" class="mt-4 mb-6 flex items-center justify-center flex-shrink-0 px-4">
                                 <svg v-if="isMenuHide == true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37" height="48" viewBox="0 0 37 48">
                                     <defs>
                                         <linearGradient id="nwn8g9eh4b" x1="100%" x2="100%" y1="2.765%" y2="135.902%">
@@ -245,6 +245,7 @@
                                     </a>
 
                                     <a :href="'/books/' + bookId + '/timeline'"
+                                       :class="{ 'active': isUrlContain('timeline') }"
                                        class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out">
                                         <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                             <g fill="none" fill-rule="evenodd">
@@ -318,8 +319,8 @@
 <!--                                    </a>-->
                                 </div>
                                 <div class="flex-1 px-2 bg-semilight flex flex-col items-center nav-sidebar" v-else>
-                                    <a href="/dashboard"
-                                       class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('dashboard') }">
+                                    <a href="/scriptorium"
+                                       class="menu-link w-48 group flex items-center px-2 py-2 focus:outline-none transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('scriptorium') }">
                                         <svg class="mr-12 h-5 nav-sidebar__icon nav-sidebar__icon_fill transition duration-75 ease-in-out" xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
                                             <g fill="none" fill-rule="evenodd">
                                                 <g fill="#BEBDB8" fill-rule="nonzero">
@@ -331,7 +332,7 @@
                                                 </g>
                                             </g>
                                         </svg>
-                                        <span class="menu-link-title">Writers Room</span>
+                                        <span class="menu-link-title">Scriptorium</span>
                                     </a>
                                     <a href="/user/profile"
                                        class="menu-link mt-10 w-48 group flex items-center px-2 py-2 transition duration-75 ease-in-out" :class="{ 'active': isUrlContain('user/profile') }">
@@ -413,7 +414,7 @@
         </div>
 
 <!--        Nav header for mobile-->
-        <div class="flex flex-col w-0 flex-1 overflow-hidden" >
+        <div class="flex overflow-y-auto flex-col w-0 flex-1 overflow-hidden" >
 <!--            <div class="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">-->
 <!--                <button @click.stop="sidebarOpen = true"-->
 <!--                        class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-75">-->
@@ -423,7 +424,7 @@
 <!--                    </svg>-->
 <!--                </button>-->
 <!--            </div>-->
-            <main class="flex-1 relative z-0 overflow-y-auto pt-2 pb-6 focus:outline-none md:py-0" tabindex="0">
+            <main class="flex-1 relative z-0 pt-2 pb-6 focus:outline-none md:py-0" tabindex="0">
                 <slot></slot>
             </main>
         </div>

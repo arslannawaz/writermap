@@ -5,7 +5,7 @@
     </div>
 
     <div class="login-logo login-logo_left">
-        <a href="{{ route('dashboard') }}" class="login-logo__link">
+        <a href="{{ route('scriptorium') }}" class="login-logo__link">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140"
                  height="61" viewBox="0 0 140 61">
                 <defs>
@@ -631,11 +631,11 @@
                 </svg>
             </div>
 
-            <h2 class="mt-40px fs-70 ff-minion font-semibold">Hello!</h2>
+            <h2 class="mt-40px fs-70 ff-minion font-semibold">Welcome!</h2>
 
             <p class="mt-40px ff-minion fs-22">
-                Enter your personal details and start<br>
-                to create your story
+                Enter your details and create<br>
+                your story
             </p>
 
             <a href="{{ route('register') }}"

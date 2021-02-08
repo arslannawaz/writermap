@@ -1,18 +1,18 @@
 <template>
     <app-layout>
         <app-container width="w-container">
-            <div class="grid grid-cols-2 grid-background absolute z-0 invisible lg:visible">
-                <div class="col-span-1"></div>
+            <div class="grid grid-cols-2 grid-background absolute z-0 invisible xl:visible">
+                <div class="col-span-1 col-bg_default"></div>
                 <div class="col-span-1 col-bg"></div>
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-2 relative z-10 h-full h-screen">
                 <!-- BEGIN Left block -->
                 <div class="px-12">
-                    <div class="flex justify-between pl-6">
+                    <div class="flex justify-between items-center pl-6">
                         <h1 class="h2">
                             <input ref="book_name" type="text" class="input-default input-default_p-zero input-default_border-transparent h2" v-model="book.title" @input="updateField('title')">
                         </h1>
-                        <svg class="mt-2 cursor-pointer icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" @click="$refs.book_name.focus()">
+                        <svg class="cursor-pointer icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" @click="$refs.book_name.focus()">
                             <g fill="none" fill-rule="evenodd">
                                 <g fill="#BEBDB8" fill-rule="nonzero">
                                     <g>
@@ -96,8 +96,8 @@
 
                 <!-- BEGIN Right block -->
                 <div class="px-12 mt-16 lg:mt-0">
-                    <div class="flex justify-between mt-2">
-                        <div class="flex">
+                    <div class="flex justify-between items-center">
+                        <div class="flex flex-auto items-center">
                             <svg @click="runEditorCommand('find', $refs['chapter_search_input'].value)" class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#BEBDB8" fill-rule="nonzero">
@@ -109,7 +109,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <input ref="chapter_search_input" type="text" class="input-default input-default_p-zero ml-4">
+                            <input ref="chapter_search_input" type="text" class="input-default input-default_p-zero ml-4" style="height: 42px; width: 80%;">
                         </div>
 
                         <div class="flex justify-end">

@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <app-container>
-            <div :class="{'hidden': !$page.user.stripe_subscription}">
+            <div :class="{'block': $page.user.stripe_subscription}">
                 <h1 class="h2">Story Plan</h1>
                 <div class="mt-12 grid grid-cols-1 xl:grid-cols-7 gap-16">
                     <div class="col-span-1 xl:col-span-3 bg-light">
@@ -310,12 +310,7 @@
                     </div>
                 </div>
             </div>
-            <div :class="{'block': !$page.user.stripe_subscription, 'hidden': $page.user.stripe_subscription}">
-                <NeedSubscription></NeedSubscription>
-            </div>
         </app-container>
-
-
 
         <jet-dialog-modal :show="isCreateMilestoneModalShow" @close="isCreateMilestoneModalShow = false">
             <template #title>
@@ -341,7 +336,6 @@
                 <button @click="createMilestone()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
             </template>
         </jet-dialog-modal>
-
         <jet-dialog-modal portal="modal_second" :show="isChangeMilestoneModalShow" @close="isChangeMilestoneModalShow = false">
             <template #title>
                 <span class="h2">Change milestone</span>
@@ -351,7 +345,7 @@
                 <input type="date" class="input-default w-full" v-model="changeMilestone.due_date">
 
                 <select class="mt-4 input-default w-full" v-model="changeMilestone.status">
-                    <option :value="key" v-for="(text, key) in milestoneStatuses">{{ text }}</option>
+                    <option :value="item.value" v-for="(item, key) in milestoneStatuses" :key="key">{{ item.title }}</option>
                 </select>
 
                 <jet-input-error :message="milestoneForm.error" class="mt-2" />
@@ -364,6 +358,10 @@
                 </div>
             </template>
         </jet-dialog-modal>
+
+        <template v-slot:modals>
+            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+        </template>
     </app-layout>
 </template>
 
@@ -372,7 +370,7 @@ import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 import JetDialogModal from "../../Jetstream/DialogModal";
 import JetInputError from "../../Jetstream/InputError";
-import NeedSubscription from "../NeedSubscription";
+import NeedSubscription from "../../Components/NeedSubscription";
 
 export default {
     components: {NeedSubscription, AppLayout, AppContainer, JetDialogModal, JetInputError},
@@ -388,13 +386,13 @@ export default {
             dateSelected: null,
             categorySelected: 'Covers',
             subCategorySelected: 'Front',
-            milestoneStatuses: {
-                0: 'In progress',
-                1: 'Completed',
-                2: 'To plan',
-                3: 'Todo',
-                4: 'On hold',
-            },
+            milestoneStatuses: [
+                { value: 2, title: 'To Plan'},
+                { value: 3, title: 'Todo'},
+                { value: 0, title: 'In Progress'},
+                { value: 4, title: 'On Hold'},
+                { value: 1, title: 'Completed'},
+            ],
             categories: {
                 'Covers': ['Front', 'Back', 'Spine'],
                 'Story Planning': ['Objective', 'Milestones'],

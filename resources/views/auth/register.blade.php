@@ -1,7 +1,7 @@
 <x-guest-layout>
 
 <div class="login-logo login-logo_left">
-        <a href="{{ route('dashboard') }}" class="login-logo__link">
+        <a href="{{ route('scriptorium') }}" class="login-logo__link">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="140"
                  height="61" viewBox="0 0 140 61">
                 <defs>

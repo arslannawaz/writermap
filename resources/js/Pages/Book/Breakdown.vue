@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <app-container>
-            <div :class="{'hidden': !$page.user.stripe_subscription}">
+            <div :class="{'block': $page.user.stripe_subscription}">
                 <div class="flex items-center px-16">
                     <h1 class="h2">Breakdown</h1>
                     <div class="flex-wrap ml-16 breakdown-header-links mt-1 hidden xl:flex">
@@ -100,17 +100,18 @@
                     </div>
                 </div>
             </div>
-            <div :class="{'block': !$page.user.stripe_subscription, 'hidden': $page.user.stripe_subscription}">
-                <NeedSubscription></NeedSubscription>
-            </div>
         </app-container>
+
+        <template v-slot:modals>
+            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+        </template>
     </app-layout>
 </template>
 
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
-import NeedSubscription from "../NeedSubscription";
+import NeedSubscription from "../../Components/NeedSubscription";
 
 export default {
     props: ['book', 'type', 'breakdown', 'prev_type', 'next_type'],
