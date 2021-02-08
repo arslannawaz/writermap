@@ -56,7 +56,8 @@
                     </div>
                     <div class="mt-2 bg-light p-10">
                         <div class="flex justify-start">
-                            <img ref="preview_physicality_image" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" alt="photo" height="84px" style="height: 84px;" class="rounded-full">
+                            <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') === undefined" src="/storage/undefined.jpg" alt="photo" height="84px" width="84px" style="height: 84px; width: 84px;" class="rounded-full">
+                            <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') !== undefined" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" alt="photo" height="84px" width="84px" style="height: 84px;width: 84px;" class="rounded-full">
                             <div class="ml-10">
                                 <div class="label-default h-35px">Describe your character’s physicality</div>
                                 <div ref="preview_physicality" class="mt-2 break-all h-100px">
@@ -601,7 +602,8 @@
                                 <div v-if="attributeInEdit.group === 'physicality'">
                                     <div class="flex mr-4">
                                         <div class="flex items-center">
-                                            <img ref="preview_input_physicality_image" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" height="84px" alt="photo" style="height: 84px;" class="rounded-full">
+                                            <img ref="preview_input_physicality_image" v-if="getAttributeValue('image', 'physicality') === undefined" src="/storage/undefined.jpg" width="84px" height="84px" alt="photo" style="height: 84px;" class="rounded-full">
+                                            <img ref="preview_input_physicality_image" v-if="getAttributeValue('image', 'physicality') !== undefined" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" width="84px" height="84px" alt="photo" style="height: 84px;" class="rounded-full">
                                             <input ref="input_physicality_image" type="file" class="hidden" @change="updateCharacterAttribute({ group: attributeInEdit.group, field: 'image', value: $event.target.files[0] })">
 
                                             <div class="ml-8 flex-shrink-0 flex-grow-0">
@@ -842,6 +844,16 @@ export default {
 
         updatePreviews(data)
         {
+            console.log('updatePreviews', data);
+            
+            if (data.field === 'image' && data.description === null) {
+                this.$refs['preview_input_' + data.group + '_' + data.field]
+                    .setAttribute('src', this.generateStorageUrl(data.value));
+
+                this.$refs['preview_' + data.group + '_' + data.field]
+                    .setAttribute('src', this.generateStorageUrl(data.value));
+            }
+
             if (this.$refs['preview_' + data.field] !== undefined) {
                 if (data.description === null) {
                     if (data.field === 'image') {
@@ -897,16 +909,21 @@ export default {
             if (group === null) {
                 for (let attribute of this.attributes) {
                     if (attribute.field === field) {
+                        console.log(`getAttributeValue, ${field}`, attribute.value);
                         return attribute.value;
                     }
                 }
             } else {
                 for (let attribute of this.attributes) {
                     if (attribute.group === group && attribute.field === field) {
+                        console.log(`getAttributeValue, ${field}`, attribute.value);
                         return attribute.value;
                     }
                 }
             }
+
+            console.log(`!return getAttributeValue, ${field}`);
+            return undefined;
         },
 
         truncateString(str, num) {

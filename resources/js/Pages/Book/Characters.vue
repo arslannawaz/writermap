@@ -146,7 +146,7 @@
 
                 <jet-dialog-modal :portal="'modal_second'" :show="isCharacterModalShow" @close="isCharacterModalShow = false">
                     <template #title>
-                        <span class="h2">Create new Character</span>
+                        <span class="h2">Create New Character</span>
                     </template>
 
                     <template #content>
