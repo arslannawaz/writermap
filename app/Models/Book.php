@@ -162,7 +162,7 @@ class Book extends Model
      */
     protected function defaultCoverImageUrl()
     {
-        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        return 'https://ui-avatars.com/api/?name='.urlencode($this->title).'&size=512&color=FFFFFF&background=4e4d4b';
     }
 
     /**
