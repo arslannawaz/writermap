@@ -4,17 +4,17 @@
             <div :class="{'block': $page.user.stripe_subscription}">
                 <h1 class="h2">Story Plan</h1>
                 <div class="mt-12 grid grid-cols-1 xl:grid-cols-7 gap-16">
-                    <div class="col-span-1 xl:col-span-3 bg-light">
+                    <div class="col-span-1 xl:col-span-3 bg-light" style="height: 370px;">
                         <h2 class="h2 px-12 pt-10">Writers Objective</h2>
-                        <div class="mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10 outline-none custom-scroll" contenteditable="true" @input="updateContentEditableField('objective', $event)">
+                        <div style="max-height: 230px;" class="custom-scroll overflow-y-auto mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10 outline-none custom-scroll" contenteditable="true" @input="updateContentEditableField('objective', $event)">
                             <p v-if="storyPlan.objective == null" @click="removeTypeHere">Type here...</p>
                             <p v-else>{{ storyPlan.objective }}</p>
                         </div>
                     </div>
-                    <div class="col-span-1 xl:col-span-4 bg-light p-12">
-                        <h2 class="h2">Story Inspiration</h2>
+                    <div class="col-span-1 xl:col-span-4 bg-light" style="height: 370px; max-height: 570px;">
+                        <h2 class="h2 px-12 pt-10">Story Inspiration</h2>
                         <div class="mt-8 flex flex-wrap xl:flex-no-wrap">
-                            <div class="mr-14 flex justify-center text-center">
+                            <div class="pl-12 mr-14 flex justify-center text-center hidden xl:block">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="230" height="225" viewBox="0 0 230 225">
                                 <g fill="none" fill-rule="evenodd">
                                     <g>
@@ -206,7 +206,7 @@
                             </svg>
                             </div>
 
-                            <div class="w-full text-left custom-scroll ff-minion fs-14 mt-10 xl:mt-0 outline-none custom-scroll" style="word-break: break-word;" contenteditable="true" @input="updateContentEditableField('inspiration', $event)">
+                            <div class="pl-12 pr-12 xl:pl-0 custom-scroll overflow-y-auto w-full text-left custom-scroll ff-minion fs-14 outline-none custom-scroll" style="word-break: break-word; max-height: 230px;" contenteditable="true" @input="updateContentEditableField('inspiration', $event)">
                                 <p v-if="storyPlan.inspiration == null" @click="removeTypeHere">Type here...</p>
                                 <p v-else>{{ storyPlan.inspiration }}</p>
                             </div>
