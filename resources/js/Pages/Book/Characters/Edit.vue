@@ -1,8 +1,13 @@
 <template>
     <app-layout>
-        <app-container width="w-container">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="">
+        <app-container width="w-full-container">
+            <div class="grid grid-cols-2 grid-background absolute z-0 invisible xl:visible">
+                <div class="col-span-1 col-bg_default"></div>
+                <div class="col-span-1 col-bg"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-15 relative z-10">
+                <div class="px-6 xl:px-12">
                     <div class="text-color-light text-sm uppercase">Basics</div>
                     <div class="mt-2 bg-light p-10">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -51,7 +56,7 @@
                     <hr class="mt-10 block w-full border-gray-300">
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Physicality</div>
+                        <div class="text-color-light text-sm uppercase label-default">Physicality</div>
                         <div v-if="attributeInEdit && attributeInEdit.group === 'physicality'">Editing</div>
                     </div>
                     <div class="mt-2 bg-light p-10">
@@ -593,7 +598,7 @@
                     </div>
                 </div>
 
-                <div v-if="attributeInEdit !== null">
+                <div class="px-6 xl:px-12" v-if="attributeInEdit !== null">
                     <div class="che-rt-block">
                         <div></div>
                         <div class="label-default">{{ attributeInEdit.group }}</div>
@@ -845,7 +850,7 @@ export default {
         updatePreviews(data)
         {
             console.log('updatePreviews', data);
-            
+
             if (data.field === 'image' && data.description === null) {
                 this.$refs['preview_input_' + data.group + '_' + data.field]
                     .setAttribute('src', this.generateStorageUrl(data.value));

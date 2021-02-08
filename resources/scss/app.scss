@@ -200,6 +200,7 @@ textarea {
 
 .form-label, .label-default {
     font-size: 12px;
+    letter-spacing: 2px;
     color: #adaaa5;
     text-transform: uppercase;
 }
@@ -336,6 +337,11 @@ label {
     @media (min-width: 2200px) {
         max-width: 1960px;
     }
+}
+
+.w-full-container {
+    width: 100%;
+    max-width: 100%;
 }
 
 .h-screen {
