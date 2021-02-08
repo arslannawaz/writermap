@@ -4,7 +4,7 @@
             <div :class="{'block': $page.user.stripe_subscription}">
                 <div class="flex items-center px-16">
                     <h1 class="h2">Breakdown</h1>
-                    <div class="flex-wrap ml-16 breakdown-header-links -mt-2 hidden xl:flex">
+                    <div class="flex-wrap ml-16 breakdown-header-links -mt-5 hidden xl:flex">
                         <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
                         <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
                         <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>

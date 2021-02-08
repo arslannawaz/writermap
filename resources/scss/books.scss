@@ -10,6 +10,15 @@
     &:hover {
         color: #4e4d4b;
     }
+
+    &_no-hover {
+        color: #adaaa5;
+        cursor: default;
+
+        &:hover {
+            color: #adaaa5;
+        }
+    }
 }
 
 .book-page {

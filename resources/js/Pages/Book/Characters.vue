@@ -42,9 +42,9 @@
                 </div>
 
                 <div class="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                    <div class="character-in-list border-default p-4" v-for="character in characters.data" :key="character.id">
+                    <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="character-in-list border-default p-4 relative z-10" v-for="character in characters.data" :key="character.id">
                         <div class="bg-light p-8 flex flex-col items-center justify-center text-center">
-                            <div class="character-in-list__three-dots icon-hoverable" @click="toggleDropdown(character.id)">
+                            <div class="character-in-list__three-dots icon-hoverable z-20" @click="toggleDropdown(character.id)">
                                 <svg class="three-dots" xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8"><g><g><path d="M172 70c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-860 -628) translate(350 522) translate(340 50)"></path></g></g></g></g></svg>
 
                                 <div :id="'dropdown-menu-' + character.id" class="character-in-list__dropdown-menu bg-light flex flex-col opacity-0">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
 
-                            <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'">
+                            <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="84" height="84" viewBox="0 0 84 84">
                                 <defs>
                                     <circle id="xf1qgiyoqa" cx="42" cy="42" r="42"/>
@@ -74,7 +74,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            </a>
+                            </div>
 
                             <div class="mt-4 fs-15 font-semibold">{{ character.name }}</div>
                             <div class="text-color-light fs-12">{{ character.type_title }}</div>
@@ -83,7 +83,7 @@
                                 Default description
                             </p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="pagination mt-12 flex justify-center items-center noselect" v-if="characters">
                     <div class="pagination__page" v-for="(page, index) in characters.links" :key="index"

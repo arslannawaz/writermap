@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <hr class="mt-10 block w-full border-gray-300">
+                    <div class="mt-10 block w-full"></div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
                         <div class="text-color-light text-sm uppercase label-default">Physicality</div>
@@ -61,8 +61,8 @@
                     </div>
                     <div class="mt-2 bg-light p-10">
                         <div class="flex justify-start">
-                            <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') === undefined" src="/storage/undefined.jpg" alt="photo" height="84px" width="84px" style="height: 84px; width: 84px;" class="rounded-full">
-                            <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') !== undefined" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" alt="photo" height="84px" width="84px" style="height: 84px;width: 84px;" class="rounded-full">
+                            <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') === undefined" src="/storage/undefined.jpg" alt="photo" height="84px" width="84px" style="height: 84px; width: 84px;" class="rounded-full flex-shrink-0">
+                            <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') !== undefined" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" alt="photo" height="84px" width="84px" style="height: 84px;width: 84px;" class="rounded-full flex-shrink-0">
                             <div class="ml-10">
                                 <div class="label-default h-35px">Describe your character’s physicality</div>
                                 <div ref="preview_physicality" class="mt-2 break-all h-100px">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
 
-                    <hr class="mt-10 block w-full border-gray-300">
+                    <div class="mt-10 block w-full"></div>
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div class="chet-preview">
@@ -177,7 +177,7 @@
 
                     </div>
 
-                    <hr class="mt-10 block w-full border-gray-300">
+                    <div class="mt-10 block w-full"></div>
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
@@ -237,7 +237,7 @@
                         </div>
                     </div>
 
-                    <hr class="mt-10 block w-full border-gray-300">
+                    <div class="mt-10 block w-full"></div>
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
@@ -415,7 +415,7 @@
                         </div>
                     </div>
 
-                    <hr class="mt-10 block w-full border-gray-300">
+                    <div class="mt-10 block w-full"></div>
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
@@ -536,7 +536,7 @@
                         </div>
                     </div>
 
-                    <hr class="mt-10 block w-full border-gray-300">
+                    <div class="mt-10 block w-full"></div>
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
