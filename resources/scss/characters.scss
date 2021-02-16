@@ -37,8 +37,15 @@
     top: 2rem;
 }
 
-//.chet-preview {
-//    &__block {
-//        height: 220px;
-//    }
-//}
+.chet-preview {
+    position: relative;
+    //&__block {
+    //    height: 220px;
+    //}
+    &__updated-at {
+        position: absolute;
+        bottom: 90px;
+        left: 35px;
+        color: #adaaa5;
+    }
+}

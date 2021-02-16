@@ -95,12 +95,13 @@
                                 <div class="text-color-light text-sm uppercase">Traits</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'trait_1'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
+                            <div class="relative mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
                                 <div>
                                     <div class="label-default h-35px">Explain character trait</div>
                                     <div ref="preview_trait_1" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('trait_1') | truncate(120, '..') }}
                                     </div>
+                                    <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('trait_1')) }}</div>
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('traits', 'trait_1', 'Select and explain character trait')">
@@ -125,11 +126,12 @@
                                 <div class="text-color-light text-sm uppercase">Traits</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'trait_2'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
+                            <div class="relative mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
                                 <div class="label-default h-35px">Explain character trait</div>
                                 <div ref="preview_trait_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('trait_2') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('trait_2')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('traits', 'trait_2', 'Select and explain character trait')">
                                     <span>View</span>
@@ -158,12 +160,13 @@
                                     <div class="text-color-light text-sm uppercase">Traits</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'trait_3'">Editing</div>
                                 </div>
-                                <div class="mt-2 bg-light p-10">
+                                <div class="relative mt-2 bg-light p-10">
 
                                     <div class="label-default h-35px">Explain character trait</div>
                                     <div ref="preview_trait_3" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('trait_3') | truncate(120, '..') }}
                                     </div>
+                                    <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('trait_3')) }}</div>
                                     <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                          @click="selectAttributeInEdit('traits', 'trait_3', 'Select and explain character trait')">
                                         <span>View</span>
@@ -188,11 +191,12 @@
                                     <div class="text-color-light text-sm uppercase">Views</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'religion'">Editing</div>
                                 </div>
-                                <div class="mt-2 bg-light p-10">
+                                <div class="relative mt-2 bg-light p-10">
                                     <div class="label-default h-35px">Do they have a religion?</div>
                                     <div ref="preview_religion" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('religion') | truncate(120, '..') }}
                                     </div>
+                                    <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('religion')) }}</div>
                                     <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                          @click="selectAttributeInEdit('views', 'religion', 'Do they have a religion? Explain their beliefs')">
                                         <span>View</span>
@@ -217,12 +221,13 @@
                                     <div class="text-color-light text-sm uppercase">Views</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'optimistic'">Editing</div>
                                 </div>
-                                <div class="mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
+                                <div class="relative mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
                                     <div>
                                         <div class="label-default h-35px">Are they optimistic or pessimistic?</div>
                                         <div ref="preview_optimistic" class="mt-2 break-all h-100px">
                                             {{ getAttributeDescription('optimistic') | truncate(120, '..') }}
                                         </div>
+                                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('optimistic')) }}</div>
                                     </div>
                                     <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                          @click="selectAttributeInEdit('views', 'optimistic', 'Are they optimistic or pessimistic? How do they view things?')">
@@ -250,11 +255,12 @@
                         <div class="text-color-light text-sm uppercase">Background</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'background_1'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">What social class do they sit in?</div>
                         <div ref="preview_background_1" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('background_1') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_1')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('background', 'background_1', 'What social class do they sit in?')">
                             <span>View</span>
@@ -278,11 +284,12 @@
                                 <div class="text-color-light text-sm uppercase">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_2'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What kind of intelligence do they have?</div>
                                 <div ref="preview_background_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_2') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_2')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_2', 'What kind of intelligence do they have?')">
                                     <span>View</span>
@@ -306,11 +313,12 @@
                                 <div class="text-color-light text-sm uppercase">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_3'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What education does your character have?</div>
                                 <div ref="preview_background_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('background_3') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_3')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_3', 'What education does your character have?')">
                                     <span>View</span>
@@ -334,11 +342,12 @@
                         <div class="text-color-light text-sm uppercase">Background</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'background_4'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">What is their hometown and what was it like</div>
                         <div ref="preview_background_4" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('background_4') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_4')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('background', 'background_4', 'What is their hometown and what was it like for them growing up? Describe their\n'+
 'childhood and the effects it has on them. Do they have a favourite place?')">
@@ -364,11 +373,12 @@
                                     <div class="text-color-light text-sm uppercase">Background</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'background_5'">Editing</div>
                                 </div>
-                                <div class="mt-2 bg-light p-10">
+                                <div class="relative mt-2 bg-light p-10">
                                     <div class="label-default h-35px">What is their occupation?</div>
                                     <div ref="preview_background_5" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('background_5') | truncate(120, '..') }}
                                     </div>
+                                    <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_5')) }}</div>
                                     <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                          @click="selectAttributeInEdit('background', 'background_5', 'What is their occupation? What does their resume look like?')">
                                         <span>View</span>
@@ -392,11 +402,12 @@
                                     <div class="text-color-light text-sm uppercase">Relationships</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_1'">Editing</div>
                                 </div>
-                                <div class="mt-2 bg-light p-10">
+                                <div class="relative mt-2 bg-light p-10">
                                     <div class="label-default h-35px">Who is your characters family?</div>
                                     <div ref="preview_relationship_1" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('relationship_1') | truncate(120, '..') }}
                                     </div>
+                                    <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_1')) }}</div>
                                     <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                          @click="selectAttributeInEdit('relationships', 'relationship_1', 'Who is your characters family? What relationship do they have with them?')">
                                         <span>View</span>
@@ -421,12 +432,13 @@
                                 <div class="text-color-light text-sm uppercase">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_6'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
+                            <div class="relative mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
                                 <div>
                                     <div class="label-default h-35px">What are some major turning points?</div>
                                     <div ref="preview_background_6" class="mt-2 break-all h-100px">
                                         {{ getAttributeDescription('background_6') | truncate(120, '..') }}
                                     </div>
+                                    <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_6')) }}</div>
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_6', 'What are some major turning points in your characters life? What events took place\n'+
@@ -454,11 +466,12 @@
                                 <div class="text-color-light text-sm uppercase">Relationships</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_2'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Who are your characters friends?</div>
                                 <div ref="preview_relationship_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('relationship_2') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_2')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('relationships', 'relationship_2', 'Who are your characters friends? How did they meet? What kind of relationship do\n'+
 'they have?')">
@@ -483,11 +496,12 @@
                                 <div class="text-color-light text-sm uppercase">Relationships</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_3'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Is your character in a relationship?</div>
                                 <div ref="preview_relationship_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('relationship_3') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_3')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('relationships', 'relationship_3', 'Is your character in a relationship with someone? How do they feel about\n'+
 'relationships? Will there be a love interest? How will it make your character feel and\n'+
@@ -513,11 +527,12 @@
                         <div class="text-color-light text-sm uppercase">Relationships</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_4'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">Sexuality, who are they interested in?</div>
                         <div ref="preview_relationship_4" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('relationship_4') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_4')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('relationships', 'relationship_4', 'Sexuality, who are they interested in?')">
                             <span>View</span>
@@ -543,11 +558,12 @@
                                 <div class="text-color-light text-sm uppercase">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_1'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What are your characters insecurities?</div>
                                 <div ref="preview_struggles_1" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('struggles_1') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_1')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('struggles', 'struggles_1', 'What are your characters insecurities?')">
                                     <span>View</span>
@@ -571,11 +587,12 @@
                                 <div class="text-color-light text-sm uppercase">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_2'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Biggest fear</div>
                                 <div ref="preview_struggles_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('struggles_2') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_2')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('struggles', 'struggles_2', 'Biggest fear. What does your character fear the most, big or small? What, if needed to\n'+
 'be confronted - would keep them up at night?')">
@@ -600,11 +617,12 @@
                         <div class="text-color-light text-sm uppercase">Struggles</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_3'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">Saddest memory</div>
                         <div ref="preview_struggles_3" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('struggles_3') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_3')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('struggles', 'struggles_3', 'Saddest memory. What memory do they hold close to their heart and wish never to feel that pain again? What memory tore them up? Describe why it made them feel the way that it did.')">
                             <span>View</span>
@@ -628,11 +646,12 @@
                                 <div class="text-color-light text-sm uppercase">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_4'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What is your characters greatest regret?</div>
                                 <div ref="preview_struggles_4" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('struggles_4') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_4')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('struggles', 'struggles_4', 'What is your characters greatest regret? What do they wish they could go back in time and do differently?')">
                                     <span>View</span>
@@ -656,11 +675,12 @@
                                 <div class="text-color-light text-sm uppercase">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_5'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What secrets is your character holding?</div>
                                 <div ref="preview_struggles_5" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('struggles_5') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_5')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('struggles', 'struggles_5', 'What secrets is your character holding? From what characters are they hiding the truth?')">
                                     <span>View</span>
@@ -684,11 +704,12 @@
                         <div class="text-color-light text-sm uppercase">Strengths</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_1'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">What are they good at?</div>
                         <div ref="preview_strengths_1" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('strengths_1') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('strengths_1')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('strengths', 'strengths_1', 'What are they good at? Good or bad, where do they excel?')">
                             <span>View</span>
@@ -712,11 +733,12 @@
                                 <div class="text-color-light text-sm uppercase">Strengths</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_2'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What memory brings joy to their heart instantly?</div>
                                 <div ref="preview_strengths_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('strengths_2') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('strengths_2')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('strengths', 'strengths_2', 'What memory brings joy to their heart instantly? Describe a time where they felt their most happiest and how they remember it.')">
                                     <span>View</span>
@@ -740,11 +762,12 @@
                                 <div class="text-color-light text-sm uppercase">Strengths</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_3'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What are their hobbies?</div>
                                 <div ref="preview_strengths_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('strengths_3') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('strengths_3')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('strengths', 'strengths_3', 'What are their hobbies? What do they do for fun?')">
                                     <span>View</span>
@@ -772,11 +795,12 @@
                                 <div class="text-color-light text-sm uppercase">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_1'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What is their goal?</div>
                                 <div ref="preview_goal_1" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('goal_1') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_1')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('goal', 'goal_1', 'What is their goal? What do they want?')">
                                     <span>View</span>
@@ -800,11 +824,12 @@
                                 <div class="text-color-light text-sm uppercase">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_2'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Why does your character want it?</div>
                                 <div ref="preview_goal_2" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('goal_2') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_2')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('goal', 'goal_2', 'Why does your character want it? Why is it their goal? How would it make them feel to have it? How do they feel without it?')">
                                     <span>View</span>
@@ -830,11 +855,12 @@
                                 <div class="text-color-light text-sm uppercase">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_3'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">What is the reason they don't have what they want?</div>
                                 <div ref="preview_goal_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('goal_3') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_3')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('goal', 'goal_3', 'What is the reason they don\'t have what they want? Have they tried before and failed? Is it a new opportunity?')">
                                     <span>View</span>
@@ -858,11 +884,12 @@
                                 <div class="text-color-light text-sm uppercase">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_4'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">How far will they go?</div>
                                 <div ref="preview_goal_4" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('goal_4') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_4')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('goal', 'goal_4', 'How far will they go? What will they sacrifice to obtain it? Time? Their life? Relationships? Money?')">
                                     <span>View</span>
@@ -886,11 +913,12 @@
                         <div class="text-color-light text-sm uppercase">Journey</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'journey_1'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">What do they do to get what they want?</div>
                         <div ref="preview_journey_1" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('journey_1') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_1')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('journey', 'journey_1', 'What do they do to get what they want?')">
                             <span>View</span>
@@ -912,11 +940,12 @@
                         <div class="text-color-light text-sm uppercase">Journey</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'journey_2'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">What implications does it cause?</div>
                         <div ref="preview_journey_2" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('journey_2') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_2')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('journey', 'journey_2', 'What implications does it cause?')">
                             <span>View</span>
@@ -940,11 +969,12 @@
                                 <div class="text-color-light text-sm uppercase">Journey</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'journey_3'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Is the result good, bad or both?</div>
                                 <div ref="preview_journey_3" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('journey_3') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_3')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('journey', 'journey_3', 'Is the result good, bad or both?')">
                                     <span>View</span>
@@ -968,11 +998,12 @@
                                 <div class="text-color-light text-sm uppercase">Journey</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'journey_4'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
+                            <div class="relative mt-2 bg-light p-10">
                                 <div class="label-default h-35px">Are they happy with the outcome?</div>
                                 <div ref="preview_journey_4" class="mt-2 break-all h-100px">
                                     {{ getAttributeDescription('journey_4') | truncate(120, '..') }}
                                 </div>
+                                <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_4')) }}</div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('journey', 'journey_4', 'Are they happy with the outcome?')">
                                     <span>View</span>
@@ -996,11 +1027,12 @@
                         <div class="text-color-light text-sm uppercase">Notes</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'notes_1'">Editing</div>
                     </div>
-                    <div class="mt-2 bg-light p-10">
+                    <div class="relative mt-2 bg-light p-10">
                         <div class="label-default h-35px">Content</div>
                         <div ref="preview_notes_1" class="mt-2 break-all h-100px">
                             {{ getAttributeDescription('notes_1') | truncate(120, '..') }}
                         </div>
+                        <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('notes_1')) }}</div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                              @click="selectAttributeInEdit('notes', 'notes_1', 'Write something')">
                             <span>View</span>
@@ -1387,6 +1419,25 @@ export default {
             for (let attribute of this.attributes) {
                 if (attribute.field === field) {
                     return attribute.description ? attribute.description : null;
+                }
+            }
+
+            return null;
+        },
+
+        formatDate(date) {
+            if (date === null) {
+                return '';
+            }
+
+            const formatDate = new Date(date);
+            return formatDate.toLocaleString('default', { month: 'short' }) + ' ' + formatDate.getUTCDate() + ', ' + formatDate.getFullYear();
+        },
+
+        getAttributeUpdatedAt(field) {
+            for (let attribute of this.attributes) {
+                if (attribute.field === field) {
+                    return attribute.updated_at ? attribute.updated_at : null;
                 }
             }
 
