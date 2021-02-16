@@ -8,7 +8,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-15 relative z-10">
                 <div class="px-6 xl:px-12">
-                    <div class="text-color-light text-sm uppercase">Basics</div>
+                    <div class="text-color-light text-sm uppercase label-default">Basics</div>
                     <div class="mt-2 bg-light p-10">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
@@ -92,7 +92,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div class="chet-preview">
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Traits</div>
+                                <div class="text-color-light text-sm uppercase label-default">Traits</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'trait_1'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
@@ -123,7 +123,7 @@
 
                         <div class="chet-preview">
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Traits</div>
+                                <div class="text-color-light text-sm uppercase label-default">Traits</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'trait_2'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between">
@@ -157,7 +157,7 @@
                         <div class="flex flex-col">
                             <div>
                                 <div class="flex justify-between items-center h-6">
-                                    <div class="text-color-light text-sm uppercase">Traits</div>
+                                    <div class="text-color-light text-sm uppercase label-default">Traits</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'trait_3'">Editing</div>
                                 </div>
                                 <div class="relative mt-2 bg-light p-10">
@@ -188,7 +188,7 @@
 
                             <div class="mt-6">
                                 <div class="flex justify-between items-center h-6">
-                                    <div class="text-color-light text-sm uppercase">Views</div>
+                                    <div class="text-color-light text-sm uppercase label-default">Views</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'religion'">Editing</div>
                                 </div>
                                 <div class="relative mt-2 bg-light p-10">
@@ -218,7 +218,7 @@
                         <div class="flex flex-col">
 
                                 <div class="flex justify-between items-center h-6">
-                                    <div class="text-color-light text-sm uppercase">Views</div>
+                                    <div class="text-color-light text-sm uppercase label-default">Views</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'optimistic'">Editing</div>
                                 </div>
                                 <div class="relative mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
@@ -252,7 +252,7 @@
                     <div class="mt-10 block w-full"></div>
 
                     <div class="flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Background</div>
+                        <div class="text-color-light text-sm uppercase label-default">Background</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'background_1'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -281,7 +281,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div class="text-color-light text-sm uppercase label-default">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_2'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -310,7 +310,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div class="text-color-light text-sm uppercase label-default">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_3'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -339,7 +339,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Background</div>
+                        <div class="text-color-light text-sm uppercase label-default">Background</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'background_4'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -370,7 +370,7 @@
                         <div class="flex flex-col">
                             <div>
                                 <div class="flex justify-between items-center h-6">
-                                    <div class="text-color-light text-sm uppercase">Background</div>
+                                    <div class="text-color-light text-sm uppercase label-default">Background</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'background_5'">Editing</div>
                                 </div>
                                 <div class="relative mt-2 bg-light p-10">
@@ -399,7 +399,7 @@
 
                             <div class="mt-8">
                                 <div class="flex justify-between items-center h-6">
-                                    <div class="text-color-light text-sm uppercase">Relationships</div>
+                                    <div class="text-color-light text-sm uppercase label-default">Relationships</div>
                                     <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_1'">Editing</div>
                                 </div>
                                 <div class="relative mt-2 bg-light p-10">
@@ -429,7 +429,7 @@
 
                         <div class="flex flex-col">
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Background</div>
+                                <div class="text-color-light text-sm uppercase label-default">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_6'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
@@ -463,7 +463,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Relationships</div>
+                                <div class="text-color-light text-sm uppercase label-default">Relationships</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_2'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -493,7 +493,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Relationships</div>
+                                <div class="text-color-light text-sm uppercase label-default">Relationships</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_3'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -524,7 +524,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Relationships</div>
+                        <div class="text-color-light text-sm uppercase label-default">Relationships</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_4'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -555,7 +555,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div class="text-color-light text-sm uppercase label-default">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_1'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -584,7 +584,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div class="text-color-light text-sm uppercase label-default">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_2'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -614,7 +614,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Struggles</div>
+                        <div class="text-color-light text-sm uppercase label-default">Struggles</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_3'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -643,7 +643,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div class="text-color-light text-sm uppercase label-default">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_4'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -672,7 +672,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div class="text-color-light text-sm uppercase label-default">Struggles</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_5'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -701,7 +701,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Strengths</div>
+                        <div class="text-color-light text-sm uppercase label-default">Strengths</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_1'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -730,7 +730,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Strengths</div>
+                                <div class="text-color-light text-sm uppercase label-default">Strengths</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_2'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -759,7 +759,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Strengths</div>
+                                <div class="text-color-light text-sm uppercase label-default">Strengths</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_3'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -792,7 +792,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div class="text-color-light text-sm uppercase label-default">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_1'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -821,7 +821,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div class="text-color-light text-sm uppercase label-default">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_2'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -852,7 +852,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div class="text-color-light text-sm uppercase label-default">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_3'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -881,7 +881,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div class="text-color-light text-sm uppercase label-default">Goal</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'goal_4'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -910,7 +910,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Journey</div>
+                        <div class="text-color-light text-sm uppercase label-default">Journey</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'journey_1'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -937,7 +937,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Journey</div>
+                        <div class="text-color-light text-sm uppercase label-default">Journey</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'journey_2'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -966,7 +966,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Journey</div>
+                                <div class="text-color-light text-sm uppercase label-default">Journey</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'journey_3'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -995,7 +995,7 @@
 
                         <div>
                             <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Journey</div>
+                                <div class="text-color-light text-sm uppercase label-default">Journey</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'journey_4'">Editing</div>
                             </div>
                             <div class="relative mt-2 bg-light p-10">
@@ -1024,7 +1024,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Notes</div>
+                        <div class="text-color-light text-sm uppercase label-default">Notes</div>
                         <div v-if="attributeInEdit && attributeInEdit.field === 'notes_1'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10">
@@ -1111,7 +1111,7 @@
                                     <div class="mt-8 fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
 
                                     <div class="mt-6 label-default">Enter description</div>
-                                    <div class="mt-2 editor outline-none">
+                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll" style="max-height: 78vh;">
                                         <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editor" />
                                     </div>
                                 </div>
@@ -1126,7 +1126,7 @@
                                     </select>
 
                                     <div class="mt-6 label-default">Enter description</div>
-                                    <div class="mt-2 editor outline-none">
+                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll" style="max-height: 78vh;">
                                         <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" @click="removeTypeHere" :editor="editor" />
                                     </div>
                                 </div>
@@ -1139,7 +1139,7 @@
     <!--                                    {{ attributeInEdit.description }}-->
     <!--                                </div>-->
 
-                                    <div class="mt-2 editor outline-none">
+                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll" style="max-height: 78vh;">
                                         <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editor" />
                                     </div>
                                 </div>
