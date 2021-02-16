@@ -40,6 +40,11 @@
         &_cover {
             padding: 0;
         }
+
+        &_preview {
+            pointer-events: none;
+            outline: none;
+        }
     }
 
     &__contacts {

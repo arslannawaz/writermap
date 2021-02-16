@@ -42,48 +42,49 @@
                 </div>
 
                 <div class="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                    <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="character-in-list border-default p-4 relative z-10" v-for="character in characters.data" :key="character.id">
-                        <div class="bg-light p-8 flex flex-col items-center justify-center text-center">
+                    <div class="character-in-list border-default p-4 relative z-10" v-for="character in characters.data" :key="character.id">
+                        <div class="bg-light flex flex-col items-center justify-center text-center">
                             <div class="character-in-list__three-dots icon-hoverable z-20" @click="toggleDropdown(character.id)">
                                 <svg class="three-dots" xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8"><g><g><path d="M172 70c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-860 -628) translate(350 522) translate(340 50)"></path></g></g></g></g></svg>
 
                                 <div :id="'dropdown-menu-' + character.id" class="character-in-list__dropdown-menu bg-light flex flex-col opacity-0">
                                     <div class="text-red-400 hover:text-red-600" @click="deleteCharacter(character.id)">Delete</div>
-                                    <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="mt-4 hover:text-black">View profile</a>
+<!--                                    <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="mt-4 hover:text-black">Edit</a>-->
                                 </div>
                             </div>
-
+                            <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="flex flex-col p-8 justify-center items-center relative z-10">
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="84" height="84" viewBox="0 0 84 84">
-                                <defs>
-                                    <circle id="xf1qgiyoqa" cx="42" cy="42" r="42"/>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <g>
-                                        <g>
-                                            <g transform="translate(-673 -219) translate(595 179) translate(78 40)">
-                                                <mask id="fj0ie4f00b" fill="#fff">
-                                                    <use xlink:href="#xf1qgiyoqa"/>
-                                                </mask>
-                                                <use fill="#EDE9E1" xlink:href="#xf1qgiyoqa"/>
-                                                <g fill="#BEBDB8" fill-rule="nonzero" mask="url(#fj0ie4f00b)">
-                                                    <path d="M13.71 11.71c2.01-1.581 2.796-4.262 1.96-6.679C14.833 2.615 12.557.995 10 .995S5.167 2.615 4.33 5.03c-.836 2.417-.05 5.098 1.96 6.679C2.867 13.081.477 16.225.07 19.89c-.06.552.338 1.05.89 1.11.552.06 1.05-.338 1.11-.89.455-4.047 3.877-7.107 7.95-7.107s7.495 3.06 7.95 7.107c.056.509.488.893 1 .89h.11c.546-.063.939-.554.88-1.1-.409-3.676-2.812-6.826-6.25-8.19zM10 11c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4c0 1.06-.421 2.078-1.172 2.828C12.078 10.578 11.061 11 10 11z" transform="translate(32 32)"/>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="84" height="84" viewBox="0 0 84 84">-->
+<!--                                    <defs>-->
+<!--                                        <circle id="xf1qgiyoqa" cx="42" cy="42" r="42"/>-->
+<!--                                    </defs>-->
+<!--                                    <g fill="none" fill-rule="evenodd">-->
+<!--                                        <g>-->
+<!--                                            <g>-->
+<!--                                                <g transform="translate(-673 -219) translate(595 179) translate(78 40)">-->
+<!--                                                    <mask id="fj0ie4f00b" fill="#fff">-->
+<!--                                                        <use xlink:href="#xf1qgiyoqa"/>-->
+<!--                                                    </mask>-->
+<!--                                                    <use fill="#EDE9E1" xlink:href="#xf1qgiyoqa"/>-->
+<!--                                                    <g fill="#BEBDB8" fill-rule="nonzero" mask="url(#fj0ie4f00b)">-->
+<!--                                                        <path d="M13.71 11.71c2.01-1.581 2.796-4.262 1.96-6.679C14.833 2.615 12.557.995 10 .995S5.167 2.615 4.33 5.03c-.836 2.417-.05 5.098 1.96 6.679C2.867 13.081.477 16.225.07 19.89c-.06.552.338 1.05.89 1.11.552.06 1.05-.338 1.11-.89.455-4.047 3.877-7.107 7.95-7.107s7.495 3.06 7.95 7.107c.056.509.488.893 1 .89h.11c.546-.063.939-.554.88-1.1-.409-3.676-2.812-6.826-6.25-8.19zM10 11c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4c0 1.06-.421 2.078-1.172 2.828C12.078 10.578 11.061 11 10 11z" transform="translate(32 32)"/>-->
+<!--                                                    </g>-->
+<!--                                                </g>-->
+<!--                                            </g>-->
+<!--                                        </g>-->
+<!--                                    </g>-->
+<!--                                </svg>-->
+                                <img :src="character.avatar_image_path" alt="avatar" style="width: 84px;height: 84px;border-radius: 100%;">
                             </div>
 
                             <div class="mt-4 fs-15 font-semibold">{{ character.name }}</div>
                             <div class="text-color-light fs-12">{{ character.type_title }}</div>
-
-                            <p class="mt-8 fs-13">
-                                Default description
-                            </p>
+                            </a>
+<!--                            <p class="mt-8 fs-13">-->
+<!--                                Default description-->
+<!--                            </p>-->
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div class="pagination mt-12 flex justify-center items-center noselect" v-if="characters">
                     <div class="pagination__page" v-for="(page, index) in characters.links" :key="index"

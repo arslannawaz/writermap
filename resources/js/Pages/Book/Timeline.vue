@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <app-container>
+        <app-container width="w-container">
             <div class="flex items-center justify-between">
                 <h1 class="h2">Timeline</h1>
 
@@ -20,20 +20,20 @@
 
                     <input ref="search_input" type="text" class="ml-2 input-default input-default_p-zero hidden" @keyup="search($event)">
 
-                    <svg @click="isEventCreateModalShow = true;" class="icon-hoverable ml-6" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <g fill="none" fill-rule="evenodd">
-                            <g fill="#BEBDB8" fill-rule="nonzero">
-                                <g>
-                                    <path d="M16.2 5.562V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v4.662c-1.068.388-1.779 1.402-1.779 2.538s.711 2.15 1.779 2.538V17.1c0 .497.403.9.9.9s.9-.403.9-.9v-6.462c1.068-.388 1.779-1.402 1.779-2.538s-.711-2.15-1.779-2.538zM15.3 9c-.497 0-.9-.403-.9-.9s.403-.9.9-.9.9.403.9.9-.403.9-.9.9zm-5.4 1.962V.9C9.9.403 9.497 0 9 0s-.9.403-.9.9v10.062c-1.068.388-1.779 1.402-1.779 2.538s.711 2.15 1.779 2.538V17.1c0 .497.403.9.9.9s.9-.403.9-.9v-1.062c1.068-.388 1.779-1.402 1.779-2.538s-.711-2.15-1.779-2.538zM9 14.4c-.497 0-.9-.403-.9-.9s.403-.9.9-.9.9.403.9.9-.403.9-.9.9zM3.6 3.762V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.862C.732 4.15.021 5.164.021 6.3S.732 8.45 1.8 8.838V17.1c0 .497.403.9.9.9s.9-.403.9-.9V8.838C4.668 8.45 5.379 7.436 5.379 6.3S4.668 4.15 3.6 3.762zM2.7 7.2c-.497 0-.9-.403-.9-.9s.403-.9.9-.9.9.403.9.9-.403.9-.9.9z" transform="translate(-1223 -44) translate(1223 44)"/>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
+<!--                    <svg class="icon-hoverable ml-6" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">-->
+<!--                        <g fill="none" fill-rule="evenodd">-->
+<!--                            <g fill="#BEBDB8" fill-rule="nonzero">-->
+<!--                                <g>-->
+<!--                                    <path d="M16.2 5.562V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v4.662c-1.068.388-1.779 1.402-1.779 2.538s.711 2.15 1.779 2.538V17.1c0 .497.403.9.9.9s.9-.403.9-.9v-6.462c1.068-.388 1.779-1.402 1.779-2.538s-.711-2.15-1.779-2.538zM15.3 9c-.497 0-.9-.403-.9-.9s.403-.9.9-.9.9.403.9.9-.403.9-.9.9zm-5.4 1.962V.9C9.9.403 9.497 0 9 0s-.9.403-.9.9v10.062c-1.068.388-1.779 1.402-1.779 2.538s.711 2.15 1.779 2.538V17.1c0 .497.403.9.9.9s.9-.403.9-.9v-1.062c1.068-.388 1.779-1.402 1.779-2.538s-.711-2.15-1.779-2.538zM9 14.4c-.497 0-.9-.403-.9-.9s.403-.9.9-.9.9.403.9.9-.403.9-.9.9zM3.6 3.762V.9c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.862C.732 4.15.021 5.164.021 6.3S.732 8.45 1.8 8.838V17.1c0 .497.403.9.9.9s.9-.403.9-.9V8.838C4.668 8.45 5.379 7.436 5.379 6.3S4.668 4.15 3.6 3.762zM2.7 7.2c-.497 0-.9-.403-.9-.9s.403-.9.9-.9.9.403.9.9-.403.9-.9.9z" transform="translate(-1223 -44) translate(1223 44)"/>-->
+<!--                                </g>-->
+<!--                            </g>-->
+<!--                        </g>-->
+<!--                    </svg>-->
 
-                    <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12" @click="isEventItemCreateModalShow = true;">Create New</button>
+                    <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12" @click="isEventCreateModalShow = true;" >Create New</button>
                 </div>
             </div>
-            <div class="timeline grid grid-cols-3 gap-10">
+            <div class="timeline custom-scroll flex">
 <!--                <div class="timeline-event__wrapper">-->
 <!--                    <h3 class="timeline-event__title">Draggable 1</h3>-->
 <!--                    <h3 class="timeline-event__description">-->
@@ -76,7 +76,7 @@
 
                 <div class="timeline-event__wrapper" v-for="(event, eventIndex) in events">
                     <div class="flex justify-between items-start">
-                        <div>
+                        <div class="timeline-event__title-wrapper">
                             <h3 class="timeline-event__title">{{ event.title }}</h3>
                             <div class="timeline-event__description">
                                 {{ event.description }}
@@ -94,6 +94,7 @@
                         </div>
                     </div>
 
+                    <div class="flex flex-col">
                     <draggable class="list-group"
                                :list="event.items"
                                group="people"
@@ -131,14 +132,18 @@
 
                                     <div class="flex justify-between">
                                         <div class="timeline-event-item__order" v-html="(eventIndex + 1) + '.' + (index + 1)"></div>
-                                        <div class="timeline-event-item__user-avatar">
-                                            <img :src="$page.user.profile_photo_url" alt="user-avatar">
-                                        </div>
+<!--                                        <div class="timeline-event-item__user-avatar">-->
+<!--                                            <img :src="$page.user.profile_photo_url" alt="user-avatar">-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
                             </transition-group>
                         </div>
                     </draggable>
+
+                    <svg @click="isEventItemCreateModalShow = true; currentEventNew = event;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>
+
+                    </div>
                 </div>
 
             </div>
@@ -156,7 +161,7 @@
                 <template #content>
                     <div class="flex flex-col">
                         <label class="label-default">Title</label>
-                        <select ref="event_item_input_event_id" class="input-default w-full">
+                        <select ref="event_item_input_event_id" class="input-default w-full" v-model="currentEventNew.id">
                             <option :value="event.id" v-for="(event, index) in events" :key="index">{{ event.title }}</option>
                         </select>
 
@@ -213,7 +218,7 @@
                 <template #content>
                     <div class="flex flex-col">
                         <label class="mt-6 label-default">Title</label>
-                        <input ref="event_input_title" type="text" class="input-default w-full">
+                        <input ref="event_input_title" type="text" class="input-default w-full" :value="'Event ' + (events.length+1)">
 
                         <label class="mt-6 label-default">Description</label>
                         <textarea ref="event_input_description" class="input-default w-full"></textarea>
@@ -274,6 +279,7 @@ export default {
         return {
             events: [],
             drag: false,
+            currentEventNew: null,
             eventEdit: {},
             eventItemEdit: {},
             isEventCreateModalShow: false,
@@ -514,8 +520,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .list-group {
     min-height: 300px;
+}
+
+.timeline-event__title-wrapper {
+    height: 45px;
 }
 </style>

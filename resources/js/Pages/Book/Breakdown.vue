@@ -4,7 +4,7 @@
             <div :class="{'block': $page.user.stripe_subscription}">
                 <div class="flex items-center px-16">
                     <h1 class="h2">Breakdown</h1>
-                    <div class="flex-wrap ml-16 breakdown-header-links -mt-5 hidden xl:flex">
+                    <div class="flex-wrap ml-16 breakdown-header-links -mt-4 hidden xl:flex">
                         <a :href="'/books/' + book.id + '/breakdown/characters'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/characters') }">Characters</a>
                         <a :href="'/books/' + book.id + '/breakdown/settings'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/settings') }">Settings</a>
                         <a :href="'/books/' + book.id + '/breakdown/problem'" class="mx-6" :class="{ 'active': isUrlContain('breakdown/problem') }">Problem</a>
@@ -24,7 +24,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 px-16">
                     <!-- BEGIN Left block -->
                     <div>
-                        <div class="mt-85px">
+                        <div class="mt-12">
                             <a :href="'/books/' + book.id + '/breakdown/' + prev_type" class="flex justify-start cursor-pointer icon-hoverable pb-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
                                     <defs>
@@ -62,7 +62,7 @@
 
                     <!-- BEGIN Right block -->
                     <div>
-                        <div class="mt-85px">
+                        <div class="mt-12">
                             <a :href="'/books/' + book.id + '/breakdown/' + next_type" class="icon-hoverable cursor-pointer flex justify-end pb-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
                                     <defs>

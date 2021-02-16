@@ -60,6 +60,7 @@ class TimelineController extends Controller
         return $this->book->events()->with('items', function ($query) {
             $query
                 ->where('title', 'like', '%'.\request('query').'%')
+                ->orWhere('description', 'like', '%'.\request('query').'%')
                 ->orderBy('order');
         })->get();
     }

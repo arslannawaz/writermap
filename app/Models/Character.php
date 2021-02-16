@@ -53,6 +53,7 @@ class Character extends Model
      */
     protected $appends = [
         'type_title',
+        'avatar_image_path',
     ];
 
     public function group()
@@ -63,6 +64,20 @@ class Character extends Model
     public function attributes()
     {
         return $this->hasMany(CharacterAttribute::class);
+    }
+
+    public function getAvatarImagePathAttribute()
+    {
+        /** @var CharacterAttribute $image */
+        $image = $this->attributes()->where('group', 'physicality')
+            ->where('field', 'image')
+            ->first();
+
+        if ($image !== null) {
+            return '/storage/' . $image->value;
+        }
+
+        return '/storage/undefined.jpg';
     }
 
     public function getTypeTitleAttribute()

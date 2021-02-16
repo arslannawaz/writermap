@@ -144,8 +144,8 @@
                             <span class="book-label book-label_no-hover">Page Preview</span>
                         </div>
 
-                        <div class="book-page flex justify-center mt-2">
-                            <div class="book-page__paper flex flex-col justify-end disable-scroll">
+                        <div class="book-page book-page_preview flex justify-center mt-2">
+                            <div class="book-page__paper book-page__paper_preview flex flex-col justify-end disable-scroll">
 <!--                                <span class="book-page__chapter">Chapter One</span>-->
 
                                 <div id="chapter-print" spellcheck="false" class="book-page__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">

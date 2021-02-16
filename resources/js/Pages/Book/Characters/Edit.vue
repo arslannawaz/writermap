@@ -852,6 +852,7 @@ export default {
             console.log('updatePreviews', data);
 
             if (data.field === 'image' && data.description === null) {
+                console.log('image1', data);
                 this.$refs['preview_input_' + data.group + '_' + data.field]
                     .setAttribute('src', this.generateStorageUrl(data.value));
 
@@ -862,6 +863,8 @@ export default {
             if (this.$refs['preview_' + data.field] !== undefined) {
                 if (data.description === null) {
                     if (data.field === 'image') {
+                        console.log('image2', data);
+
                         this.$refs['preview_input_' + data.group + '_' + data.field]
                             .setAttribute('src', this.generateStorageUrl(data.value));
 

@@ -1,11 +1,18 @@
 .timeline {
     margin-top: 100px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 70vh;
+    padding-bottom: 40px;
 }
 
 .timeline-event {
     &__wrapper {
         border: solid 1px #ccc;
         padding: 20px;
+        width: 340px;
+        margin-right: 30px;
+        flex-shrink: 0;
     }
 
     &__title {
