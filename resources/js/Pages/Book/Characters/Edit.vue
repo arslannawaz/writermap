@@ -149,18 +149,114 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 flex justify-between items-center h-6">
-                        <div class="text-color-light text-sm uppercase">Traits</div>
-                        <div v-if="attributeInEdit && attributeInEdit.field === 'trait_3'">Editing</div>
+                    <div class="mt-10 block w-full"></div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div class="flex flex-col">
+                            <div>
+                                <div class="flex justify-between items-center h-6">
+                                    <div class="text-color-light text-sm uppercase">Traits</div>
+                                    <div v-if="attributeInEdit && attributeInEdit.field === 'trait_3'">Editing</div>
+                                </div>
+                                <div class="mt-2 bg-light p-10">
+
+                                    <div class="label-default h-35px">Explain character trait</div>
+                                    <div ref="preview_trait_3" class="mt-2 break-all h-100px">
+                                        {{ getAttributeDescription('trait_3') | truncate(120, '..') }}
+                                    </div>
+                                    <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                         @click="selectAttributeInEdit('traits', 'trait_3', 'Select and explain character trait')">
+                                        <span>View</span>
+                                        <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <g fill="#4E4D4B" fill-rule="nonzero">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <div class="flex justify-between items-center h-6">
+                                    <div class="text-color-light text-sm uppercase">Views</div>
+                                    <div v-if="attributeInEdit && attributeInEdit.field === 'religion'">Editing</div>
+                                </div>
+                                <div class="mt-2 bg-light p-10">
+                                    <div class="label-default h-35px">Do they have a religion?</div>
+                                    <div ref="preview_religion" class="mt-2 break-all h-100px">
+                                        {{ getAttributeDescription('religion') | truncate(120, '..') }}
+                                    </div>
+                                    <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                         @click="selectAttributeInEdit('views', 'religion', 'Do they have a religion? Explain their beliefs')">
+                                        <span>View</span>
+                                        <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <g fill="#4E4D4B" fill-rule="nonzero">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col">
+
+                                <div class="flex justify-between items-center h-6">
+                                    <div class="text-color-light text-sm uppercase">Views</div>
+                                    <div v-if="attributeInEdit && attributeInEdit.field === 'optimistic'">Editing</div>
+                                </div>
+                                <div class="mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
+                                    <div>
+                                        <div class="label-default h-35px">Are they optimistic or pessimistic?</div>
+                                        <div ref="preview_optimistic" class="mt-2 break-all h-100px">
+                                            {{ getAttributeDescription('optimistic') | truncate(120, '..') }}
+                                        </div>
+                                    </div>
+                                    <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                         @click="selectAttributeInEdit('views', 'optimistic', 'Are they optimistic or pessimistic? How do they view things?')">
+                                        <span>View</span>
+                                        <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <g fill="#4E4D4B" fill-rule="nonzero">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-10 block w-full"></div>
+
+                    <div class="flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Background</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'background_1'">Editing</div>
                     </div>
                     <div class="mt-2 bg-light p-10">
-
-                        <div class="label-default h-35px">Explain character trait</div>
-                        <div ref="preview_trait_3" class="mt-2 break-all h-100px">
-                            {{ getAttributeDescription('trait_3') | truncate(120, '..') }}
+                        <div class="label-default h-35px">What social class do they sit in?</div>
+                        <div ref="preview_background_1" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('background_1') | truncate(120, '..') }}
                         </div>
                         <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                             @click="selectAttributeInEdit('traits', 'trait_3', 'Select and explain character trait')">
+                             @click="selectAttributeInEdit('background', 'background_1', 'What social class do they sit in?')">
                             <span>View</span>
                             <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
                                 <g fill="none" fill-rule="evenodd">
@@ -174,100 +270,9 @@
                                 </g>
                             </svg>
                         </div>
-
                     </div>
 
-                    <div class="mt-10 block w-full"></div>
-
                     <div class="mt-8 grid grid-cols-2 gap-10">
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Views</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'religion'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">Explain character trait</div>
-                                <div ref="preview_religion" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('religion') | truncate(120, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('views', 'religion', 'Do they have a religion? Explain their beliefs')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Views</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'optimistic'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">Explain character trait</div>
-                                <div ref="preview_optimistic" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('optimistic') | truncate(120, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('views', 'optimistic', 'Are they optimistic or pessimistic? How do they view things?')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-10 block w-full"></div>
-
-                    <div class="mt-8 grid grid-cols-2 gap-10">
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Background</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_1'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">What social class do they sit in?</div>
-                                <div ref="preview_background_1" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('background_1') | truncate(120, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('background', 'background_1', 'What social class do they sit in?')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
                         <div>
                             <div class="flex justify-between items-center h-6">
                                 <div class="text-color-light text-sm uppercase">Background</div>
@@ -295,9 +300,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
                                 <div class="text-color-light text-sm uppercase">Background</div>
@@ -325,75 +328,105 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Background</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_4'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">What is their hometown and what was it like</div>
-                                <div ref="preview_background_4" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('background_4') | truncate(120, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('background', 'background_4', 'What is their hometown and what was it like for them growing up? Describe their\n'+
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Background</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'background_4'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">What is their hometown and what was it like</div>
+                        <div ref="preview_background_4" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('background_4') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('background', 'background_4', 'What is their hometown and what was it like for them growing up? Describe their\n'+
 'childhood and the effects it has on them. Do they have a favourite place?')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
                                             </g>
                                         </g>
-                                    </svg>
-                                </div>
-                            </div>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
                     </div>
 
                     <div class="mt-8 grid grid-cols-2 gap-10">
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Background</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'background_5'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">What is their occupation?</div>
-                                <div ref="preview_background_5" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('background_5') | truncate(120, '..') }}
+                        <div class="flex flex-col">
+                            <div>
+                                <div class="flex justify-between items-center h-6">
+                                    <div class="text-color-light text-sm uppercase">Background</div>
+                                    <div v-if="attributeInEdit && attributeInEdit.field === 'background_5'">Editing</div>
                                 </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('background', 'background_5', 'What is their occupation? What does their resume look like?')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
+                                <div class="mt-2 bg-light p-10">
+                                    <div class="label-default h-35px">What is their occupation?</div>
+                                    <div ref="preview_background_5" class="mt-2 break-all h-100px">
+                                        {{ getAttributeDescription('background_5') | truncate(120, '..') }}
+                                    </div>
+                                    <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                         @click="selectAttributeInEdit('background', 'background_5', 'What is their occupation? What does their resume look like?')">
+                                        <span>View</span>
+                                        <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <g fill="#4E4D4B" fill-rule="nonzero">
                                                     <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                        <g>
+                                                            <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                        </g>
                                                     </g>
                                                 </g>
                                             </g>
-                                        </g>
-                                    </svg>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8">
+                                <div class="flex justify-between items-center h-6">
+                                    <div class="text-color-light text-sm uppercase">Relationships</div>
+                                    <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_1'">Editing</div>
+                                </div>
+                                <div class="mt-2 bg-light p-10">
+                                    <div class="label-default h-35px">Who is your characters family?</div>
+                                    <div ref="preview_relationship_1" class="mt-2 break-all h-100px">
+                                        {{ getAttributeDescription('relationship_1') | truncate(120, '..') }}
+                                    </div>
+                                    <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                         @click="selectAttributeInEdit('relationships', 'relationship_1', 'Who is your characters family? What relationship do they have with them?')">
+                                        <span>View</span>
+                                        <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <g fill="#4E4D4B" fill-rule="nonzero">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div>
+                        <div class="flex flex-col">
                             <div class="flex justify-between items-center h-6">
                                 <div class="text-color-light text-sm uppercase">Background</div>
                                 <div v-if="attributeInEdit && attributeInEdit.field === 'background_6'">Editing</div>
                             </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">What are some major turning points?</div>
-                                <div ref="preview_background_6" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('background_6') | truncate(120, '..') }}
+                            <div class="mt-2 bg-light p-10 flex flex-col justify-between" style="height: 100%;">
+                                <div>
+                                    <div class="label-default h-35px">What are some major turning points?</div>
+                                    <div ref="preview_background_6" class="mt-2 break-all h-100px">
+                                        {{ getAttributeDescription('background_6') | truncate(120, '..') }}
+                                    </div>
                                 </div>
                                 <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
                                      @click="selectAttributeInEdit('background', 'background_6', 'What are some major turning points in your characters life? What events took place\n'+
@@ -415,37 +448,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-10 block w-full"></div>
-
                     <div class="mt-8 grid grid-cols-2 gap-10">
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Relationships</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_1'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">Who is your characters family?</div>
-                                <div ref="preview_relationship_1" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('relationship_1') | truncate(120, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('relationships', 'relationship_1', 'Who is your characters family? What relationship do they have with them?')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-
                         <div>
                             <div class="flex justify-between items-center h-6">
                                 <div class="text-color-light text-sm uppercase">Relationships</div>
@@ -474,9 +477,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mt-8 grid grid-cols-2 gap-10">
                         <div>
                             <div class="flex justify-between items-center h-6">
                                 <div class="text-color-light text-sm uppercase">Relationships</div>
@@ -506,33 +507,31 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div>
-                            <div class="flex justify-between items-center h-6">
-                                <div class="text-color-light text-sm uppercase">Relationships</div>
-                                <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_4'">Editing</div>
-                            </div>
-                            <div class="mt-2 bg-light p-10">
-                                <div class="label-default h-35px">Sexuality, who are they interested in?</div>
-                                <div ref="preview_relationship_4" class="mt-2 break-all h-100px">
-                                    {{ getAttributeDescription('relationship_4') | truncate(120, '..') }}
-                                </div>
-                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
-                                     @click="selectAttributeInEdit('relationships', 'relationship_4', 'Sexuality, who are they interested in?')">
-                                    <span>View</span>
-                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <g fill="#4E4D4B" fill-rule="nonzero">
-                                                <g>
-                                                    <g>
-                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
-                                                    </g>
-                                                </g>
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Relationships</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'relationship_4'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">Sexuality, who are they interested in?</div>
+                        <div ref="preview_relationship_4" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('relationship_4') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('relationships', 'relationship_4', 'Sexuality, who are they interested in?')">
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
                                             </g>
                                         </g>
-                                    </svg>
-                                </div>
-                            </div>
+                                    </g>
+                                </g>
+                            </svg>
                         </div>
                     </div>
 
@@ -594,6 +593,450 @@
                                     </svg>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Struggles</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_3'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">Saddest memory</div>
+                        <div ref="preview_struggles_3" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('struggles_3') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('struggles', 'struggles_3', 'Saddest memory. What memory do they hold close to their heart and wish never to feel that pain again? What memory tore them up? Describe why it made them feel the way that it did.')">
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_4'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">What is your characters greatest regret?</div>
+                                <div ref="preview_struggles_4" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('struggles_4') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('struggles', 'struggles_4', 'What is your characters greatest regret? What do they wish they could go back in time and do differently?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Struggles</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'struggles_5'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">What secrets is your character holding?</div>
+                                <div ref="preview_struggles_5" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('struggles_5') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('struggles', 'struggles_5', 'What secrets is your character holding? From what characters are they hiding the truth?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Strengths</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_1'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">What are they good at?</div>
+                        <div ref="preview_strengths_1" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('strengths_1') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('strengths', 'strengths_1', 'What are they good at? Good or bad, where do they excel?')">
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Strengths</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_2'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">What memory brings joy to their heart instantly?</div>
+                                <div ref="preview_strengths_2" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('strengths_2') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('strengths', 'strengths_2', 'What memory brings joy to their heart instantly? Describe a time where they felt their most happiest and how they remember it.')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Strengths</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'strengths_3'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">What are their hobbies?</div>
+                                <div ref="preview_strengths_3" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('strengths_3') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('strengths', 'strengths_3', 'What are their hobbies? What do they do for fun?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                    Goals -->
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'goal_1'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">What is their goal?</div>
+                                <div ref="preview_goal_1" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('goal_1') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('goal', 'goal_1', 'What is their goal? What do they want?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'goal_2'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">Why does your character want it?</div>
+                                <div ref="preview_goal_2" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('goal_2') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('goal', 'goal_2', 'Why does your character want it? Why is it their goal? How would it make them feel to have it? How do they feel without it?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'goal_3'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">What is the reason they don't have what they want?</div>
+                                <div ref="preview_goal_3" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('goal_3') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('goal', 'goal_3', 'What is the reason they don\'t have what they want? Have they tried before and failed? Is it a new opportunity?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Goal</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'goal_4'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">How far will they go?</div>
+                                <div ref="preview_goal_4" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('goal_4') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('goal', 'goal_4', 'How far will they go? What will they sacrifice to obtain it? Time? Their life? Relationships? Money?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Journey</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'journey_1'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">What do they do to get what they want?</div>
+                        <div ref="preview_journey_1" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('journey_1') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('journey', 'journey_1', 'What do they do to get what they want?')">
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Journey</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'journey_2'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">What implications does it cause?</div>
+                        <div ref="preview_journey_2" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('journey_2') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('journey', 'journey_2', 'What implications does it cause?')">
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Journey</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'journey_3'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">Is the result good, bad or both?</div>
+                                <div ref="preview_journey_3" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('journey_3') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('journey', 'journey_3', 'Is the result good, bad or both?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center h-6">
+                                <div class="text-color-light text-sm uppercase">Journey</div>
+                                <div v-if="attributeInEdit && attributeInEdit.field === 'journey_4'">Editing</div>
+                            </div>
+                            <div class="mt-2 bg-light p-10">
+                                <div class="label-default h-35px">Are they happy with the outcome?</div>
+                                <div ref="preview_journey_4" class="mt-2 break-all h-100px">
+                                    {{ getAttributeDescription('journey_4') | truncate(120, '..') }}
+                                </div>
+                                <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                                     @click="selectAttributeInEdit('journey', 'journey_4', 'Are they happy with the outcome?')">
+                                    <span>View</span>
+                                    <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <g fill="#4E4D4B" fill-rule="nonzero">
+                                                <g>
+                                                    <g>
+                                                        <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center h-6">
+                        <div class="text-color-light text-sm uppercase">Notes</div>
+                        <div v-if="attributeInEdit && attributeInEdit.field === 'notes_1'">Editing</div>
+                    </div>
+                    <div class="mt-2 bg-light p-10">
+                        <div class="label-default h-35px">Content</div>
+                        <div ref="preview_notes_1" class="mt-2 break-all h-100px">
+                            {{ getAttributeDescription('notes_1') | truncate(120, '..') }}
+                        </div>
+                        <div class="mt-10 cursor-pointer text-color-dark font-semibold flex items-center"
+                             @click="selectAttributeInEdit('notes', 'notes_1', 'Write something')">
+                            <span>View</span>
+                            <svg class="ml-4" xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#4E4D4B" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path d="M13.93 4.043c-.042-.108-.104-.206-.184-.29l-3.5-3.5c-.343-.342-.9-.342-1.242 0-.343.344-.343.9 0 1.243L11.016 3.5H.875C.392 3.5 0 3.892 0 4.375s.392.875.875.875h10.141L9.004 7.254c-.166.164-.26.388-.26.621 0 .233.094.457.26.621.164.166.388.26.621.26.233 0 .457-.094.621-.26l3.5-3.5c.08-.083.142-.181.184-.289.088-.213.088-.451 0-.664z" transform="translate(-274 -608) translate(186 427) translate(88 181)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+
+                        </div>
+
+                        <div>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-10 block w-full"></div>
+
+                    <div class="mt-8 grid grid-cols-2 gap-10">
+                        <div>
+
+                        </div>
+
+                        <div>
+
                         </div>
                     </div>
                 </div>
@@ -863,8 +1306,7 @@ export default {
             if (this.$refs['preview_' + data.field] !== undefined) {
                 if (data.description === null) {
                     if (data.field === 'image') {
-                        console.log('image2', data);
-
+                        console.log('image1', data);
                         this.$refs['preview_input_' + data.group + '_' + data.field]
                             .setAttribute('src', this.generateStorageUrl(data.value));
 
