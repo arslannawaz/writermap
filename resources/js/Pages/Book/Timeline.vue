@@ -357,7 +357,7 @@ export default {
         },
         handleRemoveNewEventItem(event, eventIndex, itemIndex) {
             console.log('handleRemoveNewEventItem', eventIndex, itemIndex);
-            if ((event.key === "Backspace" || event.key === "Delete") && this.events[eventIndex].items[itemIndex].title === '') {
+            if ((event.key === "Backspace" || event.key === "Delete") && this.$refs[`newEventItem_${eventIndex}_${itemIndex}`][0].value.length === 0) {
                 this.events[eventIndex].items.splice(itemIndex, 1);
             }
         },

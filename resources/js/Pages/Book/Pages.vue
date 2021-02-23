@@ -152,8 +152,8 @@
     <!--                                <span class="book-page__chapter">Chapter One</span>-->
 
                                     <div id="chapter-print" spellcheck="false" class="book-page__content book-page__paper_preview__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">
-                                        <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>
-                                        <h1 class="mt-2 fs-18 ff-minion font-semibold">Chapter {{ first_chapter.title }}</h1>
+<!--                                        <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>-->
+                                        <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ first_chapter.title }}</h2>
                                         <editor-content class="mt-6 editor__content outline-none fs-15 ff-minion" style="left: 0;" :editor="editor" />
                                     </div>
                                 </div>
@@ -397,45 +397,57 @@ export default {
         },
 
         scrollChapterPrev() {
-            const chapterPrint = document.getElementById('chapter-print');
-            let prevScrollValue = 0;
-            let newLeftValue = 0;
+            if (this.scrollPage <= 1) {
+                const chapterPrint = document.getElementById('chapter-print');
+                chapterPrint.style.left = 0;
+                this.scrollPage = 1;
+            } else {
+                const chapterPrint = document.getElementById('chapter-print');
+                let prevScrollValue = 0;
+                let newLeftValue = 0;
 
-            if (parseInt(chapterPrint.style.left.replace('px','')) < 0) {
-                prevScrollValue = parseInt(chapterPrint.style.left.replace('px',''));
-                newLeftValue = parseInt(chapterPrint.style.left) + 470;
-            }
+                if (parseInt(chapterPrint.style.left.replace('px', '')) < 0) {
+                    prevScrollValue = parseInt(chapterPrint.style.left.replace('px', ''));
+                    newLeftValue = parseInt(chapterPrint.style.left) + 470;
+                }
 
-            console.log('scrollChapterNext', chapterPrint.style.left);
+                console.log('scrollChapterNext', chapterPrint.style.left);
 
-            chapterPrint.style.left = newLeftValue + 'px';
+                chapterPrint.style.left = newLeftValue + 'px';
 
-            if (this.scrollPage > 1) {
-                // if ((this.scrollPage - 1) > 0) {
+                if (this.scrollPage > 1) {
+                    // if ((this.scrollPage - 1) > 0) {
                     this.scrollPage--;
-                // }
+                    // }
+                }
             }
         },
 
         scrollChapterNext() {
-            const chapterPrint = document.getElementById('chapter-print');
-            let prevScrollValue = 0;
-            let newLeftValue = 0;
-
-            if (parseInt(chapterPrint.style.left.replace('px','')) < 0) {
-                prevScrollValue = parseInt(chapterPrint.style.left.replace('px',''));
-                newLeftValue = parseInt(chapterPrint.style.left) - 470;
+            if (this.scrollPage >= 3) {
+                const chapterPrint = document.getElementById('chapter-print');
+                chapterPrint.style.left = 0;
+                this.scrollPage = 1;
             } else {
-                prevScrollValue = 0;
-                newLeftValue = '-470';
-            }
+                const chapterPrint = document.getElementById('chapter-print');
+                let prevScrollValue = 0;
+                let newLeftValue = 0;
 
-            console.log('scrollChapterNext', chapterPrint.style.left);
+                if (parseInt(chapterPrint.style.left.replace('px', '')) < 0) {
+                    prevScrollValue = parseInt(chapterPrint.style.left.replace('px', ''));
+                    newLeftValue = parseInt(chapterPrint.style.left) - 470;
+                } else {
+                    prevScrollValue = 0;
+                    newLeftValue = '-470';
+                }
 
-            chapterPrint.style.left = newLeftValue + 'px';
+                console.log('scrollChapterNext', chapterPrint.style.left);
 
-            if (parseInt(chapterPrint.style.left) < prevScrollValue) {
-                this.scrollPage++;
+                chapterPrint.style.left = newLeftValue + 'px';
+
+                if (parseInt(chapterPrint.style.left) < prevScrollValue) {
+                    this.scrollPage++;
+                }
             }
         },
 
