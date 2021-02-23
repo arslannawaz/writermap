@@ -260,7 +260,7 @@
                                                 </g>
                                             </g>
                                         </svg>
-                                        <span class="menu-link-title">Timeline</span>
+                                        <span class="menu-link-title">Events</span>
                                     </a>
 
 <!--                                    <a href="#"-->

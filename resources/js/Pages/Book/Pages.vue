@@ -464,13 +464,14 @@ export default {
         tabSearch(event) {
             event.preventDefault();
 
-            if (this.scrollPage > 3) {
+            console.log('tabSearch scrollPage', this.scrollPage);
+            if (this.scrollPage >= 3) {
                 const chapterPrint = document.getElementById('chapter-print');
                 chapterPrint.style.left = 0;
-                this.scrollPage = 0;
+                this.scrollPage = 1;
+            } else {
+                this.scrollChapterNext();
             }
-
-            this.scrollChapterNext();
 
             // alert(1123);
             // console.log('123');

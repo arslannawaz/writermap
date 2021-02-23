@@ -40,10 +40,21 @@ class ItemController extends Controller
 
     public function create()
     {
+        $order = 0;
+
+        $lastEventItem = EventItem::where('event_id', \request('event_id'))
+            ->orderBy('order', 'asc')
+            ->first();
+
+        if ($lastEventItem !== null) {
+            $order = $lastEventItem->order + 1;
+        }
+
         return EventItem::create([
             'event_id' => \request('event_id'),
             'title' => \request('title'),
             'description' => \request('description'),
+            'order' => $order,
         ]);
     }
 

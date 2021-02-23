@@ -2,7 +2,7 @@
     <app-layout>
         <app-container width="w-container">
             <div class="flex items-center justify-between">
-                <h1 class="h2">Timeline</h1>
+                <h1 class="h2">Events</h1>
 
 
                 <div class="flex items-center justify-end">
@@ -74,7 +74,7 @@
 <!--                    </draggable>-->
 <!--                </div>-->
 
-                <div class="timeline-event__wrapper" v-for="(event, eventIndex) in events">
+                <div class="timeline-event__wrapper" v-for="(event, eventIndex) in events" :class="{'hidden': searchString !== false && event.items.length === 0}">
                     <div class="flex justify-between items-start">
                         <div class="timeline-event__title-wrapper">
                             <h3 class="timeline-event__title">{{ event.title }}</h3>
@@ -111,7 +111,16 @@
                                 <div :key="index">
                                     <div class="flex justify-between items-start">
                                         <div>
-                                            <div class="timeline-event-item__title">
+                                            <div v-if="element.id === 'new'" class="timeline-event-item__title">
+                                                <input :ref="'newEventItem_' + eventIndex + '_' + index"
+                                                       type="text"
+                                                       class="input-default input-default_p-zero input-default_border-none"
+                                                       :value="element.title"
+                                                       @keydown.enter="handleNewEventItemEnter($event, eventIndex)"
+                                                       @keydown="handleRemoveNewEventItem($event, eventIndex, index)"
+                                                >
+                                            </div>
+                                            <div v-else class="timeline-event-item__title">
                                                 {{ element.title }}
                                             </div>
                                             <div class="timeline-event-item__description">
@@ -140,8 +149,10 @@
                             </transition-group>
                         </div>
                     </draggable>
+<!--                        <svg @click="isEventItemCreateModalShow = true; currentEventNew = event;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>-->
 
-                    <svg @click="isEventItemCreateModalShow = true; currentEventNew = event;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>
+<!--                    </div>-->
+                    <svg @click="addNewEventItem(eventIndex)" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>
 
                     </div>
                 </div>
@@ -286,6 +297,7 @@ export default {
             isEventEditModalShow: false,
             isEventItemEditModalShow: false,
             isEventItemCreateModalShow: false,
+            searchString: false,
             list1: [
                 { name: "John", id: 1 },
                 { name: "Joao", id: 2 },
@@ -298,6 +310,10 @@ export default {
                 { name: "Johnson", id: 7 }
             ]
         }
+    },
+
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
     },
 
     computed: {
@@ -321,6 +337,34 @@ export default {
     },
 
     methods: {
+        handleNewEventItemEnter(event, eventIndex) {
+            console.log('handleNewEventItemEnter', event);
+            console.log('handleNewEventItemEnter', eventIndex);
+            this.createEventItem(this.events[eventIndex].id, event.target.value);
+        },
+        addNewEventItem(eventIndex) {
+            this.events[eventIndex].items.push({title: '', id: 'new'});
+
+            const index = parseInt(this.events[eventIndex].items.length) - 1;
+
+            console.log('addNewEventItem index', index);
+            console.log('addNewEventItem length', parseInt(this.events[eventIndex].items.length));
+            console.log('addNewEventItem items', this.events[eventIndex]);
+            console.log('addNewEventItem refs', this.$refs);
+            this.$nextTick(() => {
+                this.$refs[`newEventItem_${eventIndex}_${index}`][0].focus();
+            });
+        },
+        handleRemoveNewEventItem(event, eventIndex, itemIndex) {
+            console.log('handleRemoveNewEventItem', eventIndex, itemIndex);
+            if ((event.key === "Backspace" || event.key === "Delete") && this.events[eventIndex].items[itemIndex].title === '') {
+                this.events[eventIndex].items.splice(itemIndex, 1);
+            }
+        },
+        handleScroll() {
+            console.log('scroll');
+        },
+
         add: function() {
             this.list.push({ name: "Juan" });
         },
@@ -354,21 +398,36 @@ export default {
         },
 
         resetModalInputs() {
-            this.$refs['event_item_input_event_id'].value = this.events[0].id;
-            this.$refs['event_item_input_title'].value = null;
-            this.$refs['event_item_input_description'].value = null;
+            if (this.$refs['event_item_input_event_id'] !== undefined) {
+                this.$refs['event_item_input_event_id'].value = this.events[0].id;
+                this.$refs['event_item_input_title'].value = null;
+                this.$refs['event_item_input_description'].value = null;
+            }
         },
 
-        createEvent() {
+        createEvent(title, description) {
             this.isEventCreateModalShow = false;
 
             console.log(this.$refs['event_input_title'].value);
             console.log(this.$refs['event_input_description'].value);
 
             const url = '/books/' + this.$page.book.id + '/timeline/events/create';
+
+            let data = {};
+            if (title === null && description === null) {
+                data = {
+                    title: this.$refs['event_input_title'].value,
+                    description: this.$refs['event_input_description'].value,
+                };
+            } else {
+                data = {
+                    title: title,
+                    description: description,
+                };
+            }
+
             axios.post(url, {
-                title: this.$refs['event_input_title'].value,
-                description: this.$refs['event_input_description'].value,
+
             }).then((response) => {
                 console.log(response.data);
                 this.updateEventsList();
@@ -380,22 +439,37 @@ export default {
             });
         },
 
-        createEventItem() {
+        createEventItem(event_id = null, title = null, description = null) {
             this.isEventItemCreateModalShow = false;
 
-            console.log(this.$refs['event_item_input_event_id'].value);
-            console.log(this.$refs['event_item_input_title'].value);
-            console.log(this.$refs['event_item_input_description'].value);
+            let url = '';
 
-            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.$refs['event_item_input_event_id'].value +'/items/create';
-            axios.post(url, {
-                event_id: this.$refs['event_item_input_event_id'].value,
-                title: this.$refs['event_item_input_title'].value,
-                description: this.$refs['event_item_input_description'].value,
-            }).then((response) => {
+            let data = {};
+            if (event_id === null && title === null && description === null) {
+                data = {
+                    event_id: this.$refs['event_item_input_event_id'].value,
+                    title: this.$refs['event_item_input_title'].value,
+                    description: this.$refs['event_item_input_description'].value,
+                };
+
+                url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.$refs['event_item_input_event_id'].value +'/items/create'
+            } else {
+                data = {
+                    event_id: event_id,
+                    title: title,
+                    description: description,
+                };
+
+                url = '/books/' + this.$page.book.id + '/timeline/events/'+ event_id +'/items/create';
+            }
+
+            axios.post(url, data).then((response) => {
                 console.log(response.data);
                 this.updateEventsList();
-                this.resetModalInputs();
+
+                if (event_id === null) {
+                    this.resetModalInputs();
+                }
             }).catch((error) => {
                 console.log('error', error);
                 Vue.swal('createEventItem', 'Oops..', 'error');
@@ -508,7 +582,10 @@ export default {
             if (this.$refs.search_input.value == '') {
                 // this.$refs.search_input.classList.toggle('hidden');
                 this.updateEventsList();
+                this.searchString = false;
             } else {
+                this.searchString = this.$refs.search_input.value;
+
                 const url = '/books/' + this.$page.book.id + '/timeline/search';
                 axios.post(url, {
                     query: this.$refs.search_input.value,
