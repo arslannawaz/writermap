@@ -53,12 +53,12 @@ const options = {
         'scrollbars=yes'
     ],
     styles: [
-        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-        'https://unpkg.com/kidlat-css/css/kidlat.css',
-        'https://writersmap.cluster4dreams.com/css/app.css',
+        // 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        // 'https://unpkg.com/kidlat-css/css/kidlat.css',
+        'http://writersmap.test/css/app.css',
     ]
 }
-Vue.use(VueHtmlToPaper);
+Vue.use(VueHtmlToPaper, options);
 
 Vue.config.errorHandler = err => {
     console.log('Exception: ', err)

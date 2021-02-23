@@ -155,3 +155,21 @@
         text-indent: 47.244094488px;
     }
 }
+
+.print-book-page {
+    text-align: justify;
+
+    h2:first-child {
+        margin-top: 100px;
+        margin-bottom: 30px;
+    }
+
+    h2, p {
+        text-indent: 47.244094488px;
+    }
+
+    h3, h4 {
+        padding: 0;
+        margin: 0;
+    }
+}
