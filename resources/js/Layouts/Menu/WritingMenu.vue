@@ -61,25 +61,37 @@
         </div>
 
         <div class="mt-8"></div>
-        <div v-for="chapter in $page.chapters" class="flex flex-col mt-4 px-10 py-4" :class="{'border-r-4 border-gray-400': $page.page_chapter.id === chapter.id}">
-            <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" class="fs-16 font-semibold text-color-dark">Chapter {{ chapter.number }}</a>
-            <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" v-if="chapter.title" class="mt-2 text-color-light" :class="{'text-color-dark': $page.page_chapter.id === chapter.id}">{{ chapter.title | truncate(96, '...') }}</a>
-        </div>
+        <draggable class="list-group"
+                   :list="$page.chapters"
+                   group="people"
+                   v-bind="dragOptions"
+                   @start="drag = true"
+                   @end="drag = false"
+                   @change="dragLog($event)"
+                   >
+            <div v-for="(chapter, index) in $page.chapters" class="flex flex-col mt-4 px-10 py-4" :class="{'border-r-4 border-gray-400': $page.page_chapter.id === chapter.id}">
+                <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" class="fs-16 font-semibold text-color-dark">Chapter {{ index+1 }}</a>
+                <a :href="'/books/'+ $page.book.id +'/chapters/'+ chapter.id +'/edit'" v-if="chapter.title" class="mt-2 text-color-light" :class="{'text-color-dark': $page.page_chapter.id === chapter.id}">{{ chapter.title | truncate(96, '...') }}</a>
+            </div>
+        </draggable>
     </div>
 </template>
 
 <script>
 import JetDialogModal from "../../Jetstream/DialogModal";
 import JetInputError from "../../Jetstream/InputError";
+import draggable from "vuedraggable";
 
 export default {
     components: {
         JetDialogModal,
         JetInputError,
+        draggable,
     },
 
     data() {
         return {
+            drag: false,
             isCreateModalShow: false,
             newForm: this.$inertia.form({
                 book_id: this.$page.book.id,
@@ -91,6 +103,17 @@ export default {
         };
     },
 
+    computed: {
+        dragOptions() {
+            return {
+                animation: 200,
+                group: "description",
+                disabled: false,
+                ghostClass: "ghost"
+            };
+        }
+    },
+
     methods: {
         createChapter() {
             const url = '/books/'+ this.$page.book.id +'/chapters/create';
@@ -98,6 +121,30 @@ export default {
                 console.log('create new chapter', response.data);
                 window.location.href = '/books/'+ this.$page.book.id +'/chapters/'+ response.data.id +'/edit';
             });
+        },
+
+        updateChapterNumber(chapter, newNumber, oldNumber) {
+            const url = `/books/${this.$page.book.id}/chapters/update`;
+            axios.post(url, {
+                id: chapter.id,
+                book_id: this.$page.book.id,
+                field: 'number',
+                value: newNumber,
+                oldNumber: oldNumber,
+            }).then((response) => {
+                console.log('update chapter', response.data);
+                // window.location.href = '/books/'+ this.$page.book.id +'/chapters/'+ response.data.id +'/edit';
+            });
+        },
+
+        dragLog: function(event) {
+            // window.console.log('bookEvent', eventIndex);
+            window.console.log('event', event);
+            // this.updateOrderForEventItems(eventIndex);
+            if (event.moved !== undefined) {
+                console.log('MOVED', event.moved);
+                this.updateChapterNumber(event.moved.element, event.moved.newIndex+1, event.moved.oldIndex+1);
+            }
         },
     },
 }

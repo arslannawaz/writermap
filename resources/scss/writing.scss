@@ -1,6 +1,10 @@
 .chapter-container {
-    border: solid 1px #d3d3d3;
+    //border: solid 1px #d3d3d3;
     padding: 30px;
+
+    h2, p {
+        text-indent: 47.244094488px;
+    }
 
     &__inner {
         &_default-style {
@@ -10,7 +14,11 @@
 
         &_a4-style {
             padding: 100px;
-            background-color: #fefcf8;
+
+            &_background {
+                padding: 100px;
+                background-color: #fefcf8;
+            }
         }
 
         &_book-style {
@@ -18,6 +26,13 @@
             max-width: 500px;
             margin: 0 auto;
             background-color: transparent;
+
+            &_background {
+                padding: 30px;
+                max-width: 500px;
+                margin: 0 auto;
+                background-color: #fefcf8;
+            }
         }
     }
 }

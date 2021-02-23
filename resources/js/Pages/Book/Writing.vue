@@ -28,7 +28,7 @@
                 <div class="mx-auto w-1/2">
                     <div class="ml-20 flex w-full">
                         <svg @click="runEditorCommand('find', $refs['chapter_search_input'].value)" class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><g><path d="M18.738 17.453l-3.357-3.33c2.705-3.373 2.302-8.273-.918-11.158C11.243.079 6.328.213 3.271 3.27.213 6.328.079 11.243 2.965 14.463c2.885 3.22 7.785 3.623 11.158.918l3.33 3.33c.17.17.401.267.642.267s.473-.096.643-.268c.339-.35.339-.906 0-1.257zm-9.69-2.072c-3.498 0-6.334-2.836-6.334-6.333 0-3.498 2.836-6.334 6.334-6.334 3.497 0 6.333 2.836 6.333 6.334 0 1.68-.667 3.29-1.855 4.478-1.188 1.188-2.799 1.855-4.478 1.855z" transform="translate(-740 -40) translate(740 40)"></path></g></g></g></g></svg>
-                        <input ref="chapter_search_input" type="text" class="input-default input-default_p-zero ml-4 w-full" placeholder="Search..">
+                        <input ref="chapter_search_input" type="text" class="input-default input-default_p-zero ml-4 w-full" @keydown.tab="tabSearch" v-on:keyup.enter="handleSearch" placeholder="Search..">
                     </div>
                 </div>
 
@@ -61,9 +61,14 @@
                         </div>
 
                         <div v-click-outside="hideDropdowns" :id="'dropdown-menu-' + chapter.id" class="character-in-list__dropdown-menu dropdown-menu character-in-list__dropdown-menu_bottom bg-light flex flex-col opacity-0 hidden">
-                            <div class="hover:text-black" @click="setEditorStyle('book-style')">Display book</div>
+                            <div class="hover:text-black" @click="setEditorStyle('book-style')">Book</div>
                             <div class="mt-4 hover:text-black" @click="setEditorStyle('a4-style')">A4</div>
-                            <div class="mt-4 hover:text-black" @click="setEditorStyle('default-style')">Default</div>
+                            <div class="mt-4 hover:text-black cursor-pointer flex items-center">
+                                <label class="cursor-pointer">
+                                    Background
+                                    <input type="checkbox" :checked="editor_style.includes('_background')" class="ml-2" @change="toggleEditorBackground()">
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -79,9 +84,9 @@
                 </div>
             </div>
 
-            <div v-if="chapter" class="mt-24 chapter-container">
+            <div v-if="chapter" class="mt-24 chapter-container" :class="{'bg-light': editor_style.includes('_background')}">
                 <div class="chapter-container__inner" :class="'chapter-container__inner_'+ editor_style">
-                    <div class="fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
+                    <div class="pt-40 fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
                     <input type="text" class="input-default input-default_border-none h2 w-full" v-model="chapter.title"
                            @change="updateChapterField('title', $event.target.value)" />
                     <div class="mt-12 editor w-full" spellcheck="false">
@@ -128,7 +133,8 @@ export default {
     data() {
         return {
             editor: null,
-            editor_style: 'default-style'
+            editor_style: 'default-style',
+            findFocusedIndex: -1,
         }
     },
 
@@ -168,6 +174,7 @@ export default {
                 onUpdate: ({ getHTML }) => {
                     this.updateChapterField('content', getHTML());
                 },
+                // editable: false,
             });
 
             // this.editor.extensions.
@@ -226,8 +233,63 @@ export default {
         },
 
         setEditorStyle(style) {
-            this.editor_style = style;
-            localStorage.setItem('editor_style', style);
+            if (this.editor_style.includes('_background')) {
+                this.editor_style = style + '_background';
+            } else {
+                this.editor_style = style;
+            }
+
+            localStorage.setItem('editor_style', this.editor_style);
+
+            console.log('editor style', this.editor_style);
+        },
+
+        toggleEditorBackground() {
+            console.log('editor style1', this.editor_style);
+
+            if (this.editor_style.includes('_background')) {
+                this.editor_style = this.editor_style.replace('_background', '');
+            } else {
+                this.editor_style += '_background';
+            }
+
+            localStorage.setItem('editor_style', this.editor_style);
+            console.log('editor style2', this.editor_style);
+        },
+
+        handleSearch() {
+            this.runEditorCommand('find', this.$refs['chapter_search_input'].value);
+            this.$refs['chapter_search_input'].focus();
+            const searchInElement = document.getElementsByClassName('ProseMirror');
+            // console.log('editor content', this.editor.getContent());
+            // this.editor.setContent('<p style="color: red;">123</p>>');
+        },
+
+        mispelt (str, word, className) {
+            // replaces all occurrences of the string 'word' in the element
+            // 'el' with a span which has a class 'class'
+            // Assumes 'word' contains no regexp special chars
+
+            return str.replace (
+                RegExp ('\\b(' + word + ')\\b', 'ig'),
+                '<span class"' + className + '">$1</span>'
+            );
+        },
+
+        tabSearch(event) {
+            event.preventDefault();
+            // alert(1123);
+            console.log('123');
+            const findedWords = document.getElementsByClassName('find');
+
+            this.findFocusedIndex += 1;
+            if (findedWords[this.findFocusedIndex] !== undefined) {
+                findedWords[this.findFocusedIndex].style.backgroundColor = '#000';
+                findedWords[this.findFocusedIndex].classList.add('PASDADASD');
+                findedWords[this.findFocusedIndex].scrollIntoView();
+            } else {
+                this.findFocusedIndex = -1;
+            }
         },
     },
 }

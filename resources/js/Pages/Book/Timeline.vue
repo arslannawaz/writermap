@@ -33,7 +33,7 @@
                     <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12" @click="isEventCreateModalShow = true;" >Create New</button>
                 </div>
             </div>
-            <div class="timeline custom-scroll flex">
+            <div id="timeline-scroll" class="timeline custom-scroll flex">
 <!--                <div class="timeline-event__wrapper">-->
 <!--                    <h3 class="timeline-event__title">Draggable 1</h3>-->
 <!--                    <h3 class="timeline-event__description">-->
@@ -313,6 +313,11 @@ export default {
 
     mounted() {
         this.updateEventsList();
+        const timeLineScroll = document.getElementById('timeline-scroll');
+        timeLineScroll.scrollIntoView();
+        timeLineScroll.addEventListener('scroll', function () {
+           console.log('SCROLL');
+        });
     },
 
     methods: {

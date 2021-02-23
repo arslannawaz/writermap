@@ -45,13 +45,14 @@
 
                                     <span class="book-page__chapter mt-4">Paragraph</span>
 
-                                    <div class="book-page__content -mt-4">
+                                    <div class="book-page__content -mt-4" style="padding: 0 30px;">
                                         <p :ref="'content_' + index" contenteditable="true" v-for="(item, index) in decodeContent" :key="index"
                                            @input="updateContentEditableField('content', $event, index)"
                                            v-on:keypress="checkContentKey"
                                            class="outline-none"
                                         >
-                                            {{ item }}
+                                            <span v-if="item">{{ item }}</span>
+                                            <span v-else>Type here..</span>
                                         </p>
                                     </div>
                                 </div>
@@ -79,17 +80,18 @@
                             </a>
                             <div class="book-page flex justify-center">
                                 <div class="book-page__paper flex flex-col ff-minion">
-                                    <div class="mb-2"></div>
+                                    <div class="mb-4"></div>
                                     <span class="book-page__chapter mt-32">Key Points</span>
 
-                                    <div class="book-page__content">
+                                    <div class="book-page__content" style="padding: 0 30px;">
                                         <ul class="list-disc ml-4">
                                             <li :ref="'point_' + index" contenteditable="true" v-for="(item, index) in decodeKeyPoints" :key="index"
                                                 @input="updatePointEditableField('key_points', $event, index)"
                                                 v-on:keypress="checkPointsKey"
                                                 class="outline-none"
                                             >
-                                                {{ item }}
+                                                <span v-if="item">{{ item }}</span>
+                                                <span v-else>Type here..</span>
                                             </li>
                                         </ul>
                                     </div>

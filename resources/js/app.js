@@ -54,7 +54,8 @@ const options = {
     ],
     styles: [
         'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-        'https://unpkg.com/kidlat-css/css/kidlat.css'
+        'https://unpkg.com/kidlat-css/css/kidlat.css',
+        'https://writersmap.cluster4dreams.com/css/app.css',
     ]
 }
 Vue.use(VueHtmlToPaper);

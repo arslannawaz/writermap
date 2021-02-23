@@ -42,13 +42,15 @@
                 </div>
 
                 <div class="mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                    <div class="character-in-list border-default p-4 relative z-10" v-for="character in characters.data" :key="character.id">
+                    <div class="character-in-list border-default p-4 relative z-1" v-for="(character, character_index) in characters.data" :key="character.id" :style="{'z-index': 100 - character_index}">
                         <div class="bg-light flex flex-col items-center justify-center text-center">
                             <div class="character-in-list__three-dots icon-hoverable z-20" @click="toggleDropdown(character.id)">
                                 <svg class="three-dots" xmlns="http://www.w3.org/2000/svg" width="4" height="18" viewBox="0 0 4 18"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8"><g><g><path d="M172 70c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2zm0-7c1.105 0 2 .895 2 2s-.895 2-2 2-2-.895-2-2 .895-2 2-2z" transform="translate(-860 -628) translate(350 522) translate(340 50)"></path></g></g></g></g></svg>
 
                                 <div :id="'dropdown-menu-' + character.id" class="character-in-list__dropdown-menu bg-light flex flex-col opacity-0">
-                                    <div class="text-red-400 hover:text-red-600" @click="deleteCharacter(character.id)">Delete</div>
+                                    <div class="hover:text-black" @click="editCharacter = character; isAddToGroupCharacterModalShow = true;">Add To Group</div>
+                                    <div class="mt-2 hover:text-black" @click="editCharacter = character; isChangeTypeCharacterModalShow = true;">Change Type</div>
+                                    <div class="mt-2 text-red-400 hover:text-red-600" @click="deleteCharacter(character.id)">Delete</div>
 <!--                                    <a :href="'/books/'+ book.id +'/characters/'+ character.id +'/edit'" class="mt-4 hover:text-black">Edit</a>-->
                                 </div>
                             </div>
@@ -135,7 +137,7 @@
                     </template>
 
                     <template #content>
-                        <input type="text" class="input-default w-full" v-model="formGroup.title">
+                        <input type="text" class="input-default w-full" v-on:keyup.enter="createCharacterGroup()" v-model="formGroup.title">
 
                         <jet-input-error :message="formGroup.error" class="mt-2" />
                     </template>
@@ -181,6 +183,55 @@
 
         <template v-slot:modals>
             <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+
+            <portal-target name="modal_third"></portal-target>
+            <jet-dialog-modal :portal="'modal_third'" :show="isAddToGroupCharacterModalShow" @close="isAddToGroupCharacterModalShow = false">
+                <template #title>
+                    <span class="h2">Change Character</span>
+                </template>
+
+                <template #content>
+                    <form v-on:keyup.enter="changeCharacter('group_id')">
+                        <select class="mt-10 input-default w-full" v-model="editCharacter.group_id">
+                            <option value="null" :selected="editCharacter.group_id === null">Select character group</option>
+                            <option :value="group.id" v-for="group in groups">{{ group.title }}</option>
+                        </select>
+
+                        <jet-input-error :message="editCharacter.error" class="mt-2" />
+                    </form>
+                </template>
+
+                <template #footer>
+                    <div class="flex justify-center">
+                        <button @click="changeCharacter('group_id')" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    </div>
+                </template>
+            </jet-dialog-modal>
+
+            <portal-target name="modal_four"></portal-target>
+            <jet-dialog-modal :portal="'modal_four'" :show="isChangeTypeCharacterModalShow" @close="isChangeTypeCharacterModalShow = false">
+                <template #title>
+                    <span class="h2">Change Character</span>
+                </template>
+
+                <template #content>
+                    <form v-on:keyup.enter="changeCharacter('type')">
+
+                        <select class="mt-10 input-default w-full" v-model="editCharacter.type">
+                            <option value="null" :selected="editCharacter.type === null">Select character type</option>
+                            <option :value="group.type" v-for="group in characterTypes">{{ group.title }}</option>
+                        </select>
+
+                        <jet-input-error :message="editCharacter.error" class="mt-2" />
+                    </form>
+                </template>
+
+                <template #footer>
+                    <div class="flex justify-center">
+                        <button @click="changeCharacter('type')" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    </div>
+                </template>
+            </jet-dialog-modal>
         </template>
     </app-layout>
 </template>
@@ -235,6 +286,9 @@ export default {
             isSearchVisible: false,
             isGroupModalShow: false,
             isCharacterModalShow: false,
+            isAddToGroupCharacterModalShow: false,
+            isChangeTypeCharacterModalShow: false,
+            editCharacter: null,
             characters: [],
             groups: [],
             formGroup: this.$inertia.form({
@@ -309,6 +363,21 @@ export default {
             });
         },
 
+        changeCharacter(field) {
+            axios.post(`/books/${this.book.id}/characters/${this.editCharacter.id}/update`, {
+                field: field,
+                value: this.editCharacter[field],
+            }).then(response => {
+                this.isAddToGroupCharacterModalShow = false;
+                this.isChangeTypeCharacterModalShow = false;
+
+                // this.updateBooks();
+                this.updateCharacters();
+            }).catch(error => {
+                console.log('error', error);
+            });
+        },
+
         deleteCharacter(id) {
             axios.post('/books/' + this.book.id + '/characters/'+ id +'/delete').then(response => {
                 console.log(response);
@@ -376,8 +445,22 @@ export default {
         },
 
         toggleDropdown(characterId) {
+            const elements = document.querySelectorAll('.character-in-list__dropdown-menu.active');
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.add('opacity-0');
+                elements[i].classList.remove('active');
+            }
+
             document.getElementById('dropdown-menu-' + characterId).classList.toggle('opacity-0');
             document.getElementById('dropdown-menu-' + characterId).classList.toggle('active');
+        },
+
+        hideActiveDropdowns() {
+            const elements = document.querySelectorAll('.character-in-list__dropdown-menu.active');
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.add('opacity-0');
+                elements[i].classList.remove('active');
+            }
         },
 
         hideDropdowns(event) {

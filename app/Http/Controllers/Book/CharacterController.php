@@ -25,7 +25,7 @@ class CharacterController extends Controller
 
     public function list()
     {
-        $characters = Book::find(request('book_id'))->characters();
+        $characters = Book::find(request('book_id'))->characters()->getQuery();
 
         if (request()->has('group_id') && request('group_id') !== 'all') {
             $characters->where('group_id', request('group_id'));
@@ -74,12 +74,15 @@ class CharacterController extends Controller
 
     public function update()
     {
-        $characterAttribute = CharacterAttribute::findOrFail([
-            'type' => request('type'),
-            'field' => request('field'),
-        ]);
+        $character = Character::find(request('character_id'));
 
-        return $characterAttribute;
+        if ($character !== null) {
+            $field = request('field');
+            $character->$field = request('value');
+            $character->save();
+        }
+
+        return $character;
     }
 
     public function uploadAttributeImage(CharacterAttribute $model, UploadedFile $file)

@@ -26,16 +26,20 @@
     background-color: transparent;
     padding: 20px;
     width: 100%;
+    position: relative;
 
     &__paper {
         width: 100%;
-        padding: 30px 0;
+        padding: 30px;
         //padding: 30px;
         background-color: #fefcf8;
         min-height: 640px;
         height: 640px;
         max-width: 470px;
         max-height: 640px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        position: relative;
 
         &_cover {
             padding: 0;
@@ -44,6 +48,27 @@
         &_preview {
             pointer-events: none;
             outline: none;
+            //overflow: visible;
+            overflow: hidden;
+            padding: 0;
+
+            &__content {
+                .book-page__content_editor {
+                    padding: 30px;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    height: 610px;
+                    column-width: 420px;
+                    column-gap: 60px;
+                    overflow: visible;
+                    word-break: break-word;
+
+                    h2, p {
+                        text-indent: 47.244094488px;
+                    }
+                }
+            }
         }
     }
 
@@ -64,7 +89,7 @@
 
     &__content {
         font-family: MinionPro;
-        padding: 0 30px;
+        //padding: 0 30px;
         line-height: 1.43;
         font-size: 14px;
         overflow-y: auto;
@@ -101,15 +126,32 @@
         }
 
         &_first-letter {
-            p:first-child {
-                &::first-letter {
-                    font-size: 28px;
-                    float: left;
-                    padding-right: 10px;
-                    color: #4e4d4b;
-                    font-weight: 600;
-                }
-            }
+            //p:first-child {
+            //    &::first-letter {
+            //        font-size: 28px;
+            //        float: left;
+            //        padding-right: 10px;
+            //        color: #4e4d4b;
+            //        font-weight: 600;
+            //    }
+            //}
         }
+    }
+}
+
+.content-reading, #chapter-print {
+    padding: 30px;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 610px;
+    column-width: 420px;
+    column-gap: 60px;
+    overflow: visible;
+    word-break: break-word;
+    text-align: justify;
+
+    h2, p {
+        text-indent: 47.244094488px;
     }
 }

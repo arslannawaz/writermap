@@ -23,7 +23,7 @@
                         </svg>
                     </div>
 
-                    <div class="mt-85px">
+                    <div class="mt-85px" style="margin-top: 100px;">
                         <div class="flex justify-between px-6">
                             <div class="book-label outline-none select-none" @click="isShowCover = !isShowCover">
                                 <span v-if="isShowCover">Title Page</span>
@@ -49,44 +49,46 @@
                         </div>
 
                         <div class="book-page flex justify-center mt-2">
-                            <div v-if="coverImageUrl && isShowCover" class="book-page__paper book-page__paper_cover flex flex-col justify-start ff-minion">
-                                <div :style="{ backgroundImage: 'url(' + coverImageUrl + ')', height: '100%', backgroundSize: 'cover', backgroundPosition: 'center' }"></div>
-                            </div>
-                            <div v-else class="book-page__paper flex flex-col justify-between ff-minion">
-                                <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
-                                    <span v-if="book.additional_title === null">Additional title</span>
-                                    <span v-else>{{ book.additional_title }}</span>
-                                </span>
-
-                                <div class="text-center">
-                                    <p class="font-semibold fs-24">“{{ book.title }}”</p>
-                                    <p>By {{ $page.user.pen_name }}</p>
+                            <div style="background-color: #fefcf8; width: 100%; display: flex; justify-content: center;">
+                                <div v-if="coverImageUrl && isShowCover" class="book-page__paper book-page__paper_cover flex flex-col justify-start ff-minion">
+                                    <div :style="{ backgroundImage: 'url(' + coverImageUrl + ')', height: '100%', backgroundSize: 'cover', backgroundPosition: 'center' }"></div>
                                 </div>
+                                <div v-else class="book-page__paper flex flex-col justify-between ff-minion">
+                                    <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
+                                        <span v-if="book.additional_title === null">Additional title</span>
+                                        <span v-else>{{ book.additional_title }}</span>
+                                    </span>
 
-                                <div>
-                                    <div class="text-right outline-none book-page__contacts">
-                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('address', $event)">
-                                            <span v-if="book.address">{{ book.address }}</span>
-                                            <span v-else>First Stree 12,  BC 6769</span>
-                                        </p>
-                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('phone', $event)">
-                                            <span v-if="book.phone">{{ book.phone }}</span>
-                                            <span v-else>+1 6768 797</span>
-                                        </p>
-                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('email', $event)">
-                                            <span v-if="book.email">{{ book.email }}</span>
-                                            <span v-else>{{ $page.user.email }}</span>
-                                        </p>
-                                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('site', $event)">
-                                            <span v-if="book.site">{{ book.site }}</span>
-                                            <span v-else>amb-gord_stories.com</span>
-                                        </p>
+                                    <div class="text-center">
+                                        <p class="font-semibold fs-24">“{{ book.title }}”</p>
+                                        <p>By {{ $page.user.pen_name }}</p>
                                     </div>
 
-                                    <p class="text-center mt-16 copyright outline-none" v-model="book.copyright" contenteditable="true" @input="updateContentEditableField('copyright', $event)">
-                                        <span v-if="book.copyright === null">Copyright</span>
-                                        <span v-else>{{ book.copyright }}</span>
-                                    </p>
+                                    <div>
+                                        <div class="text-right outline-none book-page__contacts">
+                                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('address', $event)">
+                                                <span v-if="book.address">{{ book.address }}</span>
+                                                <span v-else>First Stree 12,  BC 6769</span>
+                                            </p>
+                                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('phone', $event)">
+                                                <span v-if="book.phone">{{ book.phone }}</span>
+                                                <span v-else>+1 6768 797</span>
+                                            </p>
+                                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('email', $event)">
+                                                <span v-if="book.email">{{ book.email }}</span>
+                                                <span v-else>{{ $page.user.email }}</span>
+                                            </p>
+                                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('site', $event)">
+                                                <span v-if="book.site">{{ book.site }}</span>
+                                                <span v-else>amb-gord_stories.com</span>
+                                            </p>
+                                        </div>
+
+                                        <p class="text-center mt-16 copyright outline-none" v-model="book.copyright" contenteditable="true" @input="updateContentEditableField('copyright', $event)">
+                                            <span v-if="book.copyright === null">Copyright</span>
+                                            <span v-else>{{ book.copyright }}</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +111,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <input ref="chapter_search_input" type="text" class="input-default input-default_p-zero ml-4" style="height: 42px; width: 80%;">
+                            <input ref="chapter_search_input" @keyup.enter="handleSearch" @keydown.tab="tabSearch" type="text" class="input-default input-default_p-zero ml-4" style="height: 42px; width: 80%;">
                         </div>
 
                         <div class="flex justify-end">
@@ -125,7 +127,7 @@
 <!--                                </g>-->
 <!--                            </svg>-->
 
-                            <svg class="ml-6 icon-hoverable" @click="$htmlToPaper('chapter-print')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <svg class="ml-6 icon-hoverable" @click="$htmlToPaper('p-print')" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                                 <g fill="none" fill-rule="evenodd">
                                     <g fill="#BEBDB8" fill-rule="nonzero">
                                         <g>
@@ -145,13 +147,15 @@
                         </div>
 
                         <div class="book-page book-page_preview flex justify-center mt-2">
-                            <div class="book-page__paper book-page__paper_preview flex flex-col justify-end disable-scroll">
-<!--                                <span class="book-page__chapter">Chapter One</span>-->
+                            <div style="background-color: #fefcf8; width: 100%; display: flex; justify-content: center;">
+                                <div class="book-page__paper book-page__paper_preview flex flex-col justify-end">
+    <!--                                <span class="book-page__chapter">Chapter One</span>-->
 
-                                <div id="chapter-print" spellcheck="false" class="book-page__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">
-                                    <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>
-                                    <h1 class="mt-2 fs-18 ff-minion font-semibold">Chapter {{ first_chapter.title }}</h1>
-                                    <editor-content class="mt-6 editor__content outline-none fs-15 ff-minion" :editor="editor" />
+                                    <div id="chapter-print" spellcheck="false" class="book-page__content book-page__paper_preview__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">
+                                        <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>
+                                        <h1 class="mt-2 fs-18 ff-minion font-semibold">Chapter {{ first_chapter.title }}</h1>
+                                        <editor-content class="mt-6 editor__content outline-none fs-15 ff-minion" style="left: 0;" :editor="editor" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +180,12 @@
                                 </svg>
                             </div>
 
-                            <div class="mx-auto outline-none">Page {{ scrollPage }}</div>
+                            <div class="mx-auto outline-none">
+                                Page
+                                <select v-model="scrollPage" @change="scrollToPage">
+                                    <option v-for="page in scrollPageCount" :key="page">{{ page }}</option>
+                                </select>
+                            </div>
 
                             <div class="ml-auto text-right icon-hoverable p-4 pr-0" @click="scrollChapterNext()">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5" height="9" viewBox="0 0 5 9">
@@ -199,6 +208,45 @@
                         </div>
                     </div>
                     <!-- END Right block -->
+                </div>
+            </div>
+
+
+            <div id="p-print" class="book-page__paper flex flex-col justify-between ff-minion" style="display: none;">
+                                    <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
+                                        <span v-if="book.additional_title === null">Additional title</span>
+                                        <span v-else>{{ book.additional_title }}</span>
+                                    </span>
+
+                <div class="text-center">
+                    <p class="font-semibold fs-24">“{{ book.title }}”</p>
+                    <p>By {{ $page.user.pen_name }}</p>
+                </div>
+
+                <div>
+                    <div class="text-right outline-none book-page__contacts">
+                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('address', $event)">
+                            <span v-if="book.address">{{ book.address }}</span>
+                            <span v-else>First Stree 12,  BC 6769</span>
+                        </p>
+                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('phone', $event)">
+                            <span v-if="book.phone">{{ book.phone }}</span>
+                            <span v-else>+1 6768 797</span>
+                        </p>
+                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('email', $event)">
+                            <span v-if="book.email">{{ book.email }}</span>
+                            <span v-else>{{ $page.user.email }}</span>
+                        </p>
+                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('site', $event)">
+                            <span v-if="book.site">{{ book.site }}</span>
+                            <span v-else>amb-gord_stories.com</span>
+                        </p>
+                    </div>
+
+                    <p class="text-center mt-16 copyright outline-none" v-model="book.copyright" contenteditable="true" @input="updateContentEditableField('copyright', $event)">
+                        <span v-if="book.copyright === null">Copyright</span>
+                        <span v-else>{{ book.copyright }}</span>
+                    </p>
                 </div>
             </div>
         </app-container>
@@ -236,11 +284,13 @@ export default {
         return {
             editor: null,
             scrollPage: 1,
+            scrollPageCount: 3,
             book: this.book_data,
             previewCover: null,
             coverImage: null,
             isShowCover: false,
             coverImageUrl: this.book_data.cover_image_url,
+            findFocusedIndex: -1,
         };
     },
 
@@ -256,25 +306,13 @@ export default {
 
             this.editor = new Editor({
                 extensions: [
-                    new Blockquote(),
-                    new BulletList(),
-                    new CodeBlock(),
-                    new HardBreak(),
-                    new Heading({ levels: [1, 2, 3] }),
-                    new ListItem(),
-                    new OrderedList(),
-                    new TodoItem(),
-                    new TodoList(),
-                    new Link(),
-                    new Bold(),
-                    new Code(),
-                    new Italic(),
-                    new Strike(),
-                    new Underline(),
-                    new History(),
                     new Search(),
                 ],
+                // editable: false,
                 content: content,
+                onUpdate: ({HTML}) => {
+                    console.log('update in editor');
+                },
                 // editable: false,
             });
 
@@ -359,21 +397,92 @@ export default {
         },
 
         scrollChapterPrev() {
-            let prevScrollTop = document.getElementById('chapter-print').scrollTop;
-            document.getElementById('chapter-print').scrollTop = document.getElementById('chapter-print').scrollTop - 580;
+            const chapterPrint = document.getElementById('chapter-print');
+            let prevScrollValue = 0;
+            let newLeftValue = 0;
 
-            if (document.getElementById('chapter-print').scrollTop < prevScrollTop) {
-                this.scrollPage--;
+            if (parseInt(chapterPrint.style.left.replace('px','')) < 0) {
+                prevScrollValue = parseInt(chapterPrint.style.left.replace('px',''));
+                newLeftValue = parseInt(chapterPrint.style.left) + 470;
+            }
+
+            console.log('scrollChapterNext', chapterPrint.style.left);
+
+            chapterPrint.style.left = newLeftValue + 'px';
+
+            if (this.scrollPage > 1) {
+                // if ((this.scrollPage - 1) > 0) {
+                    this.scrollPage--;
+                // }
             }
         },
 
         scrollChapterNext() {
-            let prevScrollTop = document.getElementById('chapter-print').scrollTop;
-            document.getElementById('chapter-print').scrollTop = document.getElementById('chapter-print').scrollTop + 580;
+            const chapterPrint = document.getElementById('chapter-print');
+            let prevScrollValue = 0;
+            let newLeftValue = 0;
 
-            if (document.getElementById('chapter-print').scrollTop > prevScrollTop) {
+            if (parseInt(chapterPrint.style.left.replace('px','')) < 0) {
+                prevScrollValue = parseInt(chapterPrint.style.left.replace('px',''));
+                newLeftValue = parseInt(chapterPrint.style.left) - 470;
+            } else {
+                prevScrollValue = 0;
+                newLeftValue = '-470';
+            }
+
+            console.log('scrollChapterNext', chapterPrint.style.left);
+
+            chapterPrint.style.left = newLeftValue + 'px';
+
+            if (parseInt(chapterPrint.style.left) < prevScrollValue) {
                 this.scrollPage++;
             }
+        },
+
+        scrollToPage(page = null) {
+            const chapterPrint = document.getElementById('chapter-print');
+            let newLeftValue = 0;
+
+
+            if (this.scrollPage === 1) {
+                newLeftValue = 0;
+            } else {
+                newLeftValue = ((this.scrollPage-1) * 470) * -1;
+            }
+
+
+            console.log('scrollToPage', chapterPrint.style.left);
+            chapterPrint.style.left = newLeftValue + 'px';
+        },
+
+        handleSearch() {
+            this.runEditorCommand('find', this.$refs['chapter_search_input'].value);
+            this.$refs['chapter_search_input'].focus();
+            this.editor.disable();
+        },
+
+        tabSearch(event) {
+            event.preventDefault();
+
+            if (this.scrollPage > 3) {
+                const chapterPrint = document.getElementById('chapter-print');
+                chapterPrint.style.left = 0;
+                this.scrollPage = 0;
+            }
+
+            this.scrollChapterNext();
+
+            // alert(1123);
+            // console.log('123');
+            // const findedWords = document.getElementsByClassName('find');
+            //
+            // this.findFocusedIndex += 1;
+            // if (findedWords[this.findFocusedIndex] !== undefined) {
+            //     findedWords[this.findFocusedIndex].classList.add('active');
+            //     findedWords[this.findFocusedIndex].scrollIntoView();
+            // } else {
+            //     this.findFocusedIndex = -1;
+            // }
         },
     },
 }

@@ -28,7 +28,7 @@ class BookController extends Controller
         $book = Book::find($id);
         return inertia('Book/Pages', [
             'book_data' => $book,
-            'first_chapter' => $book->chapters()->orderBy('created_at', 'asc')->first(),
+            'first_chapter' => $book->chapters()->orderBy('number', 'asc')->first(),
         ]);
     }
 

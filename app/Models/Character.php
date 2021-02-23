@@ -77,7 +77,7 @@ class Character extends Model
             return '/storage/' . $image->value;
         }
 
-        return '/storage/undefined.jpg';
+        return '/storage/undefined-oval.png';
     }
 
     public function getTypeTitleAttribute()

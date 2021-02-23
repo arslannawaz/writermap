@@ -54,6 +54,18 @@ class ChaptersController extends Controller
         $chapter = Chapter::find(request('id'));
 
         $field = \request('field');
+
+        if (\request('field') === 'number') {
+            $prevChapter = Chapter::where('book_id', \request('book_id'))
+                ->where('number', \request('value'))
+                ->first();
+
+            if ($prevChapter !== null) {
+                $prevChapter->number = $chapter->number;
+                $prevChapter->save();
+            }
+        }
+
         $chapter->$field = \request('value');
 
         return $chapter->save();
@@ -61,7 +73,7 @@ class ChaptersController extends Controller
 
     public function editPage()
     {
-        $chapters = $this->book->chapters()->orderBy('created_at', 'asc')->get();
+        $chapters = $this->book->chapters()->orderBy('number', 'asc')->get();
         $chapter = $this->book->chapters()->where('id', \request('chapter_id'))->first();
 
         Inertia::share('chapters', $chapters);
