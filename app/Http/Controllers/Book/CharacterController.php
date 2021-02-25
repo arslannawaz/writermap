@@ -27,7 +27,7 @@ class CharacterController extends Controller
     {
         $characters = Book::find(request('book_id'))->characters()->getQuery();
 
-        if (request()->has('group_id') && request('group_id') !== 'all') {
+        if (request()->has('group_id') && request('group_id') > 0) {
             $characters->where('group_id', request('group_id'));
         }
 

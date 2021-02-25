@@ -243,6 +243,7 @@ import Button from "../../Jetstream/Button";
 import JetDialogModal from "../../Jetstream/DialogModal";
 import JetInputError from "../../Jetstream/InputError";
 import NeedSubscription from "../../Components/NeedSubscription";
+import Vue from "vue";
 
 export default {
     components: {
@@ -325,8 +326,8 @@ export default {
 
                 this.updateGroups();
             }).catch(error => {
-                this.formGroup.processing = false;
-                this.formGroup.error = error.response.data.errors.password[0];
+                console.log('error', error);
+                Vue.swal('Create Group', 'Oops..', 'error');
             });
         },
 

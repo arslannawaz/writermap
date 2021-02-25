@@ -1080,30 +1080,30 @@
                         <div class="mt-2 p-4 border border-gray-300" style="height: 92.8vh;">
                             <div class="bg-light p-10" style="height: 90vh;">
                                 <div v-if="attributeInEdit.group === 'physicality'">
-                                    <div class="flex mr-4">
-                                        <div class="flex items-center">
+                                    <div class="flex items-center mr-4">
+                                        <div class="flex flex-wrap items-center">
                                             <img ref="preview_input_physicality_image" v-if="getAttributeValue('image', 'physicality') === undefined" src="/storage/undefined-oval.png" width="84px" height="84px" alt="photo" style="height: 84px;" class="rounded-full">
                                             <img ref="preview_input_physicality_image" v-if="getAttributeValue('image', 'physicality') !== undefined" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" width="84px" height="84px" alt="photo" style="height: 84px;" class="rounded-full">
                                             <input ref="input_physicality_image" type="file" class="hidden" @change="updateCharacterAttribute({ group: attributeInEdit.group, field: 'image', value: $event.target.files[0] })">
 
-                                            <div class="ml-8 flex-shrink-0 flex-grow-0">
-                                                <div class="label-default">Uploaded image:</div>
-                                                <div class="mt-2 flex justify-between fs-12">
-                                                    <div class="font-semibold">Format:</div>
-                                                    <div class="text-color-light">PNG</div>
-                                                </div>
-                                                <div class="mt-2 flex justify-between fs-12">
-                                                    <div class="font-semibold">Size:</div>
-                                                    <div class="text-color-light">11 Kb</div>
-                                                </div>
-                                                <div class="mt-2 flex justify-between fs-12">
-                                                    <div class="font-semibold">Last Updated:</div>
-                                                    <div class="text-color-light ml-4">Jan 13, 2021</div>
-                                                </div>
-                                            </div>
+<!--                                            <div class="ml-0 xl:ml-8 hidden xl:block">-->
+<!--                                                <div class="label-default">Uploaded image:</div>-->
+<!--                                                <div class="mt-2 flex justify-between fs-12">-->
+<!--                                                    <div class="font-semibold">Format:</div>-->
+<!--                                                    <div class="text-color-light">PNG</div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mt-2 flex justify-between fs-12">-->
+<!--                                                    <div class="font-semibold">Size:</div>-->
+<!--                                                    <div class="text-color-light">11 Kb</div>-->
+<!--                                                </div>-->
+<!--                                                <div class="mt-2 flex justify-between fs-12">-->
+<!--                                                    <div class="font-semibold">Last Updated:</div>-->
+<!--                                                    <div class="text-color-light ml-4">Jan 13, 2021</div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
                                         </div>
-                                        <div class="ml-8 flex flex-col justify-end">
-                                            <div class="mt-6 button rounded-lg bg-dark px-8 py-2 font-semibold fs-12 text-white cursor-pointer"
+                                        <div class="ml-8 flex flex-no-wrap flex-col justify-end">
+                                            <div class="button rounded-lg bg-dark px-8 py-2 font-semibold fs-12 text-white cursor-pointer"
                                                 @click="$refs.input_physicality_image.click()">Upload</div>
                                         </div>
                                     </div>
@@ -1111,7 +1111,7 @@
                                     <div class="mt-8 fs-16 ff-minion font-semibold">{{ attributeInEdit.question }}</div>
 
                                     <div class="mt-6 label-default">Enter description</div>
-                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll" style="max-height: 78vh;">
+                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll character-editor-wrapper" @click="removeTypeHereFromEditor(editor)">
                                         <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editor" />
                                     </div>
                                 </div>
@@ -1126,8 +1126,8 @@
                                     </select>
 
                                     <div class="mt-6 label-default">Enter description</div>
-                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll" style="max-height: 78vh;">
-                                        <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" @click="removeTypeHere" :editor="editor" />
+                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll character-editor-wrapper" @click="removeTypeHereFromEditor(editor)">
+                                        <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editor" />
                                     </div>
                                 </div>
                                 <div v-else>
@@ -1139,7 +1139,7 @@
     <!--                                    {{ attributeInEdit.description }}-->
     <!--                                </div>-->
 
-                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll" style="max-height: 78vh;">
+                                    <div class="mt-2 -mx-10 px-10 editor outline-none custom-scroll overflow-y-scroll character-editor-wrapper" @click="removeTypeHereFromEditor(editor)">
                                         <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editor" />
                                     </div>
                                 </div>
@@ -1289,6 +1289,11 @@ export default {
             content: `Type here...`,
             onUpdate: ({ getHTML }) => {
                 this.updateCharacterAttribute({ group: this.attributeInEdit.group, field: this.attributeInEdit.field, description: getHTML() });
+            },
+            onBlur: () => {
+                if (this.editor.getHTML() === null || this.editor.getHTML() === '' || this.editor.getHTML() === '<p></p>') {
+                    this.editor.setContent('Type here..');
+                }
             },
         });
 

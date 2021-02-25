@@ -89,7 +89,7 @@
                     <div class="pt-40 fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
                     <input type="text" class="input-default input-default_border-none h2 w-full" v-model="chapter.title"
                            @change="updateChapterField('title', $event.target.value)" />
-                    <div class="mt-12 editor w-full" spellcheck="false">
+                    <div class="mt-12 editor w-full" spellcheck="false" @click="removeTypeHereFromEditor(editor)">
                         <editor-content class="editor__content outline-none fs-18 ff-minion" :editor="editor" />
                     </div>
 
@@ -145,25 +145,24 @@ export default {
             }
 
             let content = this.chapter.content;
-
-            if (content === null) {
-                content = 'Type here...';
+            if (content === null || content === '' || content === '<p></p>') {
+                content = 'Type here..';
             }
 
             this.editor = new Editor({
                 extensions: [
                     new Blockquote(),
-                    new BulletList(),
-                    new CodeBlock(),
-                    new HardBreak(),
+                    // new BulletList(),
+                    // new CodeBlock(),
+                    // new HardBreak(),
                     new Heading({ levels: [1, 2, 3] }),
-                    new ListItem(),
-                    new OrderedList(),
-                    new TodoItem(),
-                    new TodoList(),
+                    // new ListItem(),
+                    // new OrderedList(),
+                    // new TodoItem(),
+                    // new TodoList(),
                     new Link(),
                     new Bold(),
-                    new Code(),
+                    // new Code(),
                     new Italic(),
                     new Strike(),
                     new Underline(),
@@ -173,6 +172,11 @@ export default {
                 content: content,
                 onUpdate: ({ getHTML }) => {
                     this.updateChapterField('content', getHTML());
+                },
+                onBlur: () => {
+                    if (this.editor.getHTML() === null || this.editor.getHTML() === '' || this.editor.getHTML() === '<p></p>') {
+                        this.editor.setContent('Type here..');
+                    }
                 },
                 // editable: false,
             });

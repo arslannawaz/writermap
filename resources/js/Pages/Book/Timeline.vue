@@ -290,7 +290,9 @@ export default {
         return {
             events: [],
             drag: false,
-            currentEventNew: null,
+            currentEventNew: {
+                id: null,
+            },
             eventEdit: {},
             eventItemEdit: {},
             isEventCreateModalShow: false,
@@ -405,7 +407,7 @@ export default {
             }
         },
 
-        createEvent(title, description) {
+        createEvent(title = null, description = null) {
             this.isEventCreateModalShow = false;
 
             console.log(this.$refs['event_input_title'].value);
@@ -414,21 +416,13 @@ export default {
             const url = '/books/' + this.$page.book.id + '/timeline/events/create';
 
             let data = {};
-            if (title === null && description === null) {
-                data = {
-                    title: this.$refs['event_input_title'].value,
-                    description: this.$refs['event_input_description'].value,
-                };
-            } else {
-                data = {
-                    title: title,
-                    description: description,
-                };
-            }
+            data = {
+                title: this.$refs['event_input_title'].value,
+                description: this.$refs['event_input_description'].value,
+            };
 
-            axios.post(url, {
 
-            }).then((response) => {
+            axios.post(url, data).then((response) => {
                 console.log(response.data);
                 this.updateEventsList();
                 this.$refs['event_input_title'].value = null;

@@ -43,7 +43,7 @@ class ItemController extends Controller
         $order = 0;
 
         $lastEventItem = EventItem::where('event_id', \request('event_id'))
-            ->orderBy('order', 'asc')
+            ->orderBy('order', 'desc')
             ->first();
 
         if ($lastEventItem !== null) {

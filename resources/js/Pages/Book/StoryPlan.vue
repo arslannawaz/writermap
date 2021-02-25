@@ -6,9 +6,10 @@
                 <div class="mt-12 grid grid-cols-1 xl:grid-cols-7 gap-16">
                     <div class="col-span-1 xl:col-span-3 bg-light" style="height: 370px;">
                         <h2 class="h2 px-12 pt-10">Writers Objective</h2>
-                        <div style="max-height: 230px;" class="custom-scroll overflow-y-auto mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10 outline-none custom-scroll" contenteditable="true" @input="updateContentEditableField('objective', $event)">
-                            <p v-if="storyPlan.objective == null" @click="removeTypeHere">Type here...</p>
-                            <p v-else>{{ storyPlan.objective }}</p>
+                        <div style="max-height: 230px;" @click="removeTypeHereFromEditor(editorObjective)" class="custom-scroll overflow-y-auto mt-8 custom-scroll ff-minion fs-14 custom-scroll px-12 pb-10 outline-none custom-scroll" contenteditable="true" @input="updateContentEditableField('objective', $event)">
+<!--                            <p v-if="storyPlan.objective == null" @click="removeTypeHere">Type here...</p>-->
+<!--                            <p v-else>{{ storyPlan.objective }}</p>-->
+                            <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editorObjective" />
                         </div>
                     </div>
                     <div class="col-span-1 xl:col-span-4 bg-light" style="height: 370px; max-height: 570px;">
@@ -206,9 +207,10 @@
                             </svg>
                             </div>
 
-                            <div class="pl-12 pr-12 xl:pl-0 custom-scroll overflow-y-auto w-full text-left custom-scroll ff-minion fs-14 outline-none custom-scroll" style="word-break: break-word; max-height: 230px;" contenteditable="true" @input="updateContentEditableField('inspiration', $event)">
-                                <p v-if="storyPlan.inspiration == null" @click="removeTypeHere">Type here...</p>
-                                <p v-else>{{ storyPlan.inspiration }}</p>
+                            <div @click="removeTypeHereFromEditor(editorInspiration)" class="pl-12 pr-12 xl:pl-0 custom-scroll overflow-y-auto w-full text-left custom-scroll ff-minion fs-14 outline-none custom-scroll" style="word-break: break-word; max-height: 230px;" contenteditable="true" @input="updateContentEditableField('inspiration', $event)">
+<!--                                <p v-if="storyPlan.inspiration == null" @click="removeTypeHere">Type here...</p>-->
+<!--                                <p v-else>{{ storyPlan.inspiration }}</p>-->
+                                <editor-content class="custom-scroll overflow-y-auto editor__content outline-none" :editor="editorInspiration" />
                             </div>
                         </div>
                     </div>
@@ -371,14 +373,27 @@ import AppContainer from "../../Layouts/AppContainer";
 import JetDialogModal from "../../Jetstream/DialogModal";
 import JetInputError from "../../Jetstream/InputError";
 import NeedSubscription from "../../Components/NeedSubscription";
+import {Editor, EditorContent, EditorMenuBar} from "tiptap";
+import {
+    Blockquote, Bold,
+    BulletList, Code,
+    CodeBlock,
+    HardBreak,
+    Heading, History, Italic, Link,
+    ListItem,
+    OrderedList, Search, Strike,
+    TodoItem, TodoList, Underline
+} from "tiptap-extensions";
 
 export default {
-    components: {NeedSubscription, AppLayout, AppContainer, JetDialogModal, JetInputError},
+    components: {NeedSubscription, AppLayout, AppContainer, JetDialogModal, JetInputError, EditorMenuBar, EditorContent},
 
     props: ['book', 'storyPlan'],
 
     data() {
         return {
+            editorObjective: null,
+            editorInspiration: null,
             allMilestones: [],
             isCreateMilestoneModalShow: false,
             isChangeMilestoneModalShow: false,
@@ -421,6 +436,80 @@ export default {
     mounted() {
         this.updateMilestonesList();
         this.updateMilestonesStatusCount();
+
+        let contentObjective = this.storyPlan.objective;
+        if (contentObjective === null || contentObjective === '' || contentObjective === '<p></p>') {
+            contentObjective = 'Type here..';
+        }
+
+        this.editorObjective = new Editor({
+            extensions: [
+                new Blockquote(),
+                new BulletList(),
+                new CodeBlock(),
+                new HardBreak(),
+                new Heading({ levels: [1, 2, 3] }),
+                new ListItem(),
+                new OrderedList(),
+                new TodoItem(),
+                new TodoList(),
+                new Link(),
+                new Bold(),
+                new Code(),
+                new Italic(),
+                new Strike(),
+                new Underline(),
+                new History(),
+                new Search(),
+            ],
+            content: contentObjective,
+            onUpdate: ({ getHTML }) => {
+                this.updateContentEditableField('objective', this.editorObjective);
+            },
+            onBlur: () => {
+                if (this.editorObjective.getHTML() === null || this.editorObjective.getHTML() === '' || this.editorObjective.getHTML() === '<p></p>'|| this.editorObjective.getHTML() === '<p></p>') {
+                    this.editorObjective.setContent('Type here..');
+                }
+            },
+            // editable: false,
+        });
+
+        let contentInspiration = this.storyPlan.inspiration;
+        if (contentInspiration === null || contentInspiration === '' || contentInspiration === '<p></p>') {
+            contentInspiration = 'Type here..';
+        }
+
+        this.editorInspiration = new Editor({
+            extensions: [
+                new Blockquote(),
+                new BulletList(),
+                new CodeBlock(),
+                new HardBreak(),
+                new Heading({ levels: [1, 2, 3] }),
+                new ListItem(),
+                new OrderedList(),
+                new TodoItem(),
+                new TodoList(),
+                new Link(),
+                new Bold(),
+                new Code(),
+                new Italic(),
+                new Strike(),
+                new Underline(),
+                new History(),
+                new Search(),
+            ],
+            content: contentInspiration,
+            onUpdate: ({ getHTML }) => {
+                this.updateContentEditableField('inspiration', this.editorInspiration);
+            },
+            onBlur: () => {
+                if (this.editorInspiration.getHTML() === null || this.editorInspiration.getHTML() === '' || this.editorInspiration.getHTML() === '<p></p>') {
+                    this.editorInspiration.setContent('Type here..');
+                }
+            },
+            // editable: false,
+        });
     },
 
     methods: {
@@ -657,12 +746,12 @@ export default {
             }
         },
 
-        updateContentEditableField(field, event) {
+        updateContentEditableField(field, editor) {
             // console.log(field, this.bookItem, this.bookItem[field]);
             const url = '/books/' + this.book.id + '/story-plan/update';
             axios.post(url,{
                 field: field,
-                value: event.target.innerText,
+                value: editor.getHTML(),
             }).then(response => {
                 console.log('update milestone', response.data);
             }).catch(error => {

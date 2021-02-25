@@ -57,3 +57,21 @@
         border: 1px solid #ccc;
     }
 }
+
+.character-editor-wrapper {
+    @media (min-height: 400px) {
+        max-height: 15vh;
+    }
+
+    @media (min-height: 500px) {
+        max-height: 25vh;
+    }
+
+    @media (min-height: 600px) {
+        max-height: 35vh;
+    }
+
+    @media (min-height: 700px) {
+        max-height: 40vh;
+    }
+}

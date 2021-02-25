@@ -66,10 +66,16 @@ Vue.config.errorHandler = err => {
 
 Vue.mixin({
     methods: {
-        removeTypeHere: function (event) {
-            console.log('TYPE HERE', event);
-            if (event.target.innerText === 'Type here...') {
-                event.target.innerText = '';
+        removeTypeHere: function (element) {
+            console.log('TYPE HERE', element);
+            console.log('TYPE HERE1', element.setContent(''));
+            // if (event.target.innerText === 'Type here...') {
+            //     event.target.innerText = '';
+            // }
+        },
+        removeTypeHereFromEditor: function (editor) {
+            if (editor.getHTML().includes('Type here')) {
+                editor.setContent('');
             }
         }
     }
