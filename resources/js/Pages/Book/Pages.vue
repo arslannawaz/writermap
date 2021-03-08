@@ -219,50 +219,53 @@
 
             <div id="p-print" class="" style="display: none;">
                 <div class="flex flex-col justify-between ff-minion" style="width: 100%; page-break-after: always;">
+                    <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
+                        <span v-if="book.additional_title === null">Additional title</span>
+                        <span v-else>{{ book.additional_title }}</span>
+                    </span>
 
-                <span class="text-center outline-none" v-model="book.additional_title" contenteditable="true" @input="updateContentEditableField('additional_title', $event)">
-                    <span v-if="book.additional_title === null">Additional title</span>
-                    <span v-else>{{ book.additional_title }}</span>
-                </span>
+                    <div class="text-center mt-32">
+                        <p class="font-semibold fs-24">“{{ book.title }}”</p>
+                        <p>By {{ $page.user.pen_name }}</p>
+                    </div>
+                    
+                    <div class="mt-32"></div>
+                    <div class="mt-32"></div>
+                    <div class="mt-32"></div>
+                    <div class="mt-32">
+                        <div class="text-right outline-none book-page__contacts">
+                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('address', $event)">
+                                <span v-if="book.address">{{ book.address }}</span>
+                                <span v-else>First Stree 12,  BC 6769</span>
+                            </p>
+                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('phone', $event)">
+                                <span v-if="book.phone">{{ book.phone }}</span>
+                                <span v-else>+1 6768 797</span>
+                            </p>
+                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('email', $event)">
+                                <span v-if="book.email">{{ book.email }}</span>
+                                <span v-else>{{ $page.user.email }}</span>
+                            </p>
+                            <p class="outline-none" contenteditable="true" @input="updateContentEditableField('site', $event)">
+                                <span v-if="book.site">{{ book.site }}</span>
+                                <span v-else>amb-gord_stories.com</span>
+                            </p>
+                        </div>
 
-                <div class="text-center mt-32">
-                    <p class="font-semibold fs-24">“{{ book.title }}”</p>
-                    <p>By {{ $page.user.pen_name }}</p>
-                </div>
-
-                <div class="mt-32"></div>
-                <div class="mt-32">
-                    <div class="text-right outline-none book-page__contacts">
-                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('address', $event)">
-                            <span v-if="book.address">{{ book.address }}</span>
-                            <span v-else>First Stree 12,  BC 6769</span>
-                        </p>
-                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('phone', $event)">
-                            <span v-if="book.phone">{{ book.phone }}</span>
-                            <span v-else>+1 6768 797</span>
-                        </p>
-                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('email', $event)">
-                            <span v-if="book.email">{{ book.email }}</span>
-                            <span v-else>{{ $page.user.email }}</span>
-                        </p>
-                        <p class="outline-none" contenteditable="true" @input="updateContentEditableField('site', $event)">
-                            <span v-if="book.site">{{ book.site }}</span>
-                            <span v-else>amb-gord_stories.com</span>
+                        <p class="text-center mt-16 copyright outline-none" v-model="book.copyright" contenteditable="true" @input="updateContentEditableField('copyright', $event)">
+                            <span v-if="book.copyright === null">Copyright</span>
+                            <span v-else>{{ book.copyright }}</span>
                         </p>
                     </div>
-
-                    <p class="text-center mt-16 copyright outline-none" v-model="book.copyright" contenteditable="true" @input="updateContentEditableField('copyright', $event)">
-                        <span v-if="book.copyright === null">Copyright</span>
-                        <span v-else>{{ book.copyright }}</span>
-                    </p>
-                </div>
                 </div>
 
                 <div class="mt-32">
                     <div spellcheck="false" class="print-book-page book-page__content book-page__paper_preview__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">
                         <!--                                        <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>-->
-                        <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ first_chapter.title }}</h2>
-                        <div v-html="first_chapter.content"></div>
+                        <div v-for="chapter in chapters" style="page-break-after: always;">
+                            <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ chapter.title }}</h2>
+                            <div v-html="chapter.content"></div>
+                        </div>
                     </div>
                 </div>
             </div>
