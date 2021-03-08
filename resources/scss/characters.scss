@@ -43,9 +43,10 @@
     //    height: 220px;
     //}
     &__updated-at {
-        position: absolute;
-        bottom: 90px;
-        left: 35px;
+        margin-top: 10px;
+        //position: absolute;
+        //bottom: 90px;
+        //left: 35px;
         color: #adaaa5;
     }
 }
@@ -72,6 +73,22 @@
     }
 
     @media (min-height: 700px) {
-        max-height: 40vh;
+        max-height: 45vh;
+    }
+
+    @media (min-height: 800px) {
+        max-height: 55vh;
+    }
+
+    @media (min-height: 900px) {
+        max-height: 55vh;
+    }
+
+    @media (min-height: 1000px) {
+        max-height: 60vh;
+    }
+
+    @media (min-height: 1100px) {
+        max-height: 65vh;
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <app-container width="w-container">
+        <app-container>
             <div class="grid grid-cols-2 grid-background absolute z-0 invisible xl:visible">
                 <div class="col-span-1 col-bg_default"></div>
                 <div class="col-span-1 col-bg"></div>
@@ -142,8 +142,13 @@
                     </div>
 
                     <div class="mt-85px pt-4 outline-none">
-                        <div class="flex justify-between px-6">
+                        <div class="flex justify-between items-center px-6">
                             <span class="book-label book-label_no-hover">Page Preview</span>
+                            <div>
+                                <select v-model="selectSelectedChapterIndex" @change="handleSelectChapter" class="bg-transparent outline-none">
+                                    <option :value="index" :key="index" v-for="(chapter, index) in chapters">Chapter {{ chapter.number }}</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="book-page book-page_preview flex justify-center mt-2">
@@ -153,7 +158,7 @@
 
                                     <div id="chapter-print" spellcheck="false" class="book-page__content book-page__paper_preview__content book-page__content_editor book-page__content_first-letter disable-scroll" v-if="first_chapter">
 <!--                                        <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>-->
-                                        <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ first_chapter.title }}</h2>
+                                        <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ selectedChapterTitle }}</h2>
                                         <editor-content class="mt-6 editor__content outline-none fs-15 ff-minion" style="left: 0;" :editor="editor" />
                                     </div>
                                 </div>
@@ -182,7 +187,7 @@
 
                             <div class="mx-auto outline-none">
                                 Page
-                                <select v-model="scrollPage" @change="scrollToPage">
+                                <select v-model="scrollPage" @change="scrollToPage" class="bg-transparent outline-none">
                                     <option v-for="page in scrollPageCount" :key="page">{{ page }}</option>
                                 </select>
                             </div>
@@ -283,7 +288,7 @@ import {
 } from "tiptap-extensions";
 
 export default {
-    props: ['book_data', 'first_chapter'],
+    props: ['book_data', 'first_chapter', 'chapters'],
 
     components: {
         AppLayout,
@@ -297,12 +302,15 @@ export default {
             editor: null,
             scrollPage: 1,
             scrollPageCount: 3,
+            chapterPrintWidth: 0,
             book: this.book_data,
             previewCover: null,
             coverImage: null,
             isShowCover: false,
             coverImageUrl: this.book_data.cover_image_url,
             findFocusedIndex: -1,
+            selectSelectedChapterIndex: 0,
+            selectedChapterTitle: null,
         };
     },
 
@@ -329,6 +337,11 @@ export default {
             });
 
             // this.editor.extensions.
+
+            console.log('CHAPTETS', this.chapters);
+
+            this.selectedChapterTitle = this.first_chapter.title;
+            this.chapterPrintWidth = document.getElementById('chapter-print').offsetWidth;
         }
     },
 
@@ -420,7 +433,7 @@ export default {
 
                 if (parseInt(chapterPrint.style.left.replace('px', '')) < 0) {
                     prevScrollValue = parseInt(chapterPrint.style.left.replace('px', ''));
-                    newLeftValue = parseInt(chapterPrint.style.left) + 470;
+                    newLeftValue = parseInt(chapterPrint.style.left) + this.chapterPrintWidth;
                 }
 
                 console.log('scrollChapterNext', chapterPrint.style.left);
@@ -447,10 +460,10 @@ export default {
 
                 if (parseInt(chapterPrint.style.left.replace('px', '')) < 0) {
                     prevScrollValue = parseInt(chapterPrint.style.left.replace('px', ''));
-                    newLeftValue = parseInt(chapterPrint.style.left) - 470;
+                    newLeftValue = parseInt(chapterPrint.style.left) - this.chapterPrintWidth;
                 } else {
                     prevScrollValue = 0;
-                    newLeftValue = '-470';
+                    newLeftValue = '-' + this.chapterPrintWidth;
                 }
 
                 console.log('scrollChapterNext', chapterPrint.style.left);
@@ -471,7 +484,7 @@ export default {
             if (this.scrollPage === 1) {
                 newLeftValue = 0;
             } else {
-                newLeftValue = ((this.scrollPage-1) * 470) * -1;
+                newLeftValue = ((this.scrollPage-1) * this.chapterPrintWidth) * -1;
             }
 
 
@@ -509,6 +522,13 @@ export default {
             //     this.findFocusedIndex = -1;
             // }
         },
+
+        handleSelectChapter() {
+            console.log(this.selectSelectedChapterIndex);
+            console.log(this.chapters[this.selectSelectedChapterIndex]);
+            this.selectedChapterTitle = this.chapters[this.selectSelectedChapterIndex].title;
+            this.editor.setContent(this.chapters[this.selectSelectedChapterIndex].content);
+        }
     },
 }
 </script>

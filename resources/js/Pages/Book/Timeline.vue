@@ -75,7 +75,7 @@
 <!--                </div>-->
 
                 <div class="timeline-event__wrapper" v-for="(event, eventIndex) in events" :class="{'hidden': searchString !== false && event.items.length === 0}">
-                    <div class="flex justify-between items-start">
+                    <div class="flex justify-between items-start p-4">
                         <div class="timeline-event__title-wrapper">
                             <h3 class="timeline-event__title">{{ event.title }}</h3>
                             <div class="timeline-event__description">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col">
+                    <div class="flex flex-col px-4 custom-scroll overflow-y-auto overflow-x-hidden" style="max-height: 80%;">
                     <draggable class="list-group"
                                :list="event.items"
                                group="people"
@@ -152,8 +152,9 @@
 <!--                        <svg @click="isEventItemCreateModalShow = true; currentEventNew = event;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>-->
 
 <!--                    </div>-->
-                    <svg @click="addNewEventItem(eventIndex)" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>
-
+                    </div>
+                    <div>
+                        <svg @click="addNewEventItem(eventIndex)" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="cursor-pointer icon-hoverable mx-auto mt-8"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><path d="M9 0C4.03 0 0 4.03 0 9s4.03 9 9 9 9-4.03 9-9c0-2.387-.948-4.676-2.636-6.364C13.676.948 11.387 0 9 0zm0 16.2c-3.976 0-7.2-3.224-7.2-7.2S5.024 1.8 9 1.8s7.2 3.224 7.2 7.2c0 1.91-.759 3.74-2.109 5.091C12.741 15.441 10.91 16.2 9 16.2zm3.6-8.1H9.9V5.4c0-.497-.403-.9-.9-.9s-.9.403-.9.9v2.7H5.4c-.497 0-.9.403-.9.9s.403.9.9.9h2.7v2.7c0 .497.403.9.9.9s.9-.403.9-.9V9.9h2.7c.497 0 .9-.403.9-.9s-.403-.9-.9-.9z" transform="translate(-490 -46) translate(490 46)"></path></g></g></g></svg>
                     </div>
                 </div>
 
@@ -295,6 +296,7 @@ export default {
             },
             eventEdit: {},
             eventItemEdit: {},
+            chapterPrintWidth: 0,
             isEventCreateModalShow: false,
             isEventEditModalShow: false,
             isEventItemEditModalShow: false,

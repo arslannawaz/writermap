@@ -29,6 +29,7 @@ class BookController extends Controller
         return inertia('Book/Pages', [
             'book_data' => $book,
             'first_chapter' => $book->chapters()->orderBy('number', 'asc')->first(),
+            'chapters' => $book->chapters()->orderBy('number', 'asc')->get(),
         ]);
     }
 

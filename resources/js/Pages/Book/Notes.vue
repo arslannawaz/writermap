@@ -46,7 +46,7 @@ import {
     Link,
     Strike,
     Underline,
-    History,
+    History, Search,
 } from 'tiptap-extensions';
 
 export default {
@@ -70,21 +70,22 @@ export default {
             this.editor = new Editor({
                 extensions: [
                     new Blockquote(),
-                    new BulletList(),
-                    new CodeBlock(),
-                    new HardBreak(),
+                    // new BulletList(),
+                    // new CodeBlock(),
+                    // new HardBreak(),
                     new Heading({ levels: [1, 2, 3] }),
-                    new ListItem(),
-                    new OrderedList(),
-                    new TodoItem(),
-                    new TodoList(),
+                    // new ListItem(),
+                    // new OrderedList(),
+                    // new TodoItem(),
+                    // new TodoList(),
                     new Link(),
                     new Bold(),
-                    new Code(),
+                    // new Code(),
                     new Italic(),
                     new Strike(),
                     new Underline(),
                     new History(),
+                    new Search(),
                 ],
                 content: content,
                 onUpdate: ({ getHTML }) => {
