@@ -228,7 +228,7 @@
                         <p class="font-semibold fs-24">“{{ book.title }}”</p>
                         <p>By {{ $page.user.pen_name }}</p>
                     </div>
-                    
+
                     <div class="mt-32"></div>
                     <div class="mt-32"></div>
                     <div class="mt-32"></div>
