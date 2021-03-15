@@ -80,7 +80,7 @@
                             <input class="timeline-event__title input-default input-default_border-none input-default_p-zero"
                                    v-model="event.title" @keyup="() => {eventEdit = event; updateEvent();}"
                             />
-                            <input class="timeline-event__description input-default input-default_border-none input-default_p-zero"
+                            <textarea placeholder="Type here.." class="w-full overflow-hidden resize-none timeline-event__description input-default input-default_border-none input-default_p-zero"
                                    v-model="event.description"
                                    @keyup="() => {eventEdit = event; updateEvent();}" />
                         </div>
@@ -118,6 +118,7 @@
                                                        type="text"
                                                        class="input-default input-default_p-zero input-default_border-none new-item-item-creating"
                                                        :value="element.title"
+                                                       placeholder="Type here.."
                                                        @keydown.enter="handleNewEventItemEnter($event, eventIndex)"
                                                        @keydown="handleRemoveNewEventItem($event, eventIndex, index)"
                                                 >
@@ -126,7 +127,7 @@
                                                 v-model="element.title"
                                                 @keyup="() => { eventItemEdit = element; updateEventItem(); }"
                                             />
-                                            <input class="timeline-event-item__description input-default input-default_border-none input-default_p-zero"
+                                            <textarea placeholder="Write description.." class="w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
                                                    v-model="element.description"
                                                    @keyup="() => { eventItemEdit = element; updateEventItem(); }"
                                             />
