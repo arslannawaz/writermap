@@ -265,7 +265,7 @@
                             <!--                                        <h3 class="fs-14 ff-minion font-semibold">Chapter {{ first_chapter.number }}</h3>-->
                             <div v-for="chapter in chapters" class="print-page-break" style="page-break-after: always;">
                                 <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ chapter.title }}</h2>
-                                <div v-html="chapter.content"></div>
+                                <div v-html="chapter.content" class="print-page-break"></div>
                             </div>
                         </div>
                     </div>
