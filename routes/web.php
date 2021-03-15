@@ -36,6 +36,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/scriptorium', function ()
     ]);
 })->name('scriptorium');
 
+//Route::get('books/{id}/print', function ($id) {
+//    $book = \App\Models\Book::findOrFail($id);
+//    return view('print', compact('book'));
+//});
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     Route::post('send-feedback', function () {
