@@ -108,7 +108,7 @@
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 import {Editor, EditorContent, EditorMenuBar} from "tiptap";
-import vClickOutside from 'v-click-outside'
+import vClickOutside from 'v-click-outside';
 import {
     Blockquote, Bold,
     BulletList, Code,

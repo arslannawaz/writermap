@@ -30,7 +30,7 @@
 <!--                        </g>-->
 <!--                    </svg>-->
 
-                    <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12" @click="isEventCreateModalShow = true;" >Create New</button>
+                    <button class="ml-6 button rounded-md bg-dark px-10 py-2 font-semibold text-white fs-12" @click="createEvent('Events ' + events.length)" >Create New</button>
                 </div>
             </div>
             <div id="timeline-scroll" class="timeline custom-scroll flex">
@@ -77,10 +77,12 @@
                 <div class="timeline-event__wrapper" v-for="(event, eventIndex) in events" :class="{'hidden': searchString !== false && event.items.length === 0}">
                     <div class="flex justify-between items-start p-4">
                         <div class="timeline-event__title-wrapper">
-                            <h3 class="timeline-event__title">{{ event.title }}</h3>
-                            <div class="timeline-event__description">
-                                {{ event.description }}
-                            </div>
+                            <input class="timeline-event__title input-default input-default_border-none input-default_p-zero"
+                                   v-model="event.title" @keyup="() => {eventEdit = event; updateEvent();}"
+                            />
+                            <input class="timeline-event__description input-default input-default_border-none input-default_p-zero"
+                                   v-model="event.description"
+                                   @keyup="() => {eventEdit = event; updateEvent();}" />
                         </div>
 
                         <div class="timeline-event__icon-edit icon-hoverable px-4" @click="openEventEditModal(event)">
@@ -109,23 +111,25 @@
                         >
                             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
                                 <div :key="index">
-                                    <div class="flex justify-between items-start">
+                                    <div class="flex justify-between items-start" v-click-outside="removeEmptyNewItems">
                                         <div>
                                             <div v-if="element.id === 'new'" class="timeline-event-item__title">
                                                 <input :ref="'newEventItem_' + eventIndex + '_' + index"
                                                        type="text"
-                                                       class="input-default input-default_p-zero input-default_border-none"
+                                                       class="input-default input-default_p-zero input-default_border-none new-item-item-creating"
                                                        :value="element.title"
                                                        @keydown.enter="handleNewEventItemEnter($event, eventIndex)"
                                                        @keydown="handleRemoveNewEventItem($event, eventIndex, index)"
                                                 >
                                             </div>
-                                            <div v-else class="timeline-event-item__title">
-                                                {{ element.title }}
-                                            </div>
-                                            <div class="timeline-event-item__description">
-                                                {{ element.description }}
-                                            </div>
+                                            <input v-else class="timeline-event-item__title input-default input-default_border-none input-default_p-zero"
+                                                v-model="element.title"
+                                                @keyup="() => { eventItemEdit = element; updateEventItem(); }"
+                                            />
+                                            <input class="timeline-event-item__description input-default input-default_border-none input-default_p-zero"
+                                                   v-model="element.description"
+                                                   @keyup="() => { eventItemEdit = element; updateEventItem(); }"
+                                            />
                                         </div>
 
                                         <div class="icon-hoverable px-1" @click="openEventItemEditModal(event, element)">
@@ -284,9 +288,15 @@ import NeedSubscription from "../../Components/NeedSubscription";
 import draggable from "vuedraggable";
 import Vue from "vue";
 import JetDialogModal from "../../Jetstream/DialogModal";
+import vClickOutside from 'v-click-outside';
 
 export default {
     components: {AppContainer, AppLayout, draggable, JetDialogModal, NeedSubscription},
+
+    directives: {
+        clickOutside: vClickOutside.directive
+    },
+
     data() {
         return {
             events: [],
@@ -301,7 +311,9 @@ export default {
             isEventEditModalShow: false,
             isEventItemEditModalShow: false,
             isEventItemCreateModalShow: false,
+            currentEventIndex: 0,
             searchString: false,
+            addNewEventItemAfterUpdateEvents: false,
             list1: [
                 { name: "John", id: 1 },
                 { name: "Joao", id: 2 },
@@ -347,18 +359,32 @@ export default {
             this.createEventItem(this.events[eventIndex].id, event.target.value);
         },
         addNewEventItem(eventIndex) {
-            this.events[eventIndex].items.push({title: '', id: 'new'});
+            this.currentEventIndex = eventIndex;
 
-            const index = parseInt(this.events[eventIndex].items.length) - 1;
+            this.events[this.currentEventIndex].items.push({title: '', id: 'new'});
+
+            const index = parseInt(this.events[this.currentEventIndex].items.length) - 1;
 
             console.log('addNewEventItem index', index);
-            console.log('addNewEventItem length', parseInt(this.events[eventIndex].items.length));
-            console.log('addNewEventItem items', this.events[eventIndex]);
+            console.log('addNewEventItem length', parseInt(this.events[this.currentEventIndex].items.length));
+            console.log('addNewEventItem items', this.events[this.currentEventIndex]);
             console.log('addNewEventItem refs', this.$refs);
             this.$nextTick(() => {
-                this.$refs[`newEventItem_${eventIndex}_${index}`][0].focus();
+                this.$refs[`newEventItem_${this.currentEventIndex}_${index}`][0].focus();
             });
         },
+
+        removeEmptyNewItems(event) {
+            const elements = document.getElementsByClassName('new-item-item-creating');
+            if (elements[0] !== document.activeElement) {
+                this.events[this.currentEventIndex].items.forEach((item, index) => {
+                    if (item.id === 'new') {
+                        this.events[this.currentEventIndex].items.splice(index, 1);
+                    }
+                });
+            }
+        },
+
         handleRemoveNewEventItem(event, eventIndex, itemIndex) {
             console.log('handleRemoveNewEventItem', eventIndex, itemIndex);
             if ((event.key === "Backspace" || event.key === "Delete") && this.$refs[`newEventItem_${eventIndex}_${itemIndex}`][0].value.length === 0) {
@@ -418,11 +444,18 @@ export default {
             const url = '/books/' + this.$page.book.id + '/timeline/events/create';
 
             let data = {};
-            data = {
-                title: this.$refs['event_input_title'].value,
-                description: this.$refs['event_input_description'].value,
-            };
 
+            if (title === null && description === null) {
+                data = {
+                    title: title,
+                    description: description,
+                };
+            } else {
+                data = {
+                    title: this.$refs['event_input_title'].value,
+                    description: this.$refs['event_input_description'].value,
+                };
+            }
 
             axios.post(url, data).then((response) => {
                 console.log(response.data);
@@ -461,6 +494,8 @@ export default {
 
             axios.post(url, data).then((response) => {
                 console.log(response.data);
+
+                this.addNewEventItemAfterUpdateEvents = true;
                 this.updateEventsList();
 
                 if (event_id === null) {
@@ -486,14 +521,29 @@ export default {
             });
         },
 
-        updateEvent() {
+        updateEvent(id = null, title = null, description = null) {
+            console.log('updateEvent', title, description);
+
             this.isEventEditModalShow = false;
 
-            const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventEdit.id +'/update';
-            axios.post(url, {
-                title: this.eventEdit.title,
-                description: this.eventEdit.description,
-            }).then((response) => {
+            let data = {};
+            let url = '';
+
+            if (id === null && title === null && description === null) {
+                url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventEdit.id +'/update';
+                data = {
+                    title: this.eventEdit.title,
+                    description: this.eventEdit.description
+                };
+            } else {
+                url = '/books/' + this.$page.book.id + '/timeline/events/'+ id +'/update';
+                data = {
+                    title: title,
+                    description: description
+                };
+            }
+
+            axios.post(url, data).then((response) => {
                 console.log(response.data);
                 // this.updateEventsList();
                 this.resetModalInputs();
@@ -503,14 +553,24 @@ export default {
             });
         },
 
-        updateEventItem() {
+        updateEventItem(title = null, description = null) {
             this.isEventItemEditModalShow = false;
 
+            let data = {};
+            if (title === null && description === null) {
+                data = {
+                    title: this.eventItemEdit.title,
+                    description: this.eventItemEdit.description
+                };
+            } else {
+                data = {
+                    title: title,
+                    description: description
+                };
+            }
+
             const url = '/books/' + this.$page.book.id + '/timeline/events/'+ this.eventItemEdit.event_id +'/items/'+ this.eventItemEdit.id +'/update';
-            axios.post(url, {
-                title: this.eventItemEdit.title,
-                description: this.eventItemEdit.description,
-            }).then((response) => {
+            axios.post(url, data).then((response) => {
                 console.log(response.data);
                 // this.updateEventsList();
                 this.resetModalInputs();
@@ -534,11 +594,16 @@ export default {
             });
         },
 
-        updateEventsList() {
+        async updateEventsList() {
             const url = '/books/' + this.$page.book.id + '/timeline/events/list';
             axios.get(url).then((response) => {
                 console.log(response.data);
                 this.events = response.data;
+
+                if (this.addNewEventItemAfterUpdateEvents) {
+                    this.addNewEventItem(this.currentEventIndex);
+                    this.addNewEventItemAfterUpdateEvents = false;
+                }
             }).catch((error) => {
                 console.log('error', error);
                 Vue.swal('updateEventsList', 'Oops..', 'error');
