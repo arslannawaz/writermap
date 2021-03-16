@@ -111,25 +111,30 @@
                         >
                             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
                                 <div :key="index">
-                                    <div class="flex justify-between items-start" v-click-outside="removeEmptyNewItems">
-                                        <div>
+                                    <div class="flex justify-between items-start">
+                                        <div v-click-outside="removeEmptyNewItems">
                                             <div v-if="element.id === 'new'" class="timeline-event-item__title">
                                                 <input :ref="'newEventItem_' + eventIndex + '_' + index"
                                                        type="text"
                                                        class="input-default input-default_p-zero input-default_border-none new-item-item-creating"
-                                                       :value="element.title"
+                                                       v-model="element.title"
                                                        placeholder="Type here.."
-                                                       @keydown.enter="handleNewEventItemEnter($event, eventIndex)"
+                                                       @keydown.enter="() => {handleNewEventItemEnter($event, eventIndex, element);}"
                                                        @keydown="handleRemoveNewEventItem($event, eventIndex, index)"
                                                 >
                                             </div>
                                             <input v-else class="timeline-event-item__title input-default input-default_border-none input-default_p-zero"
                                                 v-model="element.title"
-                                                @keyup="() => { eventItemEdit = element; updateEventItem(); }"
+                                                @keydown="() => { this.eventItemEdit = element; updateEventItem(); }"
                                             />
-                                            <textarea placeholder="Write description.." class="w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
-                                                   v-model="element.description"
-                                                   @keyup="() => { eventItemEdit = element; updateEventItem(); }"
+
+                                            <textarea v-if="element.id === 'new'" placeholder="Write description.." class="new-item-item-creating w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
+                                                      v-model="element.description"
+                                                      @keydown.enter="() => {handleNewEventItemEnter($event, eventIndex, element);}"
+                                            />
+                                            <textarea  v-else placeholder="Write description.." class="w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
+                                                       v-model="element.description"
+                                                       @keyup="() => { this.eventItemEdit = element; updateEventItem(); }"
                                             />
                                         </div>
 
@@ -354,10 +359,10 @@ export default {
     },
 
     methods: {
-        handleNewEventItemEnter(event, eventIndex) {
+        handleNewEventItemEnter(event, eventIndex, eventItem) {
             console.log('handleNewEventItemEnter', event);
             console.log('handleNewEventItemEnter', eventIndex);
-            this.createEventItem(this.events[eventIndex].id, event.target.value);
+            this.createEventItem(this.events[eventIndex].id, eventItem.title, eventItem.description);
         },
         addNewEventItem(eventIndex) {
             this.currentEventIndex = eventIndex;
@@ -377,7 +382,7 @@ export default {
 
         removeEmptyNewItems(event) {
             const elements = document.getElementsByClassName('new-item-item-creating');
-            if (elements[0] !== document.activeElement) {
+            if (elements[0] !== document.activeElement && elements[1] !== document.activeElement) {
                 this.events[this.currentEventIndex].items.forEach((item, index) => {
                     if (item.id === 'new') {
                         this.events[this.currentEventIndex].items.splice(index, 1);
