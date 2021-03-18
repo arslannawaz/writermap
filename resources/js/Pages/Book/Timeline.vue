@@ -125,7 +125,7 @@
                                             </div>
                                             <input v-else class="timeline-event-item__title input-default input-default_border-none input-default_p-zero"
                                                 v-model="element.title"
-                                                @keydown="() => { this.eventItemEdit = element; updateEventItem(); }"
+                                                @keydown="() => { eventItemEdit = element; updateEventItem(); }"
                                             />
 
                                             <textarea v-if="element.id === 'new'" placeholder="Write description.." class="new-item-item-creating w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
@@ -134,7 +134,7 @@
                                             />
                                             <textarea  v-else placeholder="Write description.." class="w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
                                                        v-model="element.description"
-                                                       @keyup="() => { this.eventItemEdit = element; updateEventItem(); }"
+                                                       @keyup="() => { eventItemEdit = element; updateEventItem(); }"
                                             />
                                         </div>
 
@@ -362,7 +362,10 @@ export default {
         handleNewEventItemEnter(event, eventIndex, eventItem) {
             console.log('handleNewEventItemEnter', event);
             console.log('handleNewEventItemEnter', eventIndex);
-            this.createEventItem(this.events[eventIndex].id, eventItem.title, eventItem.description);
+
+            if (event.key === 'Enter' && event.shiftKey === false) {
+                this.createEventItem(this.events[eventIndex].id, eventItem.title, eventItem.description);
+            }
         },
         addNewEventItem(eventIndex) {
             this.currentEventIndex = eventIndex;
@@ -380,12 +383,17 @@ export default {
             });
         },
 
-        removeEmptyNewItems(event) {
+        removeEmptyNewItems() {
             const elements = document.getElementsByClassName('new-item-item-creating');
             if (elements[0] !== document.activeElement && elements[1] !== document.activeElement) {
                 this.events[this.currentEventIndex].items.forEach((item, index) => {
                     if (item.id === 'new') {
-                        this.events[this.currentEventIndex].items.splice(index, 1);
+                        if (item.title !== '') {
+                            this.createEventItem(this.events[this.currentEventIndex].id, item.title, item.description);
+                            delete this.events[this.currentEventIndex].items[index];
+                        } else {
+                            this.events[this.currentEventIndex].items.splice(index, 1);
+                        }
                     }
                 });
             }
@@ -393,7 +401,8 @@ export default {
 
         handleRemoveNewEventItem(event, eventIndex, itemIndex) {
             console.log('handleRemoveNewEventItem', eventIndex, itemIndex);
-            if ((event.key === "Backspace" || event.key === "Delete") && this.$refs[`newEventItem_${eventIndex}_${itemIndex}`][0].value.length === 0) {
+            console.log(event.key);
+            if (event.key === "Escape" || ((event.key === "Backspace" || event.key === "Delete") && this.$refs[`newEventItem_${eventIndex}_${itemIndex}`][0].value.length === 0)) {
                 this.events[eventIndex].items.splice(itemIndex, 1);
             }
         },
@@ -470,7 +479,7 @@ export default {
                 this.$refs['event_input_description'].value = null;
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('createEvent', 'Oops..', 'error');
+                // Vue.swal('createEvent', 'Oops..', 'error');
             });
         },
 
@@ -509,7 +518,7 @@ export default {
                 }
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('createEventItem', 'Oops..', 'error');
+                // Vue.swal('createEventItem', 'Oops..', 'error');
             });
         },
 
@@ -523,7 +532,7 @@ export default {
                 this.resetModalInputs();
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('deleteEvent', 'Oops..', 'error');
+                // Vue.swal('deleteEvent', 'Oops..', 'error');
             });
         },
 
@@ -555,11 +564,12 @@ export default {
                 this.resetModalInputs();
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('updateEvent', 'Oops..', 'error');
+                // Vue.swal('updateEvent', 'Oops..', 'error');
             });
         },
 
         updateEventItem(title = null, description = null) {
+            console.log('handle update');
             this.isEventItemEditModalShow = false;
 
             let data = {};
@@ -582,7 +592,7 @@ export default {
                 this.resetModalInputs();
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('updateEventItem', 'Oops..', 'error');
+                // Vue.swal('updateEventItem', 'Oops..', 'error');
             });
         },
 
@@ -596,7 +606,7 @@ export default {
                 this.resetModalInputs();
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('deleteEventItem', 'Oops..', 'error');
+                // Vue.swal('deleteEventItem', 'Oops..', 'error');
             });
         },
 
@@ -612,7 +622,7 @@ export default {
                 }
             }).catch((error) => {
                 console.log('error', error);
-                Vue.swal('updateEventsList', 'Oops..', 'error');
+                // Vue.swal('updateEventsList', 'Oops..', 'error');
             });
         },
 
@@ -639,7 +649,7 @@ export default {
                 // this.events[eventIndex].items = response.data;
             }).catch((error) => {
                 console.log('updateOrderForEventItems error', error);
-                Vue.swal('updateOrderForEventItems', 'Oops..', 'error');
+                // Vue.swal('updateOrderForEventItems', 'Oops..', 'error');
             });
         },
 
