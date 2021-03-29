@@ -42,6 +42,94 @@
   * 
  */
 
+/*! ./browser */
+
+/*! ./functions */
+
+/*! ./html */
+
+/*! ./image */
+
+/*! ./js/init */
+
+/*! ./json */
+
+/*! ./modal */
+
+/*! ./pdf */
+
+/*! ./print */
+
+/*! ./raw-html */
+
+/*! ./sass/index.scss */
+
+/*! ./src/index.js */
+
+/*! Image Map Resizer (imageMapResizer.min.js ) - v1.0.10 - 2019-04-10
+ *  Desc: Resize HTML imageMap to scaled image.
+ *  Copyright: (c) 2019 David J. Bradshaw - dave@bradshaw.net
+ *  License: MIT
+ */
+
+/*! exports provided: addWrapper, capitalizePrint, collectStyles, addHeader, cleanUp, isRawHTML */
+
+/*! exports provided: default */
+
+/*! no static exports found */
+
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+
+/*!***********************!*\
+  !*** ./src/js/pdf.js ***!
+  \***********************/
+
+/*!************************!*\
+  !*** ./src/js/html.js ***!
+  \************************/
+
+/*!************************!*\
+  !*** ./src/js/init.js ***!
+  \************************/
+
+/*!************************!*\
+  !*** ./src/js/json.js ***!
+  \************************/
+
+/*!*************************!*\
+  !*** ./src/js/image.js ***!
+  \*************************/
+
+/*!*************************!*\
+  !*** ./src/js/modal.js ***!
+  \*************************/
+
+/*!*************************!*\
+  !*** ./src/js/print.js ***!
+  \*************************/
+
+/*!***************************!*\
+  !*** ./src/js/browser.js ***!
+  \***************************/
+
+/*!****************************!*\
+  !*** ./src/js/raw-html.js ***!
+  \****************************/
+
+/*!****************************!*\
+  !*** multi ./src/index.js ***!
+  \****************************/
+
+/*!*****************************!*\
+  !*** ./src/js/functions.js ***!
+  \*****************************/
+
+/*!*****************************!*\
+  !*** ./src/sass/index.scss ***!
+  \*****************************/
+
 /**
  * @license
  * Lodash <https://lodash.com/>
@@ -49,4 +137,11 @@
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/**!
+ * Sortable 1.10.2
+ * @author	RubaXa   <trash@rubaxa.org>
+ * @author	owenm    <owen23355@gmail.com>
+ * @license MIT
  */
