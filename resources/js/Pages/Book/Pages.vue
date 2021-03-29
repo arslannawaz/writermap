@@ -540,7 +540,7 @@ export default {
             printJS({
                 printable: 'p-print',
                 type: 'html',
-                css: 'https://writersmap.cluster4dreams.com/css/app.css',
+                css: '/css/app.css',
             });
         },
     },
