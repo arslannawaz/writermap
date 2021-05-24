@@ -265,7 +265,7 @@
                             class="w-60 h-80 col-span-1 milestone-item relative border border-gray-300 flex flex-col justify-center items-center p-16">
                             <div class="milestone-item__date bg-light shadow-lg py-4 px-5 text-center rounded-md">
                                 <div>
-                                    <span class="h2">{{ formatDateFromString(milestone.due_date, 'd') }}</span>th
+                                    <span class="h2">{{ formatDateFromString(milestone.due_date, 'd') }}</span>{{ordinal_suffix_of(formatDateFromString(milestone.due_date, 'd'))}}
                                 </div>
                                 <div class="form-label uppercase text-color-light">{{ formatDateFromString(milestone.due_date, 'M') }}</div>
                             </div>
@@ -516,6 +516,21 @@ export default {
         formatDateFromString(dateString, format) {
             const date = new Date(dateString);
             return this.dateFormat(date, format);
+        },
+
+        ordinal_suffix_of(i) {
+            let j = i % 10,
+                k = i % 100;
+            if (j == 1 && k != 11) {
+                return "st";
+            }
+            if (j == 2 && k != 12) {
+                return "nd";
+            }
+            if (j == 3 && k != 13) {
+                return "rd";
+            }
+            return "th";
         },
 
         /**

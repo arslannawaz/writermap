@@ -46,7 +46,7 @@
                 </template>
 
                 <template #content>
-                    <input type="text" class="input-default w-full" v-model="newForm.title" placeholder="Chapter title">
+                    <input type="text" class="input-default w-full" v-on:keyup.enter="createChapter()" v-model="newForm.title" placeholder="Chapter title">
 
 
                     <jet-input-error :message="newForm.error" class="mt-2" />

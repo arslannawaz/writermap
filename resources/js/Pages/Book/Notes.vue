@@ -64,7 +64,7 @@ export default {
             let content = this.note.content;
 
             if (content === null) {
-                content = 'Write some content here..';
+                content = 'Type here..';
             }
 
             this.editor = new Editor({

@@ -116,25 +116,27 @@
                                             <div v-if="element.id === 'new'" class="timeline-event-item__title">
                                                 <input :ref="'newEventItem_' + eventIndex + '_' + index"
                                                        type="text"
-                                                       class="input-default input-default_p-zero input-default_border-none new-item-item-creating"
+                                                       class="input-default input-default_p-zero input-default_border-none new-item-item-creating resize-none"
                                                        v-model="element.title"
+                                                       style="width: 100%"
                                                        placeholder="Type here.."
                                                        @keydown.enter="() => {handleNewEventItemEnter($event, eventIndex, element);}"
                                                        @keydown="handleRemoveNewEventItem($event, eventIndex, index)"
-                                                >
+                                                />
                                             </div>
-                                            <input v-else class="timeline-event-item__title input-default input-default_border-none input-default_p-zero"
+                                            <input v-else class="timeline-event-item__title input-default input-default_border-none input-default_p-zero resize-none"
                                                 v-model="element.title"
-                                                @keydown="() => { eventItemEdit = element; updateEventItem(); }"
+                                                style="width: 100%"
+                                                @keydown="(event) => { eventItemEdit = element; updateEventItem(); resizeTextarea(event); }"
                                             />
 
-                                            <textarea v-if="element.id === 'new'" placeholder="Write description.." class="new-item-item-creating w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
+                                            <textarea v-if="element.id === 'new'" placeholder="Write description.." class="resize-ta resize-none new-item-item-creating w-full overflow-hidden timeline-event-item__description input-default input-default_border-none input-default_p-zero"
                                                       v-model="element.description"
                                                       @keydown.enter="() => {handleNewEventItemEnter($event, eventIndex, element);}"
                                             />
-                                            <textarea  v-else placeholder="Write description.." class="w-full overflow-hidden resize-none timeline-event-item__description input-default input-default_border-none input-default_p-zero"
+                                            <textarea  v-else placeholder="Write description.." class="resize-ta w-full resize-none overflow-hidden timeline-event-item__description input-default input-default_border-none input-default_p-zero"
                                                        v-model="element.description"
-                                                       @keyup="() => { eventItemEdit = element; updateEventItem(); }"
+                                                       @keyup="(event) => { eventItemEdit = element; updateEventItem(); resizeTextarea(event); }"
                                             />
                                         </div>
 
@@ -356,9 +358,33 @@ export default {
         timeLineScroll.addEventListener('scroll', function () {
            console.log('SCROLL');
         });
+
+        // this.$nextTick(() => {
+            setTimeout(() => {
+                let textarea = document.querySelectorAll(".resize-ta");
+                console.log(textarea);
+                textarea.forEach((value, index) => {
+                    value.style.height = this.calcHeight(value.value) + "px";
+                });
+            }, 100);
+        // });
+    },
+
+    updated() {
+
     },
 
     methods: {
+        resizeTextarea(event) {
+            console.log(event);
+          event.target.style.height = this.calcHeight(event.target.value) + "px";
+        },
+        calcHeight(value) {
+            let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+            // min-height + lines x line-height + padding + border
+            let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+            return newHeight;
+        },
         handleNewEventItemEnter(event, eventIndex, eventItem) {
             console.log('handleNewEventItemEnter', event);
             console.log('handleNewEventItemEnter', eventIndex);

@@ -65,7 +65,7 @@
                             <img ref="preview_physicality_image" v-if="getAttributeValue('image', 'physicality') !== undefined" :src="generateStorageUrl(getAttributeValue('image', 'physicality'))" alt="photo" height="84px" width="84px" style="height: 84px;width: 84px;" class="rounded-full flex-shrink-0">
                             <div class="ml-10">
                                 <div class="label-default h-35px">Describe your character’s physicality</div>
-                                <div ref="preview_physicality" class="mt-2 break-all h-100px">
+                                <div ref="preview_physicality" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('physicality') | truncate(70, '...') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('physicality')) }}</div>
                                 </div>
@@ -99,7 +99,7 @@
                             <div class="relative mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'trait_1'}">
                                 <div>
                                     <div class="label-default h-35px">Explain character trait</div>
-                                    <div ref="preview_trait_1" class="mt-2 break-all h-100px">
+                                    <div ref="preview_trait_1" class="mt-2 break-words h-100px">
                                         {{ getAttributeDescription('trait_1') | truncate(70, '..') }}
                                         <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('trait_1')) }}</div>
                                     </div>
@@ -129,7 +129,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chet-preview__block flex flex-col justify-between chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'trait_2'}">
                                 <div class="label-default h-35px">Explain character trait</div>
-                                <div ref="preview_trait_2" class="mt-2 break-all h-100px">
+                                <div ref="preview_trait_2" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('trait_2') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('trait_2')) }}</div>
                                 </div>
@@ -164,7 +164,7 @@
                                 <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'trait_3'}">
 
                                     <div class="label-default h-35px">Explain character trait</div>
-                                    <div ref="preview_trait_3" class="mt-2 break-all h-100px">
+                                    <div ref="preview_trait_3" class="mt-2 break-words h-100px">
                                         {{ getAttributeDescription('trait_3') | truncate(70, '..') }}
                                         <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('trait_3')) }}</div>
                                     </div>
@@ -194,7 +194,7 @@
                                 </div>
                                 <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'religion'}">
                                     <div class="label-default h-35px">Do they have a religion?</div>
-                                    <div ref="preview_religion" class="mt-2 break-all h-100px">
+                                    <div ref="preview_religion" class="mt-2 break-words h-100px">
                                         {{ getAttributeDescription('religion') | truncate(70, '..') }}
                                         <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('religion')) }}</div>
                                     </div>
@@ -225,7 +225,7 @@
                                 <div class="relative mt-2 bg-light p-10 flex flex-col justify-between chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'optimistic'}" style="height: 100%;">
                                     <div>
                                         <div class="label-default h-35px">Are they optimistic or pessimistic?</div>
-                                        <div ref="preview_optimistic" class="mt-2 break-all h-100px">
+                                        <div ref="preview_optimistic" class="mt-2 break-words h-100px">
                                             {{ getAttributeDescription('optimistic') | truncate(70, '..') }}
                                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('optimistic')) }}</div>
                                         </div>
@@ -258,7 +258,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'background_1'}">
                         <div class="label-default h-35px">What social class do they sit in?</div>
-                        <div ref="preview_background_1" class="mt-2 break-all h-100px">
+                        <div ref="preview_background_1" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('background_1') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_1')) }}</div>
                         </div>
@@ -287,7 +287,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'background_2'}">
                                 <div class="label-default h-35px">What kind of intelligence do they have?</div>
-                                <div ref="preview_background_2" class="mt-2 break-all h-100px">
+                                <div ref="preview_background_2" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('background_2') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_2')) }}</div>
                                 </div>
@@ -316,7 +316,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'background_3'}">
                                 <div class="label-default h-35px">What education does your character have?</div>
-                                <div ref="preview_background_3" class="mt-2 break-all h-100px">
+                                <div ref="preview_background_3" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('background_3') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_3')) }}</div>
                                 </div>
@@ -344,8 +344,8 @@
                         <div v-if="attributeInEdit && attributeInEdit.field === 'background_4'">Editing</div>
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'background_4'}">
-                        <div class="label-default h-35px">What is their hometown and what was it like</div>
-                        <div ref="preview_background_4" class="mt-2 break-all h-100px">
+                        <div class="label-default h-35px">What is their hometown and what was it like?</div>
+                        <div ref="preview_background_4" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('background_4') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_4')) }}</div>
                         </div>
@@ -376,7 +376,7 @@
                                 </div>
                                 <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'background_5'}">
                                     <div class="label-default h-35px">What is their occupation?</div>
-                                    <div ref="preview_background_5" class="mt-2 break-all h-100px">
+                                    <div ref="preview_background_5" class="mt-2 break-words h-100px">
                                         {{ getAttributeDescription('background_5') | truncate(70, '..') }}
                                         <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_5')) }}</div>
                                     </div>
@@ -405,7 +405,7 @@
                                 </div>
                                 <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'relationship_1'}">
                                     <div class="label-default h-35px">Who is your characters family?</div>
-                                    <div ref="preview_relationship_1" class="mt-2 break-all h-100px">
+                                    <div ref="preview_relationship_1" class="mt-2 break-words h-100px">
                                         {{ getAttributeDescription('relationship_1') | truncate(70, '..') }}
                                         <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_1')) }}</div>
                                     </div>
@@ -436,7 +436,7 @@
                             <div class="relative mt-2 bg-light p-10 flex flex-col justify-between chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'background_6'}" style="height: 100%;">
                                 <div>
                                     <div class="label-default h-35px">What are some major turning points?</div>
-                                    <div ref="preview_background_6" class="mt-2 break-all h-100px">
+                                    <div ref="preview_background_6" class="mt-2 break-words h-100px">
                                         {{ getAttributeDescription('background_6') | truncate(70, '..') }}
                                         <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('background_6')) }}</div>
                                     </div>
@@ -469,7 +469,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'relationship_2'}">
                                 <div class="label-default h-35px">Who are your characters friends?</div>
-                                <div ref="preview_relationship_2" class="mt-2 break-all h-100px">
+                                <div ref="preview_relationship_2" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('relationship_2') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_2')) }}</div>
                                 </div>
@@ -499,7 +499,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'relationship_3'}">
                                 <div class="label-default h-35px">Is your character in a relationship?</div>
-                                <div ref="preview_relationship_3" class="mt-2 break-all h-100px">
+                                <div ref="preview_relationship_3" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('relationship_3') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_3')) }}</div>
                                 </div>
@@ -530,7 +530,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'relationship_4'}">
                         <div class="label-default h-35px">Sexuality, who are they interested in?</div>
-                        <div ref="preview_relationship_4" class="mt-2 break-all h-100px">
+                        <div ref="preview_relationship_4" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('relationship_4') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('relationship_4')) }}</div>
                         </div>
@@ -561,7 +561,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'struggles_1'}">
                                 <div class="label-default h-35px">What are your characters insecurities?</div>
-                                <div ref="preview_struggles_1" class="mt-2 break-all h-100px">
+                                <div ref="preview_struggles_1" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('struggles_1') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_1')) }}</div>
                                 </div>
@@ -590,7 +590,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'struggles_2'}">
                                 <div class="label-default h-35px">Biggest fear</div>
-                                <div ref="preview_struggles_2" class="mt-2 break-all h-100px">
+                                <div ref="preview_struggles_2" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('struggles_2') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_2')) }}</div>
                                 </div>
@@ -620,7 +620,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'struggles_3'}">
                         <div class="label-default h-35px">Saddest memory</div>
-                        <div ref="preview_struggles_3" class="mt-2 break-all h-100px">
+                        <div ref="preview_struggles_3" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('struggles_3') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_3')) }}</div>
                         </div>
@@ -649,7 +649,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'struggles_4'}">
                                 <div class="label-default h-35px">What is your characters greatest regret?</div>
-                                <div ref="preview_struggles_4" class="mt-2 break-all h-100px">
+                                <div ref="preview_struggles_4" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('struggles_4') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_4')) }}</div>
                                 </div>
@@ -678,7 +678,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'struggles_5'}">
                                 <div class="label-default h-35px">What secrets is your character holding?</div>
-                                <div ref="preview_struggles_5" class="mt-2 break-all h-100px">
+                                <div ref="preview_struggles_5" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('struggles_5') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('struggles_5')) }}</div>
                                 </div>
@@ -707,7 +707,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'strengths_1'}">
                         <div class="label-default h-35px">What are they good at?</div>
-                        <div ref="preview_strengths_1" class="mt-2 break-all h-100px">
+                        <div ref="preview_strengths_1" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('strengths_1') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('strengths_1')) }}</div>
                         </div>
@@ -736,7 +736,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'strengths_2'}">
                                 <div class="label-default h-35px">What memory brings joy to their heart instantly?</div>
-                                <div ref="preview_strengths_2" class="mt-2 break-all h-100px">
+                                <div ref="preview_strengths_2" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('strengths_2') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('strengths_2')) }}</div>
                                 </div>
@@ -765,7 +765,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'strengths_3'}">
                                 <div class="label-default h-35px">What are their hobbies?</div>
-                                <div ref="preview_strengths_3" class="mt-2 break-all h-100px">
+                                <div ref="preview_strengths_3" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('strengths_3') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('strengths_3')) }}</div>
                                 </div>
@@ -798,7 +798,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'goal_1'}">
                                 <div class="label-default h-35px">What is their goal?</div>
-                                <div ref="preview_goal_1" class="mt-2 break-all h-100px">
+                                <div ref="preview_goal_1" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('goal_1') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_1')) }}</div>
                                 </div>
@@ -827,7 +827,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'goal_2'}">
                                 <div class="label-default h-35px">Why does your character want it?</div>
-                                <div ref="preview_goal_2" class="mt-2 break-all h-100px">
+                                <div ref="preview_goal_2" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('goal_2') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_2')) }}</div>
                                 </div>
@@ -858,7 +858,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'goal_3'}">
                                 <div class="label-default h-35px">What is the reason they don't have what they want?</div>
-                                <div ref="preview_goal_3" class="mt-2 break-all h-100px">
+                                <div ref="preview_goal_3" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('goal_3') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_3')) }}</div>
                                 </div>
@@ -887,7 +887,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'goal_4'}">
                                 <div class="label-default h-35px">How far will they go?</div>
-                                <div ref="preview_goal_4" class="mt-2 break-all h-100px">
+                                <div ref="preview_goal_4" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('goal_4') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('goal_4')) }}</div>
                                 </div>
@@ -916,7 +916,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'journey_1'}">
                         <div class="label-default h-35px">What do they do to get what they want?</div>
-                        <div ref="preview_journey_1" class="mt-2 break-all h-100px">
+                        <div ref="preview_journey_1" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('journey_1') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_1')) }}</div>
                         </div>
@@ -943,7 +943,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'journey_2'}">
                         <div class="label-default h-35px">What implications does it cause?</div>
-                        <div ref="preview_journey_2" class="mt-2 break-all h-100px">
+                        <div ref="preview_journey_2" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('journey_2') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_2')) }}</div>
                         </div>
@@ -972,7 +972,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'journey_3'}">
                                 <div class="label-default h-35px">Is the result good, bad or both?</div>
-                                <div ref="preview_journey_3" class="mt-2 break-all h-100px">
+                                <div ref="preview_journey_3" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('journey_3') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_3')) }}</div>
                                 </div>
@@ -1001,7 +1001,7 @@
                             </div>
                             <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'journey_4'}">
                                 <div class="label-default h-35px">Are they happy with the outcome?</div>
-                                <div ref="preview_journey_4" class="mt-2 break-all h-100px">
+                                <div ref="preview_journey_4" class="mt-2 break-words h-100px">
                                     {{ getAttributeDescription('journey_4') | truncate(70, '..') }}
                                     <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('journey_4')) }}</div>
                                 </div>
@@ -1030,7 +1030,7 @@
                     </div>
                     <div class="relative mt-2 bg-light p-10 chedit-box-border" :class="{'chedit-box-border_active': attributeInEdit && attributeInEdit.field === 'notes_1'}">
                         <div class="label-default h-35px">Content</div>
-                        <div ref="preview_notes_1" class="mt-2 break-all h-100px">
+                        <div ref="preview_notes_1" class="mt-2 break-words h-100px">
                             {{ getAttributeDescription('notes_1') | truncate(70, '..') }}
                             <div class="chet-preview__updated-at">{{ formatDate(getAttributeUpdatedAt('notes_1')) }}</div>
                         </div>

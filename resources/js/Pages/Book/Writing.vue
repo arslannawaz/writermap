@@ -84,9 +84,9 @@
                 </div>
             </div>
 
-            <div v-if="chapter" class="mt-24 chapter-container" :class="{'bg-light': editor_style.includes('_background')}">
+            <div v-if="chapter" class="chapter-container" :class="{'bg-light': editor_style.includes('_background')}">
                 <div class="chapter-container__inner" :class="'chapter-container__inner_'+ editor_style">
-                    <div class="pt-40 fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
+                    <div class="fs-18 font-semibold ff-minion text-color-dark">Chapter {{ chapter.number }}</div>
                     <input type="text" class="input-default input-default_border-none h2 w-full" v-model="chapter.title"
                            @change="updateChapterField('title', $event.target.value)" />
                     <div class="mt-12 editor w-full" spellcheck="false" @click="removeTypeHereFromEditor(editor)">
@@ -170,6 +170,7 @@ export default {
                     new Search(),
                 ],
                 content: content,
+                injectCSS: false,
                 onUpdate: ({ getHTML }) => {
                     this.updateChapterField('content', getHTML());
                 },
