@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/scriptorium', function ()
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     Route::post('send-feedback', function () {
-        Mail::to('contact@writersmap.co')->send(new \App\Mail\FeedbackMail(request()->post('message')));
+        Mail::to('maxsprite.work@gmail.com')->send(new \App\Mail\FeedbackMail(request()->post('message')));
         return true;
     });
 
@@ -57,6 +57,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     Route::post('profile/add-card', [\App\Http\Controllers\ProfileController::class, 'addCard']);
     Route::get('profile/current-subscription', [\App\Http\Controllers\ProfileController::class, 'currentSubscription']);
+    Route::get('profile/stripe/promocodes', [\App\Http\Controllers\ProfileController::class, 'promocodesList']);
+    Route::post('profile/stripe/promocode/check', [\App\Http\Controllers\ProfileController::class, 'checkPromocode']);
     Route::post('profile/change-subscription', [\App\Http\Controllers\ProfileController::class, 'changeSubscription']);
     Route::post('profile/cancel-subscription', [\App\Http\Controllers\ProfileController::class, 'cancelSubscription']);
     Route::get('profile/invoices', [\App\Http\Controllers\ProfileController::class, 'invoices']);

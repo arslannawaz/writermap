@@ -8,27 +8,38 @@
 
                 <div class="mt-2 bg-light p-10">
                     <div>
-                        <div class="uppercase text-color-light fs-12">
-                            Plan
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="uppercase text-color-light fs-12">
+                                    Plan
+                                </div>
+                                <div class="mt-2" v-if="currentSubscription !== null && currentSubscription.plan.active">Advanced</div>
+                                <div class="mt-2" v-else>Free</div>
+                            </div>
+                            <div v-if="currentSubscription === null || currentSubscription.plan.active === false" class="relative">
+                                <input v-model="promocode" type="text" class="input-default" placeholder="Enter promocode">
+                                <div v-if="promocodeValid === false" class="mt-2 text-red-600 uppercase absolute">NOT VALID</div>
+                                <div v-if="promocodeValid === true" class="mt-2 text-green-600 uppercase absolute">VALID</div>
+                            </div>
                         </div>
-                        <div class="mt-2" v-if="currentSubscription">Advanced</div>
-                        <div class="mt-2" v-else>Free</div>
 
-                        <div class="mt-4 uppercase text-color-light fs-12">
+                        <div v-if="currentSubscription !== null && currentSubscription.status === 'canceled'" class="mt-4 uppercase text-color-light fs-12">Period End</div>
+                        <div v-else class="mt-4 uppercase text-color-light fs-12">
                             Next Bill
                         </div>
-                        <div class="mt-2" v-if="currentSubscription">{{ formatInvoiceTimestamp(currentSubscription.current_period_end) }}</div>
+                        <div class="mt-2" v-if="currentSubscription !== null && currentSubscription.plan.active">{{ formatInvoiceTimestamp(currentSubscription.current_period_end) }}</div>
                         <div class="mt-2" v-else>None</div>
 
                         <div class="mt-4 uppercase text-color-light fs-12">
                             Cost
                         </div>
-                        <div class="mt-2" v-if="currentSubscription">${{ currentSubscription.items.data[0].price.unit_amount / 100 }}/{{ currentSubscription.items.data[0].price.recurring.interval }} total</div>
+                        <div class="mt-2" v-if="currentSubscription !== null && currentSubscription.plan.active">${{ currentSubscription.items.data[0].price.unit_amount / 100 }} / {{ currentSubscription.items.data[0].price.recurring.interval }} total</div>
                         <div class="mt-2" v-else>$0</div>
                     </div>
                     <div class="flex mt-10">
-                        <div @click="changeSubscription" class="button rounded-lg bg-dark px-6 py-2 text-white fs-15 cursor-pointer">Change Plan</div>
-                        <div @click="cancelSubscription" class="ml-6 rounded-lg border border-gray-400 px-6 py-2 text-color-dark fs-15 cursor-pointer">Cancel Subscription</div>
+                        <div @click="changeSubscription" v-if="currentSubscription === null || currentSubscription.plan.active === false" class="mr-6 button rounded-lg bg-dark px-6 py-2 text-white fs-15 cursor-pointer">Change Plan</div>
+                        <div @click="cancelSubscription" v-if="currentSubscription !== null && currentSubscription.status !== 'canceled'" class="rounded-lg border border-gray-400 px-6 py-2 text-color-dark fs-15 cursor-pointer">Cancel Subscription</div>
+                        <div v-if="currentSubscription !== null && currentSubscription.status === 'canceled'" class="mb-10"></div>
                     </div>
                 </div>
             </div>
@@ -118,6 +129,9 @@ export default  {
       return {
         stripe: null,
         invoices: null,
+        promocode: null,
+        promocodeValid: null,
+        promocodeStripe: null,
         currentSubscription: null,
         card_last_4: null,
         card_number: null,
@@ -133,6 +147,7 @@ export default  {
     async mounted() {
         this.getInvoices();
         this.getCurrentSubscription();
+        this.getCouponsList();
 
 
         this.stripe = await loadStripe('pk_test_51I701bBSVLSB8icBg7Qbt2yVX4YkQrEKL3jCUWuSlMJgYjXSj7wWUIKPbdEkhsjDQGahxFueamW8X1Cq4uAHmMzw00pdWddy2G');
@@ -195,16 +210,42 @@ export default  {
 
         changeSubscription() {
             const self = this;
-            axios.post('/profile/change-subscription', {}).then(function (response) {
-                console.log('change subscription', response);
-                self.getCurrentSubscription();
-                self.getInvoices();
+            if (this.promocode === null || this.promocode.length === 0) {
+                axios.post('/profile/change-subscription', {}).then(function (response) {
+                    console.log('change subscription', response);
+                    self.getCurrentSubscription();
+                    self.getInvoices();
 
-                Vue.swal('Change Subscription', '', 'success');
-            }).catch(function (error) {
-                console.log(error);
-                Vue.swal('Change Subscription', 'You need attach your credit card', 'error');
-            });
+                    Vue.swal('Change Subscription', '', 'success');
+                }).catch(function (error) {
+                    console.log(error);
+                    Vue.swal('Change Subscription', 'You need attach your credit card', 'error');
+                });
+            } else {
+                axios.post('/profile/stripe/promocode/check', {
+                    promocode: this.promocode
+                }).then((response) => {
+                    console.log('CHECK PROMOCODE', response);
+                    if (response.data.length === 0) {
+                        self.promocodeValid = false;
+                        Vue.swal('Invalid Promo Code', 'Try to enter a different one or delete the existing to initiate a subscription', 'error');
+                    } else {
+                        self.promocodeValid = true;
+                        axios.post('/profile/change-subscription', {
+                            promocode: response.data.id
+                        }).then(function (response) {
+                            console.log('change subscription', response);
+                            self.getCurrentSubscription();
+                            self.getInvoices();
+
+                            Vue.swal('Change Subscription', '', 'success');
+                        }).catch(function (error) {
+                            console.log(error);
+                            Vue.swal('Change Subscription', 'You need attach your credit card', 'error');
+                        });
+                    }
+                })
+            }
         },
 
         cancelSubscription() {
@@ -227,6 +268,7 @@ export default  {
             axios.get('/profile/invoices', {}).then(function (response) {
                 console.log('invoices', response);
                 self.invoices = response.data;
+                console.log('INVOICES', self.invoices.data.length);
             });
         },
 
@@ -247,6 +289,22 @@ export default  {
                 console.log('get current subscription', response);
                 self.currentSubscription = response.data;
             });
+        },
+
+        getCouponsList()
+        {
+            const self = this;
+            axios.get('/profile/stripe/promocodes', {}).then(function (response) {
+                console.log('get available coupons', response);
+                // self.currentSubscription = response.data;
+            });
+        },
+
+        getPeriodEnd()
+        {
+            const periodEndTimestamp = this.currentSubscription.current_period_end * 1000;
+            const date = new Date(periodEndTimestamp);
+            return date.toUTCString();
         },
     },
 }
