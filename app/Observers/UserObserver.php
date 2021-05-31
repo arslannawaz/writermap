@@ -15,7 +15,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $stripe = new StripeClient('sk_test_51I701bBSVLSB8icBDKVpksG2XE0i2n7vPrlGFHaMiqKkLDQ7AlIjraNPvn65wZZpeZtr9GIrTjTyCcokDPSCnFSr00T4TF1iFt');
+        $stripe = new StripeClient(env('STRIPE_SK_KEY'));
         $stripeCustomer = $stripe->customers->create([
             'email' => $user->email,
         ]);
