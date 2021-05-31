@@ -99,8 +99,6 @@ class ProfileController extends Controller
         $stripe = new StripeClient(env('STRIPE_SK_KEY'));
         $promocodes = $stripe->promotionCodes->all();
 
-        ray('checkPromocode', $request->post('promocode'));
-
         /** @var PromotionCode $promocode */
         foreach ($promocodes as $promocode) {
             if ($promocode->active === true && $promocode->code === $request->post('promocode')) {
