@@ -150,9 +150,9 @@ export default  {
         this.getCouponsList();
 
 
-        this.stripe = await loadStripe('pk_test_51I701bBSVLSB8icBg7Qbt2yVX4YkQrEKL3jCUWuSlMJgYjXSj7wWUIKPbdEkhsjDQGahxFueamW8X1Cq4uAHmMzw00pdWddy2G');
+        this.stripe = await loadStripe('pk_live_51I3qaaK0GlDCCKIMnX449Iv80AjMGjqNtpnXBFLTF1NBTUkvoFJ7BkREzUj3k496lpNjtQnG8Ei5Syrqb2cRTFfS00avVJqgQp');
 
-        console.log('local stripe', this.stripe);
+        // console.log('local stripe', this.stripe);
 
         const elements = this.stripe.elements();
         // const cardElement = elements.create('card');
