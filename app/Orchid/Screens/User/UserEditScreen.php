@@ -39,7 +39,7 @@ class UserEditScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.users';
+    public $permission = [];
 
     /**
      * @var User
@@ -158,6 +158,7 @@ class UserEditScreen extends Screen
     public function save(User $user, Request $request)
     {
         $request->validate([
+            'user.is_admin' => 'boolean',
             'user.email' => [
                 'required',
                 Rule::unique(User::class, 'email')->ignore($user),

@@ -49,7 +49,7 @@ return [
 
     'middleware' => [
         'public'  => ['web',],
-        'private' => ['web', 'platform', 'admin'],
+        'private' => ['web', 'admin'],
     ],
 
     /*
