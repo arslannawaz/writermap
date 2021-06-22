@@ -188,7 +188,7 @@
                             <div class="mx-auto outline-none">
                                 Page
                                 <select v-model="scrollPage" @change="scrollToPage" class="bg-transparent outline-none">
-                                    <option v-for="page in scrollPageCount" :key="page">{{ page }}</option>
+                                    <option v-for="page in chapterPrintPagesCount" :key="page">{{ page }}</option>
                                 </select>
                             </div>
 
@@ -309,6 +309,7 @@ export default {
             scrollPage: 1,
             scrollPageCount: 3,
             chapterPrintWidth: 0,
+            chapterPrintPagesCount: 0,
             book: this.book_data,
             previewCover: null,
             coverImage: null,
@@ -348,6 +349,9 @@ export default {
 
             this.selectedChapterTitle = this.first_chapter.title;
             this.chapterPrintWidth = document.getElementById('chapter-print').offsetWidth;
+
+            const HTMLEditorContent = document.getElementsByClassName('editor__content')[0];
+            this.changePagesCount();
         }
     },
 
@@ -455,7 +459,8 @@ export default {
         },
 
         scrollChapterNext() {
-            if (this.scrollPage >= 3) {
+            console.log('this.chapterPrintWidth', this.chapterPrintWidth);
+            if (this.scrollPage >= this.chapterPrintPagesCount) {
                 const chapterPrint = document.getElementById('chapter-print');
                 chapterPrint.style.left = 0;
                 this.scrollPage = 1;
@@ -477,6 +482,7 @@ export default {
                 chapterPrint.style.left = newLeftValue + 'px';
 
                 if (parseInt(chapterPrint.style.left) < prevScrollValue) {
+                    console.log('Scroll next page', this.scrollPage);
                     this.scrollPage++;
                 }
             }
@@ -534,6 +540,16 @@ export default {
             console.log(this.chapters[this.selectSelectedChapterIndex]);
             this.selectedChapterTitle = this.chapters[this.selectSelectedChapterIndex].title;
             this.editor.setContent(this.chapters[this.selectSelectedChapterIndex].content);
+
+            this.changePagesCount();
+        },
+
+        changePagesCount() {
+            setTimeout(() => {
+                console.log('HTMLEditorContent', document.getElementsByClassName('ProseMirror')[0].offsetWidth);
+                console.log('HTMLEditorContent /', Math.round(document.getElementsByClassName('ProseMirror')[0].offsetWidth / this.chapterPrintWidth));
+                this.chapterPrintPagesCount = Math.round(document.getElementsByClassName('ProseMirror')[0].offsetWidth / this.chapterPrintWidth);
+            }, 0);
         },
 
         pPrint(selector) {
