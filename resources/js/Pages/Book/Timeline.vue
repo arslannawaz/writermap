@@ -394,19 +394,19 @@ export default {
             }
         },
         addNewEventItem(eventIndex) {
-            this.currentEventIndex = eventIndex;
+            setTimeout(() => {
+                this.currentEventIndex = eventIndex;
+                this.events[this.currentEventIndex].items.push({title: '', id: 'new'});
 
-            this.events[this.currentEventIndex].items.push({title: '', id: 'new'});
+                let index = parseInt(this.events[this.currentEventIndex].items.length) - 1;
+                if (index < 0) {
+                    index = 0;
+                }
 
-            const index = parseInt(this.events[this.currentEventIndex].items.length) - 1;
-
-            console.log('addNewEventItem index', index);
-            console.log('addNewEventItem length', parseInt(this.events[this.currentEventIndex].items.length));
-            console.log('addNewEventItem items', this.events[this.currentEventIndex]);
-            console.log('addNewEventItem refs', this.$refs);
-            this.$nextTick(() => {
-                this.$refs[`newEventItem_${this.currentEventIndex}_${index}`][0].focus();
-            });
+                this.$nextTick(() => {
+                    this.$refs[`newEventItem_${this.currentEventIndex}_${index}`][0].focus();
+                });
+            }, 0);
         },
 
         removeEmptyNewItems() {
@@ -479,8 +479,8 @@ export default {
         createEvent(title = null, description = null) {
             this.isEventCreateModalShow = false;
 
-            console.log(this.$refs['event_input_title'].value);
-            console.log(this.$refs['event_input_description'].value);
+            // console.log(this.$refs['event_input_title'].value);
+            // console.log(this.$refs['event_input_description'].value);
 
             const url = '/books/' + this.$page.book.id + '/timeline/events/create';
 
