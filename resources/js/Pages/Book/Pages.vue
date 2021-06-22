@@ -546,9 +546,16 @@ export default {
 
         changePagesCount() {
             setTimeout(() => {
-                console.log('HTMLEditorContent', document.getElementsByClassName('ProseMirror')[0].offsetWidth);
-                console.log('HTMLEditorContent /', Math.round(document.getElementsByClassName('ProseMirror')[0].offsetWidth / this.chapterPrintWidth));
-                this.chapterPrintPagesCount = Math.round(document.getElementsByClassName('ProseMirror')[0].offsetWidth / this.chapterPrintWidth);
+                // const editorContent = document.getElementsByClassName('editor__content')[0];
+                const proseMirror = document.getElementsByClassName('ProseMirror')[0];
+
+                if (proseMirror.offsetWidth > proseMirror.offsetHeight) {
+                    this.chapterPrintPagesCount = Math.round(proseMirror.offsetWidth / this.chapterPrintWidth);
+                } else {
+                    this.chapterPrintPagesCount = Math.round(proseMirror.offsetHeight / this.chapterPrintWidth);
+                }
+
+
             }, 0);
         },
 
