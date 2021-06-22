@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Orchid\Platform\Models\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Stripe\BaseStripeClient;
 use Stripe\StripeClient;
 
 /**
@@ -84,7 +86,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'pen_name', 'first_name', 'last_name', 'name', 'email', 'password',
+        'pen_name', 'first_name', 'last_name', 'name', 'email', 'password', 'permissions',
     ];
 
     /**
@@ -97,6 +99,7 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'permissions',
     ];
 
     /**
@@ -106,6 +109,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'permissions' => 'array',
     ];
 
     /**
@@ -117,8 +121,46 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * The attributes for which you can use filters in url.
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+        'id',
+        'name',
+        'email',
+        'permissions',
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'email',
+        'updated_at',
+        'created_at',
+    ];
+
     public function books()
     {
         return $this->hasMany(Book::class);
+    }
+
+    public function attachStripeCustomer()
+    {
+        if ($this->stripe_customer === null) {
+            $stripe = new StripeClient(env('STRIPE_SK_KEY'));
+            $stripeCustomer = $stripe->customers->create([
+                'email' => $this->email,
+            ]);
+            $this->stripe_customer = $stripeCustomer->id;
+        }
+
+        return $this;
     }
 }
