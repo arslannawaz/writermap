@@ -16,7 +16,7 @@
                                 <div class="mt-2" v-if="currentSubscription !== null && currentSubscription.plan.active">Advanced</div>
                                 <div class="mt-2" v-else>Free</div>
                             </div>
-                            <div v-if="currentSubscription === null || currentSubscription.plan.active === false" class="relative">
+                            <div v-if="currentSubscription === null || (currentSubscription.plan !== undefined && currentSubscription.plan.active === false)" class="relative">
                                 <input v-model="promocode" type="text" class="input-default" placeholder="Enter promocode">
                                 <div v-if="promocodeValid === false" class="mt-2 text-red-600 uppercase absolute">NOT VALID</div>
                                 <div v-if="promocodeValid === true" class="mt-2 text-green-600 uppercase absolute">VALID</div>
@@ -36,7 +36,7 @@
                         <div class="mt-2" v-if="currentSubscription !== null && currentSubscription.plan.active">${{ currentSubscription.items.data[0].price.unit_amount / 100 }} / {{ currentSubscription.items.data[0].price.recurring.interval }} total</div>
                         <div class="mt-2" v-else>$0</div>
                     </div>
-                    <div class="flex mt-10">
+                    <div class="flex mt-9">
                         <div @click="changeSubscription" v-if="currentSubscription === null || currentSubscription.plan.active === false" class="mr-6 button rounded-lg bg-dark px-6 py-2 text-white fs-15 cursor-pointer">Change Plan</div>
                         <div @click="cancelSubscription" v-if="currentSubscription !== null && currentSubscription.status !== 'canceled'" class="rounded-lg border border-gray-400 px-6 py-2 text-color-dark fs-15 cursor-pointer">Cancel Subscription</div>
                         <div v-if="currentSubscription !== null && currentSubscription.status === 'canceled'" class="mb-10"></div>
@@ -288,6 +288,10 @@ export default  {
             axios.get('/profile/current-subscription', {}).then(function (response) {
                 console.log('get current subscription', response);
                 self.currentSubscription = response.data;
+                if (self.currentSubscription.length === 0) {
+                    self.currentSubscription = null;
+                }
+                window.ray('Current subscription Stripe: ', self.currentSubscription, 1);
             });
         },
 
