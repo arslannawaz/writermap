@@ -86,7 +86,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'pen_name', 'first_name', 'last_name', 'name', 'email', 'password', 'permissions',
+        'is_admin',
+        'pen_name',
+        'first_name',
+        'last_name',
+        'name',
+        'email',
+        'password',
+        'permissions',
     ];
 
     /**
@@ -108,6 +115,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'is_admin' => 'boolean',
         'email_verified_at' => 'datetime',
         'permissions' => 'array',
     ];

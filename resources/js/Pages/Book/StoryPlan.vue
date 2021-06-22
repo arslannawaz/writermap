@@ -303,7 +303,7 @@
                             <div v-if="milestone.status === 0" class="mt-8 fs-12 text-color-light uppercase">IN PROGRESS</div>
                             <div v-if="milestone.status === 1" class="mt-8 fs-12 text-color-light uppercase">Completed</div>
                             <div v-if="milestone.status === 2" class="mt-8 fs-12 text-color-light uppercase">To plan</div>
-                            <div v-if="milestone.status === 3" class="mt-8 fs-12 text-color-light uppercase">Todo</div>
+                            <div v-if="milestone.status === 3" class="mt-8 fs-12 text-color-light uppercase">To Do</div>
                             <div v-if="milestone.status === 4" class="mt-8 fs-12 text-color-light uppercase">On hold</div>
                         </div>
                         <div @click="nextMilestonesPage()" class="icon-hoverable" style="right: -15px;top: 180px;position: absolute;padding: 10px;">
@@ -403,7 +403,7 @@ export default {
             subCategorySelected: 'Front',
             milestoneStatuses: [
                 { value: 2, title: 'To Plan'},
-                { value: 3, title: 'Todo'},
+                { value: 3, title: 'To Do'},
                 { value: 0, title: 'In Progress'},
                 { value: 4, title: 'On Hold'},
                 { value: 1, title: 'Completed'},
