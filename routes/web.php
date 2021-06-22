@@ -27,6 +27,11 @@ Route::get('/', function () {
     return redirect('scriptorium');
 });
 
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
+
 Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->name('social_login');
 Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
 

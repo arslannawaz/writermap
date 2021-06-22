@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+import { ray } from 'js-ray';
 
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
@@ -16,6 +17,8 @@ import {loadStripe} from '@stripe/stripe-js';
 
 // const __svg__ = { path: './../images/icons/*.svg', name: 'assets/images/[hash].sprite.svg' };
 // svgSpriteLoader(__svg__.filename);
+
+window.ray = ray;
 
 const truncateFilter = function(text, length, clamp){
     clamp = clamp || '...';
