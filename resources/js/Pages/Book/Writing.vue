@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <svg @click="$htmlToPaper('chapter-print')" class="ml-8 icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg  @click="pPrint('p-print')" class="ml-8 icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                         <g fill="none" fill-rule="evenodd">
                             <g fill="#BEBDB8" fill-rule="nonzero">
                                 <g>
@@ -92,10 +92,14 @@
                     <div class="mt-12 editor w-full" spellcheck="false" @click="removeTypeHereFromEditor(editor)">
                         <editor-content class="editor__content outline-none fs-18 ff-minion" :editor="editor" />
                     </div>
+                </div>
+            </div>
 
-                    <div id="chapter-print" class="hidden" v-if="editor">
-                        <h3>Chapter {{ chapter.number }}</h3>
-                        <h1>{{ chapter.title }}</h1>
+            <div class="hidden">
+                <div id="p-print" v-if="editor">
+                    <div spellcheck="false" class="print-book-page book-page__content book-page__paper_preview__content book-page__content_editor book-page__content_first-letter disable-scroll">
+<!--                    <h3>Chapter {{ chapter.number }}</h3>-->
+                        <h2 class="pt-36 mt-2 fs-18 ff-minion font-semibold">{{ chapter.title }}</h2>
                         <div v-html="chapter.content"></div>
                     </div>
                 </div>
@@ -120,6 +124,7 @@ import {
     TodoItem, TodoList, Underline,
     Search,
 } from "tiptap-extensions";
+import printJS from "print-js";
 
 export default {
     components: {AppContainer, AppLayout, EditorMenuBar, EditorContent},
@@ -295,6 +300,14 @@ export default {
             } else {
                 this.findFocusedIndex = -1;
             }
+        },
+
+        pPrint(selector) {
+            printJS({
+                printable: selector,
+                type: 'html',
+                css: '/css/app.css',
+            });
         },
     },
 }
