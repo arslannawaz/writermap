@@ -309,6 +309,7 @@ export default {
             scrollPage: 1,
             scrollPageCount: 3,
             chapterPrintWidth: 0,
+            chapterPrintHeight: 0,
             chapterPrintPagesCount: 0,
             book: this.book_data,
             previewCover: null,
@@ -349,6 +350,7 @@ export default {
 
             this.selectedChapterTitle = this.first_chapter.title;
             this.chapterPrintWidth = document.getElementById('chapter-print').offsetWidth;
+            this.chapterPrintHeight = document.getElementById('chapter-print').offsetHeight;
 
             console.log('chapterPrintWidth', this.chapterPrintWidth);
 
@@ -551,10 +553,9 @@ export default {
                 // const editorContent = document.getElementsByClassName('editor__content')[0];
                 const proseMirror = document.getElementsByClassName('ProseMirror')[0];
 
-                let pHeight = 0;
+                let pHeight = 800;
                 proseMirror.childNodes.forEach(function (item) {
-                    console.log('each p', item.offsetHeight);
-                    pHeight += item.offsetWidth;
+                    pHeight += item.offsetHeight;
                 });
 
                 const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -565,7 +566,7 @@ export default {
                         this.chapterPrintPagesCount = Math.round(proseMirror.offsetHeight / this.chapterPrintWidth);
                     }
                 } else {
-                    this.chapterPrintPagesCount = Math.round(( (pHeight / this.chapterPrintWidth) / 2) - 4)
+                    this.chapterPrintPagesCount = Math.round((pHeight / this.chapterPrintHeight));
                 }
             }, 0);
         },
