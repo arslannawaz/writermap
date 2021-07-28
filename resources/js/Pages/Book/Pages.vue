@@ -350,6 +350,8 @@ export default {
             this.selectedChapterTitle = this.first_chapter.title;
             this.chapterPrintWidth = document.getElementById('chapter-print').offsetWidth;
 
+            console.log('chapterPrintWidth', this.chapterPrintWidth);
+
             const HTMLEditorContent = document.getElementsByClassName('editor__content')[0];
             this.changePagesCount();
         }
@@ -549,13 +551,22 @@ export default {
                 // const editorContent = document.getElementsByClassName('editor__content')[0];
                 const proseMirror = document.getElementsByClassName('ProseMirror')[0];
 
-                if (proseMirror.offsetWidth > proseMirror.offsetHeight) {
-                    this.chapterPrintPagesCount = Math.round(proseMirror.offsetWidth / this.chapterPrintWidth);
+                let pHeight = 0;
+                proseMirror.childNodes.forEach(function (item) {
+                    console.log('each p', item.offsetHeight);
+                    pHeight += item.offsetWidth;
+                });
+
+                const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+                if (isFirefox) {
+                    if (proseMirror.offsetWidth > proseMirror.offsetHeight) {
+                        this.chapterPrintPagesCount = Math.round(proseMirror.offsetWidth / this.chapterPrintWidth);
+                    } else {
+                        this.chapterPrintPagesCount = Math.round(proseMirror.offsetHeight / this.chapterPrintWidth);
+                    }
                 } else {
-                    this.chapterPrintPagesCount = Math.round(proseMirror.offsetHeight / this.chapterPrintWidth);
+                    this.chapterPrintPagesCount = Math.round(( (pHeight / this.chapterPrintWidth) / 2) - 4)
                 }
-
-
             }, 0);
         },
 
