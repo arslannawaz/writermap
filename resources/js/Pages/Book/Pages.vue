@@ -145,7 +145,7 @@
                         <div class="flex justify-between items-center px-6">
                             <span class="book-label book-label_no-hover">Page Preview</span>
                             <div>
-                                <select v-model="selectSelectedChapterIndex" @change="handleSelectChapter" class="bg-transparent outline-none">
+                                <select v-model="selectSelectedChapterIndex" @change="handleSelectChapter(selectSelectedChapterIndex)" class="bg-transparent outline-none">
                                     <option :value="index" :key="index" v-for="(chapter, index) in chapters">Chapter {{ chapter.number }}</option>
                                 </select>
                             </div>
@@ -187,8 +187,11 @@
 
                             <div class="mx-auto outline-none">
                                 Page
-                                <select v-model="scrollPage" @change="scrollToPage" class="bg-transparent outline-none">
-                                    <option v-for="page in chapterPrintPagesCount" :key="page">{{ page }}</option>
+                                <select v-if="chapters[selectSelectedChapterIndex - 1] === undefined" v-model="scrollPage" @change="scrollToPage" class="bg-transparent outline-none">
+                                    <option v-for="page in chapterPrintPagesCount" :key="page" :value="page">{{ page }}</option>
+                                </select>
+                                <select v-else v-model="scrollPage" @change="scrollToPage" class="bg-transparent outline-none">
+                                    <option v-for="page in chapterPrintPagesCount" :key="page" :value="page">{{ (page + chapters[selectSelectedChapterIndex - 1].pagesCount) }}</option>
                                 </select>
                             </div>
 
@@ -319,6 +322,7 @@ export default {
             findFocusedIndex: -1,
             selectSelectedChapterIndex: 0,
             selectedChapterTitle: null,
+            latestPagesCount: 0,
         };
     },
 
@@ -437,9 +441,17 @@ export default {
 
         scrollChapterPrev() {
             if (this.scrollPage <= 1) {
-                const chapterPrint = document.getElementById('chapter-print');
-                chapterPrint.style.left = 0;
-                this.scrollPage = 1;
+                if (this.chapters[this.selectSelectedChapterIndex - 1] === undefined) {
+                    const chapterPrint = document.getElementById('chapter-print');
+                    chapterPrint.style.left = 0;
+                    this.scrollPage = 1;
+                } else {
+                    const chapterPrint = document.getElementById('chapter-print');
+                    chapterPrint.style.left = 0;
+                    this.scrollPage = 1;
+                    this.handleSelectChapter(this.selectSelectedChapterIndex - 1, this.selectSelectedChapterIndex);
+                }
+
             } else {
                 const chapterPrint = document.getElementById('chapter-print');
                 let prevScrollValue = 0;
@@ -465,9 +477,17 @@ export default {
         scrollChapterNext() {
             console.log('this.chapterPrintWidth', this.chapterPrintWidth);
             if (this.scrollPage >= this.chapterPrintPagesCount) {
-                const chapterPrint = document.getElementById('chapter-print');
-                chapterPrint.style.left = 0;
-                this.scrollPage = 1;
+                if (this.chapters[this.selectSelectedChapterIndex + 1] === undefined) {
+                    const chapterPrint = document.getElementById('chapter-print');
+                    chapterPrint.style.left = 0;
+                    this.scrollPage = 1;
+                } else {
+                    const chapterPrint = document.getElementById('chapter-print');
+                    chapterPrint.style.left = 0;
+                    this.scrollPage = 1;
+
+                    this.handleSelectChapter(this.selectSelectedChapterIndex + 1);
+                }
             } else {
                 const chapterPrint = document.getElementById('chapter-print');
                 let prevScrollValue = 0;
@@ -539,13 +559,28 @@ export default {
             // }
         },
 
-        handleSelectChapter() {
+        handleSelectChapter(newIndex, oldIndex) {
             console.log(this.selectSelectedChapterIndex);
             console.log(this.chapters[this.selectSelectedChapterIndex]);
-            this.selectedChapterTitle = this.chapters[this.selectSelectedChapterIndex].title;
-            this.editor.setContent(this.chapters[this.selectSelectedChapterIndex].content);
 
-            this.changePagesCount();
+            console.log(newIndex);
+            console.log(this.chapters[newIndex]);
+
+            this.selectSelectedChapterIndex = newIndex;
+
+            this.selectedChapterTitle = this.chapters[newIndex].title;
+            this.editor.setContent(this.chapters[newIndex].content);
+
+            if (this.chapters[newIndex].pagesCount === undefined) {
+                this.changePagesCount();
+            } else {
+                this.chapterPrintPagesCount = this.chapters[newIndex].pagesCount;
+            }
+
+            if (newIndex < oldIndex) {
+                this.scrollPage = this.chapters[newIndex].pagesCount;
+                this.scrollToPage(this.chapters[newIndex].pagesCount);
+            }
         },
 
         changePagesCount() {
@@ -553,7 +588,7 @@ export default {
                 // const editorContent = document.getElementsByClassName('editor__content')[0];
                 const proseMirror = document.getElementsByClassName('ProseMirror')[0];
 
-                let pHeight = 800;
+                let pHeight = 1000;
                 proseMirror.childNodes.forEach(function (item) {
                     pHeight += item.offsetHeight;
                 });
@@ -568,6 +603,9 @@ export default {
                 } else {
                     this.chapterPrintPagesCount = Math.round((pHeight / this.chapterPrintHeight));
                 }
+
+                this.chapters[this.selectSelectedChapterIndex]['pagesCount'] = this.chapterPrintPagesCount;
+                // this.scrollPage = latestPagesCount + 1;
             }, 0);
         },
 
