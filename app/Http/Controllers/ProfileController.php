@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Stripe\BaseStripeClient;
 use Stripe\PromotionCode;
@@ -61,7 +63,11 @@ class ProfileController extends Controller
 
         $stripeSubscription = $stripe->subscriptions->create($data);
 
+        ray('stripe subscription', $stripeSubscription);
+
         $user->stripe_subscription = $stripeSubscription->id;
+        $user->stripe_subscription_started_at = date('Y-m-d H:i:s', $stripeSubscription->current_period_start);
+        $user->stripe_subscription_ended_at = date('Y-m-d H:i:s', $stripeSubscription->current_period_end);
         $user->save();
 
         return $stripeSubscription;
@@ -69,14 +75,19 @@ class ProfileController extends Controller
 
     public function cancelSubscription()
     {
+        /** @var User $user */
         $user = \Auth::user();
         if ($user->stripe_subscription !== null) {
             $stripe = new StripeClient(env('STRIPE_SK_KEY'));
             $stripe->subscriptions->cancel($user->stripe_subscription);
-
-//            $user->stripe_subscription = null;
-//            $user->save();
+            if (Carbon::now() >= $user->stripe_subscription_ended_at) {
+                $user->stripe_subscription = null;
+                $user->stripe_subscription_started_at = null;
+                $user->stripe_subscription_ended_at = null;
+                $user->save();
+            }
         }
+
         return true;
     }
 

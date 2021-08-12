@@ -31,6 +31,8 @@ use Stripe\StripeClient;
  * @property string|null $profile_photo_path
  * @property string|null $stripe_customer
  * @property string|null $stripe_subscription
+ * @property string|null $stripe_subscription_started_at
+ * @property string|null $stripe_subscription_ended_at
  * @property string|null $stripe_card
  * @property string|null $stripe_card_last_4
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -170,5 +172,14 @@ class User extends Authenticatable
         }
 
         return $this;
+    }
+
+    public function deleteSubscription()
+    {
+        $this->stripe_subscription = null;
+        $this->stripe_subscription_started_at = null;
+        $this->stripe_subscription_ended_at = null;
+
+        return $this->save();
     }
 }
