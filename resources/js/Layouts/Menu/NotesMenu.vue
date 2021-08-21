@@ -44,19 +44,21 @@
             <template #title>
                 <span class="h2">Create New Note</span>
             </template>
+               
 
             <template #content>
-                <input type="text" class="input-default w-full" v-model="newNoteForm.title" placeholder="Note title">
-
+                <input type="text" @keyup.enter="trigger" class="input-default w-full" v-model="newNoteForm.title" placeholder="Note title">
 
                 <jet-input-error :message="newNoteForm.error" class="mt-2" />
             </template>
 
             <template #footer>
                 <div class="flex justify-center">
-                    <button @click="createNote()" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
+                    <button @click="createNote()" ref="sendReply" class="button rounded-lg bg-dark px-8 py-2 font-semibold text-white">Confirm</button>
                 </div>
             </template>
+                              
+
         </jet-dialog-modal>
     </div>
 
@@ -106,6 +108,9 @@ export default {
     },
 
     methods: {
+    trigger () {
+    	this.$refs.sendReply.click()
+    },
         createNote() {
             const url = '/books/'+ this.$page.book.id +'/notes/create';
             axios.post(url, this.newNoteForm).then((response) => {

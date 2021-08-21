@@ -24,7 +24,7 @@
                         </g>
                     </svg>
                 </div>
-
+                <div class="ml-6 icon-hoverable cursor-pointer hover:text-black" @click="zoomIn()">+</div>
                 <div class="mx-auto w-1/2">
                     <div class="ml-20 flex w-full">
                         <svg @click="runEditorCommand('find', $refs['chapter_search_input'].value)" class="icon-hoverable" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd"><g fill="#BEBDB8" fill-rule="nonzero"><g><g><path d="M18.738 17.453l-3.357-3.33c2.705-3.373 2.302-8.273-.918-11.158C11.243.079 6.328.213 3.271 3.27.213 6.328.079 11.243 2.965 14.463c2.885 3.22 7.785 3.623 11.158.918l3.33 3.33c.17.17.401.267.642.267s.473-.096.643-.268c.339-.35.339-.906 0-1.257zm-9.69-2.072c-3.498 0-6.334-2.836-6.334-6.333 0-3.498 2.836-6.334 6.334-6.334 3.497 0 6.333 2.836 6.333 6.334 0 1.68-.667 3.29-1.855 4.478-1.188 1.188-2.799 1.855-4.478 1.855z" transform="translate(-740 -40) translate(740 40)"></path></g></g></g></g></svg>
@@ -109,6 +109,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 import AppLayout from "../../Layouts/AppLayout";
 import AppContainer from "../../Layouts/AppContainer";
 import {Editor, EditorContent, EditorMenuBar} from "tiptap";
@@ -204,7 +205,45 @@ export default {
                 console.log('after update', response.data);
             });
         },
+         zoomIn() {
+               var size = parseInt($("chapter-container__inner").css("font-size"));
+                if ($(this).hasClass("plus")) {
+                    size = size + 2;
+                } else {
+                    size = size - 2;
+                    if (size <= 10) {
+                        size = 10;
+                    }
+                }
+                console.log('sadsad',size)
+                $('.chapter-container__inner').css("font-size", size);
+            var myContainer = document.getElementsByClassName("chapter-container__inner");
+            var currWidth = myContainer.clientWidth;
+            if (currWidth == 2500) return false;
+            else {
+                myContainer.style.width = (currWidth + 100) + "px";
+            }
+        },
 
+        zoomOut() {
+            var size = parseInt($("chapter-container__inner").css("font-size"));
+                if ($(this).hasClass("plus")) {
+                    size = size + 2;
+                } else {
+                    size = size - 2;
+                    if (size <= 10) {
+                        size = 10;
+                    }
+                }
+                $('#content').css("font-size", size);
+            var myContainer = document.getElementsByClassName("chapter-container__inner");
+            var currWidth = myContainer.clientWidth;
+            console.log(currWidth);
+            if (currWidth == 100) return false;
+            else {
+                myContainer.style.width = (currWidth - 100) + "px";
+            }
+        },
         runEditorCommand(command, params = null) {
             console.log('run command: ', command);
             if (params === null) {

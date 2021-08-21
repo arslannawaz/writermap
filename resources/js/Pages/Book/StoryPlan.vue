@@ -300,9 +300,9 @@
                                 </g>
                             </svg>
 
-                            <div v-if="milestone.status === 0" class="mt-8 fs-12 text-color-light uppercase">IN PROGRESS</div>
+                            <div v-if="milestone.status === 2" class="mt-8 fs-12 text-color-light uppercase">IN PROGRESS</div>
                             <div v-if="milestone.status === 1" class="mt-8 fs-12 text-color-light uppercase">Completed</div>
-                            <div v-if="milestone.status === 2" class="mt-8 fs-12 text-color-light uppercase">To plan</div>
+                            <div v-if="milestone.status === 0" class="mt-8 fs-12 text-color-light uppercase">To plan</div>
                             <div v-if="milestone.status === 3" class="mt-8 fs-12 text-color-light uppercase">To Do</div>
                             <div v-if="milestone.status === 4" class="mt-8 fs-12 text-color-light uppercase">On hold</div>
                         </div>
@@ -362,7 +362,7 @@
         </jet-dialog-modal>
 
         <template v-slot:modals>
-            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+            <!-- <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription> -->
         </template>
     </app-layout>
 </template>
@@ -401,10 +401,13 @@ export default {
             dateSelected: null,
             categorySelected: 'Covers',
             subCategorySelected: 'Front',
+            //   these two option are changed on user requirement  below options are bydefault
+            //   { value: 2, title: 'To Plan'},
+            //    { value: 0, title: 'In Progress'},
             milestoneStatuses: [
-                { value: 2, title: 'To Plan'},
+                { value: 0, title: 'To Plan'},
                 { value: 3, title: 'To Do'},
-                { value: 0, title: 'In Progress'},
+                { value: 2, title: 'In Progress'},
                 { value: 4, title: 'On Hold'},
                 { value: 1, title: 'Completed'},
             ],

@@ -105,7 +105,7 @@
         </app-container>
 
         <template v-slot:modals>
-            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+            <!-- <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription> -->
         </template>
     </app-layout>
 </template>

@@ -174,7 +174,7 @@
         </app-container>
 
         <template v-slot:modals>
-            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+            <!-- <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription> -->
 
             <portal-target name="modal_event_item_create"></portal-target>
             <jet-dialog-modal :portal="'modal_event_item_create'" :show="isEventItemCreateModalShow" @close="isEventItemCreateModalShow = false">
@@ -507,7 +507,10 @@ export default {
                 console.log('error', error);
                 // Vue.swal('createEvent', 'Oops..', 'error');
             });
+            var container = $("#timeline-scroll");
+                container.scrollLeft(1000)
         },
+      
 
         createEventItem(event_id = null, title = null, description = null) {
             this.isEventItemCreateModalShow = false;

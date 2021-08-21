@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@stripe/stripe-js": "^1.11.0",
+        "jquery": "^3.6.0",
         "js-ray": "0.0.7",
         "print-js": "^1.6.0",
         "tiptap": "^1.30.0",

@@ -182,7 +182,7 @@
 
 
         <template v-slot:modals>
-            <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription>
+            <!-- <need-subscription v-if="!$page.user.stripe_subscription"></need-subscription> -->
 
             <portal-target name="modal_third"></portal-target>
             <jet-dialog-modal :portal="'modal_third'" :show="isAddToGroupCharacterModalShow" @close="isAddToGroupCharacterModalShow = false">
