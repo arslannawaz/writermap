@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 use Orchid\Platform\Models\User as Authenticatable;
@@ -181,5 +182,16 @@ class User extends Authenticatable
         $this->stripe_subscription_ended_at = null;
 
         return $this->save();
+    }
+
+    public function deleteAccount()
+    {
+        if ($this->stripe_subscription !== null) {
+            $stripe = new StripeClient(env('STRIPE_SK_KEY'));
+            $stripe->subscriptions->cancel($this->stripe_subscription);
+            $this->deleteSubscription();
+        }
+
+        return $this->delete();
     }
 }

@@ -1,4 +1,5 @@
 <template>
+    <div>
     <jet-form-section @submitted="updateProfileInformation">
         <template #before>
             <!-- Profile Photo -->
@@ -136,14 +137,17 @@
         </template>
 
         <template #actions>
-            <div class="flex items-center justify-center ml-2">
-                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Update
-                </jet-button>
+            <div class="flex w-full items-center justify-between ml-2">
+                <div class="flex items-center justify-center">
+                    <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Update
+                    </jet-button>
 
-                <jet-action-message :on="form.recentlySuccessful" class="ml-4 uppercase">
-                    Saved
-                </jet-action-message>
+                    <jet-action-message :on="form.recentlySuccessful" class="ml-4 uppercase">
+                        Saved
+                    </jet-action-message>
+                </div>
+                <div class="cursor-pointer hover:text-red-500" @click="toggleDeleteAccountModal(true)">Delete Account</div>
             </div>
         </template>
 
@@ -151,6 +155,9 @@
             <stripe></stripe>
         </template>
     </jet-form-section>
+
+        <delete-account v-bind:is-showed="isDeleteAccountOpened" :toggleDeleteAccountModal="toggleDeleteAccountModal" :user="$page.user" />
+    </div>
 </template>
 
 <script>
@@ -162,9 +169,11 @@ import JetLabel from './../../Jetstream/Label'
 import JetActionMessage from './../../Jetstream/ActionMessage'
 import JetSecondaryButton from './../../Jetstream/SecondaryButton'
 import Stripe from "./Stripe";
+import DeleteAccount from "../../Components/DeleteAccount";
 
 export default {
     components: {
+        DeleteAccount,
         JetActionMessage,
         JetButton,
         JetFormSection,
@@ -195,6 +204,7 @@ export default {
             }),
 
             photoPreview: null,
+            isDeleteAccountOpened: false,
         }
     },
 
@@ -211,6 +221,10 @@ export default {
             } else {
                 passwordInput.setAttribute('type', 'password');
             }
+        },
+
+        toggleDeleteAccountModal(value) {
+            return this.isDeleteAccountOpened = value;
         },
 
         updateProfileInformation() {

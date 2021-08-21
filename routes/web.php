@@ -61,6 +61,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::post('books/create', [BookController::class, 'create'])->name('books.create');
 
     Route::post('profile/add-card', [\App\Http\Controllers\ProfileController::class, 'addCard']);
+    Route::post('profile/delete', [\App\Http\Controllers\ProfileController::class, 'delete']);
     Route::get('profile/current-subscription', [\App\Http\Controllers\ProfileController::class, 'currentSubscription']);
     Route::get('profile/stripe/promocodes', [\App\Http\Controllers\ProfileController::class, 'promocodesList']);
     Route::post('profile/stripe/promocode/check', [\App\Http\Controllers\ProfileController::class, 'checkPromocode']);

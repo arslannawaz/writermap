@@ -12,6 +12,15 @@ use Stripe\StripeClient;
 
 class ProfileController extends Controller
 {
+    public function delete(Request $request)
+    {
+        if ($request->id === \Auth::user()->id) {
+            return \Auth::user()->deleteAccount();
+        }
+
+        return false;
+    }
+
     public function addCard()
     {
         $stripe = new StripeClient(env('STRIPE_SK_KEY'));
